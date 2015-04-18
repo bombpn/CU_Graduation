@@ -10,6 +10,3 @@ class home extends CI_Controller {
 		$this->load->view('inc_footer');
 	}
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
