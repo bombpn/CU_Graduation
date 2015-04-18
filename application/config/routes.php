@@ -40,7 +40,8 @@
 
 $route['default_controller'] = "home";
 $route['404_override'] = '';
-
+$route['welcome']="welcome";
+$route['schedule'] = "schedule";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

@@ -14,7 +14,7 @@
     <link href="<?=base_url();?>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="<?=base_url();?>/bootstrap/dashboard.css" rel="stylesheet"> 
+    <link href="<?=base_url();?>/bootstrap/dashboard.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -60,16 +60,17 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li>XXX</li>
+            <li>Menus</li>
             <li><? echo anchor("timetable","Class for Register");?></li>
             <li><? echo anchor("timetable/add","Add Class");?></li>
-            
+
           </ul>
           <ul class="nav nav-sidebar">
             <li><? echo anchor("student","Students");?></li>
             <li><? echo anchor("student/add","Add new student");?></li>
             <li><? echo anchor("enroll","Registration List");?></li>
             <li><? echo anchor("student/search/","Search Student");?></li>
+            <li><? echo anchor("schedule","Schedule Manager");?></li>
           </ul>
           <ul class="nav nav-sidebar">
             <li><? echo anchor("selfie/table/".date("Y-m-d"),"Selfie Reservation Table");?></li>
