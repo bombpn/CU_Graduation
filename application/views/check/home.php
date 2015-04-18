@@ -14,7 +14,7 @@
         <h1 class="page-header">
             เช็คชื่อ
         </h1>
-        <table class="table">
+        <table class="table table-striped table-hover">
         	<thead>
         		<tr>
         			<th>ลำดับที่</th>
