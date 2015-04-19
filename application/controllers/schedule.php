@@ -48,7 +48,6 @@ class Schedule extends CI_Controller {
 				$this->load->view('schedule/schedule',$data);
 				$this->load->view('schedule/list',$db_schedule);
 				$this->load->view('schedule/manager');
-				$this->load->view('schedule/test');
 				$this->load->view('inc_footer');
 	}
 

@@ -2,7 +2,16 @@
 <html lang="th">
 <head>
     <title>CU Graduation</title>
-    <link href="<?=base_url();?>css/calendar.css" rel="stylesheet">
+    <link href= "<?=base_url();?>css/datepicker.css" rel="stylesheet">
+    <link href= "<?=base_url();?>css/jquery-ui-timepicker-addon.css" rel="stylesheet">
+    <script src="<?=base_url();?>/js/jquery-ui-timepicker-addon.js"></script>
+    <script type="text/javascript">
+            $("document").ready(function() {
+                $("#datepicker").datepicker();
+                $("#starttime").timepicker();
+                $("#stoptime").timepicker();
+            });
+    </script>
 </head>
 
 <body>
@@ -23,10 +32,25 @@
           <div class="form-group">
             <label class="col-md-4 control-label" for="selectbasic">Date</label>
             <div class="col-md-4">
-              <div class="input-append date"></div>
+              <input class="form-control input-md" type="text" id="datepicker"></input>
             </div>
           </div>
 
+          <!-- Time Picker -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="selectbasic">Start time :</label>
+            <div class="col-md-4">
+              <input class="form-control input-md" type="text" id="starttime"></input>
+            </div>
+          </div>
+
+          <!-- Time Picker -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="selectbasic">Stop time :</label>
+            <div class="col-md-4">
+              <input class="form-control input-md" type="text" id="stoptime"></input>
+            </div>
+          </div>
 
               <!-- Select Basic -->
               <div class="form-group">
@@ -41,11 +65,11 @@
 
               <!-- Select Basic -->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="schedule_type">type</label>
+                <label class="col-md-4 control-label" for="schedule_type">ธype</label>
                 <div class="col-md-4">
                   <select id="schedule_type" name="schedule_type" class="form-control">
-                    <option value="1">Option one</option>
-                    <option value="2">Option two</option>
+                    <option value="1">รอบซ้อมรับ</option>
+                    <option value="2">รอบพิธีการจริง</option>
                   </select>
                 </div>
               </div>
@@ -95,12 +119,8 @@
                   </select>
                 </div>
               </div>
-
-
             </fieldset></form>
-
         <hr>
-
     </div>
 </div>
 </div>

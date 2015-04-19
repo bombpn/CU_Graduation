@@ -2,7 +2,6 @@
 <html lang="th">
 <head>
     <title>CU Graduation</title>
-    <link href="<?=base_url();?>css/calendar.css" rel="stylesheet">
 </head>
 
 <body>
