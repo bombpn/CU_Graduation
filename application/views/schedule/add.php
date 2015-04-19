@@ -57,8 +57,8 @@
                 <label class="col-md-4 control-label" for="schedule_round">Round : </label>
                 <div class="col-md-4">
                   <select id="schedule_round" name="schedule_round" class="form-control">
-                    <option value="1">Option one</option>
-                    <option value="2">Option two</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
                   </select>
                 </div>
               </div>
@@ -79,15 +79,22 @@
                 <label class="col-md-4 control-label" for="schedule_group">Group : </label>
                 <div class="col-md-4">
                   <select id="schedule_group" name="schedule_group" class="form-control">
-                    <option value="1">Option one</option>
-                    <option value="2">Option two</option>
+                    <?php
+                    if(count($groups>0)){
+                        foreach($groups as $row){
+                          echo '<option value="'.$row->group_id.'">'.$row->group_id.' : '.$row->th_group_name.'</option>';
+                        }
+                    }else{
+                      echo '<option value="">No Group Available</option>';
+                    }
+                    ?>
                   </select>
                 </div>
                 <div class="col-md-4">
                       <button id="singlebutton" name="singlebutton" class="btn btn-primary">Add : </button>
                 </div>
               </div>
-
+              List Group in This Schedule  
               <!-- RETURN AJAX FETCH SCHEDULE BY schedule_date -->
               <div class="form-group">
               <div class="col-md-4"></div>
@@ -114,12 +121,31 @@
                 <label class="col-md-4 control-label" for="schedule_place">Place : </label>
                 <div class="col-md-4">
                   <select id="schedule_place" name="schedule_place" class="form-control">
-                    <option value="1">Option one</option>
-                    <option value="2">Option two</option>
+                    <?php
+                    if(count($places>0)){
+                        foreach($places as $row){
+                          echo '<option value="
+                          '.$row->place_id.
+                          '">'.
+                          $row->place_id.
+                          ' : '
+                          .$row->th_building.
+                          ' : '.
+                          'Floor/Room'.
+                          ' : '.
+                          $row->floor.
+                          '/'.
+                          $row->room.
+                          '</option>';
+                        }
+                    }else{
+                      echo '<option value="">No Group Available</option>';
+                    }
+                    ?>
                   </select>
                 </div>
               </div>
-
+              <button id="submit" name="submit" class="btn btn-primary">Submit</button>
 
             </fieldset></form>
         <hr>

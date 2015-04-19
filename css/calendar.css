@@ -397,6 +397,9 @@
 [class*="cal-cell"]:hover {
   background-color: #ededed;
 }
+[class*="cal-cell"].selected {
+  background-color: #adadad;
+}
 .cal-year-box [class*="span"],
 .cal-month-box [class*="cal-cell"] {
   min-height: 100px;

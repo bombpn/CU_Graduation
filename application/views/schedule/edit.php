@@ -15,117 +15,174 @@
 </head>
 
 <body>
-<hr>
 <!-- Page Heading -->
 <div class="col-md-12">
 <div class="row clearfix">
     <div class="col-lg-12">
-        <h1 class="page-header">
-            แก้ไขข้อมูล
+        <h1 class="page-header">แก้ไขข้อมูล
             <small>Edit</small>
         </h1>
+ท่านกำลังแก้ไข <br>
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>ลำดับที่</th>
+                            <th>วันที่</th>
+                            <th>เวลาเริ่ม</th>
+                            <th>เวลาสิ้นสุด</th>
+                          <tr>
+                        </thead>
+                        <tbody>
+                          <?php
+                            if(count($individual)>0){
+                              foreach($individual as $schedule){
+                            ?>
+                                <tr>
+                                  <td><?=$schedule->schedule_id;?></td>
+                                  <td><?=$schedule->date;?></td>
+                                  <td><?=$schedule->start_time;?></td>
+                                  <td><?=$schedule->end_time;?></td>
+                                </tr>
+                            <?php
+                              }
+                            }else{
+                            ?>
+                              <tr>
+                                <td colspan="5">ไม่มีข้อมูล</td>
+                              </tr>
+                            <?php
+                            }
+                            ?>
+                        </tbody>
+                      </table>
 
-    <!-- Form -->
-        <form class="form-horizontal"><fieldset>
+        <!-- Form -->
+            <form class="form-horizontal"><fieldset>
 
-          <!-- Date Picker -->
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="datepicker">Date : </label>
-            <div class="col-md-4">
-              <input class="form-control input-md" type="text" id="datepicker"></input>
-            </div>
-          </div>
-
-          <!-- Time Picker -->
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="starttime">Start time : </label>
-            <div class="col-md-4">
-              <input class="form-control input-md" type="text" id="starttime"></input>
-            </div>
-          </div>
-
-          <!-- Time Picker -->
-          <div class="form-group">
-            <label class="col-md-4 control-label" for="stoptime">Stop time : </label>
-            <div class="col-md-4">
-              <input class="form-control input-md" type="text" id="stoptime"></input>
-            </div>
-          </div>
-
-              <!-- Select Basic -->
+              <!-- Date Picker -->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="schedule_round">Round : </label>
+                <label class="col-md-4 control-label" for="datepicker">Date : </label>
                 <div class="col-md-4">
-                  <select id="schedule_round" name="schedule_round" class="form-control">
-                    <option value="1">Option one</option>
-                    <option value="2">Option two</option>
-                  </select>
+                  <input class="form-control input-md" type="text" id="datepicker"></input>
                 </div>
               </div>
 
-              <!-- Select Basic -->
+              <!-- Time Picker -->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="schedule_type">Type : </label>
+                <label class="col-md-4 control-label" for="starttime">Start time : </label>
                 <div class="col-md-4">
-                  <select id="schedule_type" name="schedule_type" class="form-control">
-                    <option value="1">รอบซ้อมรับ</option>
-                    <option value="2">รอบพิธีการจริง</option>
-                  </select>
+                  <input class="form-control input-md" type="text" id="starttime"></input>
                 </div>
               </div>
 
-              <!-- Select Basic -->
+              <!-- Time Picker -->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="schedule_group">Group : </label>
+                <label class="col-md-4 control-label" for="stoptime">Stop time : </label>
                 <div class="col-md-4">
-                  <select id="schedule_group" name="schedule_group" class="form-control">
-                    <option value="1">Option one</option>
-                    <option value="2">Option two</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                      <button id="singlebutton" name="singlebutton" class="btn btn-primary">Add : </button>
+                  <input class="form-control input-md" type="text" id="stoptime"></input>
                 </div>
               </div>
 
-              <!-- RETURN AJAX FETCH SCHEDULE BY schedule_date -->
-              <div class="form-group">
-              <div class="col-md-4"></div>
-              <div class="col-md-4">
-                <table class="table">
-                <thead>
-                  <tr>
-                    <th>ลำดับที่</th>
-                    <th>กลุ่ม</th>
-                  <tr>
-                </thead>
-                <tbody>
-                    <td colspan ="5"> no data fetch </td>
-                </tbody>
-              </table>
+                  <!-- Select Basic -->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="schedule_round">Round : </label>
+                    <div class="col-md-4">
+                      <select id="schedule_round" name="schedule_round" class="form-control">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Select Basic -->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="schedule_type">Type : </label>
+                    <div class="col-md-4">
+                      <select id="schedule_type" name="schedule_type" class="form-control">
+                        <option value="1">รอบซ้อมรับ</option>
+                        <option value="2">รอบพิธีการจริง</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Select Basic -->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="schedule_group">Group : </label>
+                    <div class="col-md-4">
+                      <select id="schedule_group" name="schedule_group" class="form-control">
+                        <?php
+                        if(count($groups>0)){
+                            foreach($groups as $row){
+                              echo '<option value="'.$row->group_id.'">'.$row->group_id.' : '.$row->th_group_name.'</option>';
+                            }
+                        }else{
+                          echo '<option value="">No Group Available</option>';
+                        }
+                        ?>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                          <button id="addGroup" name="addGroup" class="btn btn-primary">Add Group to Schedule</button>
+                    </div>
+                  </div>
+                  List Group in This Schedule
+                  <!-- RETURN AJAX FETCH SCHEDULE BY schedule_date -->
+                  <div class="form-group">
+                  <div class="col-md-4"></div>
+                  <div class="col-md-4">
+                    <table class="table">
+                    <thead>
+                      <tr>
+                        <th>ลำดับที่</th>
+                        <th>กลุ่ม</th>
+                      <tr>
+                    </thead>
+                    <tbody>
+                        <td colspan ="5"> no data fetch </td>
+                    </tbody>
+                  </table>
+                    </div>
+                  <div class="col-md-4"></div>
                 </div>
-              <div class="col-md-4"></div>
-            </div>
 
-              <br>
+                  <br>
 
-              <!-- Select Basic -->
-              <div class="form-group">
-                <label class="col-md-4 control-label" for="schedule_place">Place : </label>
-                <div class="col-md-4">
-                  <select id="schedule_place" name="schedule_place" class="form-control">
-                    <option value="1">Option one</option>
-                    <option value="2">Option two</option>
-                  </select>
-                </div>
-              </div>
+                  <!-- Select Basic -->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="schedule_place">Place : </label>
+                    <div class="col-md-4">
+                      <select id="schedule_place" name="schedule_place" class="form-control">
+                        <?php
+                        if(count($places>0)){
+                            foreach($places as $row){
+                              echo '<option value="
+                              '.$row->place_id.
+                              '">'.
+                              $row->place_id.
+                              ' : '
+                              .$row->th_building.
+                              ' : '.
+                              'Floor/Room'.
+                              ' : '.
+                              $row->floor.
+                              '/'.
+                              $row->room.
+                              '</option>';
+                            }
+                        }else{
+                          echo '<option value="">No Group Available</option>';
+                        }
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+                  <button id="submit" name="submit" class="btn btn-primary">Submit</button>
 
-
-            </fieldset></form>
-        <hr>
+                </fieldset></form>
+            <hr>
+        </div>
     </div>
-</div>
-</div>
+    </div>
 
-</body>
-</html>
+    </body>
+    </html>
