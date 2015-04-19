@@ -35,7 +35,10 @@
 	            			<td><?=$schedule->date;?></td>
 	            			<td><?=$schedule->start_time;?></td>
 	            			<td><?=$schedule->end_time;?></td>
-	            			<td><a href="<?=base_url();?>check/barcode_check/<?=$schedule->schedule_id?>" class="btn btn-primary">เช็คโดยบาร์โค้ด</a></td>
+	            			<td>
+                                <a href="<?=base_url();?>check/barcode_check/<?=$schedule->schedule_id?>" target="_blank" class="btn btn-primary">เช็คโดยบาร์โค้ด</a>
+                                <a href="<?=base_url();?>check/list_check/<?=$schedule->schedule_id?>" target="_blank" class="btn btn-primary">เช็คตามรายชื่อ</a>
+                            </td>
 	            		</tr>
 	            <?php
 	            	}

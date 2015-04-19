@@ -11,4 +11,14 @@ class check extends CI_Controller {
 		$this->load->view('check/home',$data);
 		$this->load->view('inc_footer');
 	}
+	public function barcode_check($schedule_id){
+		$result = $this->check->get_all_group($schedule_id);
+		foreach($result as $res){
+			$res->th_group_name = $this->check->get_group_name($res->GROUP_group_id)->th_group_name;
+		}
+		$data['allgroup_in_schedule'] = $result;
+		//$this->load->view('inc_header');
+		$this->load->view('check/barcode_check',$data);
+		//$this->load->view('inc_footer');
+	}
 }
