@@ -38,7 +38,7 @@
 
 </fieldset>
 </form>
-<form class="form-horizontal">
+<form class="form-horizontal" action="<?=base_url();?>student/import" method="POST">
 <fieldset>
 
 <!-- Form Name -->
@@ -69,7 +69,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THNameInput">ชื่อ (ไทย)</label>  
   <div class="col-md-4">
-  <input id="THNameInput" name="THFirstameInput" type="text" placeholder="" class="form-control input-md" required="">
+  <input id="THNameInput" name="THFirstnameInput" type="text" placeholder="" class="form-control input-md" required="">
     
   </div>
 </div>
@@ -86,10 +86,10 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THPrefixInput">คำนำหน้าชื่อ (อังกฤษ) </label>
   <div class="col-md-1">
-    <select id="ENPrefixInput" name="THPrefixInput" class="form-control">
-      <option value="1">Mr.</option>
-      <option value="2">Mrs.</option>
-      <option value="3">Miss</option>
+    <select id="ENPrefixInput" name="ENPrefixInput" class="form-control">
+      <option value="Mr.">Mr.</option>
+      <option value="Mrs.">Mrs.</option>
+      <option value="Miss">Miss</option>
     </select>
   </div>
 </div>
@@ -98,7 +98,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THNameInput">ชื่อ (อังกฤษ)</label>  
   <div class="col-md-4">
-  <input id="THNameInput" name="ENFirstameInput" type="text" placeholder="" class="form-control input-md" required="">
+  <input id="THNameInput" name="ENFirstnameInput" type="text" placeholder="" class="form-control input-md" required="">
     
   </div>
 </div>
@@ -179,8 +179,8 @@
   <label class="col-md-4 control-label" for="SaveButton"></label>
   <div class="col-md-8">
     <input type="submit" id="SaveButton" name="SaveButton" class="btn btn-info" value="เก็บ"></button>
-    <!-- <input type="reset" id="CancelButton" name="CancelButton" class="btn btn-danger" value="ยกเลิก"></button>
-  --></div> 
+    <input type="reset" id="ResetButton" name="ResetButton" class="btn btn-danger" value="ล้าง"></button>
+  </div> 
 </div>
 </fieldset>
 </form>

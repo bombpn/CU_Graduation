@@ -33,9 +33,9 @@
   <label class="col-md-4 control-label" for="THPrefixInput">คำนำหน้าชื่อ  (ไทย) </label>
   <div class="col-md-1">
     <select id="THPrefixInput" name="THPrefixInput" class="form-control">
-      <option value="นาย">นาย</option>
-      <option value="นาง">นาง</option>
-      <option value="นางสาว">นางสาว</option>
+      <option value="<?php echo $ta[0] ; ?>"><?php echo $ta[0] ; ?></option>
+      <option  value="<?php echo $ta[1] ; ?>"><?php echo $ta[1] ; ?></option>
+      <option value="<?php echo $ta[2] ; ?>"><?php echo $ta[2] ; ?></option>
     </select>
   </div>
 </div>
@@ -53,7 +53,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THLastnameInput">นามสกุล (ไทย)</label>  
   <div class="col-md-4">
-  <input id="THLastnameInput" name="THLastnameInput" type="text" placeholder="" class="form-control input-md" required="">
+  <input id="THLastnameInput" name="THLastnameInput" type="text" placeholder="" class="form-control input-md" value="<?php echo $th_lastname ; ?>" required="">
     
   </div>
 </div>
@@ -62,9 +62,9 @@
   <label class="col-md-4 control-label" for="THPrefixInput">คำนำหน้าชื่อ (อังกฤษ) </label>
   <div class="col-md-1">
     <select id="ENPrefixInput" name="THPrefixInput" class="form-control">
-      <option value="1">Mr.</option>
-      <option value="2">Mrs.</option>
-      <option value="3">Miss</option>
+      <option value="<?php echo $ea[0] ; ?>"><?php echo $ea[0] ; ?></option>
+      <option  value="<?php echo $ea[1] ; ?>"><?php echo $ea[1] ; ?></option>
+      <option value="<?php echo $ea[2] ; ?>"><?php echo $ea[2] ; ?></option>
     </select>
   </div>
 </div>
@@ -73,7 +73,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THNameInput">ชื่อ (อังกฤษ)</label>  
   <div class="col-md-4">
-  <input id="THNameInput" name="ENFirstameInput" type="text" placeholder="" class="form-control input-md" required="">
+  <input id="THNameInput" name="ENFirstameInput" type="text" placeholder="" class="form-control input-md" required="" value="<?php echo $en_firstname ; ?>" >
     
   </div>
 </div>
@@ -82,7 +82,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THLastnameInput">นามสกุล (อังกฤษ)</label>  
   <div class="col-md-4">
-  <input id="THLastnameInput" name="ENLastnameInput" type="text" placeholder="" class="form-control input-md" required="">
+  <input id="THLastnameInput" name="ENLastnameInput" type="text" placeholder="" class="form-control input-md" required="" value="<?php echo $en_lastname ; ?>" >
     
   </div>
 </div>
@@ -146,7 +146,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="PicPathInput">ตำแหน่งที่เก็บรูป</label>
   <div class="col-md-4">
-    <input id="PicPathInput" name="PicPathInput" class="input-file" type="file">
+    <input id="PicPathInput" name="PicPathInput" class="input-file" type="file" value="$picture_path">
   </div>
 </div>
 <!-- Button (Double) -->

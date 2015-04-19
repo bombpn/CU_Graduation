@@ -22,6 +22,7 @@
   <label class="col-md-4 control-label" for="SearchIDInput">ID</label>
   <div class="col-md-2">
     <input id="SearchIDInput" name="SearchIDInput" type="search" placeholder="" class="form-control input-md">
+    <br></br>
     <input type="submit" class="btn btn-primary btn-primary" value="Edit"> 
 </fieldset>
 </form>
