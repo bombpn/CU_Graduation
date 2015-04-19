@@ -7,8 +7,10 @@ class model_faculty extends CI_Model {
 		return $this->db->get("faculty")->result();
 	}
 	public function add_faculty($data) {
-		$this->db->insert('faculty', $data)
+		$this->db->insert('faculty', $data);
 	}
-	public function delete_faculty()
+	public function delete_faculty() {
+		
+	}
 }
 ?>
