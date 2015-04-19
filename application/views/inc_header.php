@@ -177,16 +177,16 @@
                                 <a href="<?=base_url(); ?>student/">รายชื่อบัณฑิต</a>
                             </li>
                             <li>
-                                <a href="#">รายชื่อคณะ</a>
+                                <a href="<?=base_url(); ?>faculty/">รายชื่อคณะ</a>
                             </li>
                             <li>
                                 <a href="<?=base_url(); ?>group/">รายชื่อกลุ่มรับปริญญา</a>
                             </li>
                             <li>
-                                <a href="#">รายชื่ออาจารย์</a>
+                                <a href="<?=base_url(); ?>teacher/">รายชื่ออาจารย์</a>
                             </li>
                             <li>
-                                <a href="#">สถานที่</a>
+                                <a href="<?=base_url(); ?>place/">สถานที่</a>
                             </li>
                             <li>
                                 <a href="<?=base_url(); ?>schedule/">ตารางการซ้อม</a>
