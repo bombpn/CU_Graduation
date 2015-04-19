@@ -12,8 +12,9 @@ class model_student extends CI_Model{
 		$this->db->insert("student",$rs) ;
 	}
 	public function get_student($id){
-		$sql = "SELECT * where id = $id";
+		$sql = "SELECT * from student where student_id = $id";
 		$rs = $this->db->query($sql) ;
+		return $rs->row();
 	}
 }
 

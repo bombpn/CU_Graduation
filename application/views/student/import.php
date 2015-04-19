@@ -48,7 +48,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="IDInput">ID</label>  
   <div class="col-md-2">
-  <input id="IDInput" name="IDInput" type="text" placeholder="ID..." class="form-control input-md" required="">
+  <input id="IDInput" name="IDInput" type="text" class="form-control input-md" required="">
     
   </div>
 </div>

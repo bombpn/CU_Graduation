@@ -12,47 +12,20 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-			ค้นหารายชื่อ
-            <small>Search Student</small>
+			ค้นหารายชื่อที่ต้องการแก้ไข
+            <small>Edit Student</small>
         </h1>
-    <table  class="table table-hover table-bordered">
-	<thread>
-		<tr >
-			<th>รหัสนิสิต</th>
-			<th>คำนำหน้าขื่อ</th>
-			<th>เบอร์โทรศัพท์</th>
-			<th>ปรับแต่ง</th>
-		</tr>
-	</thread>
-	<tbody>
-	<?php 
-		if (count($rs)==0)
-		{
-			echo "<tr><td colspan = '4' align='center'>-- no data --</td></tr>" ;
-		}
-		else
-		{
-				$no = 1;
-				foreach($rs as $r)
-				{
-					echo "<tr>";
-					echo "<td align='center'>$no</td>";
-					echo "<td align='center'>".$r["member_name"]."</td>";
-					echo "<td align='center'>".$r["member_tel"]."</td>";
-					echo "<td >";
-					echo anchor("member/edit/".$r['id'],"แก้ไข้")."&nbsp" ;
-					$id = $r['id'] ;
-					echo anchor("member/del/".$id,"ลบ",array(
-						"onclick" => "javascript:return confirm('คุณต้องการลบหรือไม่?');"
-						)) ;
-					echo "<tr>";
-					$no++;
-				}
-		}
-	?>
-	
-	
-	</tbody>
+<form class="form-horizontal" action="<?=base_url();?>student/edit" method="POST">
+<fieldset>
+<!-- Form Name -->
+<legend>ใส่รหัสนิสิตที่ต้องการแก้ไข</legend>
+  <label class="col-md-4 control-label" for="SearchIDInput">ID</label>
+  <div class="col-md-2">
+    <input id="SearchIDInput" name="SearchIDInput" type="search" placeholder="" class="form-control input-md">
+    <input type="submit" class="btn btn-primary btn-primary" value="Edit"> 
+</fieldset>
+</form>
+
     </div>
 </div>
 <!-- /.row -->

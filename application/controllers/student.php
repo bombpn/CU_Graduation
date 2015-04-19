@@ -4,7 +4,7 @@ class Student extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->helper('form');
-		$this->load->model("model_student","student");
+		$this->load->model("model_student","model_student");
 	}
 
 	public function index()
@@ -15,21 +15,38 @@ class Student extends CI_Controller {
 	}
 	public function search($id=0)
 	{
+				if ($_POST){
+				$id = $_POST["SearchIDInput"] ;
+				$data = $this->model_student->get_student($id);
+				$this->load->view('inc_header');
+				$this->load->view('student/edit',$data);
+				$this->load->view('inc_footer');
+				}
+				else {
 				$data = array(
 					"id" => $id 
 				);
 				$this->load->view('inc_header');
 				$this->load->view('student/search',$data);
 				$this->load->view('inc_footer');
+				}
 	}
-	public function edit($id =0)
+	public function edit()
 	{
-				$data = array(
-					"id" => $id 
-				);
+				if ($_POST){
+				$id = $_POST["SearchIDInput"] ;
+				$rs = $this->model_student->get_student($id);
+				$data['student_id'] = $rs->student_id ;
+				$data['th_prefix'] = $rs->th_prefix ;
+				$data['th_firstname'] = $rs->th_firstname ;
+				$data['th_lastname'] = $rs->th_lastname ;
+				$data['en_prefix'] = $rs->en_prefix ;
+				$data['en_firstname'] = $rs->en_firstname ; 
 				$this->load->view('inc_header');
 				$this->load->view('student/edit',$data);
 				$this->load->view('inc_footer');
+				}
+
 	}
 	public function import()
 	{
