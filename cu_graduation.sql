@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2015 at 06:11 PM
+-- Generation Time: Apr 19, 2015 at 10:16 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -88,12 +88,12 @@ INSERT INTO `faculty` (`faculty_id`, `th_faculty_name`, `en_faculty_name`) VALUE
 --
 
 CREATE TABLE IF NOT EXISTS `group` (
-  `group_id` int(11) NOT NULL,
+`group_id` int(11) NOT NULL,
   `th_group_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `en_group_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `international` tinyint(1) DEFAULT NULL,
   `degree` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `group`
@@ -833,14 +833,14 @@ INSERT INTO `join` (`STUDENT_student_id`, `GROUP_group_id`, `order`, `honors`) V
 --
 
 CREATE TABLE IF NOT EXISTS `place` (
-  `place_id` int(11) NOT NULL,
+`place_id` int(11) NOT NULL,
   `th_building` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `en_building` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `floor` varchar(3) COLLATE utf8_unicode_ci DEFAULT NULL,
   `room` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `floor_plan_file` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `total_seat` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `place`
@@ -856,14 +856,14 @@ INSERT INTO `place` (`place_id`, `th_building`, `en_building`, `floor`, `room`, 
 --
 
 CREATE TABLE IF NOT EXISTS `schedule` (
-  `schedule_id` int(11) NOT NULL,
+`schedule_id` int(11) NOT NULL,
   `date` date DEFAULT NULL,
   `start_time` time DEFAULT NULL,
   `end_time` time DEFAULT NULL,
   `type` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `round` int(11) DEFAULT NULL,
   `PLACE_place_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `schedule`
@@ -2465,6 +2465,25 @@ ALTER TABLE `transaction`
 ALTER TABLE `vip_seats`
  ADD PRIMARY KEY (`vip_seat`,`SCHEDULE_schedule_id`), ADD KEY `fk_VIP_SEATS_SCHEDULE_idx` (`SCHEDULE_schedule_id`);
 
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `group`
+--
+ALTER TABLE `group`
+MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `place`
+--
+ALTER TABLE `place`
+MODIFY `place_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `schedule`
+--
+ALTER TABLE `schedule`
+MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
