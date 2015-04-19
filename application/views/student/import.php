@@ -18,6 +18,30 @@
 <fieldset>
 
 <!-- Form Name -->
+<legend>เพิ่มบัณฑิตด้วย .CSV</legend>
+
+<!-- File Button --> 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="ImportFiel">ไฟล์ .csv</label>
+  <div class="col-md-4">
+    <input id="ImportFiel" name="ImportFiel" class="input-file" type="file">
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="ImportInput"></label>
+  <div class="col-md-4">
+    <button id="ImportInput" name="ImportInput" class="btn btn-primary">นำเข้า</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
 <legend>เพิ่มข้อมูลบัณฑิต</legend>
 
 <!-- Text input-->
@@ -34,9 +58,9 @@
   <label class="col-md-4 control-label" for="THPrefixInput">คำนำหน้าชื่อ  (ไทย) </label>
   <div class="col-md-1">
     <select id="THPrefixInput" name="THPrefixInput" class="form-control">
-      <option value="1">นาย</option>
-      <option value="2">นาง</option>
-      <option value="3">นางสาว</option>
+      <option value="นาย">นาย</option>
+      <option value="นาง">นาง</option>
+      <option value="นางสาว">นางสาว</option>
     </select>
   </div>
 </div>
@@ -154,9 +178,9 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="SaveButton"></label>
   <div class="col-md-8">
-    <button id="SaveButton" name="SaveButton" class="btn btn-info">เก็บ</button>
-    <button id="ResetButton" name="ResetButton" class="btn btn-danger">ล้าง</button>
-  </div>
+    <input type="submit" id="SaveButton" name="SaveButton" class="btn btn-info" value="เก็บ"></button>
+    <!-- <input type="reset" id="CancelButton" name="CancelButton" class="btn btn-danger" value="ยกเลิก"></button>
+  --></div> 
 </div>
 </fieldset>
 </form>
