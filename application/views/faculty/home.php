@@ -20,30 +20,33 @@
                     <th>รหัสคณะ</th>
                     <th>ชื่อคณะ</th>
                     <th>Faculty Name</th>
-                    <th>Edit</th>
+                    <th>Manage</th>
                 <tr>
         	</thead>
         	<tbody>
+            <form action="<?=base_url();?>faculty/search_faculty" method="POST">
+                <fieldset>
                 <tr>
                     <td>
-                        <input type="email" class="form-control" id="faculty_id" placeholder="รหัสคณะ">         
+                        <input class="form-control" name="faculty_id"  placeholder="รหัสคณะ">         
                     </td>
                     <td>
-                        <input type="email" class="form-control" id="th_faculty_name" placeholder="ชื่อคณะ">  
+                        <input class="form-control" name="th_faculty_name" placeholder="ชื่อคณะ">  
                     </td>
                     <td>
-                        <input type="email" class="form-control" id="en_faculty_name" placeholder="Faculty Name">
+                        <input class="form-control" name="en_faculty_name" placeholder="Faculty Name">
                     </td>
                     <td>
-                        <a href="#" class="btn btn-primary">
-                            <i class="fa fa-plus"></i>
-                        </a>
+                        <input type="submit" class="btn btn-info" value="Search">
+                            <!-- <i class="fa fa-search"></i> -->
+                        </input>
                     </td>
                 </tr>
+                </fieldset>
+            </form>
         		<?php
 	            if(count($allfaculty)>0){
 	            	foreach($allfaculty as $faculty){
-	            	//echo $schedule->schedule_id . " " . $schedule->date . " " . $schedule->start_time . " - " . $schedule->end_time . "<br>";
 	            ?>
 	            		<tr>
 	            			<td><?=$faculty->faculty_id;?></td>

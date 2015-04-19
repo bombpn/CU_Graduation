@@ -14,17 +14,18 @@ class model_faculty extends CI_Model {
 		$this->db->insert($this->table, $data);
 	}
 	public function delete_faculty($data) {
-		$this->db->where($this->id, $data[0]);
+		$this->db->where($this->id, $data['faculty_id']);
 		$this->db->delete($this->table);
+		return $this->db->get($this->table)->result();
 	}
 	public function edit_faculty($data) {
-		$this->db->where($this->id, $data[0]);
+		$this->db->where($this->id, $data['faculty_id']);
 		$this->db->update($this->table, array_slice($data, 1));
 	}
 	public function search_faculty($data) {
-		$this->db->where($this->id, $data[0]);
-		$this->db->like($this->th, $data[1]);
-		$this->db->like($this->en, $data[2]);
+		$this->db->like($this->id, $data['faculty_id']);
+		$this->db->like($this->th, $data['th_faculty_name']);
+		$this->db->like($this->en, $data['en_faculty_name']);
 		return $this->db->get($this->table)->result();
 	}
 }
