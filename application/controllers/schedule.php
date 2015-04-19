@@ -12,12 +12,12 @@ class Schedule extends CI_Controller {
 				'show_next_prev' =>'true' ,
 				'next_prev_url' => base_url(). 'schedule/showDate',
 
-				'template'    => '{table_open}<div class="row" style="width: 100%;"><div class="col-md-12">{/table_open}
-           {heading_row_start}CALENDAR{/heading_row_start}
-           {heading_previous_cell}<caption><a href="{previous_url}" class="prev_date" title="Previous Month">&lt;&lt;Prev</a>{/heading_previous_cell}
-           {heading_title_cell}{heading}{/heading_title_cell}
-           {heading_next_cell}<a href="{next_url}" class="next_date"  title="Next Month">Next&gt;&gt;</a></caption>{/heading_next_cell}
-           {heading_row_end}<col class="weekday" span="5"><col class="weekend_sat"><col class="weekend_sun">{/heading_row_end}
+				'template'    => '{table_open}<div class="row" style="width: 70%;"><div class="col-md-12">{/table_open}
+           {heading_row_start}<center>{/heading_row_start}
+           {heading_previous_cell}<caption><a href="{previous_url}" class="btn btn-primary" title="Previous Month">&lt;&lt;Prev</a>{/heading_previous_cell}
+           {heading_title_cell} <a class="btn btn-primary">{heading}</a><a class="btn btn-primary" href="">Today</a>{/heading_title_cell}
+           {heading_next_cell}<a href="{next_url}" class="btn btn-primary" title="Next Month">Next&gt;&gt;</a></caption>{/heading_next_cell}
+           {heading_row_end}</center><col class="weekday" span="5"><col class="weekend_sat"><col class="weekend_sun">{/heading_row_end}
 
 					 {week_row_start}<div class="cal-row-fluid cal-row-head">{/week_row_start}
            {week_day_cell}<div class="cal-cell1">{week_day}</div>{/week_day_cell}
@@ -47,10 +47,14 @@ class Schedule extends CI_Controller {
 				$this->load->view('inc_header');
 				$this->load->view('schedule/schedule',$data);
 				$this->load->view('schedule/list',$db_schedule);
-				$this->load->view('schedule/manager');
 				$this->load->view('inc_footer');
 	}
 
+	public function addSchedule(){
+		$this->load->view('inc_header');
+		$this->load->view('schedule/add');
+		$this->load->view('inc_footer');
+	}
 
 	public function index($year =null , $month = null)
 	{

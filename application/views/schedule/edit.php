@@ -21,8 +21,8 @@
 <div class="row clearfix">
     <div class="col-lg-12">
         <h1 class="page-header">
-            จัดการแก้ไขข้อมูล
-            <small>Add / Edit</small>
+            แก้ไขข้อมูล
+            <small>Edit</small>
         </h1>
 
     <!-- Form -->
@@ -30,7 +30,7 @@
 
           <!-- Date Picker -->
           <div class="form-group">
-            <label class="col-md-4 control-label" for="selectbasic">Date</label>
+            <label class="col-md-4 control-label" for="datepicker">Date : </label>
             <div class="col-md-4">
               <input class="form-control input-md" type="text" id="datepicker"></input>
             </div>
@@ -38,7 +38,7 @@
 
           <!-- Time Picker -->
           <div class="form-group">
-            <label class="col-md-4 control-label" for="selectbasic">Start time :</label>
+            <label class="col-md-4 control-label" for="starttime">Start time : </label>
             <div class="col-md-4">
               <input class="form-control input-md" type="text" id="starttime"></input>
             </div>
@@ -46,7 +46,7 @@
 
           <!-- Time Picker -->
           <div class="form-group">
-            <label class="col-md-4 control-label" for="selectbasic">Stop time :</label>
+            <label class="col-md-4 control-label" for="stoptime">Stop time : </label>
             <div class="col-md-4">
               <input class="form-control input-md" type="text" id="stoptime"></input>
             </div>
@@ -54,9 +54,9 @@
 
               <!-- Select Basic -->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="selectbasic">Round</label>
+                <label class="col-md-4 control-label" for="schedule_round">Round : </label>
                 <div class="col-md-4">
-                  <select id="selectbasic" name="selectbasic" class="form-control">
+                  <select id="schedule_round" name="schedule_round" class="form-control">
                     <option value="1">Option one</option>
                     <option value="2">Option two</option>
                   </select>
@@ -65,7 +65,7 @@
 
               <!-- Select Basic -->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="schedule_type">ธype</label>
+                <label class="col-md-4 control-label" for="schedule_type">Type : </label>
                 <div class="col-md-4">
                   <select id="schedule_type" name="schedule_type" class="form-control">
                     <option value="1">รอบซ้อมรับ</option>
@@ -76,7 +76,7 @@
 
               <!-- Select Basic -->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="schedule_group">Group</label>
+                <label class="col-md-4 control-label" for="schedule_group">Group : </label>
                 <div class="col-md-4">
                   <select id="schedule_group" name="schedule_group" class="form-control">
                     <option value="1">Option one</option>
@@ -84,7 +84,7 @@
                   </select>
                 </div>
                 <div class="col-md-4">
-                      <button id="singlebutton" name="singlebutton" class="btn btn-primary">Add</button>
+                      <button id="singlebutton" name="singlebutton" class="btn btn-primary">Add : </button>
                 </div>
               </div>
 
@@ -111,14 +111,16 @@
 
               <!-- Select Basic -->
               <div class="form-group">
-                <label class="col-md-4 control-label" for="schedule_group">Group</label>
+                <label class="col-md-4 control-label" for="schedule_place">Place : </label>
                 <div class="col-md-4">
-                  <select id="schedule_group" name="schedule_group" class="form-control">
+                  <select id="schedule_place" name="schedule_place" class="form-control">
                     <option value="1">Option one</option>
                     <option value="2">Option two</option>
                   </select>
                 </div>
               </div>
+
+
             </fieldset></form>
         <hr>
     </div>

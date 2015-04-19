@@ -13,15 +13,13 @@
             ตารางการซ้อม
             <small>Schedule Manager</small>
         </h1>
-        แสดงตารางการซ้อม<br>
-        เพิ่มตารางการซ้อม<br>
 
-        ควรจะเป็นปฏิทิน <br>
-        และตามด้วย Bullet แสดง Event <br>
-        <hr>
         <?php
             echo $calendars;
           ?>
+          <hr>
+            <a href ="<?=base_url();?>schedule/addSchedule"  class="btn btn-primary" >Add New Group</a>
+            <a href ="<?=base_url();?>schedule/editSchedule"  class="btn btn-warning" >Edit Existing Group</a>
     </div>
 </div>
 <!-- /.row -->
