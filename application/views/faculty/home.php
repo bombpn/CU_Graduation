@@ -12,30 +12,51 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            เช็คชื่อ
+            รายชื่อคณะ
         </h1>
-        <table class="table">
+        <table class="table table-striped">
         	<thead>
         		<tr>
-        			<th>ลำดับที่</th>
-        			<th>วันที่</th>
-        			<th>เวลาเริ่ม</th>
-        			<th>เวลาสิ้นสุด</th>
-        			<th>เช็คชื่อ</th>
-        		<tr>
+                    <th>รหัสคณะ</th>
+                    <th>ชื่อคณะ</th>
+                    <th>Faculty Name</th>
+                    <th>Edit</th>
+                <tr>
         	</thead>
         	<tbody>
+                <tr>
+                    <td>
+                        <input type="email" class="form-control" id="faculty_id" placeholder="รหัสคณะ">         
+                    </td>
+                    <td>
+                        <input type="email" class="form-control" id="th_faculty_name" placeholder="ชื่อคณะ">  
+                    </td>
+                    <td>
+                        <input type="email" class="form-control" id="en_faculty_name" placeholder="Faculty Name">
+                    </td>
+                    <td>
+                        <a href="#" class="btn btn-primary">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </td>
+                </tr>
         		<?php
-	            if(count($allschedule)>0){
-	            	foreach($allschedule as $schedule){
+	            if(count($allfaculty)>0){
+	            	foreach($allfaculty as $faculty){
 	            	//echo $schedule->schedule_id . " " . $schedule->date . " " . $schedule->start_time . " - " . $schedule->end_time . "<br>";
 	            ?>
 	            		<tr>
-	            			<td><?=$schedule->schedule_id;?></td>
-	            			<td><?=$schedule->date;?></td>
-	            			<td><?=$schedule->start_time;?></td>
-	            			<td><?=$schedule->end_time;?></td>
-	            			<td><a href="<?=base_url();?>check/barcode_check/<?=$schedule->schedule_id?>" class="btn btn-primary">เช็คโดยบาร์โค้ด</a></td>
+	            			<td><?=$faculty->faculty_id;?></td>
+	            			<td><?=$faculty->th_faculty_name;?></td>
+	            			<td><?=$faculty->en_faculty_name;?></td>
+                            <td>
+                                <a href="#" class="btn btn-primary">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a href="#" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
 	            		</tr>
 	            <?php
 	            	}
