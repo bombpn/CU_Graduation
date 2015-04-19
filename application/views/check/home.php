@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="th">
-
 <head>
-
     <title>CU Graduation</title>
-
 </head>
-
 <body>
 <!-- Page Heading -->
 <div class="row">
@@ -49,7 +45,7 @@
 	            ?>
         	</tbody>
         </table>
-            
+
     </div>
 </div>
 <!-- /.row -->

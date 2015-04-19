@@ -49,28 +49,6 @@ CREATE TABLE IF NOT EXISTS `CU_Graduation`.`PLACE` (
   PRIMARY KEY (`place_id`))
 ENGINE = InnoDB;
 
-
--- -----------------------------------------------------
--- Table `CU_Graduation`.`SCHEDULE`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `CU_Graduation`.`SCHEDULE` (
-  `schedule_id` INT NOT NULL,
-  `date` DATE NULL,
-  `start_time` TIME(0) NULL,
-  `end_time` TIME(0) NULL,
-  `type` VARCHAR(20) NULL,
-  `round` INT NULL,
-  `PLACE_place_id` INT NOT NULL,
-  PRIMARY KEY (`schedule_id`),
-  INDEX `fk_SCHEDULE_PLACE1_idx` (`PLACE_place_id` ASC),
-  CONSTRAINT `fk_SCHEDULE_PLACE1`
-    FOREIGN KEY (`PLACE_place_id`)
-    REFERENCES `CU_Graduation`.`PLACE` (`place_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
 -- -----------------------------------------------------
 -- Table `CU_Graduation`.`VIP_SEATS`
 -- -----------------------------------------------------

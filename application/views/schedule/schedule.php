@@ -22,8 +22,6 @@
         <?php
             echo $calendars;
           ?>
-
-
     </div>
 </div>
 <!-- /.row -->

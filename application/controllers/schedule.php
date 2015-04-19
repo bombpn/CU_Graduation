@@ -12,7 +12,7 @@ class Schedule extends CI_Controller {
 				'show_next_prev' =>'true' ,
 				'next_prev_url' => base_url(). 'schedule/showDate',
 
-				'template'    => '{table_open}<div class="row" style="width: 100%;"><div class="col-md-9">{/table_open}
+				'template'    => '{table_open}<div class="row" style="width: 100%;"><div class="col-md-12">{/table_open}
            {heading_row_start}CALENDAR{/heading_row_start}
            {heading_previous_cell}<caption><a href="{previous_url}" class="prev_date" title="Previous Month">&lt;&lt;Prev</a>{/heading_previous_cell}
            {heading_title_cell}{heading}{/heading_title_cell}
@@ -26,20 +26,29 @@ class Schedule extends CI_Controller {
            {cal_row_start}<div class="cal-row-fluid cal-before-eventlist">{/cal_row_start}
            {cal_cell_start}<div class ="cal-cell1 cal-cell">{/cal_cell_start}
            {cal_cell_content}<div class="date_event detail" val="{day}"><span class="pull-right">{day}</span><span class="event d{day}">{content}</span></div>{/cal_cell_content}
-           {cal_cell_content_today}<div class="" val="{day}"><span class="date">{day}</span><span class="event d{day}">{content}</span></div>{/cal_cell_content_today}
+           {cal_cell_content_today}<div class="" val="{day}"><span class="pull-right" style="font-weight:bold; ">{day}</span><span class="event d{day}">{content}</span></div>{/cal_cell_content_today}
            {cal_cell_no_content}<div class="" val="{day}"><span class="pull-right">{day}</span><span class="event d{day}"></span></div>{/cal_cell_no_content}
-           {cal_cell_no_content_today}<div class="active_no_event detail" val="{day}"><span class="date">{day}</span><span class="event d{day}">&nbsp;</span></div>{/cal_cell_no_content_today}
+           {cal_cell_no_content_today}<div class="active_no_event detail" val="{day}"><span class="pull-right" style="font-weight:bold; font-size:x-large; ">{day}</span><span class="event d{day}">&nbsp;</span></div>{/cal_cell_no_content_today}
            {cal_cell_blank}&nbsp;{/cal_cell_blank}
            {cal_cell_end}</div>{/cal_cell_end}
            {cal_row_end}</div>{/cal_row_end}
            {table_close</div>}</div>{/table_close}'
 				);
+				// LOAD LIBRARY
 				$this->load->library('calendar',$conf);
+
+				// GENERATE CALENDAR BASED ON YEAR AND MONTH
 				$data['calendars'] = $this->calendar->generate($year,$month);
 
-				$this->load->view('inc_header');
+				// FETCH ALL SCHEDULE FROM DATABASE
+				$db_schedule['allschedule'] = $this->schedule->get_all_schedules();
 
+				// VIEWS
+				$this->load->view('inc_header');
 				$this->load->view('schedule/schedule',$data);
+				$this->load->view('schedule/list',$db_schedule);
+				$this->load->view('schedule/manager');
+				$this->load->view('schedule/test');
 				$this->load->view('inc_footer');
 	}
 
