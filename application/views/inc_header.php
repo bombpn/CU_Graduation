@@ -165,22 +165,22 @@
                         <a href="#"><i class="fa fa-fw fa-file"></i> รายงาน</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-history"></i> ประวัติ</a>
+                        <a href="#"><i class="fa fa-fw fa-history"></i>ประวัติ</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-print"></i> พิมพ์บาร์โค้ด</a>
+                        <a href="#"><i class="fa fa-fw fa-print"></i>พิมพ์บาร์โค้ด</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-database"></i> จัดการข้อมูล <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="#">รายชื่อบัณฑิต</a>
+                                <a href="<?=base_url(); ?>student/">รายชื่อบัณฑิต</a>
                             </li>
                             <li>
                                 <a href="#">รายชื่อคณะ</a>
                             </li>
                             <li>
-                                <a href="#">รายชื่อกลุ่มรับปริญญา</a>
+                                <a href="<?=base_url(); ?>group/">รายชื่อกลุ่มรับปริญญา</a>
                             </li>
                             <li>
                                 <a href="#">รายชื่ออาจารย์</a>
@@ -189,7 +189,7 @@
                                 <a href="#">สถานที่</a>
                             </li>
                             <li>
-                                <a href="#">ตารางการซ้อม</a>
+                                <a href="<?=base_url(); ?>schedule/">ตารางการซ้อม</a>
                             </li>
                         </ul>
                     </li>
