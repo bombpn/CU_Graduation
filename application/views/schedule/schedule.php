@@ -12,7 +12,7 @@
               console.log($('.selected .date_content').text());
               var month = "<?php echo $month; ?>";
               var day = $('.selected .date_content').text();
-              var year = "<?php echo $year; ?>"
+              var year = "<?php echo $year; ?>";
               console.log(day+"/"+month+"/"+year);
               window.location.replace('<?=base_url()?>schedule/showDate/'+year+"/"+month+"/"+day);
             }

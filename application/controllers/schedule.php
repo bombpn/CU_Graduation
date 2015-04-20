@@ -75,7 +75,7 @@ class Schedule extends CI_Controller {
 		$fetch['groups'] = $this->schedule->getAllGroups();
 		$fetch['places'] = $this->schedule->getAllPlaces();
 		$fetch['individual'] = $this->schedule->getSchedule($schedule_id);
-
+		$fetch['returnObject'] = $this->schedule->getDate($schedule_id);
 		$this->load->view('inc_header');
 		$this->load->view('schedule/edit',$fetch);
 		$this->load->view('inc_footer');

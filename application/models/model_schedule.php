@@ -15,6 +15,23 @@ class model_schedule extends CI_Model{
 		return $this->db->from("schedule")->where('schedule_id',$schedule_id)->get()->result();
 	}
 
+	public function getDate($schedule_id){
+		//GET DATE FROM SCHEDULE_ID
+		$returnObject = array();
+		$query = $this->db->from("schedule")->where('schedule_id',$schedule_id)->get()->result();
+			foreach ($query as $row)
+			{
+			    $returnObject['schedule_id'] = $row->schedule_id;
+					$returnObject['date'] = $row->date;
+					$returnObject['start_time'] = $row->start_time;
+					$returnObject['end_time'] = $row->end_time;
+					$returnObject['type'] = $row->type;
+					$returnObject['round'] = $row->round;
+					$returnObject['PLACE_place_id'] = $row->PLACE_place_id;
+			}
+			return $returnObject;
+	}
+
 	public function getAllGroups(){
 		//$query = $this->db->query("SELECT * FROM group ");
 		//return $query->result();

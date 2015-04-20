@@ -7,9 +7,18 @@
     <script src="<?=base_url();?>/js/jquery-ui-timepicker-addon.js"></script>
     <script type="text/javascript">
             $("document").ready(function() {
-                $("#datepicker").datepicker();
-                $("#starttime").timepicker();
-                $("#stoptime").timepicker();
+                console.log("<?=$returnObject['date']?>");
+                $("#datepicker").datepicker({
+                  dateFormat: 'yy-mm-dd',
+                });
+                $("#starttime").timepicker({
+                  showSecond: true,
+                  timeFormat: 'hh:mm:ss'
+                });
+                $("#stoptime").timepicker({
+                  showSecond: true,
+                  timeFormat: 'hh:mm:ss'
+                });
             });
     </script>
 </head>
@@ -63,7 +72,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="datepicker">Date : </label>
                 <div class="col-md-4">
-                  <input class="form-control input-md" type="text" id="datepicker"></input>
+                  <input class="form-control input-md" type="text" id="datepicker" value="<?=$returnObject['date']?>"></input>
                 </div>
               </div>
 
@@ -71,7 +80,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="starttime">Start time : </label>
                 <div class="col-md-4">
-                  <input class="form-control input-md" type="text" id="starttime"></input>
+                  <input class="form-control input-md" type="text" id="starttime" value="<?=$returnObject['start_time']?>"></input>
                 </div>
               </div>
 
@@ -79,7 +88,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="stoptime">Stop time : </label>
                 <div class="col-md-4">
-                  <input class="form-control input-md" type="text" id="stoptime"></input>
+                  <input class="form-control input-md" type="text" id="stoptime" value="<?=$returnObject['end_time']?>"></input>
                 </div>
               </div>
 
@@ -125,12 +134,13 @@
                           <button id="addGroup" name="addGroup" class="btn btn-primary">Add Group to Schedule</button>
                     </div>
                   </div>
-                  List Group in This Schedule
+
                   <!-- RETURN AJAX FETCH SCHEDULE BY schedule_date -->
                   <div class="form-group">
                   <div class="col-md-4"></div>
                   <div class="col-md-4">
                     <table class="table">
+                      List Group in This Schedule
                     <thead>
                       <tr>
                         <th>ลำดับที่</th>
@@ -157,7 +167,7 @@
                             foreach($places as $row){
                               echo '<option value="
                               '.$row->place_id.
-                              '">'.
+                              (($row->place_id==$returnObject['PLACE_place_id'])? '" selected="selected">' : '">').
                               $row->place_id.
                               ' : '
                               .$row->th_building.

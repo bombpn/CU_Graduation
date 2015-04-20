@@ -7,7 +7,8 @@
     <script src="<?=base_url();?>/js/jquery-ui-timepicker-addon.js"></script>
     <script type="text/javascript">
             $("document").ready(function() {
-                $("#datepicker").datepicker();
+                $("#datepicker").datepicker({dateFormat: 'yy-mm-dd'});
+
                 $("#starttime").timepicker();
                 $("#stoptime").timepicker();
             });
@@ -94,7 +95,7 @@
                       <button id="singlebutton" name="singlebutton" class="btn btn-primary">Add : </button>
                 </div>
               </div>
-              List Group in This Schedule  
+              List Group in This Schedule
               <!-- RETURN AJAX FETCH SCHEDULE BY schedule_date -->
               <div class="form-group">
               <div class="col-md-4"></div>
