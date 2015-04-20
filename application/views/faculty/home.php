@@ -55,13 +55,13 @@
                     <fieldset>
 	            		<tr>
 	            			<td>
-                                <input class="form-control" name="faculty_id"  value=<?=$faculty->faculty_id;?>>
+                                <input class="form-control" name="faculty_id"  value=<?=$faculty->faculty_id;?> readonly>
                             </td>
                             <td>
-                                <input class="form-control" name="th_faculty_name"  value=<?=$faculty->th_faculty_name;?>>
+                                <input class="form-control" name="th_faculty_name"  value=<?=$faculty->th_faculty_name;?> readonly>
                             </td>
                             <td>
-                                <input class="form-control" name="en_faculty_name"  value=<?=$faculty->en_faculty_name;?>>
+                                <input class="form-control" name="en_faculty_name"  value=<?=$faculty->en_faculty_name;?> readonly>
                             </td>
                             <td>
                                 <input type="submit" class="btn btn-primary" value="Edit">
