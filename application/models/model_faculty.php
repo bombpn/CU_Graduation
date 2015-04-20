@@ -13,8 +13,8 @@ class model_faculty extends CI_Model {
 	public function add_faculty($data) {
 		$this->db->insert($this->table, $data);
 	}
-	public function delete_faculty($data) {
-		$this->db->where($this->id, $data['faculty_id']);
+	public function delete_faculty($faculty_id) {
+		$this->db->where($this->id, $faculty_id);
 		$this->db->delete($this->table);
 		return $this->db->get($this->table)->result();
 	}

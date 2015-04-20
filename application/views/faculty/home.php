@@ -4,7 +4,6 @@
 <head>
 
     <title>CU Graduation</title>
-
 </head>
 
 <body>
@@ -14,6 +13,9 @@
         <h1 class="page-header">
             รายชื่อคณะ
         </h1>
+        <a href="<?=base_url();?>faculty/load_add_faculty_page" class="btn btn-primary">
+            add faculty <i class="fa fa-plus"></i>
+        </a>
         <table class="table table-striped">
         	<thead>
         		<tr>
@@ -45,22 +47,35 @@
                 </fieldset>
             </form>
         		<?php
+
 	            if(count($allfaculty)>0){
 	            	foreach($allfaculty as $faculty){
 	            ?>
+                <form action="<?=base_url();?>faculty/load_edit_faculty_page" method="POST">
+                    <fieldset>
 	            		<tr>
-	            			<td><?=$faculty->faculty_id;?></td>
-	            			<td><?=$faculty->th_faculty_name;?></td>
-	            			<td><?=$faculty->en_faculty_name;?></td>
+	            			<td>
+                                <input class="form-control" name="faculty_id"  value=<?=$faculty->faculty_id;?>>
+                            </td>
                             <td>
-                                <a href="#" class="btn btn-primary">
+                                <input class="form-control" name="th_faculty_name"  value=<?=$faculty->th_faculty_name;?>>
+                            </td>
+                            <td>
+                                <input class="form-control" name="en_faculty_name"  value=<?=$faculty->en_faculty_name;?>>
+                            </td>
+                            <td>
+                                <input type="submit" class="btn btn-primary" value="Edit">
+                                </input>
+                                <!-- <a href="<?=base_url();?>faculty/load_edit_faculty_page" class="btn btn-primary">
                                     <i class="fa fa-pencil"></i>
-                                </a>
-                                <a href="#" class="btn btn-danger">
+                                </a> -->
+                                <a href="<?=base_url();?>faculty/delete_faculty/<?=$faculty->faculty_id;?>" class="btn btn-danger">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </td>
 	            		</tr>
+                    </fieldset>
+                </form>
 	            <?php
 	            	}
 	            }else{
