@@ -30,40 +30,67 @@
                 </h1>
                 <div class="col-lg-9">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            FORM
+                        <div class="panel-heading" align="center">
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <label for="barcode">Barcode</label>
+                                    <input type="text" class="form-control" id="barcode" placeholder="">
+                                    <script>
+                                        window.onload = function() {
+                                            document.getElementById("barcode").focus();
+                                        };
+                                    </script>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Check</button>
+                            </form>
                         </div>
                         <!--div class="panel-body">
                             Panel content
                         </div-->
                     </div>
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <!--h3 class="panel-title">Panel title</h3-->
-                                <div class="col-xs-6">
-                                    <img src="<?=base_url();?>GradPic/_blank_person.jpg" class="img-thumbnail" width="100%">
+                    <?php
+                    if(count($first_faculty)>0){
+                        foreach($first_faculty as $student){
+                    ?>
+                            <div class="panel panel-green" id="<?=$student->student_id;?>">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <!--h3 class="panel-title">Panel title</h3-->
+                                        <div class="col-xs-6">
+                                            <?php
+                                            if(file_exists("GradPic/".$student->picture_path)) $imagePath = $student->picture_path;
+                                            else $imagePath = "_blank_person.jpg"; 
+                                            ?>
+                                            <img src="<?=base_url();?>GradPic/<?=$imagePath;?>" class="img-thumbnail" width="100%">
+                                        </div>
+                                        <div class="col-xs-6" align="center" valign="middle">
+                                            <h3><i class="fa fa-fw fa-check-square"></i> บันทึกสำเร็จ</h3>
+                                            <h3><i class="fa fa-fw fa-warning"></i> มีการข้ามลำดับ</h3>
+                                            <h3><i class="fa fa-fw fa-times"></i> มีข้อผิดพลาด</h3>
+                                            <h1 style="font-size:1100%;"># <?=$student->order;?></h1>
+                                            <h3><?=$student->th_prefix;?><?=$student->th_firstname;?> <?=$student->th_lastname;?></h3>
+                                            <h3><?=$student->en_prefix;?><?=$student->en_firstname;?> <?=$student->en_lastname;?></h3>
+                                            <h4><?=$student->student_id;?></h4>
+                                            <h4>คณะวิศวกรรมศาสตร์</h4>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-xs-6" align="center" valign="middle">
-                                    <h3><i class="fa fa-fw fa-check-square"></i> บันทึกสำเร็จ</h3>
-                                    <h3><i class="fa fa-fw fa-warning"></i> มีการข้ามลำดับ</h3>
-                                    <h3><i class="fa fa-fw fa-times"></i> มีข้อผิดพลาด</h3>
-                                    <h1 style="font-size:1100%;"># NO</h1>
-                                    <h3>นายชื่อ นามสกุล</h3>
-                                    <h3>Mr.Name Surname</h3>
-                                    <h3>คณะวิศวกรรมศาสตร์</h3>
-                                </div>
+                                <!--div class="panel-body">
+                                    Panel content
+                                </div-->
                             </div>
-                        </div>
-                        <!--div class="panel-body">
-                            Panel content
-                        </div-->
-                    </div>
+                    <?php
+                        }
+                    }
+                    ?>
                 </div>
                 <div class="col-lg-3">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Panel title</h3>
+                            <h3 class="panel-title">
+                                กลุ่มที่มีการซ้อม วันที่ <?=$schedule_detail->date;?><br>
+                                เวลา <?=$schedule_detail->start_time;?> - <?=$schedule_detail->end_time;?>
+                            </h3>
                         </div>
                         <div class="panel-body">
                             <ul>

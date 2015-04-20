@@ -17,6 +17,8 @@ class check extends CI_Controller {
 			$res->th_group_name = $this->check->get_group_name($res->GROUP_group_id)->th_group_name;
 		}
 		$data['allgroup_in_schedule'] = $result;
+		$data['schedule_detail'] = $this->check->get_schedule_detail($schedule_id);
+		$data['first_faculty'] = $this->check->get_name_list($result[0]->GROUP_group_id);
 		//$this->load->view('inc_header');
 		$this->load->view('check/barcode_check',$data);
 		//$this->load->view('inc_footer');
