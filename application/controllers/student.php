@@ -17,25 +17,76 @@ class Student extends CI_Controller {
 	{
 				if ($_POST){
 				$id = $_POST["SearchIDInput"] ;
-				$data = $this->model_student->get_student($id);
-				$this->load->view('inc_header');
-				$this->load->view('student/edit',$data);
-				$this->load->view('inc_footer');
+				$th_firstname = $_POST["SearchTHFirstnameInput"] ;
+				$th_lastname = $_POST["SearchTHLastnameInput"] ;
+				$en_firstname = $_POST["SearchENFirstnameInput"] ;
+				$en_lastname = $_POST["SearchENLastnameInput"] ;
+				$data = $this->model_student->get_student($id,$th_firstname
+					,$th_lastname,$en_firstname,$en_lastname);
+
+					
+						//$this->edit($data) ;
+						$this->load->view('inc_header');
+						$this->load->view('student/result',array("result"=>$data));
+						$this->load->view('inc_footer');
+					
+				
 				}
 				else {
-				$data = array(
-					"id" => $id 
-				);
+				$var = array ("opt" => "search") ;
 				$this->load->view('inc_header');
-				$this->load->view('student/search',$data);
+				$this->load->view('student/search',$var);
 				$this->load->view('inc_footer');
 				}
 	}
-	public function edit()
-	{
-				if ($_POST){
-				$id = $_POST["SearchIDInput"] ;
-				$rs = $this->model_student->get_student($id);
+	public function edit($rs = "#")
+	{		
+
+			if(gettype($rs) == "string" && $rs != "#"){
+
+				$r = $this->model_student->get_student_by_id($rs);
+				$data['student_id'] = $r->student_id ;
+				$data['th_firstname'] = $r->th_firstname ;
+				$data['th_lastname'] = $r->th_lastname ;
+				$data['en_firstname'] = $r->en_firstname ; 
+				$data['en_lastname'] = $r->en_lastname ; 
+				$data['picture_path'] = $r->picture_path ;
+				$ta = array('นาย' ,'นาง' ,'นางสาว');
+				if($r->th_prefix == "นาง")
+				{
+					$ta[0] = 'นาง' ;
+					$ta[1] = 'นาย' ;
+				}
+				else if($r->th_prefix == "นางสาว")
+				{
+					$ta[0] = 'นางสาว' ;
+					$ta[2] = 'นาย' ;
+				}
+				$ea = array('Mr.','Mrs.' ,'Miss');
+				if($r->en_prefix == "Mrs.")
+				{
+					$ea[0] = 'Mrs.' ;
+					$ea[1] = 'Mr.' ;
+				}
+				else if($r->en_prefix == "Miss")
+				{
+					$ea[0] = 'Miss' ;
+					$ea[2] = 'Mr.' ;
+				}
+				$data['ta'] = $ta ; 
+				$data['ea'] = $ea ;	
+				$this->load->view('inc_header');
+				$this->load->view('student/edit',$data);
+				$this->load->view('inc_footer');
+			}
+		    
+			else if ($rs == "#") {
+				$var = array ("opt" => "edit") ;
+				$this->load->view('inc_header');
+				$this->load->view('student/search',$var);
+				$this->load->view('inc_footer');
+			}
+			else {
 				$data['student_id'] = $rs->student_id ;
 				$data['th_firstname'] = $rs->th_firstname ;
 				$data['th_lastname'] = $rs->th_lastname ;
@@ -69,7 +120,7 @@ class Student extends CI_Controller {
 				$this->load->view('inc_header');
 				$this->load->view('student/edit',$data);
 				$this->load->view('inc_footer');
-				}
+			}
 
 	}
 	public function import()
@@ -116,8 +167,8 @@ class Student extends CI_Controller {
 		}
 	}
 
-	public function test()
-	{
-		
+	public function del($id)
+	{	
+		$this->model_student->removeStudent($id);
 	} 
 }
