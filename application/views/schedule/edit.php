@@ -13,11 +13,11 @@
                 });
                 $("#starttime").timepicker({
                   showSecond: true,
-                  timeFormat: 'hh:mm:ss'
+                  timeFormat: 'HH:mm:ss'
                 });
                 $("#stoptime").timepicker({
                   showSecond: true,
-                  timeFormat: 'hh:mm:ss'
+                  timeFormat: 'HH:mm:ss'
                 });
             });
     </script>
@@ -108,8 +108,8 @@
                     <label class="col-md-4 control-label" for="schedule_type">Type : </label>
                     <div class="col-md-4">
                       <select id="schedule_type" name="schedule_type" class="form-control">
-                        <option value="1">รอบซ้อมรับ</option>
-                        <option value="2">รอบพิธีการจริง</option>
+                        <option value="1" <?php if($returnObject['type']=="Practice")echo "selected=selected"?>>รอบซ้อมรับ</option>
+                        <option value="2" <?php if($returnObject['type']=="Graduation")echo "selected=selected"?>>รอบพิธีการจริง</option>
                       </select>
                     </div>
                   </div>
@@ -186,9 +186,14 @@
                       </select>
                     </div>
                   </div>
-                  <button id="submit" name="submit" class="btn btn-primary">Submit</button>
 
+                  <div class="form-group">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"><button id="submit" name="submit" class="btn btn-primary">Submit</button></div>
+                    <div class="col-md-4"></div>
+                  </div>
                 </fieldset></form>
+
             <hr>
         </div>
     </div>

@@ -33,8 +33,6 @@ class model_schedule extends CI_Model{
 	}
 
 	public function getAllGroups(){
-		//$query = $this->db->query("SELECT * FROM group ");
-		//return $query->result();
 		return $this->db->get("group")->result();
 	}
 
@@ -43,9 +41,15 @@ class model_schedule extends CI_Model{
 	}
 
 	public function getAllPlaces(){
-		//$query = $this->db->query("SELECT * FROM place ");
-		//return $query->result();
 		return $this->db->get("place")->result();
+	}
+
+	//SETTERS
+
+	public function addScheduleToDB($data){
+		  $this->db->insert('schedule',$data);
+			return $data['date'];
+
 	}
 
 }

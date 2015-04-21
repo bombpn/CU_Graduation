@@ -314,9 +314,11 @@
   display: block;
   background-color: #c3c3c3;
   width: 12px;
+  float: left;
   height: 12px;
-  margin-right: 2px;
-  margin-bottom: 2px;
+  margin-right: auto;
+  margin-bottom: 6px;
+  margin-top: 3px;
   -webkit-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
   box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
   border-radius: 8px;
@@ -402,7 +404,7 @@
 }
 .cal-year-box [class*="span"],
 .cal-month-box [class*="cal-cell"] {
-  min-height: 100px;
+  min-height: 30px;
   border-right: 1px solid #e1e1e1;
   position: relative;
 }

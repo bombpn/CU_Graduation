@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <title>CU Graduation</title>
+<style>
+        .page-header-list{
+            padding-bottom: 9px;
+            margin: 0px 0 20px;
+            border-bottom: 1px solid #eee;
+        }
+</style>
 </head>
-
 <body>
 <!-- Page Heading -->
-<div class="col-md-12">
+<div class="col-md-6">
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">
+        <h1 class="page-header-list">
             All Schedule
         </h1>
-        <br>
         <table class="table">
           <thead>
             <tr>
@@ -46,11 +50,6 @@
               ?>
           </tbody>
         </table>
-
-
-
-
-        <hr>
     </div>
 </div>
 </div>

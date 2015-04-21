@@ -29,15 +29,16 @@
             ตารางการซ้อม
             <small>Schedule Manager</small>
         </h1>
-        <a class="btn btn-primary" href="<?=base_url();?>schedule">Today</a>
-        <?php
-            echo $calendars;
-          ?>
-          <hr>
+      </div>
+        
+        <div class="col-md-6"><center>
+            <a class="btn btn-primary" href="<?=base_url();?>schedule">Today</a>
             <a href ="<?=base_url();?>schedule/addSchedule"  class="btn btn-primary" >Add New Group</a>
-            <a href ="<?=base_url();?>schedule/editSchedule"  class="btn btn-warning" >Edit Existing Group</a>
-    </div>
-</div>
+            <?php
+                echo $calendars;
+              ?>
+            <hr>
+        </center></div>
 <!-- /.row -->
 </body>
 </html>

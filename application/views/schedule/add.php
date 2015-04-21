@@ -7,10 +7,17 @@
     <script src="<?=base_url();?>/js/jquery-ui-timepicker-addon.js"></script>
     <script type="text/javascript">
             $("document").ready(function() {
-                $("#datepicker").datepicker({dateFormat: 'yy-mm-dd'});
-
-                $("#starttime").timepicker();
-                $("#stoptime").timepicker();
+                $("#datepicker").datepicker({
+                  dateFormat: 'yy-mm-dd',
+                });
+                $("#starttime").timepicker({
+                  showSecond: true,
+                  timeFormat: 'HH:mm:ss'
+                });
+                $("#stoptime").timepicker({
+                  showSecond: true,
+                  timeFormat: 'HH:mm:ss'
+                });
             });
     </script>
 </head>
@@ -27,13 +34,13 @@
         </h1>
 
     <!-- Form -->
-        <form class="form-horizontal"><fieldset>
+        <form class="form-horizontal" action="<?=base_url();?>schedule/addSchedule/" method="POST"><fieldset>
 
           <!-- Date Picker -->
           <div class="form-group">
             <label class="col-md-4 control-label" for="datepicker">Date : </label>
             <div class="col-md-4">
-              <input class="form-control input-md" type="text" id="datepicker"></input>
+              <input class="form-control input-md" type="text" name="datepicker" id="datepicker"></input>
             </div>
           </div>
 
@@ -41,7 +48,7 @@
           <div class="form-group">
             <label class="col-md-4 control-label" for="starttime">Start time : </label>
             <div class="col-md-4">
-              <input class="form-control input-md" type="text" id="starttime"></input>
+              <input class="form-control input-md" type="text" name="starttime" id="starttime"></input>
             </div>
           </div>
 
@@ -49,7 +56,7 @@
           <div class="form-group">
             <label class="col-md-4 control-label" for="stoptime">Stop time : </label>
             <div class="col-md-4">
-              <input class="form-control input-md" type="text" id="stoptime"></input>
+              <input class="form-control input-md" type="text" id="stoptime" name="stoptime"></input>
             </div>
           </div>
 
@@ -69,7 +76,7 @@
                 <label class="col-md-4 control-label" for="schedule_type">Type : </label>
                 <div class="col-md-4">
                   <select id="schedule_type" name="schedule_type" class="form-control">
-                    <option value="1">รอบซ้อมรับ</option>
+                    <option value="Practice">รอบซ้อมรับ</option>
                     <option value="2">รอบพิธีการจริง</option>
                   </select>
                 </div>
@@ -79,7 +86,7 @@
               <div class="form-group">
                 <label class="col-md-4 control-label" for="schedule_group">Group : </label>
                 <div class="col-md-4">
-                  <select id="schedule_group" name="schedule_group" class="form-control">
+                  <select id="schedule_group[]" name="schedule_group[]" class="form-control" multiple="multiple">
                     <?php
                     if(count($groups>0)){
                         foreach($groups as $row){
@@ -92,7 +99,7 @@
                   </select>
                 </div>
                 <div class="col-md-4">
-                      <button id="singlebutton" name="singlebutton" class="btn btn-primary">Add : </button>
+                      <button id="groupAdd" name="groupAdd" class="btn btn-primary">Add : </button>
                 </div>
               </div>
               List Group in This Schedule
@@ -125,9 +132,7 @@
                     <?php
                     if(count($places>0)){
                         foreach($places as $row){
-                          echo '<option value="
-                          '.$row->place_id.
-                          '">'.
+                          echo '<option value="'.$row->place_id.'">'.
                           $row->place_id.
                           ' : '
                           .$row->th_building.

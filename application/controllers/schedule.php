@@ -12,13 +12,13 @@ class Schedule extends CI_Controller {
 				'show_next_prev' =>'true' ,
 				'next_prev_url' => base_url(). 'schedule/showDate',
 
-				'template'    => '{table_open}<div class="row" style="width: 70%;"><div class="col-md-12">{/table_open}
+				'template'    => '{table_open}<div>{/table_open}
            {heading_row_start}<center>{/heading_row_start}
            {heading_previous_cell}<caption><a href="{previous_url}" class="btn btn-primary" title="Previous Month">&lt;&lt;Prev</a>{/heading_previous_cell}
            {heading_title_cell} <a class="btn btn-primary">{heading}</a>{/heading_title_cell}
-
            {heading_next_cell}<a href="{next_url}" class="btn btn-primary" title="Next Month">Next&gt;&gt;</a></caption>{/heading_next_cell}
            {heading_row_end}</center><col class="weekday" span="5"><col class="weekend_sat"><col class="weekend_sun">{/heading_row_end}
+
 					 {week_row_start}<div class="cal-row-fluid cal-row-head">{/week_row_start}
            {week_day_cell}<div class="cal-cell1">{week_day}</div>{/week_day_cell}
            {week_row_end}</div><div class="cal-month-box">{/week_row_end}
@@ -32,7 +32,7 @@ class Schedule extends CI_Controller {
            {cal_cell_blank}&nbsp;{/cal_cell_blank}
            {cal_cell_end}</div>{/cal_cell_end}
            {cal_row_end}</div>{/cal_row_end}
-           {table_close</div>}</div>{/table_close}'
+           {table_close}</div>{/table_close}'
 				);
 				// LOAD LIBRARY
 				$this->load->library('calendar',$conf);
@@ -52,7 +52,6 @@ class Schedule extends CI_Controller {
 					$this->load->view('schedule/list',$db_schedule);
 				}else{
 					$formattedDate = $year."-".$month."-".$day;
-					echo $formattedDate;
 					$db_schedule['formattedDate'] = $formattedDate;
 					$db_schedule['datedSchedule'] = $this->schedule->getDatedSchedule($formattedDate);
 					$this->load->view('schedule/listByDay',$db_schedule);
@@ -68,6 +67,46 @@ class Schedule extends CI_Controller {
 		$this->load->view('inc_header');
 		$this->load->view('schedule/add',$fetch);
 		$this->load->view('inc_footer');
+		//addScheduleToDB()
+
+
+			$schedule_id = NULL;
+			$date=$this->input->post('datepicker');
+			$start_time=$this->input->post('starttime');
+			$end_time=$this->input->post('stoptime');
+			$type=$this->input->post('schedule_type');
+			$round=$this->input->post('schedule_round');
+			$PLACE_place_id =$this->input->post('schedule_place');
+			$StudentGroup = $this->input->post('schedule_group');
+
+			if(isset($_POST['groupAdd'])){
+						if(is_array($StudentGroup)){
+							//MULTIVALUE FOR ATTEND HERE
+							echo "YES";
+							foreach($StudentGroup as $temp){
+								echo $temp;
+							}
+						}else{
+							echo "NO";
+						}
+			}
+			$data = array(
+				'schedule_id'		=>NULL,
+				'date'			 		=>$date,
+				'start_time'		 =>$start_time,
+				'end_time'			=>$end_time,
+				'type'					=>$type,
+				'round'					=>$round,
+				'PLACE_place_id'=>$PLACE_place_id
+			);
+
+			//SUBMIT FORM DATA
+		if(isset($_POST['submit'])){
+        $result = $this->schedule->addScheduleToDB($data);
+    }
+
+
+
 	}
 
 	public function editSchedule($schedule_id = null){
@@ -91,4 +130,5 @@ class Schedule extends CI_Controller {
 			$month = date('m');
 			$this->showDate($year,$month);
 	}
+
 }
