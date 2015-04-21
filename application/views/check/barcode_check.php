@@ -63,7 +63,7 @@
                                             ?>
                                             <img src="<?=base_url();?>GradPic/<?=$imagePath;?>" class="img-thumbnail" width="100%">
                                         </div>
-                                        <div class="col-xs-6" align="center" valign="middle">
+                                        <div class="col-xs-6" align="center">
                                             <h3><i class="fa fa-fw fa-check-square"></i> บันทึกสำเร็จ</h3>
                                             <h3><i class="fa fa-fw fa-warning"></i> มีการข้ามลำดับ</h3>
                                             <h3><i class="fa fa-fw fa-times"></i> มีข้อผิดพลาด</h3>
