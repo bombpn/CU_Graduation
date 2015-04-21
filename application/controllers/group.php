@@ -243,7 +243,7 @@ class Group extends CI_Controller {
                 else
                 {
                         $data = array('upload_data' => $this->upload->data());
-
+                        importStudentCSV($data['full_path']);
                         $this->load->view('student/successful', $data);
                 }
 	}

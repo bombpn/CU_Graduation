@@ -129,7 +129,7 @@ class Student extends CI_Controller {
 	{
 		if($this->input->post('SaveButton')!=null)
 		{
-			if ($this->save($_POST)){
+			if ($this->saveByForm($_POST)){
 				$this->load->view('inc_header');
 				$this->load->view('student/successful',array("opt"=>"import" , "student_id" <= $_POST["student_id"] ));
 				$this->load->view('inc_footer');
@@ -166,7 +166,7 @@ class Student extends CI_Controller {
 			}
 	} 
 
-	public function save($POST){
+	public function saveByForm($POST){
 			$faculty = $POST["FacultyInput"];
 			$group = $_POST["GroupInput"];
 			$degree = $_POST["DegreeInput"];
@@ -183,6 +183,7 @@ class Student extends CI_Controller {
 				"en_firstname" => $_POST["ENFirstnameInput"],
 				"en_lastname" => $_POST["ENLastnameInput"],
 				"gender" => $gender ,
+				"barcode" => $_POST["IDInput"] ,
 				"picture_path" => $_POST["IDInput"].'.'."jpg"
 				/*"barcode" => $_POST[("IDInput"),
 				"picture_path" => $_POST[("PicPathInput"),
@@ -252,11 +253,13 @@ class Student extends CI_Controller {
                 }
                 else
                 {
+                		$upload = $this->upload->data() ;
                         $data = array(
-                        	'upload_data' => $this->upload->data() , 
-                        	"opt" => "upload",
-                        	"filename" => );
-                        readCSV($path);
+                        	'upload_data' => $upload , 
+                        	"opt" => "importcsv",
+                        	"full_path" => $upload["full_path"] ,
+                        	"file_name" => $upload["orig_name"]);
+                        $data['num_records'] = $this->readCSV($upload['full_path']);
 						$this->load->view('inc_header');
                         $this->load->view('student/successful', $data);
 						$this->load->view('inc_footer');
@@ -270,7 +273,26 @@ class Student extends CI_Controller {
         }
 
 }
-	public function readCSV($path){
-
-	}
+	public function readCSV($filePath){
+			$this->load->library('csvreader');
+      		$count = 0 ;
+           $csvData = $this->csvreader->parse_file($filePath);
+ 			foreach($csvData as $field){
+ 				$data ;
+                $data['student_id'] = $field['student_id'] ;
+                $data['th_prefix'] = $field['th_prefix'] ;
+				$data['th_firstname'] = $field['th_firstname'] ;
+				$data['th_lastname'] =  $field['th_lastname'] ;
+                $data['en_prefix'] = $field['en_prefix'] ;
+				$data['en_firstname'] = $field['en_firstname'] ;
+				$data['en_lastname'] =  $field['en_lastname'] ;
+                $data['gender'] = 	$field['gender'] ;
+				$data['picture_path'] = $field['student_id'].'.jpg' ;
+                $data['barcode'] = 	$data['student_id'] ;
+                 if ($this->model_student->addStudent($data))
+                 	$count++;
+                
+               }
+           return $count ;
+       }
 }

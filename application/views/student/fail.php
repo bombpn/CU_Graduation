@@ -13,7 +13,7 @@
     <div class="col-lg-12">
         <h1 class="page-header">
 			  เกิดข้อผิดพลาด
-            <small>Fail</small>
+            <small><?php echo "$error"?> Fail</small>
         </h1>
         <?php echo anchor("student/" ,"กลับ",array(
                         'name'=>'BackButton', 'class'=>'btn btn-primary'

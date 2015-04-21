@@ -1,13 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class model_student extends CI_Model{
+class model_group extends CI_Model{
 	public function __construct(){
 		parent::__construct();
 	}
-	public function get_all_student(){
-		return $this->db->get("student")->result();
+	public function get_all_group(){
+		return $this->db->get("group")->result();
 	}
+	/*
 	public function addStudent($data){
 		$this->db->where('student_id',$data['student_id']);
 		if($this->db->get("student")->num_rows() == 0){
@@ -20,8 +21,6 @@ class model_student extends CI_Model{
 		}
 	}
 	public function get_student($id,$th_firstname,$th_lastname,$en_firstname,$en_lastname){
-		/*$sql = "SELECT * from student where student_id = $id";
-		$rs = $this->db->query($sql) ;*/
 		
 		if($id) $this->db->where('student_id',$id);
 		if($th_firstname) $this->db->where('th_firstname',$th_firstname);
@@ -49,19 +48,9 @@ class model_student extends CI_Model{
 		}
 	}
 	public function updateStudent($id,$data){
-		/*$sql = "UPDATE student SET th_prefix = '{$th_prefix}'
-		th_prefix = '{$th_prefix}'
-		th_prefix = '{$th_prefix}'
-		th_prefix = '{$th_prefix}'
-		th_prefix = '{$th_prefix}'
-		th_prefix = '{$th_prefix}'
-		th_prefix = '{$th_prefix}'
-		WHERE student_id = 
-		";
-		$this->db->simple_query($sql)*/
 		$this->db->where('student_id', $id);
 		$this->db->update('student', $data);
-	}
+	}*/
 }
 
 
