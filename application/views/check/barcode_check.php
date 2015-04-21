@@ -45,7 +45,7 @@
                             </form>
                         </div>
                         <!--div class="panel-body">
-                            Panel content
+                            Panel content.
                         </div-->
                     </div>
                     <?php
