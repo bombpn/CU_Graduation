@@ -9,11 +9,9 @@
 <!-- Page Heading -->
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">
-			แก้ข้อมูลของบัณฑิต
-            <small>Edit Student</small>
+        <h1 class="page-header"> แก้ข้อมูลของบัณฑิต <small>Edit Student</small>
         </h1>
-<form class="form-horizontal">
+<form class="form-horizontal" action="<?=base_url();?>student/edit" method="POST">
 <fieldset>
 
 <!-- Form Name -->
@@ -44,7 +42,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THNameInput">ชื่อ (ไทย)</label>  
   <div class="col-md-4">
-  <input id="THNameInput" name="THFirstameInput" type="text" placeholder="" class="form-control input-md" required="" value="<?php echo $th_firstname ; ?>">
+  <input id="THFirstnameInput" name="THFirstnameInput" type="text" placeholder="" class="form-control input-md" required="" value="<?php echo $th_firstname ; ?>">
     
   </div>
 </div>
@@ -61,7 +59,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THPrefixInput">คำนำหน้าชื่อ (อังกฤษ) </label>
   <div class="col-md-1">
-    <select id="ENPrefixInput" name="THPrefixInput" class="form-control">
+    <select id="ENPrefixInput" name="ENPrefixInput" class="form-control">
       <option value="<?php echo $ea[0] ; ?>"><?php echo $ea[0] ; ?></option>
       <option  value="<?php echo $ea[1] ; ?>"><?php echo $ea[1] ; ?></option>
       <option value="<?php echo $ea[2] ; ?>"><?php echo $ea[2] ; ?></option>
@@ -73,7 +71,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THNameInput">ชื่อ (อังกฤษ)</label>  
   <div class="col-md-4">
-  <input id="THNameInput" name="ENFirstameInput" type="text" placeholder="" class="form-control input-md" required="" value="<?php echo $en_firstname ; ?>" >
+  <input id="THNameInput" name="ENFirstnameInput" type="text" placeholder="" class="form-control input-md" required="" value="<?php echo $en_firstname ; ?>" >
     
   </div>
 </div>
@@ -154,7 +152,7 @@
   <label class="col-md-4 control-label" for="SaveButton"></label>
   <div class="col-md-8">
     <input type="submit" id="SaveButton" name="SaveButton" class="btn btn-info" value="เก็บ"></button>
-    <input type="button" id="RemoveButton" name="RemoveButton" class="btn btn-info" value="ลบ"></button>
+    <input type="reset" id="RemoveButton" name="RemoveButton" class="btn btn-info" value="ลบ"></button>
     <!-- <input type="reset" id="CancelButton" name="CancelButton" class="btn btn-danger" value="ยกเลิก"></button>
   --></div> 
 </div>

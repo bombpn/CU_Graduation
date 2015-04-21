@@ -33,6 +33,9 @@
                     $th_prefix= $r["th_prefix"] ;
                     $th_firstname= $r['th_firstname'] ;
                     $th_lastname= $r['th_lastname'] ;
+                    $en_prefix= $r["en_prefix"] ;
+                    $en_firstname= $r['en_firstname'] ;
+                    $en_lastname= $r['en_lastname'] ;
                     echo "
                     <form action='".$bu."student/edit' method='POST'>
 	            		<tr>
@@ -40,13 +43,15 @@
 	            			<td>".$th_prefix."</td>
 	            			<td>".$th_firstname."</td>
 	            			<td>".$th_lastname."</td>
-                            <td>
+                            <td>".$en_prefix."</td>
+                            <td>".$en_firstname."</td>
+                            <td>".$en_lastname."</td>
                             ";
                         echo anchor("student/edit/".$student_id ,"แก้ไข",array(
                         'name'=>'SaveButton', 'class'=>'btn btn-info', 
                         )) ;
                         echo anchor("student/del/".$student_id , "ลบ" ,array(
-                        "onclick" => "javascript:return confirm('คุณต้องการลบหรือไม่? \n $student_id $th_prefix $th_firstname $th_lastname');" ,
+                        "onclick" => "javascript:return confirm('คุณต้องการลบหรือไม่? $student_id $th_prefix $th_firstname $th_lastname');" ,
                         'name'=>'DeleteButton', 'class'=>'btn btn-danger'
                         )) ;
 	            		echo "</td>    

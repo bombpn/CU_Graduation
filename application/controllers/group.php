@@ -1,16 +1,16 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Student extends CI_Controller {
+class Group extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->helper('form');
-		$this->load->model("model_student","model_student");
+		$this->load->model("model_group","model_group");
 	}
 
 	public function index()
 	{
 				$this->load->view('inc_header');
-				$this->load->view('student/main');
+				$this->load->view('group/main');
 				$this->load->view('inc_footer');
 	}
 	public function search($id=0)
@@ -228,49 +228,23 @@ class Student extends CI_Controller {
 				return $data ;
 	}
 	public function uploadCSV(){
-		try
-        {
-            if($this->input->post("ImportInput")){
-            	$path = dirname($_SERVER["SCRIPT_FILENAME"])."/files/" ;  
-		 		$config =  array(
-                  'upload_path'     => $path,
-                  'upload_url'      => base_url()."files/",
-                  //'allowed_types'   => "csv|csv|gif|jpg|png|jpeg|pdf|doc|xml",
-                  'allowed_types'   => "csv",
-                  'overwrite'       => TRUE,
-                  'max_size'        => "1000KB" 
-                );
+		 		$config['upload_path']          = 'C:/wamp/www/';
+                //$config['allowed_types']        = 'csv|jpg';
+                $config['max_size']             = 100;
 
                 $this->load->library('upload', $config);
 
                 if ( !$this->upload->do_upload())
                 {
                         $error = array('error' => $this->upload->display_errors());
-                        $this->load->view('inc_header');
+
                         $this->load->view('student/fail', $error);
-                		$this->load->view('inc_footer');
                 }
                 else
                 {
-                        $data = array(
-                        	'upload_data' => $this->upload->data() , 
-                        	"opt" => "upload",
-                        	"filename" => );
-                        readCSV($path);
-						$this->load->view('inc_header');
+                        $data = array('upload_data' => $this->upload->data());
+
                         $this->load->view('student/successful', $data);
-						$this->load->view('inc_footer');
                 }
-            }
-	}
-	catch(Exception $err)
-        {
-            log_message("error",$err->getMessage());
-            return show_error($err->getMessage());
-        }
-
-}
-	public function readCSV($path){
-
 	}
 }

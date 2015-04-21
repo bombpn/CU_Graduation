@@ -9,8 +9,8 @@ class model_student extends CI_Model{
 		return $this->db->get("student")->result();
 	}
 	public function addStudent($data){
-	$this->db->where('student_id',$data['student_id']);
-	if($this->db->get("student")->num_rows() == 0){
+		$this->db->where('student_id',$data['student_id']);
+		if($this->db->get("student")->num_rows() == 0){
 		$this->db->insert('student',$data) ;
 		return true ;
 	}

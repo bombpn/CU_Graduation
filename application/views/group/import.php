@@ -10,12 +10,12 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-			เพิ่มรายชื่อ
-            <small>Import Student</small>
+			เพิ่มกลุ่ม
+            <small>Import Group</small>
         </h1>
 
 
-<legend>เพิ่มบัณฑิตด้วย .CSV</legend>
+<legend>เพิ่มกลุ่มด้วย.CSV</legend>
 <fieldset> 
 <div class="form-group form-horizontal">
   <label class="col-md-4 control-label" for="ImportFiel">ไฟล์ .csv</label>
@@ -26,7 +26,7 @@
     <input type="submit" id="ImportInput" name="ImportInput" class="btn btn-success" value="Upload"/>
     
 </form>  -->
- <form  class="form-horizontal" action="<?=base_url();?>student/uploadCSV" method="POST" enctype="multipart/form-data" >
+ <form  class="form-horizontal" action="<?=base_url();?>group/uploadCSV" method="POST" enctype="multipart/form-data" >
             
             <input type="file" name="userfile" class="input-file" multiple="multiple"  />
             
@@ -47,13 +47,13 @@
 <fieldset> 
 
 <!-- Form Name -->
-<legend>เพิ่มข้อมูลบัณฑิต</legend>
+<legend>เพิ่มข้อมูลกลุ่ม</legend>
 
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="IDInput">ID</label>  
   <div class="col-md-2">
-  <input id="IDInput" name="IDInput" type="text" class="form-control input-md" required="">
+  <label class=" control-label" for="IDInput"><?php echo ; ?></label>  
     
   </div>
 </div>
