@@ -18,7 +18,7 @@ class faculty extends CI_Controller {
 		}
 	}
 	public function delete_faculty($faculty_id){
-		$data['allfaculty'] = $this->faculty->delete_faculty($faculty_id);
+		$this->faculty->delete_faculty($faculty_id);
 		$this->index();
 	}
 	public function edit_faculty(){

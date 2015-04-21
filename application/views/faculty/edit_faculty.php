@@ -13,27 +13,42 @@
         <h1 class="page-header">
             แก้ไขรายชื่อคณะ
         </h1>
-        <form action="<?=base_url();?>faculty/edit_faculty" method="POST">
+        <form class="form-horizontal" action="<?=base_url();?>faculty/edit_faculty" method="POST">
                 <fieldset>
-                <tr>
-                    <td>
-                        <input class="form-control" name="faculty_id"  value="<?=$edit_faculty_temp['faculty_id'];?>" readonly>         
-                    </td>
-                    <td>
-                        <input class="form-control" name="th_faculty_name" value="<?=$edit_faculty_temp['th_faculty_name'];?>">
-                    </td>
-                    <td>
-                        <input class="form-control" name="en_faculty_name" value="<?=$edit_faculty_temp['en_faculty_name'];?>">
-                    </td>
-                    <td>
+                <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">รหัสคณะ:</label>
+                        <div class="col-md-4">
+                            <input class="form-control input-md" name="faculty_id"  value="<?=$edit_faculty_temp['faculty_id'];?>" disabled>         
+                        </div>
+                </div>
+                <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">ชื่อคณะ:</label>
+                        <div class="col-md-4">
+                            <input class="form-control input-md" name="th_faculty_name" value="<?=$edit_faculty_temp['th_faculty_name'];?>" required>  
+                        </div>
+                </div>
+                <div class="form-group">
+                        <label class="col-md-4 control-label" for="textinput">Faculty Name:</label>
+                        <div class="col-md-4">
+                            <input class="form-control input-md" name="en_faculty_name" value="<?=$edit_faculty_temp['en_faculty_name'];?>" required>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="button1id"></label>
+                    <div class="col-md-4">
                         <input type="submit" class="btn btn-info" value="Submit">
+
                             <!-- <i class="fa fa-search"></i> -->
                         </input>
-                    </td>
-                </tr>
-                </fieldset>
-            </form>
-        
+                        <a href="<?=base_url();?>faculty/index" class="btn btn-danger">
+                            Cancel
+                            <!-- <i class="fa fa-search"></i> -->
+                        </a>
+                        
+                    </div>
+                </div>
+            </fieldset>
+        </form>
     </div>
 </div>
 <!-- /.row -->

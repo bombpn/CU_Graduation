@@ -11,12 +11,14 @@ class model_faculty extends CI_Model {
 		return $this->db->get($this->table)->result();
 	}
 	public function add_faculty($data) {
-		$this->db->insert($this->table, $data);
+		if($this->db->get($this->table)->num_rows() == 0){
+			$this->db->insert($this->table, $data);
+		}
+		echo 'Row succesfully inserted!';
 	}
 	public function delete_faculty($faculty_id) {
 		$this->db->where($this->id, $faculty_id);
 		$this->db->delete($this->table);
-		return $this->db->get($this->table)->result();
 	}
 	public function edit_faculty($data) {
 		$this->db->where($this->id, $data['faculty_id']);

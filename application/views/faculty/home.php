@@ -64,8 +64,9 @@
                                 <input class="form-control" name="en_faculty_name"  value=<?=$faculty->en_faculty_name;?> readonly>
                             </td>
                             <td>
-                                <input type="submit" class="btn btn-primary" value="Edit">
-                                </input>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
                                 <!-- <a href="<?=base_url();?>faculty/load_edit_faculty_page" class="btn btn-primary">
                                     <i class="fa fa-pencil"></i>
                                 </a> -->
