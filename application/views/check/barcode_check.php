@@ -31,10 +31,10 @@
                 <div class="col-lg-9">
                     <div class="panel panel-default">
                         <div class="panel-heading" align="center">
-                            <form class="form-inline">
+                            <form class="form-inline" method="post">
                                 <div class="form-group">
                                     <label for="barcode">Barcode</label>
-                                    <input type="text" class="form-control" id="barcode" placeholder="">
+                                    <input type="text" class="form-control" name="barcode" placeholder="">
                                     <script>
                                         window.onload = function() {
                                             document.getElementById("barcode").focus();
@@ -49,17 +49,18 @@
                         </div-->
                     </div>
                     <?php
-                    if(count($first_faculty)>0){
-                        foreach($first_faculty as $student){
+                    //if(count($first_faculty)>0){
+                        //foreach($first_faculty as $student){
                     ?>
-                            <div class="panel panel-green" id="<?=$student->student_id;?>">
+                            <div class="panel panel-green" id="<? //=$student->student_id;?>">
                                 <div class="panel-heading">
                                     <div class="row">
                                         <!--h3 class="panel-title">Panel title</h3-->
                                         <div class="col-xs-6">
                                             <?php
-                                            if(file_exists("GradPic/".$student->picture_path)) $imagePath = $student->picture_path;
-                                            else $imagePath = "_blank_person.jpg"; 
+                                            //if(file_exists("GradPic/".$student->picture_path)) $imagePath = $student->picture_path;
+                                            //else $imagePath = "_blank_person.jpg"; 
+                                            $imagePath = "_blank_person.jpg"; 
                                             ?>
                                             <img src="<?=base_url();?>GradPic/<?=$imagePath;?>" class="img-thumbnail" width="100%">
                                         </div>
@@ -67,11 +68,11 @@
                                             <h3><i class="fa fa-fw fa-check-square"></i> บันทึกสำเร็จ</h3>
                                             <h3><i class="fa fa-fw fa-warning"></i> มีการข้ามลำดับ</h3>
                                             <h3><i class="fa fa-fw fa-times"></i> มีข้อผิดพลาด</h3>
-                                            <h1 style="font-size:1100%;"># <?=$student->order;?></h1>
+                                            <!--h1 style="font-size:1100%;"># <?=$student->order;?></h1>
                                             <h3><?=$student->th_prefix;?><?=$student->th_firstname;?> <?=$student->th_lastname;?></h3>
                                             <h3><?=$student->en_prefix;?><?=$student->en_firstname;?> <?=$student->en_lastname;?></h3>
                                             <h4><?=$student->student_id;?></h4>
-                                            <h4>คณะวิศวกรรมศาสตร์</h4>
+                                            <h4>คณะวิศวกรรมศาสตร์</h4-->
                                         </div>
                                     </div>
                                 </div>
@@ -80,8 +81,8 @@
                                 </div-->
                             </div>
                     <?php
-                        }
-                    }
+                        //}
+                    //}
                     ?>
                 </div>
                 <div class="col-lg-3">
