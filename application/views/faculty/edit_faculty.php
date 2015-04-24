@@ -18,7 +18,7 @@
                 <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">รหัสคณะ:</label>
                         <div class="col-md-4">
-                            <input class="form-control input-md" name="faculty_id"  value="<?=$edit_faculty_temp['faculty_id'];?>" disabled>         
+                            <input class="form-control input-md" name="faculty_id"  value="<?=$edit_faculty_temp['faculty_id'];?>" readonly>         
                         </div>
                 </div>
                 <div class="form-group">
