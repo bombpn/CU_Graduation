@@ -7,6 +7,9 @@ class faculty extends CI_Controller {
 	}
 	public function index(){
 		$data['allfaculty'] = $this->faculty->get_all_faculty();
+		$data['faculty_id_search'] = "";
+		$data['th_faculty_name_search'] = "";
+		$data['en_faculty_name_search'] = "";
 		$this->load->view('inc_header');
 		$this->load->view('faculty/home',$data);
 		$this->load->view('inc_footer');
@@ -30,6 +33,9 @@ class faculty extends CI_Controller {
 	public function search_faculty(){
 		if($_POST){
 			$data['allfaculty'] = $this->faculty->search_faculty($_POST);
+			$data['faculty_id_search'] = $_POST['faculty_id'];
+			$data['th_faculty_name_search'] = $_POST['th_faculty_name'];
+			$data['en_faculty_name_search'] = $_POST['en_faculty_name'];
 			$this->load->view('inc_header');
 			$this->load->view('faculty/home',$data);
 			$this->load->view('inc_footer');

@@ -16,6 +16,19 @@
         <a href="<?=base_url();?>faculty/load_add_faculty_page" class="btn btn-primary">
             add faculty <i class="fa fa-plus"></i>
         </a>
+        <?php
+        if($faculty_id_search != "" || $th_faculty_name_search != "" || $en_faculty_name_search != ""){
+        ?>
+            <a href="<?=base_url();?>faculty/index" class="btn btn-danger">
+                cancel search <i class="fa fa-times"></i>
+            </a>
+            <h2 class="text-danger bg-info">
+            ผลการค้นหา
+            </h2>
+        <?php
+            }
+        ?>
+
         <table class="table table-striped">
         	<thead>
         		<tr>
@@ -30,13 +43,13 @@
                 <fieldset>
                 <tr>
                     <td>
-                        <input class="form-control" name="faculty_id"  placeholder="รหัสคณะ">         
+                        <input class="form-control" name="faculty_id"  placeholder="รหัสคณะ" value=<?=$faculty_id_search;?>>         
                     </td>
                     <td>
-                        <input class="form-control" name="th_faculty_name" placeholder="ชื่อคณะ">  
+                        <input class="form-control" name="th_faculty_name" placeholder="ชื่อคณะ" value=<?=$th_faculty_name_search;?>>  
                     </td>
                     <td>
-                        <input class="form-control" name="en_faculty_name" placeholder="Faculty Name">
+                        <input class="form-control" name="en_faculty_name" placeholder="Faculty Name" value=<?=$en_faculty_name_search;?>>
                     </td>
                     <td>
                         <input type="submit" class="btn btn-info" value="Search">
