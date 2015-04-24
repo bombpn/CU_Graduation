@@ -131,7 +131,7 @@ class Student extends CI_Controller {
 		{
 			if ($this->saveByForm($_POST)){
 				$this->load->view('inc_header');
-				$this->load->view('student/successful',array("opt"=>"import" , "student_id" <= $_POST["student_id"] ));
+				$this->load->view('student/successful',array("opt"=>"import" , "student_id" <= $_POST["IDInput"] ));
 				$this->load->view('inc_footer');
 			}
 			else{
@@ -278,7 +278,7 @@ class Student extends CI_Controller {
       		$count = 0 ;
            $csvData = $this->csvreader->parse_file($filePath);
  			foreach($csvData as $field){
- 				$data ;
+ 				//print_r($field) ;
                 $data['student_id'] = $field['student_id'] ;
                 $data['th_prefix'] = $field['th_prefix'] ;
 				$data['th_firstname'] = $field['th_firstname'] ;
@@ -288,11 +288,40 @@ class Student extends CI_Controller {
 				$data['en_lastname'] =  $field['en_lastname'] ;
                 $data['gender'] = 	$field['gender'] ;
 				$data['picture_path'] = $field['student_id'].'.jpg' ;
-                $data['barcode'] = 	$data['student_id'] ;
-                 if ($this->model_student->addStudent($data))
-                 	$count++;
+                $data['barcode'] = 	genBarcode($data['student_id']) ;
+                 if ($this->model_student->addStudent($data)) $count++;
                 
                }
            return $count ;
+               /*
+          	$line = 1 ;
+            $file = fopen($filePath,"r");
+
+			while(! feof($file))
+  			{
+
+  				$field = fgetcsv($file) ;
+  				//Skip First Line!
+  					if( $line > 1) {
+                	echo "$field[0]<br>" ;
+                	$data['student_id'] = $field[0] ;
+                	$data['th_prefix'] = $field[1] ;
+					$data['th_firstname'] = $field[2] ;
+					$data['th_lastname'] =  $field[3] ;
+                	$data['en_prefix'] = $field[4] ;
+					$data['en_firstname'] = $field[5] ;
+					$data['en_lastname'] =  $field[6] ;
+                	$data['gender'] = 	$field[7] ;
+					$data['picture_path'] = $data['student_id'].'.jpg' ;
+                	$data['barcode'] = 	$data['student_id'] ;
+                	if ($this->model_student->addStudent($data)) 
+                		{$count++;}
+                }
+                $line++;
+  			}
+			fclose($file);*/
+       }
+       public function genBarcode($id){
+       	return $id ;
        }
 }

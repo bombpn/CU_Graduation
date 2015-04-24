@@ -13,7 +13,7 @@
 class CSVReader {
     
     var $fields;        /** columns names retrieved after parsing */
-    var $separator = ',';    /** separator used to explode each line */
+    var $separator = ",";    /** separator used to explode each line */
     
     /**
      * Parse a text containing CSV formatted data.
@@ -50,15 +50,14 @@ class CSVReader {
         foreach( $p_CSVLines as $line_num => $line ) {
             if( $line != '' ) { // skip empty lines
                 $elements = explode($this->separator, $line);
- 
                 if( !is_array($content) ) { // the first line contains fields names
                     $this->fields = $elements;
                     $content = array();
                 } else {
                     $item = array();
                     foreach( $this->fields as $id => $field ) {
-                        if( isset($elements[$id]) ) {
-                            $item[$field] = $elements[$id];
+                        if( isset($elements[trim($id)]) ) {
+                            $item[trim($field)] = $elements[trim($id)];
                         }
                     }
                     $content[] = $item;

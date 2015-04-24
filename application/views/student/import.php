@@ -29,7 +29,7 @@
  <form  class="form-horizontal" action="<?=base_url();?>student/uploadCSV" method="POST" enctype="multipart/form-data" >
             
             <input type="file" name="userfile" class="input-file" multiple="multiple"  />
-            
+            <br></br>
             <input type="submit" id="ImportInput" name="ImportInput" value="อัพโหลด" class="btn btn-success" />
         </form>
     </div>
@@ -183,7 +183,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="SaveButton"></label>
   <div class="col-md-8">
-    <input type="submit" id="SaveButton" name="SaveButton" class="btn btn-info" value="เก็บ"></button>
+    <button type="submit" id="SaveButton" name="SaveButton" class="btn btn-info" value="เก็บ"></button>
     <input type="reset" id="ResetButton" name="ResetButton" class="btn btn-danger" value="ล้าง"></button>
   </div> 
 </div>
