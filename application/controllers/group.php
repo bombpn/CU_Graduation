@@ -17,25 +17,20 @@ class Group extends CI_Controller {
 	{
 				if ($_POST){
 				$id = $_POST["SearchIDInput"] ;
-				$th_firstname = $_POST["SearchTHFirstnameInput"] ;
-				$th_lastname = $_POST["SearchTHLastnameInput"] ;
-				$en_firstname = $_POST["SearchENFirstnameInput"] ;
-				$en_lastname = $_POST["SearchENLastnameInput"] ;
-				$data = $this->model_student->get_student($id,$th_firstname
-					,$th_lastname,$en_firstname,$en_lastname);
-
-					
-						//$this->edit($data) ;
-						$this->load->view('inc_header');
-						$this->load->view('student/result',array("result"=>$data));
-						$this->load->view('inc_footer');
-					
-				
+				$th_name = $_POST["SearchTHNameInput"] ;
+				$en_name = $_POST["SearchENNameInput"] ;
+				$international = $_POST['SearchInternationalInput'];
+				$degree = $_POST['SearchDegreeInput'];
+				$data = $this->model_group->get_group($id,$th_name,$en_name,$international,$degree);
+				$this->load->view('inc_header');
+				$this->load->view('group/result',array("result"=>$data));
+				$this->load->view('inc_footer');
 				}
 				else {
 				$var = array ("opt" => "search") ;
 				$this->load->view('inc_header');
-				$this->load->view('student/search',$var);
+				$this->load->view('group/search',$var);
+				print_r($_POST) ;
 				$this->load->view('inc_footer');
 				}
 	}
@@ -228,23 +223,99 @@ class Group extends CI_Controller {
 				return $data ;
 	}
 	public function uploadCSV(){
-		 		$config['upload_path']          = 'C:/wamp/www/';
-                //$config['allowed_types']        = 'csv|jpg';
-                $config['max_size']             = 100;
+		try
+        {
+            if($this->input->post("ImportInput")){
+            	$path = dirname($_SERVER["SCRIPT_FILENAME"])."/files/" ;  
+		 		$config =  array(
+                  'upload_path'     => $path,
+                  'upload_url'      => base_url()."files/",
+                  //'allowed_types'   => "csv|csv|gif|jpg|png|jpeg|pdf|doc|xml",
+                  'allowed_types'   => "csv",
+                  'overwrite'       => TRUE,
+                  'max_size'        => "1000KB" 
+                );
 
                 $this->load->library('upload', $config);
 
                 if ( !$this->upload->do_upload())
                 {
                         $error = array('error' => $this->upload->display_errors());
-
-                        $this->load->view('student/fail', $error);
+                        $this->load->view('inc_header');
+                        $this->load->view('group/fail', $error);
+                		$this->load->view('inc_footer');
                 }
                 else
                 {
-                        $data = array('upload_data' => $this->upload->data());
-                        importStudentCSV($data['full_path']);
-                        $this->load->view('student/successful', $data);
+                		$upload = $this->upload->data() ;
+                        $data = array(
+                        	'upload_data' => $upload , 
+                        	"opt" => "importcsv",
+                        	"full_path" => $upload["full_path"] ,
+                        	"file_name" => $upload["orig_name"]);
+                        $data['num_records'] = $this->readCSV($upload['full_path']);
+						$this->load->view('inc_header');
+                        $this->load->view('group/successful', $data);
+						$this->load->view('inc_footer');
                 }
+            }
 	}
+	catch(Exception $err)
+        {
+            log_message("error",$err->getMessage());
+            return show_error($err->getMessage());
+        }
+
+}
+	public function readCSV($filePath){
+			$this->load->library('csvreader');
+      		$count = 0 ;
+           $csvData = $this->csvreader->parse_file($filePath);
+ 			foreach($csvData as $field){
+ 				//print_r($field) ;
+                $data['student_id'] = $field['student_id'] ;
+                $data['th_prefix'] = $field['th_prefix'] ;
+				$data['th_firstname'] = $field['th_firstname'] ;
+				$data['th_lastname'] =  $field['th_lastname'] ;
+                $data['en_prefix'] = $field['en_prefix'] ;
+				$data['en_firstname'] = $field['en_firstname'] ;
+				$data['en_lastname'] =  $field['en_lastname'] ;
+                $data['gender'] = 	$field['gender'] ;
+				$data['picture_path'] = $field['student_id'].'.jpg' ;
+                $data['barcode'] = 	genBarcode($data['student_id']) ;
+                 if ($this->model_student->addStudent($data)) $count++;
+                
+               }
+           return $count ;
+               /*
+          	$line = 1 ;
+            $file = fopen($filePath,"r");
+
+			while(! feof($file))
+  			{
+
+  				$field = fgetcsv($file) ;
+  				//Skip First Line!
+  					if( $line > 1) {
+                	echo "$field[0]<br>" ;
+                	$data['student_id'] = $field[0] ;
+                	$data['th_prefix'] = $field[1] ;
+					$data['th_firstname'] = $field[2] ;
+					$data['th_lastname'] =  $field[3] ;
+                	$data['en_prefix'] = $field[4] ;
+					$data['en_firstname'] = $field[5] ;
+					$data['en_lastname'] =  $field[6] ;
+                	$data['gender'] = 	$field[7] ;
+					$data['picture_path'] = $data['student_id'].'.jpg' ;
+                	$data['barcode'] = 	$data['student_id'] ;
+                	if ($this->model_student->addStudent($data)) 
+                		{$count++;}
+                }
+                $line++;
+  			}
+			fclose($file);*/
+       }
+       public function genBarcode($id){
+       	return $id ;
+       }
 }

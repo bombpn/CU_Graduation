@@ -76,7 +76,7 @@ class Student extends CI_Controller {
 				"en_lastname" => $_POST["ENLastnameInput"],
 				"gender" => $gender ,
 				"picture_path" => $_POST["IDInput"].'.'."jpg",
-				"barcode" => $_POST["IDInput"]/*
+				"barcode" => $this->genBarcode($_POST["IDInput"])/*
 				"picture_path" => $_POST[("PicPathInput"),
 				"degree" => $degree ,
 				"faculty" => $faculty ,
@@ -86,9 +86,9 @@ class Student extends CI_Controller {
 				$id = $_POST["IDInput"] ;
 				$this->model_student->updateStudent($id,$data)	;		
 				echo "Update" ;
-				//$this->load->view('inc_header');
+				$this->load->view('inc_header');
 				$this->load->view('student/successful',array("opt" => 'edit'));
-				//$this->load->view('inc_footer');
+				$this->load->view('inc_footer');
 			}
 
 	}
@@ -183,7 +183,7 @@ class Student extends CI_Controller {
 				"en_firstname" => $_POST["ENFirstnameInput"],
 				"en_lastname" => $_POST["ENLastnameInput"],
 				"gender" => $gender ,
-				"barcode" => $_POST["IDInput"] ,
+				"barcode" => $this->genBarcode($_POST["IDInput"]) ,
 				"picture_path" => $_POST["IDInput"].'.'."jpg"
 				/*"barcode" => $_POST[("IDInput"),
 				"picture_path" => $_POST[("PicPathInput"),
@@ -228,99 +228,7 @@ class Student extends CI_Controller {
 				$data['ea'] = $ea ;
 				return $data ;
 	}
-	public function uploadCSV(){
-		try
-        {
-            if($this->input->post("ImportInput")){
-            	$path = dirname($_SERVER["SCRIPT_FILENAME"])."/files/" ;  
-		 		$config =  array(
-                  'upload_path'     => $path,
-                  'upload_url'      => base_url()."files/",
-                  //'allowed_types'   => "csv|csv|gif|jpg|png|jpeg|pdf|doc|xml",
-                  'allowed_types'   => "csv",
-                  'overwrite'       => TRUE,
-                  'max_size'        => "1000KB" 
-                );
-
-                $this->load->library('upload', $config);
-
-                if ( !$this->upload->do_upload())
-                {
-                        $error = array('error' => $this->upload->display_errors());
-                        $this->load->view('inc_header');
-                        $this->load->view('student/fail', $error);
-                		$this->load->view('inc_footer');
-                }
-                else
-                {
-                		$upload = $this->upload->data() ;
-                        $data = array(
-                        	'upload_data' => $upload , 
-                        	"opt" => "importcsv",
-                        	"full_path" => $upload["full_path"] ,
-                        	"file_name" => $upload["orig_name"]);
-                        $data['num_records'] = $this->readCSV($upload['full_path']);
-						$this->load->view('inc_header');
-                        $this->load->view('student/successful', $data);
-						$this->load->view('inc_footer');
-                }
-            }
-	}
-	catch(Exception $err)
-        {
-            log_message("error",$err->getMessage());
-            return show_error($err->getMessage());
-        }
-
-}
-	public function readCSV($filePath){
-			$this->load->library('csvreader');
-      		$count = 0 ;
-           $csvData = $this->csvreader->parse_file($filePath);
- 			foreach($csvData as $field){
- 				//print_r($field) ;
-                $data['student_id'] = $field['student_id'] ;
-                $data['th_prefix'] = $field['th_prefix'] ;
-				$data['th_firstname'] = $field['th_firstname'] ;
-				$data['th_lastname'] =  $field['th_lastname'] ;
-                $data['en_prefix'] = $field['en_prefix'] ;
-				$data['en_firstname'] = $field['en_firstname'] ;
-				$data['en_lastname'] =  $field['en_lastname'] ;
-                $data['gender'] = 	$field['gender'] ;
-				$data['picture_path'] = $field['student_id'].'.jpg' ;
-                $data['barcode'] = 	genBarcode($data['student_id']) ;
-                 if ($this->model_student->addStudent($data)) $count++;
-                
-               }
-           return $count ;
-               /*
-          	$line = 1 ;
-            $file = fopen($filePath,"r");
-
-			while(! feof($file))
-  			{
-
-  				$field = fgetcsv($file) ;
-  				//Skip First Line!
-  					if( $line > 1) {
-                	echo "$field[0]<br>" ;
-                	$data['student_id'] = $field[0] ;
-                	$data['th_prefix'] = $field[1] ;
-					$data['th_firstname'] = $field[2] ;
-					$data['th_lastname'] =  $field[3] ;
-                	$data['en_prefix'] = $field[4] ;
-					$data['en_firstname'] = $field[5] ;
-					$data['en_lastname'] =  $field[6] ;
-                	$data['gender'] = 	$field[7] ;
-					$data['picture_path'] = $data['student_id'].'.jpg' ;
-                	$data['barcode'] = 	$data['student_id'] ;
-                	if ($this->model_student->addStudent($data)) 
-                		{$count++;}
-                }
-                $line++;
-  			}
-			fclose($file);*/
-       }
+	
        public function genBarcode($id){
        	return $id ;
        }

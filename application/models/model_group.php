@@ -6,7 +6,7 @@ class model_group extends CI_Model{
 		parent::__construct();
 	}
 	public function get_all_group(){
-		return $this->db->get("group")->result();
+		return $this->db->get("group")->result_array();
 	}
 	/*
 	public function addStudent($data){
@@ -19,17 +19,17 @@ class model_group extends CI_Model{
 			//Duplicate!
 			return false ;
 		}
-	}
-	public function get_student($id,$th_firstname,$th_lastname,$en_firstname,$en_lastname){
+	}*/
+	public function get_group($id,$th_name,$en_name,$international,$degree){
 		
-		if($id) $this->db->where('student_id',$id);
-		if($th_firstname) $this->db->where('th_firstname',$th_firstname);
-		if($th_lastname) $this->db->where('th_lastname',$th_lastname);
-		if($en_firstname) $this->db->where('en_firstname',$en_firstname);
-		if($en_lastname) $this->db->where('en_lastname',$en_lastname);
-		$rs = $this->db->get('student');
+		if($id) $this->db->where('group_id',$id);
+		if($th_name) $this->db->like('th_group_name',$th_name);
+		if($en_name) $this->db->like('en_group_name',$en_name);
+		if($international) $this->db->where('international',$international);
+		if($degree) $this->db->where('degree',$degree);
+		$rs = $this->db->get('group');
 		return $rs->result_array();
-	}
+	}/*
 	public function get_student_by_id($id){
 		$this->db->where('student_id',$id);
 		$rs = $this->db->get('student');

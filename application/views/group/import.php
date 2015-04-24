@@ -20,28 +20,12 @@
 <div class="form-group form-horizontal">
   <label class="col-md-4 control-label" for="ImportFiel">ไฟล์ .csv</label>
   <div class="col-md-4">
-    <!-- <form  action="<?=base_url();?>student/uploadCSV" method="POST" enctype="multipart/form-data">
-
-    <input id="ImportFile" name="ImportFile" class="input-file" type="file" multiple="multiple"/>  
-    <input type="submit" id="ImportInput" name="ImportInput" class="btn btn-success" value="Upload"/>
-    
-</form>  -->
- <form  class="form-horizontal" action="<?=base_url();?>group/uploadCSV" method="POST" enctype="multipart/form-data" >
-            
+        <form  class="form-horizontal" action="<?=base_url();?>group/uploadCSV" method="POST" enctype="multipart/form-data" >
             <input type="file" name="userfile" class="input-file" multiple="multiple"  />
-            
             <input type="submit" id="ImportInput" name="ImportInput" value="อัพโหลด" class="btn btn-success" />
         </form>
     </div>
 </div>
-</fieldset> 
-<!--  <form action="<?=base_url();?>student/uploadCSV" method="POST" enctype="multipart/form-data" >
-            
-            Select File To Upload:<br />
-            <input type="file" name="userfile" class="input-file" multiple="multiple"  />
-            
-            <input type="submit" id="ImportInput" name="ImportInput" value="Upload" class="btn btn-success" />
-        </form> -->
 
 <form class="form-horizontal" action="<?=base_url();?>student/import" method="POST">
 <fieldset> 
