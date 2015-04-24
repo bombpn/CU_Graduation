@@ -11,6 +11,7 @@ class model_faculty extends CI_Model {
 		return $this->db->get($this->table)->result();
 	}
 	public function add_faculty($data) {
+		$this->db->where($this->id, $data['faculty_id']);
 		if($this->db->get($this->table)->num_rows() == 0){
 			$this->db->insert($this->table, $data);
 		}
