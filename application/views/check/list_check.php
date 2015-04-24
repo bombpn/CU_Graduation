@@ -43,7 +43,7 @@
                                 </div> -->
                                 <div class="row">
                                     <div class="col-xs-2 vcenter" align="center">
-                                        <a href="#" class="btn btn-lg btn-link vcenter" width="100%">
+                                        <a href="#" class="btn btn-lg btn-link vcenter">
                                             <i class="fa fa-chevron-circle-left fa-5x vcenter"></i>
                                         </a>
                                     </div>
