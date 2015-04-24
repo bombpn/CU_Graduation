@@ -18,5 +18,21 @@ class model_check extends CI_Model{
 	public function get_name_list($group_id){
 		return $this->db->select('*')->from('JOIN')->where('GROUP_group_id',$group_id)->join('STUDENT','STUDENT.student_id = JOIN.STUDENT_student_id','inner')->order_by('order','asc')->get()->result();
 	}
+	public function get_student_id($barcode,$group_id){
+		$find_by_barcode = $this->db->where('barcode',$barcode)->get('student')->result();
+		$find_by_student_id = $this->db->where('student_id',$barcode)->get('student')->result();
+		$find_by_number = $this->db->where('order',$barcode)->where('GROUP_group_id',$group_id)->get('join')->result();
+		echo "<script> alert(" . count($find_by_barcode) . " " . count($find_by_number) . " " . count($find_by_student_id) . ")</script>";
+		if(count($find_by_number) > 0) return $find_by_number[0]->STUDENT_student_id;
+		else if(count($find_by_barcode) > 0) return $find_by_number[0]->student_id;
+		else if(count($find_by_student_id) > 0) return $find_by_student_id[0]->student_id;
+		return 0;
+	}
+	public function get_student_detail($student_id, $group_id){
+		return $this->db->select('*')->from('student')->where('student_id',$student_id)->join('join','student.student_id = join.STUDENT_student_id and join.GROUP_group_id = ' . $group_id,'inner')->get()->row();
+	}
+	public function create_transaction($student_id, $schedule_id){
+		
+	}
 }
 ?>

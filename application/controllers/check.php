@@ -18,10 +18,19 @@ class check extends CI_Controller {
 		}
 		$data['allgroup_in_schedule'] = $result;
 		$data['schedule_detail'] = $this->check->get_schedule_detail($schedule_id);
-		$data['barcodes'] = "";
+		$data['has_data'] = 'first';
 		if($_SERVER['REQUEST_METHOD']=='POST'){
 			//echo "<script>alert(". $this->input->post('barcode').");</script>";
-			$data['barcodes'] = $this->input->post('barcode');
+			$data['has_data'] = 'has';
+			$student_id = $this->check->get_student_id($this->input->post('barcode'),1);
+			$data['barcode'] = $this->input->post('barcode');
+			if($student_id!=0){
+				$data['student_id'] = $student_id;
+				$data['student'] = $this->check->get_student_detail($student_id,1);
+			}else{
+				$data['has_data'] = 'notfound';
+			}
+			
 		}
 		//$data['first_faculty'] = $this->check->get_name_list($result[0]->GROUP_group_id);
 		//$this->load->view('inc_header');
