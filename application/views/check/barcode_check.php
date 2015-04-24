@@ -35,6 +35,16 @@
                                 <div class="form-group">
                                     <label for="barcode">Barcode</label>
                                     <input type="text" class="form-control" name="barcode" id="barcode" placeholder="">
+                                    <input type="hidden" name="schedule_id" value="<?=$schedule_detail->schedule_id;?>">
+                                    <input type="hidden" name="group_id" value="<?=$active_group;?>">
+                                    <?php 
+                                        if($has_data == 'has'){ 
+                                            $prev_num = $student->order; 
+                                        }else{ 
+                                            $prev_num = 0;
+                                        } 
+                                    ?>
+                                    <input type="hidden" name="prev_num" value="<?=$prev_num;?>">
                                     <script>
                                         window.onload = function() {
                                             document.getElementById("barcode").focus();
@@ -53,7 +63,7 @@
                         //foreach($first_faculty as $student){
                         if($has_data=='has'){
                     ?>
-                            <div class="panel panel-green" id="<? //=$student->student_id;?>">
+                            <div class="panel panel-<?=$color;?>" id="<? //=$student->student_id;?>">
                                 <div class="panel-heading">
                                     <div class="row">
                                         <!--h3 class="panel-title">Panel title</h3-->
@@ -99,7 +109,7 @@
                                         </div>
                                         <div class="col-xs-6" align="center" valign="middle">
                                             <h3><i class="fa fa-fw fa-times"></i> มีข้อผิดพลาด</h3>
-                                            <h1 style="font-size:1100%;"># ไม่พบ</h1>
+                                            <h1 style="font-size:800%;"># ไม่พบ</h1>
                                             <h1 style="font-size:400%;"><?=$barcode;?></h1>
                                             <!--h4>คณะวิศวกรรมศาสตร์</h4-->
                                         </div>
@@ -147,7 +157,13 @@
                                     //echo $schedule->schedule_id . " " . $schedule->date . " " . $schedule->start_time . " - " . $schedule->end_time . "<br>";
                             ?>
                                     
-                                    <li><?=$group->attendance_order;?> : <?=$group->th_group_name;?></li>
+                                    <li>
+                                        <?php if($attendance_order == $group->attendance_order) {?>
+                                            <b><?=$group->attendance_order;?> : <?=$group->th_group_name;?></b>
+                                        <?php }else{ ?>
+                                            <a href="<?=base_url();?>check/barcode_check/<?=$schedule_detail->schedule_id;?>/<?=$group->attendance_order;?>"><?=$group->attendance_order;?> : <?=$group->th_group_name;?></a>
+                                        <?php } ?>
+                                    </li>
                             <?php
                                 }
                             }

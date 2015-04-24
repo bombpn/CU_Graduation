@@ -31,6 +31,12 @@ class model_check extends CI_Model{
 	public function get_student_detail($student_id, $group_id){
 		return $this->db->select('*')->from('student')->where('student_id',$student_id)->join('join','student.student_id = join.STUDENT_student_id and join.GROUP_group_id = ' . $group_id,'inner')->get()->row();
 	}
+	public function get_max_student_no($schedule_id, $group_id){
+		return 100;
+	}
+	public function inserted_transaction($student_id,$schedule_id){
+		return true;
+	}
 	public function create_transaction($student_id, $schedule_id){
 		
 	}
