@@ -46,8 +46,24 @@ class model_schedule extends CI_Model{
 
 	//SETTERS
 
-	public function addScheduleToDB($data){
+	public function addScheduleToDB($data,$attend){
 		  $this->db->insert('schedule',$data);
+			$this->db->select_max('schedule_id');
+			$conditioned_schedule = $this->db->get('schedule');
+			$resultRow = $conditioned_schedule->row_array();
+
+			$schedule_id = $resultRow['schedule_id'];
+			//attend[0] = ENG
+			//attend[1] =
+			for(int i = 0 ; i < $attend.length ; i++){
+				$data_attend = array(
+					'schedule' =>
+				);
+				$this->db->insert('attend',$data_attend);
+			}
+			//SELECT MAX
+			//GET IT SCHEDULT ID
+			//INSERT ATTEND SCHEDULE ID AND $data[StudentGroup][i]
 			//$this
 			return $data['date'];
 

@@ -81,7 +81,7 @@ class Schedule extends CI_Controller {
 					'PLACE_place_id'=>$PLACE_place_id
 				);
 				//ADD TO DB
-				$this->schedule->addScheduleToDB($data);
+				$this->schedule->addScheduleToDB($data,$StudentGroup);
 				//$this->schedule->addAttendList($)
 				$result = array(
 						'redirect' => 'schedule',
