@@ -59,29 +59,74 @@ class Schedule extends CI_Controller {
 				$this->load->view('inc_footer');
 	}
 
-	public function formSubmit(){
-		header( 'Content-type: application/json' );
-		if(isset($_POST)){
 
+	public function addResult(){
+		if($_POST){
+				$schedule_id = NULL;
+				$date=$_POST['date'];
+				$start_time=$_POST['start_time'];
+				$end_time=$_POST['end_time'];
+				$type=$_POST['type'];
+				$round=$_POST['round'];
+				$PLACE_place_id =$_POST['PLACE_place_id'];
+				$StudentGroup = $_POST['schedule_group_populated'];
 
-			$date = $this->input->post('schedule_group_populated');
-			$start = $_POST['start_time'];
-			echo $start."<br>";
-				// $schedule_id = NULL;
-				// $date=$_POST['date'];
-				// $start_time=$_POST['start_time'];
-				// $end_time=$_POST['end_time'];
-				// $type=$_POST['type'];
-				// $round=$_POST['round'];
-				// $PLACE_place_id =$_POST['PLACE_place_id'];
-				// $StudentGroup = $_POST['schedule_group_populated'];
-			$my = array( 'date'	=>$date );
-			//$this->load->view('schedule/result',$my);
-			foreach($date as $i){
-				echo $i." ";
+				$data = array(
+					'schedule_id'		=>NULL,
+					'date'			 		=>$date,
+					'start_time'		 =>$start_time,
+					'end_time'			=>$end_time,
+					'type'					=>$type,
+					'round'					=>$round,
+					'PLACE_place_id'=>$PLACE_place_id
+				);
+				//ADD TO DB
+				$this->schedule->addScheduleToDB($data);
+				//$this->schedule->addAttendList($)
+				$result = array(
+						'redirect' => 'schedule',
+						'message' => "ADDED SUCCESFULL returning back"
+				);
+
+				$this->output->set_content_type('application/json')->set_output(json_encode($result));
 			}
-			return $this->output->set_output(json_encode($my));
-		}
+
+	}
+
+
+	public function editResult(){
+		if($_POST){
+				$schedule_id = NULL;
+				$date=$_POST['date'];
+				$start_time=$_POST['start_time'];
+				$end_time=$_POST['end_time'];
+				$type=$_POST['type'];
+				$round=$_POST['round'];
+				$PLACE_place_id =$_POST['PLACE_place_id'];
+				$StudentGroup = $_POST['schedule_group_populated'];
+
+				$data = array(
+					'schedule_id'		=>NULL,
+					'date'			 		=>$date,
+					'start_time'		 =>$start_time,
+					'end_time'			=>$end_time,
+					'type'					=>$type,
+					'round'					=>$round,
+					'PLACE_place_id'=>$PLACE_place_id
+				);
+				//ADD TO DB
+				//DELETE SCHEDULE_ID FROM ATTEND
+				//ADD WHOLE NEW THING
+
+				$result = array(
+						'redirect' => 'schedule',
+						'message' => "ADDED SUCCESFULL returning back"
+				);
+
+				$this->output->set_content_type('application/json')->set_output(json_encode($result));
+			}
+
+
 	}
 
 	public function addSchedule(){
@@ -89,45 +134,18 @@ class Schedule extends CI_Controller {
 		$fetch['groups'] = $this->schedule->getAllGroups();
 		$fetch['places'] = $this->schedule->getAllPlaces();
 
-		$this->load->view('inc_header');
-		$this->load->view('schedule/add',$fetch);
-		$this->load->view('inc_footer');
+			$this->load->view('inc_header');
+			$this->load->view('schedule/add',$fetch);
+			$this->load->view('inc_footer');
 
-			//SUBMIT FORM DATA
-		// 		$this->test();
-	//	if(isset($_POST['submit'])){
-				// $schedule_id = NULL;
-				// $date=$_GET['date'];
-				// $start_time=$_POST['start_time'];
-				// $end_time=$_POST['stop_time'];
-				// $type=$_POST['type'];
-				// $round=$_POST['round'];
-				// $PLACE_place_id =$_POST['PLACE_place_id'];
-				// $StudentGroup = $_POST['schedule_group_populated'];
-				//
-				//
-				// $data = array(
-				//   'schedule_id'		=>NULL,
-				//   'date'			 		=>$date,
-				//   'start_time'		 =>$start_time,
-				//   'end_time'			=>$end_time,
-				//   'type'					=>$type,
-				//   'round'					=>$round,
-				//   'PLACE_place_id'=>$PLACE_place_id
-				// );
-				//
-				// foreach ($data as $row){
-				// 	echo $row;
-				// }
 
-	        //$result = $this->schedule->addScheduleToDB($data);
-			//}
 		}
 	public function editSchedule($schedule_id = null){
 		$fetch['groups'] = $this->schedule->getAllGroups();
 		$fetch['places'] = $this->schedule->getAllPlaces();
 		$fetch['individual'] = $this->schedule->getSchedule($schedule_id);
 		$fetch['returnObject'] = $this->schedule->getDate($schedule_id);
+		$fetch['schedule_id'] = $schedule_id;
 		$this->load->view('inc_header');
 		$this->load->view('schedule/edit',$fetch);
 		$this->load->view('inc_footer');
