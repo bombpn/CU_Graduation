@@ -1,0 +1,5 @@
+﻿"",student_id,th_prefix,th_firstname,th_lastname,en_prefix,en_firstname,en_lastname,gender,barcode,faculty_id,honors
+1,51111111,นาย,ปิกะจู,โปเกมอน,Mr.,Pikachu,Pokemon,M,1111115,21,เกียรตินิยมอันดับ 1
+2,51111112,นาง,คริสตัล,เมเดน,Mrs.,Crystal,Maiden,F,22222225,21,เกียรตินิยมอันดับ 1
+3,51111113,นางสาว,ควีน,ออฟเพน,Miss,Queen,Ofpain,F,3333335,22,เกียรตินิยมอันดับ 2
+4,51111114,นาง,มิราน่า,ไนท์เชด,Mrs,Mirana,Nightshade,F,3333335,22,-

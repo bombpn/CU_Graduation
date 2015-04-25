@@ -45,6 +45,16 @@ class model_group extends CI_Model{
 		$rs = $this->db->get('group');
 		return $rs->row_array();
 	}
+	public function get_student_from_group_id($id){
+		$this->db->select('STUDENT_student_id') ;
+		$this->db->where('GROUP_group_id',$id);
+		$rs = $this->db->get('join');
+		foreach ($rs->result_array() as $student_id) {
+			$this->db->or_where('student_id',$student_id['STUDENT_student_id']);
+		}
+		$result_student = $this->db->get('student');
+		return $result_student->result_array();
+	}
 	public function removeGroup($id){
 		$this->db->where('group_id',$id);
 		if($this->db->get("group")->num_rows() != 0){
@@ -66,6 +76,20 @@ class model_group extends CI_Model{
 		$this->db->select_max('group_id');
 		$r = $this->db->get('group');
 		return $r->row()->group_id ; 
+	}
+	public function addJoin($data){
+		// Clear old relation
+		$this->db->insert('join',$data);
+	}
+	public function clearJoin($Group_group_id){
+		$this->db->where('GROUP_group_id',$Group_group_id);
+		$this->db->delete('join');	
+	}
+	public function addBelong($belong){
+		$this->db->where('STUDENT_student_id',$belong['STUDENT_student_id']) ;
+		$this->db->delete('student_belong_to');	
+		$this->db->insert('student_belong_to',$belong);
+		
 	}
 }
 

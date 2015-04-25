@@ -55,6 +55,10 @@
                         'name'=>'ImportButton', 'class'=>'btn btn-primary', 
                         )) ;
                         echo "&nbsp" ;
+                        echo anchor("group/viewStudent/".$group_id."/".$th_name ,"รายชื่อบัณฑิต",array(
+                        'name'=>'ViewButton', 'class'=>'btn btn-primary', 
+                        )) ;
+                        echo "&nbsp" ;
                         echo anchor("group/del/".$group_id , "ลบ" ,array(
                         "onclick" => "javascript:return confirm('คุณต้องการลบหรือไม่? $group_id $th_name $en_name ');" ,
                         'name'=>'DeleteButton', 'class'=>'btn btn-danger'

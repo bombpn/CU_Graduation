@@ -5,6 +5,7 @@ class Group extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('form');
 		$this->load->model("model_group","model_group");
+		$this->load->model("model_student","model_student");
 	}
 
 	public function index()
@@ -137,7 +138,10 @@ class Group extends CI_Controller {
 	}
 	public function import()
 	{
-		
+			$data = $this->model_group->get_all_group() ;
+			$this->load->view('inc_header');
+			$this->load->view('group/import',array("result" => $data));
+			$this->load->view('inc_footer');
 	}
 
 	public function del($id)
@@ -182,10 +186,16 @@ class Group extends CI_Controller {
 				$data['da'] = $da ;
 				return $data ;
 	}
+	public function addStudent($id){
+				$ra = $this->model_group->get_group_by_id($id) ;
+				$this->load->view('inc_header');
+				$this->load->view('group/upload',array("id" => $id , "name" => $ra['th_group_name'] ));
+				$this->load->view('inc_footer');
+	}
 	public function uploadCSV(){
 		try
         {
-            if($this->input->post("ImportInput")){
+            if($this->input->post("UploadInput")){
             	$path = dirname($_SERVER["SCRIPT_FILENAME"])."/files/" ;  
 		 		$config =  array(
                   'upload_path'     => $path,
@@ -201,9 +211,9 @@ class Group extends CI_Controller {
                 if ( !$this->upload->do_upload())
                 {
                         $error = array('error' => $this->upload->display_errors());
-                        $this->load->view('inc_header');
+                       // $this->load->view('inc_header');
                         $this->load->view('group/fail', $error);
-                		$this->load->view('inc_footer');
+                		//$this->load->view('inc_footer');
                 }
                 else
                 {
@@ -213,7 +223,7 @@ class Group extends CI_Controller {
                         	"opt" => "importcsv",
                         	"full_path" => $upload["full_path"] ,
                         	"file_name" => $upload["orig_name"]);
-                        $data['num_records'] = $this->readCSV($upload['full_path']);
+                        $data['num_records'] = $this->readCSV($upload['full_path'],$_POST['IDInput']);
 						$this->load->view('inc_header');
                         $this->load->view('group/successful', $data);
 						$this->load->view('inc_footer');
@@ -227,10 +237,13 @@ class Group extends CI_Controller {
         }
 
 }
-	public function readCSV($filePath){
+	public function readCSV($filePath,$group_id){
 			$this->load->library('csvreader');
-      		$count = 0 ;
-           $csvData = $this->csvreader->parse_file($filePath);
+      		$count = 1 ;
+           	$csvData = $this->csvreader->parse_file($filePath);
+ 			/*print_r($csvData) ;
+ 			echo "<br>";*/
+ 			if(count($csvData > 0)) $this->model_group->clearJoin($group_id) ;
  			foreach($csvData as $field){
  				//print_r($field) ;
                 $data['student_id'] = $field['student_id'] ;
@@ -242,11 +255,27 @@ class Group extends CI_Controller {
 				$data['en_lastname'] =  $field['en_lastname'] ;
                 $data['gender'] = 	$field['gender'] ;
 				$data['picture_path'] = $field['student_id'].'.jpg' ;
-                $data['barcode'] = 	genBarcode($data['student_id']) ;
-                 if ($this->model_group->addStudent($data)) $count++;
+                $data['barcode'] = 	$field['barcode'] ;
+                // Add new student
+                $this->model_student->addStudent($data) ;
+                // Add student to group id : $group_id
+                $join = array(
+                	'STUDENT_student_id' =>$data['student_id'] ,
+                	'GROUP_group_id' =>$group_id ,
+                	'order' => $count ,
+                	'honors' => $field['honors']
+                	);
+                $this->model_group->addJoin($join) ;
+                // Add student to faculty : $field['faculty_id']
+                $belong = array(
+                	'STUDENT_student_id' =>$data['student_id'] ,
+                	'FACULTY_faculty_id' =>$field['faculty_id']
+                	);
+                $this->model_group->addBelong($belong) ;
                 
+                $count++;
                }
-           return $count ;
+           return $count-1 ;
                /*
           	$line = 1 ;
             $file = fopen($filePath,"r");
@@ -275,7 +304,10 @@ class Group extends CI_Controller {
   			}
 			fclose($file);*/
        }
-       public function genBarcode($id){
-       	return $id ;
+       public function viewStudent($id,$name){
+       		$data = $this->model_group->get_student_from_group_id($id);
+       		$this->load->view('inc_header');
+            $this->load->view('group/student_result', array('result' => $data));
+			$this->load->view('inc_footer');    
        }
 }
