@@ -13,22 +13,27 @@
         <h1 class="page-header">
             รายชื่อคณะ
         </h1>
-        <a href="<?=base_url();?>faculty/load_add_faculty_page" class="btn btn-primary">
-            add faculty <i class="fa fa-plus"></i>
-        </a>
+        
         <?php
-        if($faculty_id_search != "" || $th_faculty_name_search != "" || $en_faculty_name_search != ""){
+        if($faculty_id_search == "" && $th_faculty_name_search == "" && $en_faculty_name_search == ""){
         ?>
-            <a href="<?=base_url();?>faculty/index" class="btn btn-danger">
-                cancel search <i class="fa fa-times"></i>
+            <a href="<?=base_url();?>faculty/load_add_faculty_page" class="btn btn-primary">
+                add faculty <i class="fa fa-plus"></i>
             </a>
-            <h2 class="text-danger bg-info">
-            ผลการค้นหา
+        <?php
+            }else{
+        ?>
+            <h2 class="bg-primary">
+            
+                <a href="<?=base_url();?>faculty/index" class="btn btn-link">
+                    <i class="fa fa-chevron-circle-left fa-2x" style="color: #fff;"></i>
+                </a>
+                | ผลการค้นหา
             </h2>
+            
         <?php
             }
         ?>
-
         <table class="table table-striped">
         	<thead>
         		<tr>
