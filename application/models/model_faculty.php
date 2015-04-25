@@ -18,6 +18,7 @@ class model_faculty extends CI_Model {
 		echo 'Row succesfully inserted!';
 	}
 	public function delete_faculty($faculty_id) {
+		echo $faculty_id;
 		$this->db->where($this->id, $faculty_id);
 		$this->db->delete($this->table);
 	}
