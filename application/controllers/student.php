@@ -76,7 +76,7 @@ class Student extends CI_Controller {
 				"en_lastname" => $_POST["ENLastnameInput"],
 				"gender" => $gender ,
 				"picture_path" => $_POST["IDInput"].'.'."jpg",
-				"barcode" => $this->genBarcode($_POST["IDInput"])/*
+				"barcode" => $_POST["BarcodeInput"])/*
 				"picture_path" => $_POST[("PicPathInput"),
 				"degree" => $degree ,
 				"faculty" => $faculty ,
@@ -183,7 +183,7 @@ class Student extends CI_Controller {
 				"en_firstname" => $_POST["ENFirstnameInput"],
 				"en_lastname" => $_POST["ENLastnameInput"],
 				"gender" => $gender ,
-				"barcode" => $this->genBarcode($_POST["IDInput"]) ,
+				"barcode" => $_POST["BarcodeInput"] ,
 				"picture_path" => $_POST["IDInput"].'.'."jpg"
 				/*"barcode" => $_POST[("IDInput"),
 				"picture_path" => $_POST[("PicPathInput"),
@@ -201,6 +201,7 @@ class Student extends CI_Controller {
 				$data['th_lastname'] = $r->th_lastname ;
 				$data['en_firstname'] = $r->en_firstname ; 
 				$data['en_lastname'] = $r->en_lastname ; 
+				$data['barcode'] = $r->barcode 
 				$data['picture_path'] = $r->picture_path ;
 				$ta = array('นาย' ,'นาง' ,'นางสาว');
 				if($r->th_prefix == "นาง")

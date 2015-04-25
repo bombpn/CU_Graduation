@@ -118,6 +118,14 @@
 </div>
 <!-- Text input-->
 <div class="form-group">
+  <label class="col-md-4 control-label" for="BarcodeInput">บาร์โค้ด/label>  
+  <div class="col-md-2">
+  <input id="BarcodeInput" name="BarcodeInput" type="text" placeholder="" class="form-control input-md">
+    
+  </div>
+</div>
+<!-- Text input-->
+<div class="form-group">
   <label class="col-md-4 control-label" for="OrderInput">ลำดับ</label>  
   <div class="col-md-1">
   <input id="OrderInput" name="OrderInput" type="text" placeholder="" class="form-control input-md">
