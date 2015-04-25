@@ -59,6 +59,31 @@ class Schedule extends CI_Controller {
 				$this->load->view('inc_footer');
 	}
 
+	public function formSubmit(){
+		header( 'Content-type: application/json' );
+		if(isset($_POST)){
+
+
+			$date = $this->input->post('schedule_group_populated');
+			$start = $_POST['start_time'];
+			echo $start."<br>";
+				// $schedule_id = NULL;
+				// $date=$_POST['date'];
+				// $start_time=$_POST['start_time'];
+				// $end_time=$_POST['end_time'];
+				// $type=$_POST['type'];
+				// $round=$_POST['round'];
+				// $PLACE_place_id =$_POST['PLACE_place_id'];
+				// $StudentGroup = $_POST['schedule_group_populated'];
+			$my = array( 'date'	=>$date );
+			//$this->load->view('schedule/result',$my);
+			foreach($date as $i){
+				echo $i." ";
+			}
+			return $this->output->set_output(json_encode($my));
+		}
+	}
+
 	public function addSchedule(){
 
 		$fetch['groups'] = $this->schedule->getAllGroups();
@@ -67,50 +92,38 @@ class Schedule extends CI_Controller {
 		$this->load->view('inc_header');
 		$this->load->view('schedule/add',$fetch);
 		$this->load->view('inc_footer');
-		//addScheduleToDB()
-
-
-			$schedule_id = NULL;
-			$date=$this->input->post('datepicker');
-			$start_time=$this->input->post('starttime');
-			$end_time=$this->input->post('stoptime');
-			$type=$this->input->post('schedule_type');
-			$round=$this->input->post('schedule_round');
-			$PLACE_place_id =$this->input->post('schedule_place');
-			$StudentGroup = $this->input->post('schedule_group');
-
-			if(isset($_POST['groupAdd'])){
-						if(is_array($StudentGroup)){
-							//MULTIVALUE FOR ATTEND HERE
-							echo "YES";
-							foreach($StudentGroup as $temp){
-								echo $temp;
-							}
-						}else{
-							echo "NO";
-						}
-			}
-			$data = array(
-				'schedule_id'		=>NULL,
-				'date'			 		=>$date,
-				'start_time'		 =>$start_time,
-				'end_time'			=>$end_time,
-				'type'					=>$type,
-				'round'					=>$round,
-				'PLACE_place_id'=>$PLACE_place_id
-			);
 
 			//SUBMIT FORM DATA
-		if(isset($_POST['submit'])){
-        $result = $this->schedule->addScheduleToDB($data);
-    }
+		// 		$this->test();
+	//	if(isset($_POST['submit'])){
+				// $schedule_id = NULL;
+				// $date=$_GET['date'];
+				// $start_time=$_POST['start_time'];
+				// $end_time=$_POST['stop_time'];
+				// $type=$_POST['type'];
+				// $round=$_POST['round'];
+				// $PLACE_place_id =$_POST['PLACE_place_id'];
+				// $StudentGroup = $_POST['schedule_group_populated'];
+				//
+				//
+				// $data = array(
+				//   'schedule_id'		=>NULL,
+				//   'date'			 		=>$date,
+				//   'start_time'		 =>$start_time,
+				//   'end_time'			=>$end_time,
+				//   'type'					=>$type,
+				//   'round'					=>$round,
+				//   'PLACE_place_id'=>$PLACE_place_id
+				// );
+				//
+				// foreach ($data as $row){
+				// 	echo $row;
+				// }
 
-
-
-	}
-
+	        //$result = $this->schedule->addScheduleToDB($data);
+			//}
+		}
 	public function editSchedule($schedule_id = null){
-
 		$fetch['groups'] = $this->schedule->getAllGroups();
 		$fetch['places'] = $this->schedule->getAllPlaces();
 		$fetch['individual'] = $this->schedule->getSchedule($schedule_id);
@@ -124,8 +137,7 @@ class Schedule extends CI_Controller {
 		$fetch['datedSchedule'] = $this->schedule->getDatedSchedule();
 	}
 
-	public function index($year =null , $month = null)
-	{
+	public function index($year =null , $month = null){
 			$year = date("Y");
 			$month = date('m');
 			$this->showDate($year,$month);

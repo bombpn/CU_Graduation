@@ -17,6 +17,8 @@
 
 <p>Date: <input type="text" id="datepicker"></p>
 
+<?php echo $date; ?>
+
 <br><br>
 
 
