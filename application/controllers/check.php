@@ -21,6 +21,7 @@ class check extends CI_Controller {
 		$data['allgroup_in_schedule'] = $result;
 		$data['schedule_detail'] = $this->check->get_schedule_detail($schedule_id);
 		$data['has_data'] = 'first';
+		if($active_group == 0) $attendance_order = 0;
 		$data['attendance_order'] = $attendance_order;
 		$data['active_group'] = $active_group;
 		$data['color'] = 'green';
@@ -36,43 +37,61 @@ class check extends CI_Controller {
 				$msg['inserted'] = false; // insert transaction
 				$msg['previously_inserted'] = false; // have inserted before
 				$msg['late'] = false; // come late
+				$msg['cant_extra'] = false; // can not extra attend
 
 				$data['student_id'] = $student_id;
 				$data['student'] = $this->check->get_student_detail($student_id,$group_id);
-				$prev_num = $this->input->post('prev_num');
-				$max_student_no = $this->check->get_max_student_no($schedule_id,$group_id);
-				//$data['max_student_no'] = $max_student_no;
-				$prerequisite = $data['schedule_detail']->round - 1;
-				if(!$this->check->attend_prev($student_id, $prerequisite)){
-					$data['color'] = 'red';
-					$msg['prerequisite'] = true;
-				}
-				if($this->check->inserted_transaction($student_id,$schedule_id)){
-					// inserted
-					$data['color'] = 'danger';
-					$msg['previously_inserted'] = true;
-				}else if($data['student']->order < $max_student_no && $data['student']->order != $prev_num){
-					// come late
-					$data['color'] = 'red';
-					$msg['late'] = true;
-				//}else if($data['student']->order == $prev_num+1){ $data['color'] = 'green'; }
-				}else{
-					if($data['student']->order == $max_student_no+1){
-						// in order
-						$data['color'] = 'green';
-					}else{
-						// skip order
-						$data['color'] = 'yellow';
-						$msg['skip'] = true;
-					}
+				if($attendance_order>0){
+					$prev_num = $this->input->post('prev_num');
+					$max_student_no = $this->check->get_max_student_no($schedule_id,$group_id);
+					//$data['max_student_no'] = $max_student_no;
 					$prerequisite = $data['schedule_detail']->round - 1;
-					if($this->check->attend_prev($student_id, $prerequisite) || $data['student']->order == $prev_num){
-						$this->check->create_transaction($student_id,$schedule_id);
-						$msg['inserted'] = true;
-						$msg['prerequisite'] = false;
-					}else{
+					if(!$this->check->attend_prev($student_id, $prerequisite)){
 						$data['color'] = 'red';
 						$msg['prerequisite'] = true;
+					}
+					if($this->check->inserted_transaction($student_id,$schedule_id)){
+						// inserted
+						$data['color'] = 'danger';
+						$msg['previously_inserted'] = true;
+					}else if($data['student']->order < $max_student_no && $data['student']->order != $prev_num){
+						// come late
+						$data['color'] = 'red';
+						$msg['late'] = true;
+					//}else if($data['student']->order == $prev_num+1){ $data['color'] = 'green'; }
+					}else{
+						if($data['student']->order == $max_student_no+1){
+							// in order
+							$data['color'] = 'green';
+						}else{
+							// skip order
+							$data['color'] = 'yellow';
+							$msg['skip'] = true;
+						}
+						$prerequisite = $data['schedule_detail']->round - 1;
+						if($this->check->attend_prev($student_id, $prerequisite) || $data['student']->order == $prev_num){
+							$this->check->create_transaction($student_id,$schedule_id);
+							$msg['inserted'] = true;
+							$msg['prerequisite'] = false;
+						}else{
+							$data['color'] = 'red';
+							$msg['prerequisite'] = true;
+						}
+						
+					}
+				}else{
+					if($this->check->inserted_transaction($student_id,$schedule_id)){
+						// inserted
+						$data['color'] = 'danger';
+						$msg['previously_inserted'] = true;
+					}else{
+						if($this->check->can_extra_attend($student_id,$schedule_id)){
+							$msg['inserted'] = true;
+							$this->check->create_transaction($student_id,$schedule_id);
+						}else{
+							$msg['cant_extra'] = true;
+							$data['color'] = 'red';
+						}
 					}
 					
 				}
@@ -83,9 +102,16 @@ class check extends CI_Controller {
 			}
 			
 		}
+		$data['last10transaction'] = $this->check->get_last_10_transaction();
 		//$data['first_faculty'] = $this->check->get_name_list($result[0]->GROUP_group_id);
 		//$this->load->view('inc_header');
 		$this->load->view('check/barcode_check',$data);
 		//$this->load->view('inc_footer');
+	}
+	public function remove_trans($schedule_id, $attendance_order = 1, $remove_id = -1){
+		if($remove_id>-1){
+			$this->check->remove_transaction($remove_id,$schedule_id);
+		}
+		redirect('/check/barcode_check/'.$schedule_id.'/'.$attendance_order, 'refresh');
 	}
 }

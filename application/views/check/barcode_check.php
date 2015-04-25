@@ -94,6 +94,10 @@
                                                 <h3><i class="fa fa-fw fa-times"></i> มาซ้อมไม่ครบ</h3>
                                             <?php }?>
 
+                                            <?php if($message['cant_extra']){ ?>
+                                                <h3><i class="fa fa-fw fa-times"></i> ไม่ได้รับอนุญาตให้ซ้อมในรอบนี้</h3>
+                                            <?php }?>
+
                                             <?php if($message['previously_inserted']){ ?>
                                                 <h3><i class="fa fa-fw fa-history"></i> เช็คชื่อในรอบนี้ไปแล้ว</h3>
                                             <?php }?>
@@ -170,7 +174,9 @@
                         <div class="panel-body">
                             <ul>
                             <?php
+                            $has_some_group = false;
                             if(count($allgroup_in_schedule)>0){
+                                $has_some_group = true;
                                 foreach($allgroup_in_schedule as $group){
                                     //echo $schedule->schedule_id . " " . $schedule->date . " " . $schedule->start_time . " - " . $schedule->end_time . "<br>";
                             ?>
@@ -186,7 +192,35 @@
                                 }
                             }
                             ?>
+                            <li>
+                                <?php if($attendance_order == 0 || !$has_some_group) {?>
+                                    <b>ผู้ที่ซ้อมนอกรอบ</b>
+                                <?php }else{ ?>
+                                    <a href="<?=base_url();?>check/barcode_check/<?=$schedule_detail->schedule_id;?>/0">ผู้ที่ซ้อมนอกรอบ</a>
+                                <?php } ?>
+                            </li>
                             </ul>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">History</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-condensed">
+                                <?php
+                                foreach($last10transaction as $transaction){
+                                ?>
+                                    <tr>
+                                        <td><?=$transaction->order;?></td>
+                                        <td><?=$transaction->STUDENT_student_id;?></td>
+                                        <td><a href="<?=base_url();?>check/remove_trans/<?=$schedule_detail->schedule_id;?>/<?=$attendance_order;?>/<?=$transaction->STUDENT_student_id;?>" class="btn btn-danger btn-xs" onclick="return confirm('ยืนยันการลบการเข้าร่วมของ <?=$transaction->STUDENT_student_id;?>')">Cancel</a></td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+                            </table>
                         </div>
                     </div>
                 </div>

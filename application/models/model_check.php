@@ -21,15 +21,24 @@ class model_check extends CI_Model{
 	public function get_student_id($barcode,$group_id){
 		$find_by_barcode = $this->db->where('barcode',$barcode)->get('student')->result();
 		$find_by_student_id = $this->db->where('student_id',$barcode)->get('student')->result();
-		$find_by_number = $this->db->where('order',$barcode)->where('GROUP_group_id',$group_id)->get('join')->result();
-		echo "<script> alert(" . count($find_by_barcode) . " " . count($find_by_number) . " " . count($find_by_student_id) . ")</script>";
-		if(count($find_by_number) > 0) return $find_by_number[0]->STUDENT_student_id;
-		else if(count($find_by_barcode) > 0) return $find_by_number[0]->student_id;
-		else if(count($find_by_student_id) > 0) return $find_by_student_id[0]->student_id;
-		return 0;
+		if($group_id>0) $find_by_number = $this->db->where('order',$barcode)->where('GROUP_group_id',$group_id)->get('join')->result();
+		else $find_by_number = array();
+		//echo "<script> alert(" . count($find_by_barcode) . " " . count($find_by_number) . " " . count($find_by_student_id) . ")</script>";
+		$student_id = 0;
+		if(count($find_by_number) == 1) $student_id = $find_by_number[0]->STUDENT_student_id;
+		else if(count($find_by_barcode) == 1) $student_id = $find_by_number[0]->student_id;
+		else if(count($find_by_student_id) == 1) $student_id = $find_by_student_id[0]->student_id;
+
+		$ingroup = $this->db->where('STUDENT_student_id',$student_id)->where('GROUP_group_id',$group_id)->get('join')->result();
+		if(count($ingroup)==0 && $group_id>0) $student_id = 0;
+
+		return $student_id;
 	}
+
 	public function get_student_detail($student_id, $group_id){
-		return $this->db->select('*')->from('student')->where('student_id',$student_id)->join('join','student.student_id = join.STUDENT_student_id and join.GROUP_group_id = ' . $group_id,'inner')->get()->row();
+		if($group_id > 0) $where = 'and join.GROUP_group_id = ' . $group_id;
+		else $where = '';
+		return $this->db->select('*')->from('student')->where('student_id',$student_id)->join('join','student.student_id = join.STUDENT_student_id ' . $where,'inner')->get()->row();
 	}
 	public function get_max_student_no($schedule_id, $group_id){
 		//$sql = "SELECT max(order) FROM (SELECT * from join AS STU_ORDER where GROUP_group_id = '$group_id') INNER JOIN (SELECT * from transaction AS TRANS where SCHEDULE_schedule_id = '$schedule_id') ON STU_ORDER.STUDENT_student_id = TRANS.STUDENT_student_id";
@@ -59,6 +68,25 @@ class model_check extends CI_Model{
 		$result = $this->db->where('STUDENT_student_id', $student_id)->get('transaction')->result();
 		if(count($result) < $time_count) return false;
 		else return true;
+	}
+	public function can_extra_attend($student_id,$schedule_id){
+		$result = $this->db->where('STUDENT_student_id',$student_id)->where('SCHEDULE_schedule_id',$schedule_id)->get('extra_attend')->result();
+		if(count($result) > 0) return true;
+		else return false;
+	}
+	public function get_last_10_transaction(){
+		$last10trans = $this->db->order_by('transaction_time','desc')->limit(10)->get('transaction')->result();
+		foreach($last10trans as $trans){
+			$result = $this->db->where('STUDENT_student_id',$trans->STUDENT_student_id)->get('join')->row();
+			$trans->order = $result->order;
+		}
+		return $last10trans;
+	}
+	public function remove_transaction($student_id,$schedule_id){
+		$result = $this->db->where('STUDENT_student_id',$student_id)->where('SCHEDULE_schedule_id',$schedule_id)->get('transaction')->row();
+		if(count($result)>0){
+			$this->db->delete('transaction', array('STUDENT_student_id'=>$student_id, 'SCHEDULE_schedule_id'=>$schedule_id));
+		}
 	}
 }
 ?>
