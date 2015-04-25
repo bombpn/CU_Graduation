@@ -77,9 +77,27 @@
                                             <img src="<?=base_url();?>GradPic/<?=$imagePath;?>" class="img-thumbnail" width="100%">
                                         </div>
                                         <div class="col-xs-6" align="center" valign="middle">
-                                            <h3><i class="fa fa-fw fa-check-square"></i> บันทึกสำเร็จ</h3>
-                                            <h3><i class="fa fa-fw fa-warning"></i> มีการข้ามลำดับ</h3>
-                                            <h3><i class="fa fa-fw fa-times"></i> มีข้อผิดพลาด</h3>
+                                            
+                                            <?php if($message['inserted']){ ?>
+                                                <h3><i class="fa fa-fw fa-check-square"></i> บันทึกสำเร็จ</h3>
+                                            <?php }?>
+
+                                            <?php if($message['skip']){ ?>
+                                                <h3><i class="fa fa-fw fa-warning"></i> มีการข้ามลำดับ</h3>
+                                            <?php }?>
+
+                                            <?php if($message['late']){ ?>
+                                                <h3><i class="fa fa-fw fa-clock-o"></i> มาเช็คชื่อช้า</h3>
+                                            <?php }?>
+                                            
+                                            <?php if($message['prerequisite']){ ?>
+                                                <h3><i class="fa fa-fw fa-times"></i> มาซ้อมไม่ครบ</h3>
+                                            <?php }?>
+
+                                            <?php if($message['previously_inserted']){ ?>
+                                                <h3><i class="fa fa-fw fa-history"></i> เช็คชื่อในรอบนี้ไปแล้ว</h3>
+                                            <?php }?>
+
                                             <h1 style="font-size:1100%;"># <?=$student->order;?></h1>
                                             <h3><?=$student->th_prefix;?><?=$student->th_firstname;?> <?=$student->th_lastname;?></h3>
                                             <h3><?=$student->en_prefix;?><?=$student->en_firstname;?> <?=$student->en_lastname;?></h3>

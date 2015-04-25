@@ -31,24 +31,52 @@ class check extends CI_Controller {
 			$student_id = $this->check->get_student_id($this->input->post('barcode'),$group_id);
 			$data['barcode'] = $this->input->post('barcode');
 			if($student_id!=0){
+				$msg['skip'] = false; // skip students
+				$msg['prerequisite'] = false; // didn't come previous attend
+				$msg['inserted'] = false; // insert transaction
+				$msg['previously_inserted'] = false; // have inserted before
+				$msg['late'] = false; // come late
+
 				$data['student_id'] = $student_id;
 				$data['student'] = $this->check->get_student_detail($student_id,$group_id);
 				$prev_num = $this->input->post('prev_num');
 				$max_student_no = $this->check->get_max_student_no($schedule_id,$group_id);
+				//$data['max_student_no'] = $max_student_no;
+				$prerequisite = $data['schedule_detail']->round - 1;
+				if(!$this->check->attend_prev($student_id, $prerequisite)){
+					$data['color'] = 'red';
+					$msg['prerequisite'] = true;
+				}
 				if($this->check->inserted_transaction($student_id,$schedule_id)){
 					// inserted
 					$data['color'] = 'danger';
-				}else if($data['student']->order < $max_student_no){
+					$msg['previously_inserted'] = true;
+				}else if($data['student']->order < $max_student_no && $data['student']->order != $prev_num){
 					// come late
 					$data['color'] = 'red';
+					$msg['late'] = true;
 				//}else if($data['student']->order == $prev_num+1){ $data['color'] = 'green'; }
-				}else if($data['student']->order == $max_student_no+1){
-					// in order
-					$data['color'] = 'green';
 				}else{
-					// skip order
-					$data['color'] = 'yellow';
+					if($data['student']->order == $max_student_no+1){
+						// in order
+						$data['color'] = 'green';
+					}else{
+						// skip order
+						$data['color'] = 'yellow';
+						$msg['skip'] = true;
+					}
+					$prerequisite = $data['schedule_detail']->round - 1;
+					if($this->check->attend_prev($student_id, $prerequisite) || $data['student']->order == $prev_num){
+						$this->check->create_transaction($student_id,$schedule_id);
+						$msg['inserted'] = true;
+						$msg['prerequisite'] = false;
+					}else{
+						$data['color'] = 'red';
+						$msg['prerequisite'] = true;
+					}
+					
 				}
+				$data['message'] = $msg;
 			}else{
 				$data['has_data'] = 'notfound';
 				$data['color'] = 'red';
