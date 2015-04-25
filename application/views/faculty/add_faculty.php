@@ -25,13 +25,13 @@
                 <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">ชื่อคณะ:</label>
                         <div class="col-md-4">
-                            <input class="form-control input-md" name="th_faculty_name" placeholder="ชื่อคณะ" required>  
+                            <input class="form-control input-md" name="th_faculty_name" placeholder="ชื่อคณะ" required> </input> 
                         </div>
                 </div>
                 <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">Faculty Name:</label>
                         <div class="col-md-4">
-                            <input class="form-control input-md" name="en_faculty_name" placeholder="Faculty Name" required>
+                            <input class="form-control input-md" name="en_faculty_name" placeholder="Faculty Name" required></input> 
                         </div>
                 </div>
                 <div class="form-group">

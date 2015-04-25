@@ -18,19 +18,19 @@
                 <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">รหัสคณะ:</label>
                         <div class="col-md-4">
-                            <input class="form-control input-md" name="faculty_id"  value="<?=$edit_faculty_temp['faculty_id'];?>" readonly>         
+                            <input class="form-control input-md" name="faculty_id"  value="<?=$edit_faculty_temp['faculty_id'];?>" readonly>  </input>        
                         </div>
                 </div>
                 <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">ชื่อคณะ:</label>
                         <div class="col-md-4">
-                            <input class="form-control input-md" name="th_faculty_name" value="<?=$edit_faculty_temp['th_faculty_name'];?>" required>  
+                            <input class="form-control input-md" name="th_faculty_name" value="<?=$edit_faculty_temp['th_faculty_name'];?>" required>  </input> 
                         </div>
                 </div>
                 <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">Faculty Name:</label>
                         <div class="col-md-4">
-                            <input class="form-control input-md" name="en_faculty_name" value="<?=$edit_faculty_temp['en_faculty_name'];?>" required>
+                            <input class="form-control input-md" name="en_faculty_name" value="<?=$edit_faculty_temp['en_faculty_name'];?>" required></input> 
                         </div>
                 </div>
                 <div class="form-group">
