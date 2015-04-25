@@ -189,13 +189,16 @@
                                 <a href="<?=base_url(); ?>group/">รายชื่อกลุ่มรับปริญญา</a>
                             </li>
                             <li>
-                                <a href="#">รายชื่ออาจารย์</a>
+                                <a href="<?=base_url(); ?>teacher/">รายชื่ออาจารย์</a>
                             </li>
                             <li>
                                 <a href="#">สถานที่</a>
                             </li>
                             <li>
                                 <a href="<?=base_url(); ?>schedule/">ตารางการซ้อม</a>
+                            </li>
+                            <li>
+                                <a href="#">อนุญาตบัณฑิตซ้อมนอกรอบ</a>
                             </li>
                         </ul>
                     </li>
