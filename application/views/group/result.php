@@ -20,7 +20,7 @@
                     <th>รหัสกลุ่ม</th>
                     <th>ชือภาษาไทย</th>
                     <th>ชือภาษาอังกฤษ</th>
-                    <th>International</th>
+                    <th>หลักสูตร</th>
                     <th>ปริญญา</th>
                     <th>แก้ไข</th>
                 <tr>
@@ -33,7 +33,10 @@
                     $group_id = $r["group_id"]  ;
                     $th_name = $r["th_group_name"] ;
                     $en_name = $r["en_group_name"] ;
-                    $international = $r['international'] ;
+                    if ($r['international'] =='1')
+                    $international = 'International' ;
+                    else 
+                    $international = 'ปกติ' ;
                     $degree = $r['degree'] ;
                     echo "
                     <form action='".$bu."student/edit' method='POST'>
@@ -44,15 +47,15 @@
                             <td>".$international."</td>
                             <td>".$degree."</td>
                             <td>";
-                        echo anchor("student/edit/".$group_id ,"แก้ไข",array(
+                        echo anchor("group/edit/".$group_id ,"แก้ไข",array(
                         'name'=>'EditButton', 'class'=>'btn btn-info', 
                         )) ;
                         echo "&nbsp" ;
-                        echo anchor("student//".$group_id ,"เพิ่มบัณฑิต",array(
+                        echo anchor("group/addStudent/".$group_id ,"เพิ่มบัณฑิต",array(
                         'name'=>'ImportButton', 'class'=>'btn btn-primary', 
                         )) ;
                         echo "&nbsp" ;
-                        echo anchor("student/del/".$group_id , "ลบ" ,array(
+                        echo anchor("group/del/".$group_id , "ลบ" ,array(
                         "onclick" => "javascript:return confirm('คุณต้องการลบหรือไม่? $group_id $th_name $en_name ');" ,
                         'name'=>'DeleteButton', 'class'=>'btn btn-danger'
                         )) ;

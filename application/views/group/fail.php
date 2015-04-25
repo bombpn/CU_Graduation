@@ -12,10 +12,10 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-			  เกิดข้อผิดพลาด
+			  เกิดข้อผิดพลาด 
             <small><?php echo "$error"?> Fail</small>
         </h1>
-        <?php echo anchor("student/" ,"กลับ",array(
+        <?php echo anchor("group/" ,"กลับ",array(
                         'name'=>'BackButton', 'class'=>'btn btn-primary'
                         )) ;
         ?>

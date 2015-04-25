@@ -20,7 +20,9 @@
         			<th>รหัสนิสิต</th>
         			<th>คำนำหน้ชื่อ</th>
         			<th>ชือภาษาไทย</th>
-        			<th>ชื่อภาษาอังกฤษ</th>
+        			<th>นามสกุลอภาษาไทย</th>
+                    <th>ชื่อภาษาอังกฤษ</th>
+                    <th>นามสกุลอภาษาอังกฤษ</th>
         			<th>แก้ไข</th>
         		<tr>
         	</thead>
@@ -46,7 +48,7 @@
                             <td>".$en_prefix."</td>
                             <td>".$en_firstname."</td>
                             <td>".$en_lastname."</td>
-                            ";
+                            <td>";
                         echo anchor("student/edit/".$student_id ,"แก้ไข",array(
                         'name'=>'SaveButton', 'class'=>'btn btn-info', 
                         )) ;

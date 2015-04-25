@@ -38,13 +38,13 @@ class model_student extends CI_Model{
 	}
 	public function removeStudent($id){
 		$this->db->where('student_id',$id);
-		if($this->db->get("student")->num_rows() == 0){
+		if($this->db->get("student")->num_rows() != 0){
 			$this->db->where('student_id', $id);
 			$this->db->delete('student');
 			return true ;
 		}
 		else{
-			//Duplicate!
+			//No record!
 			return false ;
 		}
 	}

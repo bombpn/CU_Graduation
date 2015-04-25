@@ -17,7 +17,7 @@
 	<br></br>-->
 	<a href="<?=base_url(); ?>group/import/" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-save"></span> Import Student</a>
 	<br></br>
-	<a href="<?=base_url(); ?>student/edit/" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-plus"></span> Create Group</a>
+	<a href="<?=base_url(); ?>group/create/" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-plus"></span> Create Group</a>
     <br></br>
     <a href="<?=base_url(); ?>group/search/" class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-search"></span> Search Group</a>
     </div>

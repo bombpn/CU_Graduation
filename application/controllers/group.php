@@ -16,12 +16,21 @@ class Group extends CI_Controller {
 	public function search($id=0)
 	{
 				if ($_POST){
+				//print_r($_POST);
 				$id = $_POST["SearchIDInput"] ;
 				$th_name = $_POST["SearchTHNameInput"] ;
 				$en_name = $_POST["SearchENNameInput"] ;
-				$international = $_POST['SearchInternationalInput'];
-				$degree = $_POST['SearchDegreeInput'];
+				$international = array() ;
+				$degree = array() ;
+				if(isset($_POST['InternationalCheck-0']))$international['InterBox0'] = $_POST['InternationalCheck-0'] ;
+				if(isset($_POST['InternationalCheck-1']))$international['InterBox1'] = $_POST['InternationalCheck-1'];
+				if(isset($_POST['DegreeCheck-0']))	$degree['DegreeBox0'] = $_POST['DegreeCheck-0'] ;
+				if(isset($_POST['DegreeCheck-1']))	$degree['DegreeBox1'] = $_POST['DegreeCheck-1'] ;
+				if(isset($_POST['DegreeCheck-2']))	$degree['DegreeBox2'] = $_POST['DegreeCheck-2'] ;
+				$data = array();
+				//if($international != NULL AND $degree != NULL)
 				$data = $this->model_group->get_group($id,$th_name,$en_name,$international,$degree);
+				//print_r($data);
 				$this->load->view('inc_header');
 				$this->load->view('group/result',array("result"=>$data));
 				$this->load->view('inc_footer');
@@ -30,7 +39,6 @@ class Group extends CI_Controller {
 				$var = array ("opt" => "search") ;
 				$this->load->view('inc_header');
 				$this->load->view('group/search',$var);
-				print_r($_POST) ;
 				$this->load->view('inc_footer');
 				}
 	}
@@ -38,52 +46,31 @@ class Group extends CI_Controller {
 	{		
 
 			if(gettype($rs) == "string" && $rs != "#"){
-
+				//Call for edit
 				$data = $this->getDataForEdit($rs);
-				echo "Let's Edit $rs" ;
-				//$this->load->view('inc_header');
-				$this->load->view('student/edit',$data);
-				//$this->load->view('inc_footer');
-			}
-		    /*
-			else if ($rs == "#") {
-				$var = array ("opt" => "edit") ;
 				$this->load->view('inc_header');
-				$this->load->view('student/search',$var);
+				$this->load->view('group/edit',$data);
 				$this->load->view('inc_footer');
-			}*/
+			}
 			else if($_POST) {
-				// 
-				$faculty = $_POST["FacultyInput"];
-				$group = $_POST["GroupInput"];
+				print_r($_POST);
+				$group_id = $_POST["IDInput"];
+				$th_name = $_POST["THNameInput"];
+				$en_name = $_POST["ENNameInput"];
+				$international = $_POST["InternationalInput"];
 				$degree = $_POST["DegreeInput"];
-				$honor = $_POST["HonorInput"];
-				$gender = "F" ;
-				if($_POST["THPrefixInput"] == "นาย") $gender = "M" ;
 
 				$data = array(
-				"student_id" => $_POST["IDInput"],
-				"th_prefix" => $_POST["THPrefixInput"],
-				"th_firstname" => $_POST["THFirstnameInput"],
-				"th_lastname" => $_POST["THLastnameInput"],
-				"en_prefix" => $_POST["ENPrefixInput"],
-				"en_firstname" => $_POST["ENFirstnameInput"],
-				"en_lastname" => $_POST["ENLastnameInput"],
-				"gender" => $gender ,
-				"picture_path" => $_POST["IDInput"].'.'."jpg",
-				"barcode" => $_POST["IDInput"]/*
-				"picture_path" => $_POST[("PicPathInput"),
-				"degree" => $degree ,
-				"faculty" => $faculty ,
-				"group" => $group ,
-				"honor" => $honor */
+				"group_id" => $group_id,
+				"th_group_name" => $th_name,
+				"en_group_name" => $en_name,
+				"international" => $international,
+				"degree" => $degree
 				);
-				$id = $_POST["IDInput"] ;
-				$this->model_student->updateStudent($id,$data)	;		
-				echo "Update" ;
-				//$this->load->view('inc_header');
-				$this->load->view('student/successful',array("opt" => 'edit'));
-				//$this->load->view('inc_footer');
+				$this->model_group->updateGroup($group_id,$data) ;
+				$this->load->view('inc_header');
+				$this->load->view('group/successful',array("opt" => 'edit'));
+				$this->load->view('inc_footer');
 			}
 
 	}
@@ -116,110 +103,83 @@ class Group extends CI_Controller {
 		updateStudent($data['student_id'],$data);
 		$array = array('opt' => $opt);
 		$this->load->view('inc_header');
-		$this->load->view('student/successful',$array);
+		$this->load->view('group/successful',$array);
 		$this->load->view('inc_footer');
 		}
 	}
-	public function import()
+	public function create()
 	{
 		if($this->input->post('SaveButton')!=null)
 		{
 			if ($this->save($_POST)){
+				$name = $_POST["THNameInput"] ;
 				$this->load->view('inc_header');
-				$this->load->view('student/successful',array("opt"=>"import" , "student_id" <= $_POST["student_id"] ));
+				$this->load->view('group/successful',array("opt"=>"create" , 'Gname' => $name ));
 				$this->load->view('inc_footer');
 			}
 			else{
 				$this->load->view('inc_header');
-				$this->load->view('student/fail',array("error" => "Import"));
+				$this->load->view('group/fail',array("error" => "Import"));
 				$this->load->view('inc_footer');
 			}
 		}
 		else if($this->input->post('ResetButton')!=null)
 		{
-			redirect(base_url()."student/import","refresh");
+			redirect(base_url()."group/create","refresh");
 			exit();
 		}
 		else {
+			$newID = $this->model_group->getLastID()+1;
 			$this->load->view('inc_header');
-			$this->load->view('student/import');
+			$this->load->view('group/create',array('group_id'=>$newID));
 			$this->load->view('inc_footer');
 		}
+	}
+	public function import()
+	{
+		
 	}
 
 	public function del($id)
 	{	
-		if ($this->model_student->removeStudent($id)){
+		if ($this->model_group->removeGroup($id)){
 				$this->load->view('inc_header');
-				$this->load->view('student/successful',array("opt"=>"del" , "student_id" <= $id ));
+				$this->load->view('group/successful',array("opt"=>"del" , "group_id" <= $id ));
 				$this->load->view('inc_footer');
 			}
 			else{
 				$this->load->view('inc_header');
-				$this->load->view('student/fail',array("error" => "Delele"));
+				$this->load->view('group/fail',array("error" => "Delele"));
 				$this->load->view('inc_footer');
 			}
 	} 
 
 	public function save($POST){
-			$faculty = $POST["FacultyInput"];
-			$group = $_POST["GroupInput"];
-			$degree = $_POST["DegreeInput"];
-			$honor = $_POST["HonorInput"];
-			$gender = "F" ;
-			if($_POST["THPrefixInput"] == "นาย") $gender = "M" ;
-
+				$id = $_POST["IDInput"] ;
+				$th_name = $_POST["THNameInput"] ;
+				$en_name = $_POST["ENNameInput"] ;
+				$international = $_POST["InternationalInput"] ; ;
+				$degree = $_POST["DegreeInput"] ; ;
 			$data = array(
-				"student_id" => $_POST["IDInput"],
-				"th_prefix" => $_POST["THPrefixInput"],
-				"th_firstname" => $_POST["THFirstnameInput"],
-				"th_lastname" => $_POST["THLastnameInput"],
-				"en_prefix" => $_POST["ENPrefixInput"],
-				"en_firstname" => $_POST["ENFirstnameInput"],
-				"en_lastname" => $_POST["ENLastnameInput"],
-				"gender" => $gender ,
-				"picture_path" => $_POST["IDInput"].'.'."jpg"
-				/*"barcode" => $_POST[("IDInput"),
-				"picture_path" => $_POST[("PicPathInput"),
-				"degree" => $degree ,
-				"faculty" => $faculty ,
-				"group" => $group ,
-				"honor" => $honor */
+				"group_id" => $id,
+				"th_group_name" => $th_name,
+				"en_group_name" => $en_name,
+				"international" => $international,
+				"degree" =>$degree
 			);			
-			return $this->model_student->addStudent($data);
+			return $this->model_group->addGroup($data);
 	}
 	public function getDataForEdit($id){
-			$r = $this->model_student->get_student_by_id($id);
-				$data['student_id'] = $r->student_id ;
-				$data['th_firstname'] = $r->th_firstname ;
-				$data['th_lastname'] = $r->th_lastname ;
-				$data['en_firstname'] = $r->en_firstname ; 
-				$data['en_lastname'] = $r->en_lastname ; 
-				$data['picture_path'] = $r->picture_path ;
-				$ta = array('นาย' ,'นาง' ,'นางสาว');
-				if($r->th_prefix == "นาง")
-				{
-					$ta[0] = 'นาง' ;
-					$ta[1] = 'นาย' ;
-				}
-				else if($r->th_prefix == "นางสาว")
-				{
-					$ta[0] = 'นางสาว' ;
-					$ta[2] = 'นาย' ;
-				}
-				$ea = array('Mr.','Mrs.' ,'Miss');
-				if($r->en_prefix == "Mrs.")
-				{
-					$ea[0] = 'Mrs.' ;
-					$ea[1] = 'Mr.' ;
-				}
-				else if($r->en_prefix == "Miss")
-				{
-					$ea[0] = 'Miss' ;
-					$ea[2] = 'Mr.' ;
-				}
-				$data['ta'] = $ta ; 
-				$data['ea'] = $ea ;
+			$r = $this->model_group->get_group_by_id($id);
+				$data['group_id'] = $r['group_id'] ;
+				$data['th_name'] = $r['th_group_name'] ;
+				$data['en_name'] = $r['en_group_name'] ;
+				$ia = array('International','ปกติ');
+				$da = array('ตรี','โท' ,'เอก');
+				$data['select_international'] = $r['international'] ; 
+				$data['select_degree'] = $r['degree'] ; 
+				$data['ia'] = $ia ;
+				$data['da'] = $da ;
 				return $data ;
 	}
 	public function uploadCSV(){
@@ -283,7 +243,7 @@ class Group extends CI_Controller {
                 $data['gender'] = 	$field['gender'] ;
 				$data['picture_path'] = $field['student_id'].'.jpg' ;
                 $data['barcode'] = 	genBarcode($data['student_id']) ;
-                 if ($this->model_student->addStudent($data)) $count++;
+                 if ($this->model_group->addStudent($data)) $count++;
                 
                }
            return $count ;
@@ -308,7 +268,7 @@ class Group extends CI_Controller {
                 	$data['gender'] = 	$field[7] ;
 					$data['picture_path'] = $data['student_id'].'.jpg' ;
                 	$data['barcode'] = 	$data['student_id'] ;
-                	if ($this->model_student->addStudent($data)) 
+                	if ($this->model_group->addStudent($data)) 
                 		{$count++;}
                 }
                 $line++;

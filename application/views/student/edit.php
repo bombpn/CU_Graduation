@@ -31,9 +31,12 @@
   <label class="col-md-4 control-label" for="THPrefixInput">คำนำหน้าชื่อ  (ไทย) </label>
   <div class="col-md-1">
     <select id="THPrefixInput" name="THPrefixInput" class="form-control">
-      <option value="<?php echo $ta[0] ; ?>"><?php echo $ta[0] ; ?></option>
-      <option  value="<?php echo $ta[1] ; ?>"><?php echo $ta[1] ; ?></option>
-      <option value="<?php echo $ta[2] ; ?>"><?php echo $ta[2] ; ?></option>
+      <?php 
+        foreach ($ta as $th_prefix){
+          if ($select_th_prefix == $th_prefix) echo "<option value='$th_prefix' selected = 'selected'>$th_prefix</option> "; 
+          else echo "<option value='$th_prefix'>$th_prefix</option> "; 
+        }
+      ?>
     </select>
   </div>
 </div>
@@ -60,10 +63,13 @@
   <label class="col-md-4 control-label" for="THPrefixInput">คำนำหน้าชื่อ (อังกฤษ) </label>
   <div class="col-md-1">
     <select id="ENPrefixInput" name="ENPrefixInput" class="form-control">
-      <option value="<?php echo $ea[0] ; ?>"><?php echo $ea[0] ; ?></option>
-      <option  value="<?php echo $ea[1] ; ?>"><?php echo $ea[1] ; ?></option>
-      <option value="<?php echo $ea[2] ; ?>"><?php echo $ea[2] ; ?></option>
-    </select>
+      <?php 
+        foreach ($ea as $en_prefix){
+          if ($select_en_prefix == $en_prefix) echo "<option value='$en_prefix' selected = 'selected'>$en_prefix</option> "; 
+          else echo "<option value='$en_prefix'>$en_prefix</option> "; 
+        }
+      ?>
+      </select>
   </div>
 </div>
 
@@ -141,18 +147,18 @@
 </div>
 
 <!-- File Button --> 
-<div class="form-group">
+<!-- <div class="form-group">
   <label class="col-md-4 control-label" for="PicPathInput">ตำแหน่งที่เก็บรูป</label>
   <div class="col-md-4">
     <input id="PicPathInput" name="PicPathInput" class="input-file" type="file" value="$picture_path">
   </div>
-</div>
+</div> -->
 <!-- Button (Double) -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="SaveButton"></label>
   <div class="col-md-8">
     <input type="submit" id="SaveButton" name="SaveButton" class="btn btn-info" value="เก็บ"></button>
-    <input type="reset" id="RemoveButton" name="RemoveButton" class="btn btn-info" value="ลบ"></button>
+    <input type="reset" id="RemoveButton" name="RemoveButton" class="btn btn-info" value="ล้าง"></button>
     <!-- <input type="reset" id="CancelButton" name="CancelButton" class="btn btn-danger" value="ยกเลิก"></button>
   --></div> 
 </div>

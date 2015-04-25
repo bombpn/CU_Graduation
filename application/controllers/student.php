@@ -23,14 +23,10 @@ class Student extends CI_Controller {
 				$en_lastname = $_POST["SearchENLastnameInput"] ;
 				$data = $this->model_student->get_student($id,$th_firstname
 					,$th_lastname,$en_firstname,$en_lastname);
-
-					
 						//$this->edit($data) ;
 						$this->load->view('inc_header');
 						$this->load->view('student/result',array("result"=>$data));
 						$this->load->view('inc_footer');
-					
-				
 				}
 				else {
 				$var = array ("opt" => "search") ;
@@ -43,12 +39,11 @@ class Student extends CI_Controller {
 	{		
 
 			if(gettype($rs) == "string" && $rs != "#"){
-
+				// Edit Student Info with ID
 				$data = $this->getDataForEdit($rs);
-				echo "Let's Edit $rs" ;
-				//$this->load->view('inc_header');
+				$this->load->view('inc_header');
 				$this->load->view('student/edit',$data);
-				//$this->load->view('inc_footer');
+				$this->load->view('inc_footer');
 			}
 		    /*
 			else if ($rs == "#") {
@@ -76,7 +71,7 @@ class Student extends CI_Controller {
 				"en_lastname" => $_POST["ENLastnameInput"],
 				"gender" => $gender ,
 				"picture_path" => $_POST["IDInput"].'.'."jpg",
-				"barcode" => $_POST["BarcodeInput"])/*
+				"barcode" => $_POST["BarcodeInput"]/*
 				"picture_path" => $_POST[("PicPathInput"),
 				"degree" => $degree ,
 				"faculty" => $faculty ,
@@ -201,32 +196,14 @@ class Student extends CI_Controller {
 				$data['th_lastname'] = $r->th_lastname ;
 				$data['en_firstname'] = $r->en_firstname ; 
 				$data['en_lastname'] = $r->en_lastname ; 
-				$data['barcode'] = $r->barcode 
+				$data['barcode'] = $r->barcode ;
 				$data['picture_path'] = $r->picture_path ;
 				$ta = array('นาย' ,'นาง' ,'นางสาว');
-				if($r->th_prefix == "นาง")
-				{
-					$ta[0] = 'นาง' ;
-					$ta[1] = 'นาย' ;
-				}
-				else if($r->th_prefix == "นางสาว")
-				{
-					$ta[0] = 'นางสาว' ;
-					$ta[2] = 'นาย' ;
-				}
 				$ea = array('Mr.','Mrs.' ,'Miss');
-				if($r->en_prefix == "Mrs.")
-				{
-					$ea[0] = 'Mrs.' ;
-					$ea[1] = 'Mr.' ;
-				}
-				else if($r->en_prefix == "Miss")
-				{
-					$ea[0] = 'Miss' ;
-					$ea[2] = 'Mr.' ;
-				}
 				$data['ta'] = $ta ; 
 				$data['ea'] = $ea ;
+				$data['select_th_prefix'] = $r->th_prefix ; 
+				$data['select_en_prefix'] = $r->en_prefix ;
 				return $data ;
 	}
 	

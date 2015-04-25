@@ -20,12 +20,6 @@
 <div class="form-group form-horizontal">
   <label class="col-md-4 control-label" for="ImportFiel">ไฟล์ .csv</label>
   <div class="col-md-4">
-    <!-- <form  action="<?=base_url();?>student/uploadCSV" method="POST" enctype="multipart/form-data">
-
-    <input id="ImportFile" name="ImportFile" class="input-file" type="file" multiple="multiple"/>  
-    <input type="submit" id="ImportInput" name="ImportInput" class="btn btn-success" value="Upload"/>
-    
-</form>  -->
  <form  class="form-horizontal" action="<?=base_url();?>student/uploadCSV" method="POST" enctype="multipart/form-data" >
             
             <input type="file" name="userfile" class="input-file" multiple="multiple"  />
@@ -35,13 +29,6 @@
     </div>
 </div>
 </fieldset> 
-<!--  <form action="<?=base_url();?>student/uploadCSV" method="POST" enctype="multipart/form-data" >
-            
-            Select File To Upload:<br />
-            <input type="file" name="userfile" class="input-file" multiple="multiple"  />
-            
-            <input type="submit" id="ImportInput" name="ImportInput" value="Upload" class="btn btn-success" />
-        </form> -->
 
 <form class="form-horizontal" action="<?=base_url();?>student/import" method="POST">
 <fieldset> 
@@ -118,7 +105,7 @@
 </div>
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="BarcodeInput">บาร์โค้ด/label>  
+  <label class="col-md-4 control-label" for="BarcodeInput">บาร์โค้ด</label>  
   <div class="col-md-2">
   <input id="BarcodeInput" name="BarcodeInput" type="text" placeholder="" class="form-control input-md">
     
@@ -181,17 +168,17 @@
 </div>
 
 <!-- File Button --> 
-<div class="form-group">
+<!-- <div class="form-group">
   <label class="col-md-4 control-label" for="PicPathInput">ตำแหน่งที่เก็บรูป</label>
   <div class="col-md-4">
     <input id="PicPathInput" name="PicPathInput" class="input-file" type="file">
   </div>
-</div>
+</div> -->
 <!-- Button (Double) -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="SaveButton"></label>
   <div class="col-md-8">
-    <button type="submit" id="SaveButton" name="SaveButton" class="btn btn-info" value="เก็บ"></button>
+    <input type="submit" id="SaveButton" name="SaveButton" class="btn btn-info" value="เก็บ"></button>
     <input type="reset" id="ResetButton" name="ResetButton" class="btn btn-danger" value="ล้าง"></button>
   </div> 
 </div>
