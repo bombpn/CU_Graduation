@@ -24,8 +24,8 @@ $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Intania Computer Club');
-$pdf->SetTitle('พิธีพระราชทานปริญญาบัตร จุฬาลงกรณ์มหาวิทยาลัย');
-$pdf->SetSubject('บัตรยืนยันตัวสำหรับบัณฑิต');
+$pdf->SetTitle('CU Graduation');
+$pdf->SetSubject('barcode');
 $pdf->SetKeywords('');
 
 // remove default header/footer
@@ -101,8 +101,9 @@ if ($type == 1 || $type == 2) {
     $html .= '<tr width="100%" height="100%">
 <td width="50%">
 <b style="font-size:150pt;">' . $d["order"] . '</b><br><span style="font-size: 14pt;"><br>
-' . $d["th_prefix"] . $d["th_firstname"] . " " . $d["th_lastname"] . '<br>
-' . $d["th_group_name"] . '</span>
+' . $d["th_prefix"] . $d["th_firstname"] . " " . $d["th_lastname"] . " [" . $d["th_group_name"] . '] <br> 
+' . $d["en_prefix"] . $d["en_firstname"] . " " . $d["en_lastname"] . " [" . $d["en_group_name"] . ']
+</span>
 </td>
 <td width="50%">
 <br><br><br>
@@ -142,8 +143,9 @@ if ($type == 1 || $type == 2) {
       $html .= '<tr width="100%" height="100%">
 <td width="50%">
 <b style="font-size:150pt;">' . $d["order"] . '</b><br><span style="font-size: 14pt;"><br>
-' . $d["th_prefix"] . $d["th_firstname"] . " " . $d["th_lastname"] . '<br>
-' . $d["th_group_name"] . '</span>
+' . $d["th_prefix"] . $d["th_firstname"] . " " . $d["th_lastname"] . " [" . $d["th_group_name"] . '] <br> 
+' . $d["en_prefix"] . $d["en_firstname"] . " " . $d["en_lastname"] . " [" . $d["en_group_name"] . ']
+</span>
 </td>
 <td width="50%">
 <br><br><br>
