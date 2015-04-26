@@ -3,6 +3,22 @@
 <head>
     <title>CU Graduation</title>
     <link href="<?=base_url();?>css/calendar.css" rel="stylesheet">
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $(".cal-cell1").click(function(){
+            $('.selected').removeClass("selected");
+            $(this).addClass("selected");
+            if($('.selected .date_content').text() !=''){
+              console.log($('.selected .date_content').text());
+              var month = "<?php echo $month; ?>";
+              var day = $('.selected .date_content').text();
+              var year = "<?php echo $year; ?>";
+              console.log(day+"/"+month+"/"+year);
+              window.location.replace('<?=base_url()?>schedule/showDate/'+year+"/"+month+"/"+day);
+            }
+          });
+        });
+    </script>
 </head>
 
 <body>
@@ -13,19 +29,16 @@
             ตารางการซ้อม
             <small>Schedule Manager</small>
         </h1>
-        แสดงตารางการซ้อม<br>
-        เพิ่มตารางการซ้อม<br>
-
-        ควรจะเป็นปฏิทิน <br>
-        และตามด้วย Bullet แสดง Event <br>
-        <hr>
-        <?php
-            echo $calendars;
-          ?>
-
-
-    </div>
-</div>
+      </div>
+        
+        <div class="col-md-6"><center>
+            <a class="btn btn-primary" href="<?=base_url();?>schedule">Today</a>
+            <a href ="<?=base_url();?>schedule/addSchedule"  class="btn btn-primary" >Add New Group</a>
+            <?php
+                echo $calendars;
+              ?>
+            <hr>
+        </center></div>
 <!-- /.row -->
 </body>
 </html>
