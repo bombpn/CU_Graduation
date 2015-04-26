@@ -18,6 +18,9 @@ class model_check extends CI_Model{
 	public function get_name_list($group_id){
 		return $this->db->select('*')->from('JOIN')->where('GROUP_group_id',$group_id)->join('STUDENT','STUDENT.student_id = JOIN.STUDENT_student_id','inner')->order_by('order','asc')->get()->result();
 	}
+    public function get_extra_list($schedule_id){
+    	return $this->db->select('*')->from('extra_attend')->where('SCHEDULE_schedule_id',$schedule_id)->join('STUDENT','STUDENT.student_id = extra_attend.STUDENT_student_id','inner')->join('JOIN','STUDENT.student_id = join.STUDENT_student_id','inner')->order_by('student_id','asc')->get()->result();	
+    }
 	public function get_student_id($barcode,$group_id){
 		$find_by_barcode = $this->db->where('barcode',$barcode)->get('student')->result();
 		$find_by_student_id = $this->db->where('student_id',$barcode)->get('student')->result();

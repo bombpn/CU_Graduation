@@ -2,6 +2,11 @@
 <html lang="th">
 
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
     <title>CU Graduation</title>
     <!-- Bootstrap Core CSS -->
     <link href="<?=base_url();?>/css/bootstrap.min.css" rel="stylesheet">
@@ -19,124 +24,113 @@
     <script src="<?=base_url();?>/js/bootstrap.min.js"></script>
 </head>
 
-<body style="margin:0;padding:0">
-    <!-- Page Heading -->
-    <div id="page-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">
-                        เช็คชื่อ
-                    </h1>
-                    <div class="col-lg-9">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" align="center">
-                                <form class="form-inline">
-                                <!-- <div class="form-group">
-                                    <label for="barcode">Barcode</label>
-                                    <input type="text" class="form-control" id="barcode" placeholder="">
-                                    <script>
-                                        window.onload = function() {
-                                            document.getElementById("barcode").focus();
-                                        };
-                                    </script>
-                                </div> -->
-                                <div class="row">
-                                    <div class="col-xs-2 vcenter" align="center">
-                                        <a href="#" class="btn btn-lg btn-link vcenter">
-                                            <i class="fa fa-chevron-circle-left fa-5x vcenter"></i>
-                                        </a>
-                                    </div>
+<body style="margin-top:15px;padding:0">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <!--button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">CU Graduation</a-->
 
-                                    <?php
-                                    if(count($first_faculty)>0){ 
-                      //  foreach($first_faculty as $student){
-                                        $student = $first_faculty[0];
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> กลุ่มที่มีการซ้อม วันที่ <?=$schedule_detail->date;?>
+                                เวลา <?=$schedule_detail->start_time;?> - <?=$schedule_detail->end_time;?> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <?php
+                            $has_some_group = false;
+                            if(count($allgroup_in_schedule)>0){
+                                $has_some_group = true;
+                                foreach($allgroup_in_schedule as $group){
+                                    //echo $schedule->schedule_id . " " . $schedule->date . " " . $schedule->start_time . " - " . $schedule->end_time . "<br>";
+                            ?>
+                                    
+                                    <li <?php if($attendance_order == $group->attendance_order) echo "class='active'";?>>
+                                        <a href="<?=base_url();?>check/list_check/<?=$schedule_detail->schedule_id;?>/<?=$group->attendance_order;?>"><?=$group->attendance_order;?> : <?=$group->th_group_name;?></a>
+                                    </li>
+                            <?php
+                                }
+                            }
+                            ?>
+                            <li <?php if($attendance_order == 0 || !$has_some_group) echo "class='active'";?>>
+                                <a href="<?=base_url();?>check/list_check/<?=$schedule_detail->schedule_id;?>/0">ผู้ที่ซ้อมนอกรอบ</a>
+                            </li>
+                            
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+<!-- Page Heading -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <br>
+                <h1 class="page-header">
+                    เช็คชื่อ
+                </h1>
+                <div>
+                    <?php
+                    foreach($name_list as $student){
+                    ?>
+                        <div class="panel panel-green" id="<? //=$student->student_id;?>">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <!--h3 class="panel-title">Panel title</h3-->
+                                    <div class="col-xs-6 col-sm-4 col-md-2">
+                                        <?php
+                                        if(file_exists("GradPic/".$student->picture_path)) $imagePath = $student->picture_path;
+                                        else $imagePath = "_blank_person.jpg"; 
+                                        //if(!$has_data) $imagePath = "_blank_person.jpg"; 
+                                        //else $imagePath = "";
                                         ?>
-                                        <div class="col-xs-8 vcenter" align="center">
-                                            <div class="panel panel-green" id="<?=$student->student_id;?>">
-                                                <div class="panel-heading">
-                                                    <div class="row">
-                                                        <!--h3 class="panel-title">Panel title</h3-->
-                                                        <div class="col-xs-4">
-                                                            <?php
-                                                            if(file_exists("GradPic/".$student->picture_path)) $imagePath = $student->picture_path;
-                                                            else $imagePath = "_blank_person.jpg"; 
-                                                            ?>
-                                                            <img src="<?=base_url();?>GradPic/<?=$imagePath;?>" class="img-thumbnail" width="100%">
-                                                        </div>
-                                                        <div class="col-xs-4" align="center" valign="middle">
-                                                            <h3><i class="fa fa-fw fa-check-square"></i> บันทึกสำเร็จ</h3>
-                                                            <h3><i class="fa fa-fw fa-warning"></i> มีการข้ามลำดับ</h3>
-                                                            <h3><i class="fa fa-fw fa-times"></i> มีข้อผิดพลาด</h3>
-                                                            <h1 style="font-size:500%;"># <?=$student->order;?></h1>
-                                                            <h3><?=$student->th_prefix;?><?=$student->th_firstname;?> <?=$student->th_lastname;?></h3>
-                                                            <h3><?=$student->en_prefix;?><?=$student->en_firstname;?> <?=$student->en_lastname;?></h3>
-                                                            <h4><?=$student->student_id;?></h4>
-                                                            <h4>คณะวิศวกรรมศาสตร์</h4>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                <!--div class="panel-body">
-                                    Panel content
+                                        <img src="<?=base_url();?>GradPic/<?=$imagePath;?>" class="img-thumbnail" width="100%">
+                                    </div>
+                                    <div class="col-xs-6 col-sm-4 col-md-2">
+                                        <div class="row btn-group" valign="middle">
+                                            <a href="#" class="btn btn-lg btn-default">
+                                                <i class="fa fa-check-circle fa-2x"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-lg btn-default">
+                                                <i class="fa fa-times-circle fa-2x"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-8">
+                                        <div class="col-xs-12">
+                                            <h4># <?=$student->order;?> (<?=$student->student_id;?>)</h4>
+                                            <h4><?=$student->th_prefix;?><?=$student->th_firstname;?> <?=$student->th_lastname;?></h4>
+                                            <h4><?=$student->en_prefix;?><?=$student->en_firstname;?> <?=$student->en_lastname;?></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--div class="row" align="center">
+                                    <a href="#" class="btn btn-lg btn-link">
+                                        <i class="fa fa-chevron-left fa-5x vcenter"></i>
+                                    </a>   
+                                    <a href="#" class="btn btn-lg btn-link">
+                                        <i class="fa fa-check-circle fa-5x"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-lg btn-link">
+                                        <i class="fa fa-times-circle fa-5x"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-lg btn-link">
+                                        <i class="fa fa-chevron-right fa-5x"></i>
+                                    </a>
                                 </div-->
                             </div>
                         </div>
-                       
                     <?php
-                        //}
-                }
-                ?>
-                <div class="col-xs-2 vcenter" align="center" valign="middle">   
-                    <a href="#" class="btn btn-lg btn-link">
-                        <i class="fa fa-chevron-circle-right fa-5x"></i>
-                    </a>
-                </div>
-
-            </div>          
-        </form>
-    </div>
-                        <!--div class="panel-body">
-                            Panel content
-                        </div-->
-                    </div>
-                    <?php
-                    if(count($first_faculty)>0){
-                        foreach($first_faculty as $student){
-                            ?>
-
-                            <?php
-                        }
                     }
                     ?>
-
                 </div>
-                <div class="col-lg-3">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                กลุ่มที่มีการซ้อม วันที่ <?=$schedule_detail->date;?><br>
-                                เวลา <?=$schedule_detail->start_time;?> - <?=$schedule_detail->end_time;?>
-                            </h3>
-                        </div>
-                        <div class="panel-body">
-                            <ul>
-                                <?php
-                                if(count($allgroup_in_schedule)>0){
-                                    foreach($allgroup_in_schedule as $group){
-                                    //echo $schedule->schedule_id . " " . $schedule->date . " " . $schedule->start_time . " - " . $schedule->end_time . "<br>";
-                                        ?>
-
-                                        <li><?=$group->attendance_order;?> : <?=$group->th_group_name;?></li>
-                                        <?php
-                                    }
-                                }
-                                ?>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
+                    
             </div>
         </div>   
     </div>

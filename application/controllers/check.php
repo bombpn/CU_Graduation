@@ -114,4 +114,23 @@ class check extends CI_Controller {
 		}
 		redirect('/check/barcode_check/'.$schedule_id.'/'.$attendance_order, 'refresh');
 	}
+    public function list_check($schedule_id, $attendance_order = 1){
+        $result = $this->check->get_all_group($schedule_id);
+        $active_group = 0;
+        foreach($result as $res){
+            $res->th_group_name = $this->check->get_group_name($res->GROUP_group_id)->th_group_name;
+			if($res->attendance_order == $attendance_order) $active_group = $res->GROUP_group_id;
+        }
+		$data['allgroup_in_schedule'] = $result;
+		$data['active_group'] = $active_group;
+		$data['attendance_order'] = $attendance_order;
+		$data['schedule_detail'] = $this->check->get_schedule_detail($schedule_id);
+        if($active_group > 0) $data['name_list'] = $this->check->get_name_list($active_group);
+        else $data['name_list'] = $this->check->get_extra_list($schedule_id);
+		$data['last10transaction'] = $this->check->get_last_10_transaction();
+        //$this->load->view('inc_header');
+        $this->load->view('check/list_check',$data);
+        //$this->load->view('inc_footer');
+    }
+
 }
