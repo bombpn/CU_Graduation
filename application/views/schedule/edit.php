@@ -2,11 +2,34 @@
 <html lang="th">
 <head>
     <title>CU Graduation</title>
+    <script src="<?=base_url();?>/js/chosen.jquery.js"></script>
     <link href= "<?=base_url();?>css/datepicker.css" rel="stylesheet">
+    <link href= "<?=base_url();?>css/chosen.css" rel="stylesheet">
     <link href= "<?=base_url();?>css/jquery-ui-timepicker-addon.css" rel="stylesheet">
+
+    <script src="<?=base_url();?>/js/chosen.order.jquery.js"></script>
     <script src="<?=base_url();?>/js/jquery-ui-timepicker-addon.js"></script>
     <script type="text/javascript">
             $("document").ready(function() {
+              var schedule_populated = new Array();
+              var textGroup = [];
+              $('#schedule_group option').each(function(i){
+                textGroup[i] = $(this).text();
+              });
+              $('select[multiple].chosen').chosen();
+              var MY_SELECT = $($('select[multiple].chosen').get(0)); // BUG
+              $('#groupAdd').click(function(){
+                  var selection = MY_SELECT.getSelectionOrder();
+
+                  console.log(textGroup);
+                  $("#returnedArrangement").find("tr").remove();
+                  $('#s1-order-list').empty();
+                  schedule_populated=[];
+                  $(selection).each(function(i){
+                      $('#returnedArrangement').append("<tr><td>"+selection[i]+"</td><td>"+textGroup[selection[i]]+"</td></tr>");
+                      schedule_populated.push(selection[i]);
+                  });
+              });
                 console.log("<?=$returnObject['date']?>");
                 $("#datepicker").datepicker({
                   dateFormat: 'yy-mm-dd',
@@ -19,6 +42,30 @@
                   showSecond: true,
                   timeFormat: 'HH:mm:ss'
                 });
+
+
+                $("#submit").click(function(){
+                  var formData = { date : $("#datepicker").val(),
+                                  start_time : $("#starttime").val(),
+                                  end_time : $("#stoptime").val(),
+                                  type : $("#schedule_type").val(),
+                                  round : $("#schedule_round").val(),
+                                  PLACE_place_id : $("#schedule_place").val(),
+                                  schedule_group_populated : schedule_populated
+                  };
+                  console.log(formData);
+                  //BRING AJAX REQUEST ON!
+                  $.ajax({
+                    type: "POST",
+                    url: '<?php echo base_url();?>schedule/editResult/',
+                    dataType: 'json',
+                    data: formData,
+                    success: function(res){
+                      //alert(res.message);
+                      //window.location.href = res.redirect;
+                    }
+                  });
+                });//submit
             });
     </script>
 </head>
@@ -66,7 +113,7 @@
                       </table>
 
         <!-- Form -->
-            <form class="form-horizontal"><fieldset>
+
 
               <!-- Date Picker -->
               <div class="form-group">
@@ -118,7 +165,8 @@
                   <div class="form-group">
                     <label class="col-md-4 control-label" for="schedule_group">Group : </label>
                     <div class="col-md-4">
-                      <select id="schedule_group" name="schedule_group" class="form-control">
+                      <select id="schedule_group" name="schedule_group" class="form-control chosen" multiple>
+                        <option value=""></option>
                         <?php
                         if(count($groups>0)){
                             foreach($groups as $row){
@@ -131,24 +179,26 @@
                       </select>
                     </div>
                     <div class="col-md-4">
-                          <button id="addGroup" name="addGroup" class="btn btn-primary">Add Group to Schedule</button>
+                          <button type="button" id="groupAdd" name="groupAdd" class="btn btn-primary">Add : </button>
+                          <div class="col-md-4">  <ol id="s1-order-list"></ol> </div>
+                          <input type="hidden" name="schedule_group" id="total" value="">
                     </div>
                   </div>
 
+                  List Group in This Schedule
                   <!-- RETURN AJAX FETCH SCHEDULE BY schedule_date -->
                   <div class="form-group">
                   <div class="col-md-4"></div>
                   <div class="col-md-4">
                     <table class="table">
-                      List Group in This Schedule
                     <thead>
                       <tr>
                         <th>ลำดับที่</th>
                         <th>กลุ่ม</th>
-                      <tr>
+                      </tr>
                     </thead>
-                    <tbody>
-                        <td colspan ="5"> no data fetch </td>
+                    <tbody id="returnedArrangement">
+
                     </tbody>
                   </table>
                     </div>
@@ -165,8 +215,7 @@
                         <?php
                         if(count($places>0)){
                             foreach($places as $row){
-                              echo '<option value="
-                              '.$row->place_id.
+                              echo '<option value="'.$row->place_id.
                               (($row->place_id==$returnObject['PLACE_place_id'])? '" selected="selected">' : '">').
                               $row->place_id.
                               ' : '
@@ -192,7 +241,6 @@
                     <div class="col-md-4"><button id="submit" name="submit" class="btn btn-primary">Submit</button></div>
                     <div class="col-md-4"></div>
                   </div>
-                </fieldset></form>
 
             <hr>
         </div>

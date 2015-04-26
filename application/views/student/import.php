@@ -3,6 +3,7 @@
 <head>
     <title>CU Graduation</title>
     <!-- <link href="<?=base_url();?>css/calendar.css" rel="stylesheet"> -->
+    
 </head>
 
 <body>
@@ -15,7 +16,7 @@
         </h1>
 
 
-<legend>เพิ่มบัณฑิตด้วย .CSV</legend>
+<!-- <legend>เพิ่มบัณฑิตด้วย .CSV</legend>
 <fieldset> 
 <div class="form-group form-horizontal">
   <label class="col-md-4 control-label" for="ImportFiel">ไฟล์ .csv</label>
@@ -28,10 +29,10 @@
         </form>
     </div>
 </div>
-</fieldset> 
+</fieldset>  -->
 
 <form class="form-horizontal" action="<?=base_url();?>student/import" method="POST">
-<fieldset> 
+<fieldset>
 
 <!-- Form Name -->
 <legend>เพิ่มข้อมูลบัณฑิต</legend>
@@ -125,9 +126,14 @@
   <label class="col-md-4 control-label" for="FacultyInput">คณะ</label>
   <div class="col-md-3">
     <select id="FacultyInput" name="FacultyInput" class="form-control">
-      <option value="1">คณะวิศวกรรมศาสตร์</option>
-      <option value="2">คณะจิตวิทยา</option>
-      <option value="3">คณะวิทยาศาสตร์</option>
+      <?php 
+        foreach ($facultyList as $fl){
+          $fid =  $fl['faculty_id'] ; 
+          $ftname = $fl['th_faculty_name'] ;
+          $fename = $fl['en_faculty_name'] ;
+          echo "<option value='$fid'>$ftname $fename</option> "; 
+        }
+      ?>
     </select>
   </div>
 </div>
@@ -135,7 +141,7 @@
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="DegreeInput">ปริญญา</label>
-  <div class="col-md-3">
+  <div class="col-md-2">
     <select id="DegreeInput" name="DegreeInput" class="form-control">
       <option value="ปริญญาตรี">ตรี</option>
       <option value="ปริญญาโท">โท</option>
@@ -147,10 +153,16 @@
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="GroupInput">กลุ่ม</label>
-  <div class="col-md-2">
+  <div class="col-md-3">
     <select id="GroupInput" name="GroupInput" class="form-control">
-      <option value="1">1</option>
-      <option value="2">2</option>
+      <?php 
+        foreach ($groupList as $gl){
+          $gid =  $gl['group_id'] ; 
+          $gtname = $gl['th_group_name'] ;
+          $gename = $gl['en_group_name'] ;
+          echo "<option value='$gid'>$gtname $gename</option> "; 
+        }
+      ?>
     </select>
   </div>
 </div>
@@ -167,18 +179,10 @@
   </div>
 </div>
 
-<!-- File Button --> 
-<!-- <div class="form-group">
-  <label class="col-md-4 control-label" for="PicPathInput">ตำแหน่งที่เก็บรูป</label>
-  <div class="col-md-4">
-    <input id="PicPathInput" name="PicPathInput" class="input-file" type="file">
-  </div>
-</div> -->
-<!-- Button (Double) -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="SaveButton"></label>
   <div class="col-md-8">
-    <input type="submit" id="SaveButton" name="SaveButton" class="btn btn-info" value="เก็บ"></button>
+    <input type="submit" id="SaveButton" name="SaveButton" class="btn btn-info " value="เก็บ"></button>
     <input type="reset" id="ResetButton" name="ResetButton" class="btn btn-danger" value="ล้าง"></button>
   </div> 
 </div>

@@ -4,7 +4,6 @@
 <head>
 
     <title>CU Graduation</title>
-
 </head>
 
 <body>
@@ -12,31 +11,90 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            เช็คชื่อ
+            รายชื่อคณะ
         </h1>
-        <table class="table">
+        
+        <?php
+        if($faculty_id_search == "" && $th_faculty_name_search == "" && $en_faculty_name_search == ""){
+        ?>
+            <a href="<?=base_url();?>faculty/load_add_faculty_page" class="btn btn-primary">
+                add faculty <i class="fa fa-plus"></i>
+            </a>
+        <?php
+            }else{
+        ?>
+            <h2 class="bg-primary">
+            
+                <a href="<?=base_url();?>faculty/index" class="btn btn-link">
+                    <i class="fa fa-chevron-circle-left fa-2x" style="color: #fff;"></i>
+                </a>
+                | ผลการค้นหา
+            </h2>
+            
+        <?php
+            }
+        ?>
+        <table class="table table-striped">
         	<thead>
         		<tr>
-        			<th>ลำดับที่</th>
-        			<th>วันที่</th>
-        			<th>เวลาเริ่ม</th>
-        			<th>เวลาสิ้นสุด</th>
-        			<th>เช็คชื่อ</th>
-        		<tr>
+                    <th>รหัสคณะ</th>
+                    <th>ชื่อคณะ</th>
+                    <th>Faculty Name</th>
+                    <th>Manage</th>
+                <tr>
         	</thead>
         	<tbody>
+            <form action="<?=base_url();?>faculty/search_faculty" method="POST">
+                <fieldset>
+                <tr>
+                    <td>
+                        <input class="form-control" name="faculty_id"  placeholder="รหัสคณะ" value=<?=$faculty_id_search;?>>         
+                    </td>
+                    <td>
+                        <input class="form-control" name="th_faculty_name" placeholder="ชื่อคณะ" value=<?=$th_faculty_name_search;?>>  
+                    </td>
+                    <td>
+                        <input class="form-control" name="en_faculty_name" placeholder="Faculty Name" value=<?=$en_faculty_name_search;?>>
+                    </td>
+                    <td>
+                        <input type="submit" class="btn btn-info" value="Search">
+                            <!-- <i class="fa fa-search"></i> -->
+                        </input>
+                    </td>
+                </tr>
+                </fieldset>
+            </form>
         		<?php
-	            if(count($allschedule)>0){
-	            	foreach($allschedule as $schedule){
-	            	//echo $schedule->schedule_id . " " . $schedule->date . " " . $schedule->start_time . " - " . $schedule->end_time . "<br>";
+
+	            if(count($allfaculty)>0){
+	            	foreach($allfaculty as $faculty){
 	            ?>
+                <form action="<?=base_url();?>faculty/load_edit_faculty_page" method="POST">
+                    <fieldset>
 	            		<tr>
-	            			<td><?=$schedule->schedule_id;?></td>
-	            			<td><?=$schedule->date;?></td>
-	            			<td><?=$schedule->start_time;?></td>
-	            			<td><?=$schedule->end_time;?></td>
-	            			<td><a href="<?=base_url();?>check/barcode_check/<?=$schedule->schedule_id?>" class="btn btn-primary">เช็คโดยบาร์โค้ด</a></td>
+	            			<td>
+                                <input class="form-control" name="faculty_id"  value=<?=$faculty->faculty_id;?> readonly>
+                            </td>
+                            <td>
+                                <input class="form-control" name="th_faculty_name"  value=<?=$faculty->th_faculty_name;?> readonly>
+                            </td>
+                            <td>
+                                <input class="form-control" name="en_faculty_name"  value=<?=$faculty->en_faculty_name;?> readonly>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                                <!-- <a href="<?=base_url();?>faculty/load_edit_faculty_page" class="btn btn-primary">
+                                    <i class="fa fa-pencil"></i>
+                                </a> -->
+                                <a href="<?=base_url();?>faculty/delete_faculty/<?=$faculty->faculty_id;?>" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
 	            		</tr>
+                    </fieldset>
+                </form>
 	            <?php
 	            	}
 	            }else{

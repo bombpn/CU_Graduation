@@ -104,9 +104,15 @@
   <label class="col-md-4 control-label" for="FacultyInput">คณะ</label>
   <div class="col-md-3">
     <select id="FacultyInput" name="FacultyInput" class="form-control">
-      <option value="1">คณะวิศวกรรมศาสตร์</option>
-      <option value="2">คณะจิตวิทยา</option>
-      <option value="3">คณะวิทยาศาสตร์</option>
+      <?php 
+        foreach ($facultyList as $fl){
+          $fid =  $fl['faculty_id'] ; 
+          $ftname = $fl['th_faculty_name'] ;
+          $fename = $fl['en_faculty_name'] ;
+          if ($select_fid == $fid) echo "<option value='$fid' selected>$ftname $fename</option> "; 
+          else echo "<option value='$fid'>$ftname $fename</option> "; 
+        }
+      ?>
     </select>
   </div>
 </div>
@@ -116,9 +122,9 @@
   <label class="col-md-4 control-label" for="DegreeInput">ปริญญา</label>
   <div class="col-md-2">
     <select id="DegreeInput" name="DegreeInput" class="form-control">
-      <option value="1">ปริญญาตรี</option>
-      <option value="2">ปริญญาโท</option>
-      <option value="3">ปริญญาเอก</option>
+      <option value="ปริญญาตรี" <?php if($degree == "ปริญญาตรี") echo 'selected'?>>ตรี</option>
+      <option value="ปริญญาโท" <?php if($degree == "ปริญญาโท") echo 'selected'?>>โท</option>
+      <option value="ปริญญาเอก" <?php if($degree == "ปริญญาเอก") echo 'selected'?>>เอก</option>
     </select>
   </div>
 </div>
@@ -128,8 +134,15 @@
   <label class="col-md-4 control-label" for="GroupInput">กลุ่ม</label>
   <div class="col-md-2">
     <select id="GroupInput" name="GroupInput" class="form-control">
-      <option value="1">1</option>
-      <option value="2">2</option>
+      <?php 
+        foreach ($groupList as $gl){
+          $gid =  $gl['group_id'] ; 
+          $gtname = $gl['th_group_name'] ;
+          $gename = $gl['en_group_name'] ;
+          if ($select_gid == $gid) echo "<option value='$gid' selected>$gtname $gename</option> ";
+          else echo "<option value='$gid'>$gtname $gename</option> "; 
+        }
+      ?>
     </select>
   </div>
 </div>
@@ -139,9 +152,9 @@
   <label class="col-md-4 control-label" for="HonorInput">เกียรตินิยม</label>
   <div class="col-md-1">
     <select id="HonorInput" name="HonorInput" class="form-control">
-      <option value="1">อันดับ 1</option>
-      <option value="2">อันดับ 2</option>
-      <option value="0">-</option>
+      <option value="1" <?php if($honors == "1") echo 'selected'?>>อันดับ 1</option>
+      <option value="2" <?php if($honors == "2") echo 'selected'?>>อันดับ 2</option>
+      <option value="0" <?php if($honors == "0") echo 'selected'?>>-</option>
     </select>
   </div>
 </div>

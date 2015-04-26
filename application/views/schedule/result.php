@@ -1,3 +1,11 @@
-<?php
-  //echo "<br> LOCAL PRINT =".$date;
-?>
+
+<html>
+<head>
+</head>
+<body>
+  <?php
+    echo "DATA POSTED";
+    
+  ?>
+</body>
+</html>

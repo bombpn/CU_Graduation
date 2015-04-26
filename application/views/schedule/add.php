@@ -18,7 +18,7 @@
                   textGroup[i] = $(this).text();
                 });
                 $('select[multiple].chosen').chosen();
-                var MY_SELECT = $($('select[multiple].chosen').get(0));
+                var MY_SELECT = $($('select[multiple].chosen').get(0)); // BUG
                 $('#groupAdd').click(function(){
                     var selection = MY_SELECT.getSelectionOrder();
 
@@ -57,21 +57,14 @@
                   console.log(formData);
                   //BRING AJAX REQUEST ON!
                   $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url();?>schedule/formSubmit/',
+                    type: "POST",
+                    url: '<?php echo base_url();?>schedule/addResult/',
                     dataType: 'json',
                     data: formData,
-                    success: function(json){
-                		try{
-                			var obj = jQuery.parseJSON(json);
-                			alert( obj['date']);
-                		}catch(e) {
-                			alert('Exception while request..');
-                		}
-                		},
-                		error: function(){
-                			alert('Error while request..');
-                		}
+                    success: function(res){
+                      //alert(res.message);
+                      //window.location.href = res.redirect;
+                    }
                   });
                 });//submit
             });//document ready

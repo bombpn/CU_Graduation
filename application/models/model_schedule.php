@@ -48,6 +48,7 @@ class model_schedule extends CI_Model{
 
 	public function addScheduleToDB($data){
 		  $this->db->insert('schedule',$data);
+			//$this
 			return $data['date'];
 
 	}

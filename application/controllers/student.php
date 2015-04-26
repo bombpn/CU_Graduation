@@ -45,13 +45,6 @@ class Student extends CI_Controller {
 				$this->load->view('student/edit',$data);
 				$this->load->view('inc_footer');
 			}
-		    /*
-			else if ($rs == "#") {
-				$var = array ("opt" => "edit") ;
-				$this->load->view('inc_header');
-				$this->load->view('student/search',$var);
-				$this->load->view('inc_footer');
-			}*/
 			else if($_POST) {
 				// 
 				$faculty = $_POST["FacultyInput"];
@@ -70,13 +63,13 @@ class Student extends CI_Controller {
 				"en_firstname" => $_POST["ENFirstnameInput"],
 				"en_lastname" => $_POST["ENLastnameInput"],
 				"gender" => $gender ,
+				"barcode" => $_POST["BarcodeInput"] ,
 				"picture_path" => $_POST["IDInput"].'.'."jpg",
-				"barcode" => $_POST["BarcodeInput"]/*
-				"picture_path" => $_POST[("PicPathInput"),
 				"degree" => $degree ,
-				"faculty" => $faculty ,
-				"group" => $group ,
-				"honor" => $honor */
+				"faculty_id" => $faculty ,
+				"group_id" => $group ,
+				"order" => $order ,
+				"honors" => $honors
 				);
 				$id = $_POST["IDInput"] ;
 				$this->model_student->updateStudent($id,$data)	;		
@@ -86,7 +79,7 @@ class Student extends CI_Controller {
 				$this->load->view('inc_footer');
 			}
 
-	}
+	}/*
 	public function update($opt = "edit"){
 		if($_POST){
 			$faculty = $_POST["FacultyInput"];
@@ -95,7 +88,6 @@ class Student extends CI_Controller {
 			$honor = $_POST["HonorInput"];
 			$gender = "F" ;
 			if($_POST["THPrefixInput"] == "นาย") $gender = "M" ;
-
 			$data = array(
 				"student_id" => $_POST["IDInput"],
 				"th_prefix" => $_POST["THPrefixInput"],
@@ -105,13 +97,8 @@ class Student extends CI_Controller {
 				"en_firstname" => $_POST["ENFirstnameInput"],
 				"en_lastname" => $_POST["ENLastnameInput"],
 				"gender" => $gender ,
-				"picture_path" => $_POST["IDInput"].'.'."jpg"
-				/*"barcode" => $_POST[("IDInput"),
-				"picture_path" => $_POST[("PicPathInput"),
-				"degree" => $degree ,
-				"faculty" => $faculty ,
-				"group" => $group ,
-				"honor" => $honor */
+				"picture_path" => $_POST["IDInput"].'.'."jpg" ,
+				"barcode" => $_POST["BarcodeInput"],
 			);
 		updateStudent($data['student_id'],$data);
 		$array = array('opt' => $opt);
@@ -119,7 +106,7 @@ class Student extends CI_Controller {
 		$this->load->view('student/successful',$array);
 		$this->load->view('inc_footer');
 		}
-	}
+	}*/
 	public function import()
 	{
 		if($this->input->post('SaveButton')!=null)
@@ -141,15 +128,17 @@ class Student extends CI_Controller {
 			exit();
 		}
 		else {
+			$facultyList = $this->model_student->get_faculty_for_import() ;
+			$groupList = $this->model_student->get_group_for_import() ;
 			$this->load->view('inc_header');
-			$this->load->view('student/import');
+			$this->load->view('student/import', array('facultyList' => $facultyList , 'groupList' => $groupList));
 			$this->load->view('inc_footer');
 		}
 	}
 
 	public function del($id)
 	{	
-		if ($this->model_student->removeStudent($id)){
+		if ($this->model_student->remove_student($id)){
 				$this->load->view('inc_header');
 				$this->load->view('student/successful',array("opt"=>"del" , "student_id" <= $id ));
 				$this->load->view('inc_footer');
@@ -163,29 +152,30 @@ class Student extends CI_Controller {
 
 	public function saveByForm($POST){
 			$faculty = $POST["FacultyInput"];
-			$group = $_POST["GroupInput"];
-			$degree = $_POST["DegreeInput"];
-			$honor = $_POST["HonorInput"];
+			$group = $POST["GroupInput"];
+			$degree = $POST["DegreeInput"];
+			$honors = $POST["HonorInput"];
 			$gender = "F" ;
-			if($_POST["THPrefixInput"] == "นาย") $gender = "M" ;
+			//New student order is the last order in that group.
+			$order = $this->model_student->get_last_group_order($group);
+			if($POST["THPrefixInput"] == "นาย") $gender = "M" ;
 
 			$data = array(
-				"student_id" => $_POST["IDInput"],
-				"th_prefix" => $_POST["THPrefixInput"],
-				"th_firstname" => $_POST["THFirstnameInput"],
-				"th_lastname" => $_POST["THLastnameInput"],
-				"en_prefix" => $_POST["ENPrefixInput"],
-				"en_firstname" => $_POST["ENFirstnameInput"],
-				"en_lastname" => $_POST["ENLastnameInput"],
+				"student_id" => $POST["IDInput"],
+				"th_prefix" => $POST["THPrefixInput"],
+				"th_firstname" => $POST["THFirstnameInput"],
+				"th_lastname" => $POST["THLastnameInput"],
+				"en_prefix" => $POST["ENPrefixInput"],
+				"en_firstname" => $POST["ENFirstnameInput"],
+				"en_lastname" => $POST["ENLastnameInput"],
 				"gender" => $gender ,
-				"barcode" => $_POST["BarcodeInput"] ,
-				"picture_path" => $_POST["IDInput"].'.'."jpg"
-				/*"barcode" => $_POST[("IDInput"),
-				"picture_path" => $_POST[("PicPathInput"),
+				"barcode" => $POST["BarcodeInput"] ,
+				"picture_path" => $POST["IDInput"].'.'."jpg",
 				"degree" => $degree ,
-				"faculty" => $faculty ,
-				"group" => $group ,
-				"honor" => $honor */
+				"faculty_id" => $faculty ,
+				"group_id" => $group ,
+				"order" => $order ,
+				"honors" => $honors
 			);			
 			return $this->model_student->addStudent($data);
 	}
