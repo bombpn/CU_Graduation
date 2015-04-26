@@ -100,12 +100,11 @@
                         <?=$place->total_seat;?>
                     </td>
                     <td>
-                        <?=$place->floor_plan_file;?>
+                        <a href="<?=base_url();?>place/download_floor_plan_file/<?=$place->floor_plan_file;?>" class="btn btn-info" title="Download">
+                            <i class="fa fa-file-text-o"></i>
+                        </a>
                     </td>
                     <td>
-                        <!-- <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-pencil"></i>
-                        </button> -->
                         <a href="<?=base_url();?>place/load_edit_place_page/<?=$place->place_id;?>" class="btn btn-primary" title="Edit">
                             <i class="fa fa-pencil"></i>
                         </a>

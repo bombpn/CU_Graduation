@@ -14,7 +14,7 @@
         <h1 class="page-header">
             เพิ่มสถานที่
         </h1>
-        <form class="form-horizontal" action="<?=base_url();?>place/add_place" method="POST">
+        <form class="form-horizontal" action="<?=base_url();?>place/add_place" method="POST" enctype="multipart/form-data">
                 <fieldset>
                 <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">ชื่อสถานที่:</label>
@@ -49,17 +49,17 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label">Row: </label>
                                 <div class="col-md-4">
-                                    <input class="form-control input-md" name="row" placeholder="Row" required>
+                                    <input class="form-control input-md" name="row" placeholder="Row">
                                 </div>
                                 <label class="col-md-2 control-label">Col: </label>
                                 <div class="col-md-4">
-                                    <input class="form-control input-md" name="col" placeholder="Col" required>
+                                    <input class="form-control input-md" name="col" placeholder="Col">
                                 </div>
                             </div>
 
                             <div class="radio">
                                 <label><input type="radio" name="option" value="import">Import CSV File</label>
-                                <input type="file" class="control-label" name="import_file">
+                                <input type="file" class="control-label" name="import_file" accept=".csv">
                             </div>
                         </div>
                 </div>

@@ -26,6 +26,10 @@ class model_place extends CI_Model {
 	}
 	//
 	public function delete_place($place_id) {
+		// ------- other table -------
+		$this->db->where('PLACE_place_id', $place_id);
+		$this->db->delete('schedule');
+		// ------- place -------
 		$this->db->where($this->id, $place_id);
 		$this->db->delete($this->table);
 	}
@@ -40,9 +44,12 @@ class model_place extends CI_Model {
 		$this->db->like($this->en, $data['en_building']);
 		$this->db->like($this->floor, $data['floor']);
 		$this->db->like($this->room, $data['room']);
-		$this->db->like($this->plan, $data['floor_plan_file']);
 		return $this->db->get($this->table)->result();
 	}
 	///
+	public function get_next_id() {
+		$this->db->select_max($this->id);
+		return $this->db->get($this->table)->result()[0]->place_id + 1;
+	}
 }
 ?>

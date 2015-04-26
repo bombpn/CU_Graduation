@@ -41,12 +41,6 @@
                         </div>
                 </div>
                 <div class="form-group">
-                        <label class="col-md-4 control-label" for="textinput">แผนผังที่นั่ง:</label>
-                        <div class="col-md-4">
-                            <input class="form-control input-md" name="floor_plan_file" placeholder="xxx.csv">
-                        </div>
-                </div>
-                <div class="form-group">
                     <label class="col-md-4 control-label" for="button1id"></label>
                     <div class="col-md-4">
                         <input type="submit" class="btn btn-info" value="Submit">

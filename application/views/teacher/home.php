@@ -14,7 +14,7 @@
             รายชื่ออาจารย์
         </h1>
         
-        <a href="<?=base_url();?>teacher/load_add_teacher_page" class="btn btn-primary" title="Add">
+        <a href="<?=base_url();?>teacher/load_add_teacher_page/0" class="btn btn-primary" title="Add">
             ADD TEACHER <i class="fa fa-plus"></i> 
         </a>
         <a href="<?=base_url();?>teacher/load_search_teacher_page" class="btn btn-success" title="Search">
@@ -69,8 +69,9 @@
         <table class="table table-striped">
         	<thead>
         		<tr>
-                    <th>รหัสอาจารย์ (Teacher ID)</th>
-                    <th>ชื่ออาจารย์ (Teacher Name)</th>
+                    <th>รหัสอาจารย์ (ID)</th>
+                    <th>ชื่ออาจารย์ (Name)</th>
+                    <th>คณะ (Faculty)</th>
                     <th>เบอร์โทรศัพท์ (Tel Number)</th>
                     <th>Manage</th>
                 <tr>
@@ -88,6 +89,9 @@
                         <?=$teacher->th_prefix;?> <?=$teacher->th_firstname;?> <?=$teacher->th_lastname;?><br>
                         <?=$teacher->en_prefix;?> <?=$teacher->en_firstname;?> <?=$teacher->en_lastname;?>
                     </td>
+                    <td>
+                        <?=$teacher->faculty_id;?>: <?=$teacher->th_faculty_name;?><br>
+                        <?=$teacher->en_faculty_name;?>
                     <td>
                         <?=$teacher->tel_number;?>
                     </td>
