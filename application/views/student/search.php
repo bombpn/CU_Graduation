@@ -13,7 +13,7 @@
     <div class="col-lg-12">
         <h1 class="page-header">
 			<?php if($opt == "search") echo "ค้นหา"; else if($opt == "edit") echo "ค้นหาข้อมูลของบัณฑิตเพื่อแก้ไข" ;?>
-            <small><?php if($opt == "search") echo "Search Student"; else if($opt == "edit") echo "Edit Student" ;?></small>
+            <small><?php if($opt == "search") echo "Search Graduate"; else if($opt == "edit") echo "Edit Graduate" ;?></small>
         </h1>
 <form class="form-horizontal" action="<?=base_url();?>student/search" method="POST">
 <fieldset>

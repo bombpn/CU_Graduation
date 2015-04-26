@@ -48,17 +48,21 @@ class model_student extends CI_Model{
 		$this->db->where('GROUP_group_id',$id);
 		$r = $this->db->get('join');
 		$last = $r->row_array() ;
-		return $last['order'] == NULL ? 1 : ($last['order']+1) ; 
+		$order = 1 ;
+		if(isset($last['order'])) {
+			$order = $last['order']+1;
+		}
+		return  $order ; 
 	}
 	public function get_student($id,$th_firstname,$th_lastname,$en_firstname,$en_lastname){
 		/*$sql = "SELECT * from student where student_id = $id";
 		$rs = $this->db->query($sql) ;*/
 		
-		if($id) $this->db->where('student_id',$id);
-		if($th_firstname) $this->db->where('th_firstname',$th_firstname);
-		if($th_lastname) $this->db->where('th_lastname',$th_lastname);
-		if($en_firstname) $this->db->where('en_firstname',$en_firstname);
-		if($en_lastname) $this->db->where('en_lastname',$en_lastname);
+		if($id) $this->db->like('student_id',$id);
+		if($th_firstname) $this->db->like('th_firstname',$th_firstname);
+		if($th_lastname) $this->db->like('th_lastname',$th_lastname);
+		if($en_firstname) $this->db->like('en_firstname',$en_firstname);
+		if($en_lastname) $this->db->like('en_lastname',$en_lastname);
 		$rs = $this->db->get('student');
 		return $rs->result_array();
 	}
@@ -88,32 +92,50 @@ class model_student extends CI_Model{
 	}
 	public function updateStudent($id,$data){
 		$this->db->where('STUDENT_student_id',$id) ;
+		$this->db->delete('student_belong_to') ;
 		$belong = array('STUDENT_student_id' => $data['student_id'] ,
 			'FACULTY_faculty_id' => $data['faculty_id'] 
 			 );
-		$this->db->update('student_belong_to');
+		$this->db->insert('student_belong_to',$belong);
+
 		$this->db->where('STUDENT_student_id',$id) ;
+		$this->db->delete('join') ;
 		$join = array('STUDENT_student_id' => $data['student_id'] ,
 			'GROUP_group_id' => $data['group_id'] ,
 			'order' => $data['order'] ,
 			 'honors' => $data['honors']
 			 );
-		$this->db->update('join');
+		$this->db->insert('join',$join);
+		
 		unset($data['degree']);
 		unset($data['order']);
 		unset($data['honors']);
 		unset($data['group_id']);
 		unset($data['faculty_id']);		
+
 		$this->db->where('student_id', $id);
 		$this->db->update('student', $data);
 	}
 	public function get_faculty_for_import(){
 		$rs = $this->db->get('faculty');
-		return $rs->result_array();
+		$list = $rs->result_array() ;
+		return $list ;
 	}
 	public function get_group_for_import(){
 		$rs = $this->db->get('group');
 		return $rs->result_array() ;
+	}
+	public function get_faculty_id_by_student($id){
+		$this->db->where('STUDENT_student_id',$id) ;
+		$rs = $this->db->get('student_belong_to');
+		$fid = $rs->row();
+		return $fid == NULL ? 0 : $fid->FACULTY_faculty_id ;
+	}
+	public function get_group_by_student($id){
+		$this->db->where('STUDENT_student_id',$id) ;
+		$rs = $this->db->get('join');
+		$fid = $rs->row();
+		return $fid == NULL ? NULL : $fid;
 	}
 }
 

@@ -24,7 +24,7 @@
     	}
     	else if($opt=="del") {
     		echo "<h1 class=".'page-header'.">ลบข้อมูลสำเร็จ<small>Successfully Delete</small></h1> " ; 
-    		$opt = "";
+    		$opt = "search";
     	}
     	else if($opt=="upload") {
     		echo "<h1 class=".'page-header'.">อัพโหลดข้อมูลสำเร็จ<small>Successfully Upload CSV</small></h1> " ; 

@@ -3,7 +3,24 @@
 <head>
     <title>CU Graduation</title>
     <!-- <link href="<?=base_url();?>css/calendar.css" rel="stylesheet"> -->
-    
+    <script>
+        function changeENPrefixValue(){
+          console.log('TH change');
+          var tp = $("#THPrefixInput").val() ;
+          if(tp =='นาย') $("#ENPrefixInput").val('Mr.') ;
+          else if (tp =='นาง') $("#ENPrefixInput").val('Mrs.') ;
+          else if (tp =='นางสาว') $("#ENPrefixInput").val('Miss') ;
+            
+        }
+        function changeTHPrefixValue(){
+          console.log('EN change');
+          var ep = $("#ENPrefixInput").val() ;
+          if(ep =='Mr.') $("#THPrefixInput").val('นาย') ;
+          else if (ep =='Mrs.') $("#THPrefixInput").val('นาง') ;
+          else if (ep =='Miss') $("#THPrefixInput").val('นางสาว') ;
+            
+        }
+    </script>
 </head>
 
 <body>
@@ -12,24 +29,8 @@
     <div class="col-lg-12">
         <h1 class="page-header">
 			เพิ่มรายชื่อ
-            <small>Import Student</small>
+            <small>Import Graduate</small>
         </h1>
-
-
-<!-- <legend>เพิ่มบัณฑิตด้วย .CSV</legend>
-<fieldset> 
-<div class="form-group form-horizontal">
-  <label class="col-md-4 control-label" for="ImportFiel">ไฟล์ .csv</label>
-  <div class="col-md-4">
- <form  class="form-horizontal" action="<?=base_url();?>student/uploadCSV" method="POST" enctype="multipart/form-data" >
-            
-            <input type="file" name="userfile" class="input-file" multiple="multiple"  />
-            <br></br>
-            <input type="submit" id="ImportInput" name="ImportInput" value="อัพโหลด" class="btn btn-success" />
-        </form>
-    </div>
-</div>
-</fieldset>  -->
 
 <form class="form-horizontal" action="<?=base_url();?>student/import" method="POST">
 <fieldset>
@@ -49,8 +50,8 @@
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="THPrefixInput">คำนำหน้าชื่อ  (ไทย) </label>
-  <div class="col-md-1">
-    <select id="THPrefixInput" name="THPrefixInput" class="form-control">
+  <div class="col-md-2">
+    <select id="THPrefixInput" name="THPrefixInput" class="form-control" onchange="changeENPrefixValue()">
       <option value="นาย">นาย</option>
       <option value="นาง">นาง</option>
       <option value="นางสาว">นางสาว</option>
@@ -78,8 +79,8 @@
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="THPrefixInput">คำนำหน้าชื่อ (อังกฤษ) </label>
-  <div class="col-md-1">
-    <select id="ENPrefixInput" name="ENPrefixInput" class="form-control">
+  <div class="col-md-2">
+    <select id="ENPrefixInput" name="ENPrefixInput" class="form-control" onchange="changeTHPrefixValue()">
       <option value="Mr.">Mr.</option>
       <option value="Mrs.">Mrs.</option>
       <option value="Miss">Miss</option>
@@ -170,7 +171,7 @@
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="HonorInput">เกียรตินิยม</label>
-  <div class="col-md-1">
+  <div class="col-md-2">
     <select id="HonorInput" name="HonorInput" class="form-control">
       <option value="1">อันดับ 1</option>
       <option value="2">อันดับ 2</option>

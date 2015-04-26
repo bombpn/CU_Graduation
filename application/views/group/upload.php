@@ -13,9 +13,27 @@
 			เพิ่มรายชื่อ
             <small>Import Student to Group</small>
         </h1>
-        <h1>Group ID = <?=$id?> Group Name : <?=$name?>   </h1>
-
-<legend>เพิ่มบัณฑิตด้วย .CSV</legend>
+<table class="table table-striped table-hover" >
+            <thead>
+                <tr>
+                    <th>รหัสกลุ่ม</th>
+                    <th>ชือภาษาไทย</th>
+                    <th>ชือภาษาอังกฤษ</th>
+                    <th>หลักสูตร</th>
+                    <th>ปริญญา</th>
+                <tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td><?=$id?></td>
+                        <td><?=$th_name?></td>
+                        <td><?=$en_name?></td>
+                        <td><?=$international?></td>
+                        <td><?=$degree?></td> 
+                    </tr> 
+            </tbody>
+        </table>
+<legend>เพิ่มบัณฑิตด้วย .csv</legend>
 <fieldset> 
 <div class="form-group form-horizontal">
   <label class="col-md-4 control-label" for="ImportFiel">ไฟล์ .csv</label>

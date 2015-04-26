@@ -40,20 +40,22 @@ class Student extends CI_Controller {
 
 			if(gettype($rs) == "string" && $rs != "#"){
 				// Edit Student Info with ID
+				// Prepare data for edit view
 				$data = $this->getDataForEdit($rs);
+				$data['facultyList'] = $this->model_student->get_faculty_for_import() ;
+				$data['groupList'] = $this->model_student->get_group_for_import() ;
 				$this->load->view('inc_header');
 				$this->load->view('student/edit',$data);
 				$this->load->view('inc_footer');
 			}
 			else if($_POST) {
-				// 
+				//GET Data from View
 				$faculty = $_POST["FacultyInput"];
 				$group = $_POST["GroupInput"];
-				$degree = $_POST["DegreeInput"];
-				$honor = $_POST["HonorInput"];
+				$honors = $_POST["HonorInput"];
 				$gender = "F" ;
 				if($_POST["THPrefixInput"] == "นาย") $gender = "M" ;
-
+				$order =  $this->model_student->get_last_group_order($group) ;
 				$data = array(
 				"student_id" => $_POST["IDInput"],
 				"th_prefix" => $_POST["THPrefixInput"],
@@ -65,48 +67,20 @@ class Student extends CI_Controller {
 				"gender" => $gender ,
 				"barcode" => $_POST["BarcodeInput"] ,
 				"picture_path" => $_POST["IDInput"].'.'."jpg",
-				"degree" => $degree ,
 				"faculty_id" => $faculty ,
 				"group_id" => $group ,
 				"order" => $order ,
 				"honors" => $honors
 				);
 				$id = $_POST["IDInput"] ;
-				$this->model_student->updateStudent($id,$data)	;		
-				echo "Update" ;
+				$this->model_student->updateStudent($id,$data)	;
+
 				$this->load->view('inc_header');
 				$this->load->view('student/successful',array("opt" => 'edit'));
 				$this->load->view('inc_footer');
 			}
 
-	}/*
-	public function update($opt = "edit"){
-		if($_POST){
-			$faculty = $_POST["FacultyInput"];
-			$group = $_POST["GroupInput"];
-			$degree = $_POST["DegreeInput"];
-			$honor = $_POST["HonorInput"];
-			$gender = "F" ;
-			if($_POST["THPrefixInput"] == "นาย") $gender = "M" ;
-			$data = array(
-				"student_id" => $_POST["IDInput"],
-				"th_prefix" => $_POST["THPrefixInput"],
-				"th_firstname" => $_POST["THFirstnameInput"],
-				"th_lastname" => $_POST["THLastnameInput"],
-				"en_prefix" => $_POST["ENPrefixInput"],
-				"en_firstname" => $_POST["ENFirstnameInput"],
-				"en_lastname" => $_POST["ENLastnameInput"],
-				"gender" => $gender ,
-				"picture_path" => $_POST["IDInput"].'.'."jpg" ,
-				"barcode" => $_POST["BarcodeInput"],
-			);
-		updateStudent($data['student_id'],$data);
-		$array = array('opt' => $opt);
-		$this->load->view('inc_header');
-		$this->load->view('student/successful',$array);
-		$this->load->view('inc_footer');
-		}
-	}*/
+	}
 	public function import()
 	{
 		if($this->input->post('SaveButton')!=null)
@@ -180,7 +154,9 @@ class Student extends CI_Controller {
 			return $this->model_student->addStudent($data);
 	}
 	public function getDataForEdit($id){
-			$r = $this->model_student->get_student_by_id($id);
+				$r = $this->model_student->get_student_by_id($id);
+				$select_fid = $this->model_student->get_faculty_id_by_student($id) ;
+				$group = $this->model_student->get_group_by_student($id) ;
 				$data['student_id'] = $r->student_id ;
 				$data['th_firstname'] = $r->th_firstname ;
 				$data['th_lastname'] = $r->th_lastname ;
@@ -194,6 +170,10 @@ class Student extends CI_Controller {
 				$data['ea'] = $ea ;
 				$data['select_th_prefix'] = $r->th_prefix ; 
 				$data['select_en_prefix'] = $r->en_prefix ;
+				$data['select_fid'] = $select_fid;
+				$data['select_gid'] = $group != NULL ? $group->GROUP_group_id : 0;
+				$data['order'] = $group != NULL ?  $group->order : "-" ;
+				$data['honors'] = $group != NULL ?  $group->honors : 0 ;
 				return $data ;
 	}
 	
