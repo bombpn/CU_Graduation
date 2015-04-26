@@ -63,6 +63,7 @@ class model_group extends CI_Model{
 	public function removeGroup($id){
 		$this->db->where('group_id',$id);
 		if($this->db->get("group")->num_rows() != 0){
+			//Delete Relationship
 			$this->db->where('GROUP_group_id', $id);
 			$this->db->delete('join');
 			$this->db->where('group_id', $id);

@@ -26,22 +26,22 @@
     <input id="SearchIDInput" name="SearchIDInput" type="search" placeholder="" class="form-control input-md">
   </div></div>
   <div class="form-group">
-  <label class="col-md-4 control-label" for="SearchIDInput">ชื่อ (ภาษาไทย)</label>
+  <label class="col-md-4 control-label" for="SearchIDInput">ชื่อ</label>
   <div class="col-md-2">
     <input id="SearchTHFirstnameInput" name="SearchTHFirstnameInput" type="search" placeholder="" class="form-control input-md">
   </div></div>
   <div class="form-group">  
-  <label class="col-md-4 control-label" for="SearchIDInput">นามสกุล (ภาษาไทย)</label>
+  <label class="col-md-4 control-label" for="SearchIDInput">นามสกุล</label>
   <div class="col-md-2">
     <input id="SearchTHLastnameInput" name="SearchTHLastnameInput" type="search" placeholder="" class="form-control input-md">
     </div></div>
     <div class="form-group">
-    <label class="col-md-4 control-label" for="SearchIDInput">ชื่อ (ภาษาอังกฤษ)</label>
+    <label class="col-md-4 control-label" for="SearchIDInput">Firstname</label>
   <div class="col-md-2">
     <input id="SearchENFirstnameInput" name="SearchENFirstnameInput" type="search" placeholder="" class="form-control input-md">
     </div></div>
     <div class="form-group">
-    <label class="col-md-4 control-label" for="SearchIDInput">นามสกุล (ภาษาอังกฤษ)</label>
+    <label class="col-md-4 control-label" for="SearchIDInput">Lastname</label>
   <div class="col-md-2">
     <input id="SearchENLastnameInput" name="SearchENLastnameInput" type="search" placeholder="" class="form-control input-md">
     <br></br>

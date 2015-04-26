@@ -49,7 +49,7 @@
 
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="THPrefixInput">คำนำหน้าชื่อ  (ไทย) </label>
+  <label class="col-md-4 control-label" for="THPrefixInput">คำนำหน้าชื่อ </label>
   <div class="col-md-2">
     <select id="THPrefixInput" name="THPrefixInput" class="form-control" onchange="changeENPrefixValue()">
       <option value="นาย">นาย</option>
@@ -61,7 +61,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="THNameInput">ชื่อ (ไทย)</label>  
+  <label class="col-md-4 control-label" for="THNameInput">ชื่อ</label>  
   <div class="col-md-4">
   <input id="THNameInput" name="THFirstnameInput" type="text" placeholder="" class="form-control input-md" required="">
     
@@ -70,7 +70,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="THLastnameInput">นามสกุล (ไทย)</label>  
+  <label class="col-md-4 control-label" for="THLastnameInput">นามสกุล</label>  
   <div class="col-md-4">
   <input id="THLastnameInput" name="THLastnameInput" type="text" placeholder="" class="form-control input-md" required="">
     
@@ -78,7 +78,7 @@
 </div>
 <!-- Select Basic -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="THPrefixInput">คำนำหน้าชื่อ (อังกฤษ) </label>
+  <label class="col-md-4 control-label" for="THPrefixInput">Prefix</label>
   <div class="col-md-2">
     <select id="ENPrefixInput" name="ENPrefixInput" class="form-control" onchange="changeTHPrefixValue()">
       <option value="Mr.">Mr.</option>
@@ -90,7 +90,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="THNameInput">ชื่อ (อังกฤษ)</label>  
+  <label class="col-md-4 control-label" for="THNameInput">Firstname</label>  
   <div class="col-md-4">
   <input id="THNameInput" name="ENFirstnameInput" type="text" placeholder="" class="form-control input-md" required="">
     
@@ -99,7 +99,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="THLastnameInput">นามสกุล (อังกฤษ)</label>  
+  <label class="col-md-4 control-label" for="THLastnameInput">Lastname</label>  
   <div class="col-md-4">
   <input id="THLastnameInput" name="ENLastnameInput" type="text" placeholder="" class="form-control input-md" required="">
     

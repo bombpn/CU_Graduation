@@ -18,13 +18,13 @@
         	<thead>
         		<tr>
         			<th>รหัสนิสิต</th>
-        			<th>คำนำหน้าชื่อ</th>
-        			<th>ชือภาษาไทย</th>
-        			<th>นามสกุลภาษาไทย</th>
                     <th>คำนำหน้าชื่อ</th>
-                    <th>ชื่อภาษาอังกฤษ</th>
-                    <th>นามสกุลภาษาอังกฤษ</th>
-        			<th>แก้ไข</th>
+                    <th>ชือ</th>
+                    <th>นามสกุล</th>
+                    <th>Prefix</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>แก้ไข</th>
         		<tr>
         	</thead>
         	<tbody>
