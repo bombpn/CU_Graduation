@@ -213,7 +213,7 @@
                                 foreach($last10transaction as $transaction){
                                 ?>
                                     <tr>
-                                        <td><?=$transaction->order;?></td>
+                                        <td><?=$transaction->SCHEDULE_schedule_id;?></td>
                                         <td><?=$transaction->STUDENT_student_id;?></td>
                                         <td><a href="<?=base_url();?>check/remove_trans/<?=$schedule_detail->schedule_id;?>/<?=$attendance_order;?>/<?=$transaction->STUDENT_student_id;?>" class="btn btn-danger btn-xs" onclick="return confirm('ยืนยันการลบการเข้าร่วมของ <?=$transaction->STUDENT_student_id;?>')">Cancel</a></td>
                                     </tr>

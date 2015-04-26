@@ -6,6 +6,13 @@ class model_check extends CI_Model{
 	public function get_all_schedules(){
 		return $this->db->get("schedule")->result();
 	}
+	public function get_all_schedules_current(){
+		$date = date('Y-m-d');
+		$time = date('H:i:s');
+		$sql = "SELECT * FROM schedule WHERE date = '$date' and start_time <= '$time' and end_time >= '$time' ";
+		return $this->db->query($sql)->result();
+		//return $this->db->select('*')->from('schedule')->where('date',$date)->where('start_time <',$time)->where('end_time >',$time)->get()->result();
+	}
 	public function get_schedule_detail($schedule_id){
 		return $this->db->where('schedule_id',$schedule_id)->get("schedule")->row();
 	}
@@ -29,7 +36,7 @@ class model_check extends CI_Model{
 		//echo "<script> alert(" . count($find_by_barcode) . " " . count($find_by_number) . " " . count($find_by_student_id) . ")</script>";
 		$student_id = 0;
 		if(count($find_by_number) == 1) $student_id = $find_by_number[0]->STUDENT_student_id;
-		else if(count($find_by_barcode) == 1) $student_id = $find_by_number[0]->student_id;
+		else if(count($find_by_barcode) == 1) $student_id = $find_by_barcode[0]->student_id;
 		else if(count($find_by_student_id) == 1) $student_id = $find_by_student_id[0]->student_id;
 
 		$ingroup = $this->db->where('STUDENT_student_id',$student_id)->where('GROUP_group_id',$group_id)->get('join')->result();
@@ -82,10 +89,12 @@ class model_check extends CI_Model{
 	}
 	public function get_last_10_transaction(){
 		$last10trans = $this->db->order_by('transaction_time','desc')->limit(10)->get('transaction')->result();
+		/*
 		foreach($last10trans as $trans){
 			$result = $this->db->where('STUDENT_student_id',$trans->STUDENT_student_id)->get('join')->row();
 			$trans->order = $result->order;
 		}
+		*/
 		return $last10trans;
 	}
 	public function remove_transaction($student_id,$schedule_id){

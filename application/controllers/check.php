@@ -6,7 +6,7 @@ class check extends CI_Controller {
 		$this->load->model("model_check","check");
 	}
 	public function index(){
-		$data['allschedule'] = $this->check->get_all_schedules();
+		$data['allschedule'] = $this->check->get_all_schedules_current();
 		$this->load->view('inc_header');
 		$this->load->view('check/home',$data);
 		$this->load->view('inc_footer');
