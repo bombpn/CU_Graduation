@@ -19,6 +19,12 @@ class model_faculty extends CI_Model {
 		return "error";
 	}
 	public function delete_faculty($data) {
+		$this->db->where('FACULTY_faculty_id', $data['faculty_id']);
+		$this->db->delete('teacher_belong_to');
+		
+		$this->db->where('FACULTY_faculty_id', $data['faculty_id']);
+		$this->db->delete('student_belong_to');
+
 		$this->db->where($this->id, $data['faculty_id']);
 		$this->db->delete($this->table);
 		// console.log("[Model]delete success" + $data['faculty_id']);
