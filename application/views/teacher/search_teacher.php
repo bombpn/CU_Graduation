@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            ค้นหารายชื่ออาจารย์ (Search Teacher)
+            ค้นหารายชื่ออาจารย์
         </h1>
         <form class="form-horizontal" action="<?=base_url();?>teacher/search_teacher" method="POST">
                 <fieldset>

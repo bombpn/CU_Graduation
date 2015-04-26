@@ -192,7 +192,7 @@
                                 <a href="<?=base_url(); ?>teacher/">รายชื่ออาจารย์</a>
                             </li>
                             <li>
-                                <a href="#">สถานที่</a>
+                                <a href="<?=base_url(); ?>place/">สถานที่</a>
                             </li>
                             <li>
                                 <a href="<?=base_url(); ?>schedule/">ตารางการซ้อม</a>
