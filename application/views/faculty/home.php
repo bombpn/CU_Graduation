@@ -57,9 +57,9 @@
                 if (confirm("คุณต้องการลบใช่หรือไม่?"))
                 {
                     var parent = $(this).parent().parent().parent();
-                    var formData = { faculty_id : $(this).parent().parent().siblings('.faculty_id').children().attr("value"),
-                              th_faculty_name : $(this).parent().parent().siblings('.th_faculty_name').children().attr("value"),
-                              en_faculty_name : $(this).parent().parent().siblings('.en_faculty_name').children().attr("value")
+                    var formData = { faculty_id : $(this).parent().parent().siblings('.faculty_id').children().text(),
+                              th_faculty_name : $(this).parent().parent().siblings('.th_faculty_name').children().text(),
+                              en_faculty_name : $(this).parent().parent().siblings('.en_faculty_name').children().text()
                     };
                     console.log(formData);
                     $.ajax(
@@ -78,9 +78,19 @@
             });
             $('table#table1 tbody td div button.edit').click(function()
             {
-                $(this).parent().parent().siblings('.th_faculty_name').children().prop('readonly',false);
-                $(this).parent().parent().siblings('.en_faculty_name').children().prop('readonly',false);
+                // $(this).parent().parent().siblings('.th_faculty_name').children().prop('readonly',false);
+                // $(this).parent().parent().siblings('.en_faculty_name').children().prop('readonly',false);
                 // $(this).siblings('.confirm').value = "none";
+                th_name = $(this).parent().parent().siblings('.th_faculty_name');
+                en_name = $(this).parent().parent().siblings('.en_faculty_name');
+                th_name.children(".form-control").attr("value",th_name.children(".text").text());
+                th_name.children(".form-control").attr("style","display: block;");
+                th_name.children(".text").attr("style","display: none;");
+                en_name.children(".form-control").attr("value",en_name.children(".text").text());
+                en_name.children(".form-control").attr("style","display: block;");
+                en_name.children(".text").attr("style","display: none;");
+                
+
                 $(this).parent().attr('style',"display: none;");
                 $(this).parent().siblings('.edit').attr('style',"display: block;");
                 // console.log($(this).siblings('.confirm').attr('style'));
@@ -90,12 +100,21 @@
             {
                 if (confirm("คุณต้องการบันทึกค่าที่แก้ไขใช่หรือไม่?"))
                 {
-                    var formData = { faculty_id : $(this).parent().siblings('.faculty_id').children().attr("value"),
-                                  th_faculty_name : $(this).parent().siblings('.th_faculty_name').children().attr("value"),
-                                  en_faculty_name : $(this).parent().siblings('.en_faculty_name').children().attr("value")
+                    var formData = { faculty_id : $(this).parent().siblings('.faculty_id').children('.form-control').attr("value"),
+                                  th_faculty_name : $(this).parent().siblings('.th_faculty_name').children('.form-control').attr("value"),
+                                  en_faculty_name : $(this).parent().siblings('.en_faculty_name').children('.form-control').attr("value")
                         };
-                    $(this).parent().parent().siblings('.th_faculty_name').children().prop('readonly',true);
-                    $(this).parent().parent().siblings('.en_faculty_name').children().prop('readonly',true);
+                    // $(this).parent().parent().siblings('.th_faculty_name').children().prop('readonly',true);
+                    // $(this).parent().parent().siblings('.en_faculty_name').children().prop('readonly',true);
+
+                    th_name = $(this).parent().parent().siblings('.th_faculty_name');
+                    en_name = $(this).parent().parent().siblings('.en_faculty_name');
+                    th_name.children(".text").text(th_name.children(".form-control").attr('value'));
+                    th_name.children(".form-control").attr("style","display: none;");
+                    th_name.children(".text").attr("style","display: block;");
+                    en_name.children(".text").text(en_name.children(".form-control").attr('value'));
+                    en_name.children(".form-control").attr("style","display: none;");
+                    en_name.children(".text").attr("style","display: block;");
 
                     $(this).parent().siblings('.manage').attr('style',"display: block;");
                     $(this).parent().attr('style',"display: none;");
@@ -116,9 +135,20 @@
             {
                 if (confirm("คุณต้องการยกเลิกใช่หรือไม่?"))
                 {
-                    $(this).parent().parent().siblings('.th_faculty_name').children().prop('readonly',true);
-                    $(this).parent().parent().siblings('.en_faculty_name').children().prop('readonly',true);
+                    // $(this).parent().parent().siblings('.th_faculty_name').children().prop('readonly',true);
+                    // $(this).parent().parent().siblings('.en_faculty_name').children().prop('readonly',true);
                     // $(this).siblings('.confirm').value = "none";
+
+                    th_name = $(this).parent().parent().siblings('.th_faculty_name');
+                    en_name = $(this).parent().parent().siblings('.en_faculty_name');
+                    // th_name.children(".form-control").text(th_name.children(".text").attr('value'));
+                    th_name.children(".form-control").attr("style","display: none;");
+                    th_name.children(".text").attr("style","display: block;");
+                    // en_name.children(".form-control").text(th_name.children(".text").attr('value'));
+                    en_name.children(".form-control").attr("style","display: none;");
+                    en_name.children(".text").attr("style","display: block;");
+
+
                     $(this).parent().siblings('.manage').attr('style',"display: block;");
                     $(this).parent().attr('style',"display: none;");
                 }
@@ -176,7 +206,7 @@
         <table class="table table-striped" id="table1">
         	<thead>
         		<tr>
-                    <th>รหัสคณะ</th>
+                    <th>รหัสคณะ (id)</th>
                     <th>ชื่อคณะ</th>
                     <th>Faculty Name</th>
                     <th>Manage</th>
@@ -215,28 +245,30 @@
                     <!-- <fieldset> -->
 	            		<tr>
 	            			<td class="faculty_id">
-                                <input class="form-control" name="faculty_id" id="faculty_id" value=<?=$faculty->faculty_id;?> readonly>
+                                <text name="faculty_id" id="faculty_id"><?=$faculty->faculty_id;?></text>
                             </td>
                             <td class="th_faculty_name">
-                                <input class="form-control" name="th_faculty_name" id="th_faculty_name" value=<?=$faculty->th_faculty_name;?> readonly>
+                                <text class="text"><?=$faculty->th_faculty_name;?></text>
+                                <input class="form-control" name="th_faculty_name" id="th_faculty_name" style="display: none;">
                             </td>
                             <td class="en_faculty_name">
-                                <input class="form-control" name="en_faculty_name" id="en_faculty_name"  value=<?=$faculty->en_faculty_name;?> readonly>
+                                <text class="text"><?=$faculty->en_faculty_name;?></text>
+                                <input class="form-control" name="en_faculty_name" id="en_faculty_name" style="display: none;">
                             </td>
                             <td>
                                 <div class="manage btn-group">
-                                    <button type = "button" id="edit" class="edit btn btn-primary" value="edit">
+                                    <button type="button" id="edit" class="edit btn btn-primary" value="edit">
                                         <i class="fa fa-pencil"></i>
                                     </button>
-                                    <button type = "button" id="delete" class="delete btn btn-danger">
+                                    <button type="button" id="delete" class="delete btn btn-danger">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </div>
                                 <div class="edit btn-group" style="display: none;">
-                                    <button type = "button" id="confirm" class="confirm btn btn-info" >
+                                    <button type="button" id="confirm" class="confirm btn btn-info" >
                                         <i class="fa fa-check"></i>
                                     </button>
-                                    <button type = "button" id="cancel" class="cancel btn btn-warning">
+                                    <button type="button" id="cancel" class="cancel btn btn-warning">
                                         <i class="fa fa-times"></i>
                                     </button>
                                 </div>
