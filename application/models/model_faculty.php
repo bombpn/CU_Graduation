@@ -14,8 +14,9 @@ class model_faculty extends CI_Model {
 		$this->db->where($this->id, $data['faculty_id']);
 		if($this->db->get($this->table)->num_rows() == 0){
 			$this->db->insert($this->table, $data);
+			return "success";
 		}
-		echo 'Row succesfully inserted!';
+		return "error";
 	}
 	public function delete_faculty($data) {
 		$this->db->where($this->id, $data['faculty_id']);

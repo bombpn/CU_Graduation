@@ -4,7 +4,6 @@
 <head>
 
     <title>CU Graduation</title>
-
 </head>
 
 <body>

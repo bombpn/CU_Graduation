@@ -8,27 +8,27 @@
     <script src="http://malsup.github.com/jquery.form.js"></script> 
     <script type="text/javascript">
         $("document").ready(function() {
-            $("#search").click(function(){
-              //PREPARE FORM DATA
-              event.preventDefault();
-              var formData = { faculty_id : $("#faculty_id_search").val(),
-                              th_faculty_name : $("#th_faculty_name_search").val(),
-                              en_faculty_name : $("#en_faculty_name_search").val()
-              };
-              console.log(formData);
-              //BRING AJAX REQUEST ON!
-              $.ajax({
-                    type: "POST",
-                    url: '<?php echo base_url();?>faculty/search_faculty/>',
-                    dataType: 'json',
-                    data: formData,
-                    success: function(res){
-                      //alert(res.message);
-                      //window.location.href = res.redirect;
-                      // $('#123 td:nth-child(2)').html('<i class="fa fa-pencil"></i>');
-                    }
-                });
-            });//search
+            // $("#search").click(function(){
+            //   //PREPARE FORM DATA
+            //   event.preventDefault();
+            //   var formData = { faculty_id : $("#faculty_id_search").val(),
+            //                   th_faculty_name : $("#th_faculty_name_search").val(),
+            //                   en_faculty_name : $("#en_faculty_name_search").val()
+            //   };
+            //   console.log(formData);
+            //   //BRING AJAX REQUEST ON!
+            //   $.ajax({
+            //         type: "POST",
+            //         url: '<?php echo base_url();?>faculty/search_faculty/>',
+            //         dataType: 'json',
+            //         data: formData,
+            //         success: function(res){
+            //           //alert(res.message);
+            //           //window.location.href = res.redirect;
+            //           // $('#123 td:nth-child(2)').html('<i class="fa fa-pencil"></i>');
+            //         }
+            //     });
+            // });//search
 
             // $("#form1").submit(function(){
             //   //PREPARE FORM DATA
@@ -71,7 +71,8 @@
                         
                            success: function()
                            {
-                                parent.fadeOut('slow', function() {$(this).remove();});
+                                // alert("msg " + res.message);
+                                // parent.fadeOut('slow', function() {$(this).remove();});
                            }
                      });                
                 }
@@ -153,6 +154,18 @@
                     $(this).parent().attr('style',"display: none;");
                 }
             });
+
+            // $('table#table1 tbody tr td button.search').click(function()
+            // {
+            //     var formData = { faculty_id : $(this).parent().siblings('.faculty_id').children().attr("value"),
+            //                       th_faculty_name : $(this).parent().siblings('.th_faculty_name').children().attr("value"),
+            //                       en_faculty_name : $(this).parent().siblings('.en_faculty_name').children().attr("value")
+            //             };
+            // });
+
+
+
+
         });
             // $('.button-primary').click(function(){
             //     alert("reach ajax Hooray!!!");
@@ -213,28 +226,29 @@
                 <tr>
         	</thead>
         	<tbody>
-            <!-- <form action="<?=base_url();?>faculty/search_faculty" method="POST"> -->
+            <form action="<?=base_url();?>faculty/search_faculty" method="POST">
             <!-- <form> -->
-                <fieldset>
-                <tr id="123">
-                    <td>
-                        <input class="form-control" name="faculty_id_search" id="faculty_id_search" placeholder="รหัสคณะ (id)" value=<?=$faculty_id_search;?>>         
+                <!-- <fieldset> -->
+                <tr>
+                    <td class="faculty_id">
+                        <input class="form-control input-md" name="faculty_id" id="faculty_id" placeholder="รหัสคณะ (id)" value=<?=$faculty_id_search;?>>         
+                    </td>
+                    <td class="th_faculty_name">
+                        <input class="form-control input-md" name="th_faculty_name" id="th_faculty_name" placeholder="ชื่อคณะ" value=<?=$th_faculty_name_search;?>>  
+                    </td>
+                    <td class="en_faculty_name">
+                        <input class="form-control input-md" name="en_faculty_name" id="en_faculty_name" placeholder="Faculty Name" value=<?=$en_faculty_name_search;?>>
                     </td>
                     <td>
-                        <input class="form-control" name="th_faculty_name_search" id="th_faculty_name_search" placeholder="ชื่อคณะ" value=<?=$th_faculty_name_search;?>>  
-                    </td>
-                    <td>
-                        <input class="form-control" name="en_faculty_name_search" id="en_faculty_name_search" placeholder="Faculty Name" value=<?=$en_faculty_name_search;?>>
-                    </td>
-                    <td>
-                        <button type="search" class="btn btn-info" id="search" name="search" value="Search">
+                        <!-- <button type="search" class="btn btn-info" id="search" name="search" value="Search">
                             <i class="fa fa-search"></i>
-                        </button>
+                        </button> -->
+                        <input type="submit" class="btn btn-info" value="ค้นหา">
                     </td>
                     
                 </tr>
-                </fieldset>
-            <!-- </form> -->
+                <!-- </fieldset> -->
+            </form>
         		<?php
 	            if(count($allfaculty)>0){
                     // $count = 0;

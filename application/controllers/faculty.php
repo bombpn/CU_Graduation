@@ -16,7 +16,7 @@ class faculty extends CI_Controller {
 	}
 	public function add_faculty(){
 		if($_POST){
-			$this->faculty->add_faculty($_POST);
+			$message = $this->faculty->add_faculty($_POST);
 			redirect("faculty");
 		}
 	}
@@ -24,6 +24,11 @@ class faculty extends CI_Controller {
 		// console.log("[control]try to delete " + $_POST["faculty_id"]);
 		$this->faculty->delete_faculty($_POST);
 		// $this->index();
+		$result = array(
+					'redirect' => 'schedule',
+					'message' => "ADDED SUCCESFULL returning back"
+			);
+		$this->output->set_content_type('application/json')->set_output(json_encode($result));
 	}
 	public function edit_faculty(){
 		if($_POST){
@@ -38,9 +43,9 @@ class faculty extends CI_Controller {
 			$data['faculty_id_search'] = $_POST['faculty_id'];
 			$data['th_faculty_name_search'] = $_POST['th_faculty_name'];
 			$data['en_faculty_name_search'] = $_POST['en_faculty_name'];
-			// $this->load->view('inc_header');
-			// $this->load->view('faculty/home',$data);
-			// $this->load->view('inc_footer');
+			$this->load->view('inc_header');
+			$this->load->view('faculty/home',$data);
+			$this->load->view('inc_footer');
 		}
 	}
 	public function load_add_faculty_page(){
