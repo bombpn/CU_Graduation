@@ -20,6 +20,32 @@
           else if (ep =='Miss') $("#THPrefixInput").val('นางสาว') ;
             
         }
+        function reloadLastOrder(){
+              //PREPARE FORM DATA
+              event.preventDefault();
+              var g = $("#GroupInput").val() ;
+              var formData = { opt : "group_change_on_import" , group_id : g  };
+                      console.log('KKK'); 
+              //BRING AJAX REQUEST ON!
+              $.ajax({
+                    type: "POST",
+                    url: '<?php echo base_url();?>student/update_form/>',
+                    dataType: 'json',
+                    data: formData,
+                    success: function(res){
+                      $("#OrderInput").attr("readonly", false);
+                      $('#OrderInput').val(res.order);
+                      $("#OrderInput").attr("readonly", true);
+
+                      $("#DegreeInput").attr("readonly", false);
+                      $('#DegreeInput').val(res.degree);
+                      $("#DegreeInput").attr("readonly", true); 
+                      //alert(res.message);
+                      //window.location.href = res.redirect;
+                      // $('#123 td:nth-child(2)').html('<i class="fa fa-pencil"></i>');
+                    }
+                });
+            }
     </script>
 </head>
 
@@ -109,7 +135,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="BarcodeInput">บาร์โค้ด</label>  
   <div class="col-md-2">
-  <input id="BarcodeInput" name="BarcodeInput" type="text" placeholder="" class="form-control input-md">
+  <input id="BarcodeInput" name="BarcodeInput" type="text" placeholder="" class="form-control input-md" required="true">
     
   </div>
 </div>
@@ -117,7 +143,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="OrderInput">ลำดับ</label>  
   <div class="col-md-1">
-  <input id="OrderInput" name="OrderInput" type="text" placeholder="" class="form-control input-md">
+  <input id="OrderInput" name="OrderInput" type="text" placeholder="" class="form-control input-md" readonly="true">
     
   </div>
 </div>
@@ -126,7 +152,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="FacultyInput">คณะ</label>
   <div class="col-md-3">
-    <select id="FacultyInput" name="FacultyInput" class="form-control">
+    <select id="FacultyInput" name="FacultyInput" class="form-control" required="true">
       <?php 
         foreach ($facultyList as $fl){
           $fid =  $fl['faculty_id'] ; 
@@ -143,11 +169,12 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="DegreeInput">ปริญญา</label>
   <div class="col-md-2">
-    <select id="DegreeInput" name="DegreeInput" class="form-control">
+    <input id="DegreeInput" name="DegreeInput" type="text" placeholder="" class="form-control input-md" readonly="true">
+    <!-- <select id="DegreeInput" name="DegreeInput" class="form-control" readonly>
       <option value="ปริญญาตรี">ตรี</option>
       <option value="ปริญญาโท">โท</option>
       <option value="ปริญญาเอก">เอก</option>
-    </select>
+    </select> -->
   </div>
 </div>
 
@@ -155,7 +182,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="GroupInput">กลุ่ม</label>
   <div class="col-md-3">
-    <select id="GroupInput" name="GroupInput" class="form-control">
+    <select id="GroupInput" name="GroupInput" class="form-control" onchange="reloadLastOrder()" required="true" >
       <?php 
         foreach ($groupList as $gl){
           $gid =  $gl['group_id'] ; 
@@ -172,7 +199,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="HonorInput">เกียรตินิยม</label>
   <div class="col-md-2">
-    <select id="HonorInput" name="HonorInput" class="form-control">
+    <select id="HonorInput" name="HonorInput" class="form-control" required="true">
       <option value="1">อันดับ 1</option>
       <option value="2">อันดับ 2</option>
       <option value="0">-</option>

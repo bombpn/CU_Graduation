@@ -43,17 +43,6 @@ class model_student extends CI_Model{
 			return false ;
 		}
 	}
-	public function get_last_group_order($id){
-		$this->db->order_by('order','DESC');
-		$this->db->where('GROUP_group_id',$id);
-		$r = $this->db->get('join');
-		$last = $r->row_array() ;
-		$order = 1 ;
-		if(isset($last['order'])) {
-			$order = $last['order']+1;
-		}
-		return  $order ; 
-	}
 	public function get_student($id,$th_firstname,$th_lastname,$en_firstname,$en_lastname){
 		/*$sql = "SELECT * from student where student_id = $id";
 		$rs = $this->db->query($sql) ;*/
@@ -136,6 +125,24 @@ class model_student extends CI_Model{
 		$rs = $this->db->get('join');
 		$fid = $rs->row();
 		return $fid == NULL ? NULL : $fid;
+	}
+	public function get_last_group_order($id){
+		$this->db->order_by('order','DESC');
+		$this->db->where('GROUP_group_id',$id);
+		$r = $this->db->get('join');
+		$last = $r->row_array() ;
+		$order = 1 ;
+		if(isset($last['order'])) {
+			$order = $last['order']+1;
+		}
+		return  $order ; 
+	}
+	public function get_inter_degree_from_group($id){
+		$this->db->select('degree,international');
+		$this->db->where('group_id',$id);
+		$r = $this->db->get('group');
+		$result = $r->row_array() ;
+		return  $result ; 
 	}
 }
 

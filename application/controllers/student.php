@@ -177,7 +177,26 @@ class Student extends CI_Controller {
 				return $data ;
 	}
 	
-       public function genBarcode($id){
-       	return $id ;
+       public function update_form(){
+       		if($_POST['opt']=='group_change_on_import'){
+       			$id = $_POST['group_id'] ;
+       			$r = $this->model_student->get_inter_degree_from_group($id) ;
+       			$result = array (
+       				'order' => $this->model_student->get_last_group_order($id),
+       				'international' => $r['international'] ,
+       				'degree' => $r['degree']
+       				) ;
+       			$this->output->set_content_type('application/json')->set_output(json_encode($result));
+       		}
+       		else if($_POST['opt']=='group_change_on_edit'){
+       			$id = $_POST['group_id'] ;
+       			$r = $this->model_student->get_inter_degree_from_group($id) ;
+       			$result = array (
+       				'order' => $this->model_student->get_last_group_order($id),
+       				'international' => $r['international'] ,
+       				'degree' => $r['degree']
+       				) ;
+       			$this->output->set_content_type('application/json')->set_output(json_encode($result));
+       		}
        }
 }

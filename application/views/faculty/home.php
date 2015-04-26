@@ -30,28 +30,6 @@
                 });
             });//search
 
-            // $("#form1").submit(function(){
-            //   //PREPARE FORM DATA
-            //   alert("reach form Hooray!!!");
-            //   event.preventDefault();
-            //   var formData = { faculty_id : $("#faculty_id").val(),
-            //                   th_faculty_name : $("#input#th_faculty_name").val(),
-            //                   en_faculty_name : $("#input#en_faculty_name").val()
-            //   };
-            //   console.log(formData);
-            //   //BRING AJAX REQUEST ON!
-            //   $.ajax({
-            //         type: "POST",
-            //         url: '<?php echo base_url();?>faculty/delete_faculty/>',
-            //         dataType: 'json',
-            //         data: formData,
-            //         success: function(res){
-            //           //alert(res.message);
-            //           //window.location.href = res.redirect;
-            //           $(form).remove();
-            //         }
-            //     });
-            // });//delete
             $('table#table1 tbody td div button.delete').click(function()
             {
                 if (confirm("คุณต้องการลบใช่หรือไม่?"))
@@ -78,9 +56,6 @@
             });
             $('table#table1 tbody td div button.edit').click(function()
             {
-                // $(this).parent().parent().siblings('.th_faculty_name').children().prop('readonly',false);
-                // $(this).parent().parent().siblings('.en_faculty_name').children().prop('readonly',false);
-                // $(this).siblings('.confirm').value = "none";
                 th_name = $(this).parent().parent().siblings('.th_faculty_name');
                 en_name = $(this).parent().parent().siblings('.en_faculty_name');
                 th_name.children(".form-control").attr("value",th_name.children(".text").text());

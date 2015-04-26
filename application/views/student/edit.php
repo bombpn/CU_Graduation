@@ -4,6 +4,8 @@
     <title>CU Graduation</title>
     <!-- <link href="<?=base_url();?>css/calendar.css" rel="stylesheet"> -->
     <script>
+        var currentOrder = $('#OrderInput').val();
+        var currentGroup = $('#GroupInput').val();
         function changeENPrefixValue(){
           console.log('TH change');
           var tp = $("#THPrefixInput").val() ;
@@ -20,6 +22,31 @@
           else if (ep =='Miss') $("#THPrefixInput").val('นางสาว') ;
             
         }
+        function reloadLastOrder(){
+              //PREPARE FORM DATA
+              event.preventDefault();
+              var g = $("#GroupInput").val() ;
+              var formData = { opt : "group_change_on_edit" , group_id : g  };
+              //BRING AJAX REQUEST ON!
+              $.ajax({
+                    type: "POST",
+                    url: '<?php echo base_url();?>student/update_form/>',
+                    dataType: 'json',
+                    data: formData,
+                    success: function(res){
+                      $("#OrderInput").attr("readonly", false);
+                      $('#OrderInput').val(res.order);
+                      $("#OrderInput").attr("readonly", true);
+                      console.log(currentGroup);
+                      $("#DegreeInput").attr("readonly", false);
+                      $('#DegreeInput').val(res.degree);
+                      $("#DegreeInput").attr("readonly", true); 
+                      //alert(res.message);
+                      //window.location.href = res.redirect;
+                      // $('#123 td:nth-child(2)').html('<i class="fa fa-pencil"></i>');
+                    }
+                });
+            }
     </script>
 </head>
 
@@ -168,7 +195,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="GroupInput">กลุ่ม</label>
   <div class="col-md-2">
-    <select id="GroupInput" name="GroupInput" class="form-control" >
+    <select id="GroupInput" name="GroupInput" class="form-control" onchange="reloadLastOrder()">
       <?php 
       if ($select_gid != 0)
         {
@@ -177,7 +204,7 @@
           $gtname = $gl['th_group_name'] ;
           $gename = $gl['en_group_name'] ;
           if ($select_gid == $gid) echo "<option value='$gid' selected>$gtname $gename</option> ";
-          //else echo "<option value='$gid'>$gtname $gename</option> "; 
+          else echo "<option value='$gid'>$gtname $gename</option> "; 
         }
       }
       else {
