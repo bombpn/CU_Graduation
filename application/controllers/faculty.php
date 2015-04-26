@@ -17,11 +17,12 @@ class faculty extends CI_Controller {
 	public function add_faculty(){
 		if($_POST){
 			$this->faculty->add_faculty($_POST);
-			$this->index();
+			redirect("faculty");
 		}
 	}
 	public function delete_faculty(){
-		$this->faculty->delete_faculty($_POST['faculty_id']);
+		// console.log("[control]try to delete " + $_POST["faculty_id"]);
+		$this->faculty->delete_faculty($_POST);
 		// $this->index();
 	}
 	public function edit_faculty(){

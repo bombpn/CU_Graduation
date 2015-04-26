@@ -4,6 +4,8 @@
 <head>
 
     <title>CU Graduation</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
+    <script src="http://malsup.github.com/jquery.form.js"></script> 
     <script type="text/javascript">
         $("document").ready(function() {
             $("#search").click(function(){
@@ -26,31 +28,120 @@
                       // $('#123 td:nth-child(2)').html('<i class="fa fa-pencil"></i>');
                     }
                 });
+            });//search
+
+            // $("#form1").submit(function(){
+            //   //PREPARE FORM DATA
+            //   alert("reach form Hooray!!!");
+            //   event.preventDefault();
+            //   var formData = { faculty_id : $("#faculty_id").val(),
+            //                   th_faculty_name : $("#input#th_faculty_name").val(),
+            //                   en_faculty_name : $("#input#en_faculty_name").val()
+            //   };
+            //   console.log(formData);
+            //   //BRING AJAX REQUEST ON!
+            //   $.ajax({
+            //         type: "POST",
+            //         url: '<?php echo base_url();?>faculty/delete_faculty/>',
+            //         dataType: 'json',
+            //         data: formData,
+            //         success: function(res){
+            //           //alert(res.message);
+            //           //window.location.href = res.redirect;
+            //           $(form).remove();
+            //         }
+            //     });
+            // });//delete
+            $('table#table1 tbody td div button.delete').click(function()
+            {
+                if (confirm("คุณต้องการลบใช่หรือไม่?"))
+                {
+                    var parent = $(this).parent().parent().parent();
+                    var formData = { faculty_id : $(this).parent().parent().siblings('.faculty_id').children().attr("value"),
+                              th_faculty_name : $(this).parent().parent().siblings('.th_faculty_name').children().attr("value"),
+                              en_faculty_name : $(this).parent().parent().siblings('.en_faculty_name').children().attr("value")
+                    };
+                    console.log(formData);
+                    $.ajax(
+                    {
+                           type: "POST",
+                           url: '<?php echo base_url();?>faculty/delete_faculty/>',
+                           data: formData,
+                           cache: false,
+                        
+                           success: function()
+                           {
+                                parent.fadeOut('slow', function() {$(this).remove();});
+                           }
+                     });                
+                }
             });
-        });//search
-        $("document").ready(function() {
-            $("#form1").submit(function(){
-              //PREPARE FORM DATA
-              event.preventDefault();
-              var formData = { faculty_id : $("#input#faculty_id").val(),
-                              th_faculty_name : $("#input#th_faculty_name").val(),
-                              en_faculty_name : $("#input#en_faculty_name").val()
-              };
-              console.log(formData);
-              //BRING AJAX REQUEST ON!
-              $.ajax({
-                    type: "POST",
-                    url: '<?php echo base_url();?>faculty/delete_faculty/>',
-                    dataType: 'json',
-                    data: formData,
-                    success: function(res){
-                      //alert(res.message);
-                      //window.location.href = res.redirect;
-                      $(form).remove();
-                    }
-                });
-            });//delete
+            $('table#table1 tbody td div button.edit').click(function()
+            {
+                $(this).parent().parent().siblings('.th_faculty_name').children().prop('readonly',false);
+                $(this).parent().parent().siblings('.en_faculty_name').children().prop('readonly',false);
+                // $(this).siblings('.confirm').value = "none";
+                $(this).parent().attr('style',"display: none;");
+                $(this).parent().siblings('.edit').attr('style',"display: block;");
+                // console.log($(this).siblings('.confirm').attr('style'));
+            });
+           
+           $('table#table1 tbody td div button.confirm').click(function()
+            {
+                if (confirm("คุณต้องการบันทึกค่าที่แก้ไขใช่หรือไม่?"))
+                {
+                    var formData = { faculty_id : $(this).parent().siblings('.faculty_id').children().attr("value"),
+                                  th_faculty_name : $(this).parent().siblings('.th_faculty_name').children().attr("value"),
+                                  en_faculty_name : $(this).parent().siblings('.en_faculty_name').children().attr("value")
+                        };
+                    $(this).parent().parent().siblings('.th_faculty_name').children().prop('readonly',true);
+                    $(this).parent().parent().siblings('.en_faculty_name').children().prop('readonly',true);
+
+                    $(this).parent().siblings('.manage').attr('style',"display: block;");
+                    $(this).parent().attr('style',"display: none;");
+                    // $(this).siblings('.confirm').value = "none";
+
+                    console.log(formData);
+                    $.ajax(
+                    {
+                           type: "POST",
+                           url: '<?php echo base_url();?>faculty/edit_faculty/>',
+                           data: formData,
+                           cache: false,
+                     });
+                }
+            });
+            
+            $('table#table1 tbody td div button.cancel').click(function()
+            {
+                if (confirm("คุณต้องการยกเลิกใช่หรือไม่?"))
+                {
+                    $(this).parent().parent().siblings('.th_faculty_name').children().prop('readonly',true);
+                    $(this).parent().parent().siblings('.en_faculty_name').children().prop('readonly',true);
+                    // $(this).siblings('.confirm').value = "none";
+                    $(this).parent().siblings('.manage').attr('style',"display: block;");
+                    $(this).parent().attr('style',"display: none;");
+                }
+            });
         });
+            // $('.button-primary').click(function(){
+            //     alert("reach ajax Hooray!!!");
+            //     console.log('submit clicked!!');
+            //     id = $(this).prev('.id').text();
+            //     p_type = $(this).prev('.p_type').text();
+
+            //     value = [id ,p_type];
+            //     //ajax POST
+            //     $.ajax({
+            //         url: '<?php echo base_url();?>faculty/search_faculty/>',
+            //         type: 'POST',
+            //         data: value,
+            //         success: function() {
+
+            //             console.log('result is show!!');
+            //         }
+            //     });
+            // });   
     </script>
 </head>
 
@@ -82,7 +173,7 @@
         <?php
             }
         ?>
-        <table class="table table-striped">
+        <table class="table table-striped" id="table1">
         	<thead>
         		<tr>
                     <th>รหัสคณะ</th>
@@ -97,7 +188,7 @@
                 <fieldset>
                 <tr id="123">
                     <td>
-                        <input class="form-control" name="faculty_id_search" id="faculty_id_search" placeholder="รหัสคณะ" value=<?=$faculty_id_search;?>>         
+                        <input class="form-control" name="faculty_id_search" id="faculty_id_search" placeholder="รหัสคณะ (id)" value=<?=$faculty_id_search;?>>         
                     </td>
                     <td>
                         <input class="form-control" name="th_faculty_name_search" id="th_faculty_name_search" placeholder="ชื่อคณะ" value=<?=$th_faculty_name_search;?>>  
@@ -110,6 +201,7 @@
                             <i class="fa fa-search"></i>
                         </button>
                     </td>
+                    
                 </tr>
                 </fieldset>
             <!-- </form> -->
@@ -119,35 +211,45 @@
 	            	foreach($allfaculty as $faculty){
 	            ?>
                 <!-- <form action="<?=base_url();?>faculty/load_edit_faculty_page" method="POST"> -->
-                <form id="form1" method="POST">
-                    <fieldset>
+                <!-- <form id="form1" method="POST"> -->
+                    <!-- <fieldset> -->
 	            		<tr>
-	            			<td>
+	            			<td class="faculty_id">
                                 <input class="form-control" name="faculty_id" id="faculty_id" value=<?=$faculty->faculty_id;?> readonly>
                             </td>
-                            <td>
+                            <td class="th_faculty_name">
                                 <input class="form-control" name="th_faculty_name" id="th_faculty_name" value=<?=$faculty->th_faculty_name;?> readonly>
                             </td>
-                            <td>
+                            <td class="en_faculty_name">
                                 <input class="form-control" name="en_faculty_name" id="en_faculty_name"  value=<?=$faculty->en_faculty_name;?> readonly>
                             </td>
                             <td>
-                                <button type="submit" class="btn btn-primary" value="edit">
-                                    <i class="fa fa-pencil"></i>
-                                </button>
-                                <!-- <a href="<?=base_url();?>faculty/load_edit_faculty_page" class="btn btn-primary">
-                                    <i class="fa fa-pencil"></i>
-                                </a> -->
-                                <!-- <a href="<?=base_url();?>faculty/delete_faculty/<?=$faculty->faculty_id;?>" class="btn btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                </a> -->
-                                <button id="delete" class="btn btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                </button>
+                                <div class="manage btn-group">
+                                    <button type = "button" id="edit" class="edit btn btn-primary" value="edit">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                    <button type = "button" id="delete" class="delete btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                                <div class="edit btn-group" style="display: none;">
+                                    <button type = "button" id="confirm" class="confirm btn btn-info" >
+                                        <i class="fa fa-check"></i>
+                                    </button>
+                                    <button type = "button" id="cancel" class="cancel btn btn-warning">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
                             </td>
 	            		</tr>
-                    </fieldset>
-                </form>
+                    <!-- </fieldset> -->
+                <!--/form-->
+                    <!-- <tr>
+                        <td class="id"><?=$faculty->faculty_id;?></td>
+                        <td class="p_type"><?=$faculty->th_faculty_name;?></td>
+                        <td class="en_faculty_name"><?=$faculty->en_faculty_name;?></td>
+                        <td><input class="button-primary btn-primary" type="button" value="Delete"></td>
+                    </tr> -->
 	            <?php
 	            	}
 	            }else{
