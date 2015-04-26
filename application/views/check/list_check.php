@@ -22,6 +22,70 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="<?=base_url();?>/js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript">
+        function edit_transaction(student_id,schedule_id,operations){
+            var url = "<?=base_url();?>index.php/check/";
+            if(operations=='create') url = url + "create_transaction/";
+            else if(operations=='remove') url = url + "remove_transaction/";
+            url = url + student_id + "/" + schedule_id;
+            
+            $.ajax({
+                type: "post",
+                url: url,
+                cache: false,               
+                data: $('#userForm').serialize(),
+                success: function(json){                        
+                    try{        
+                        var obj = jQuery.parseJSON(json);
+                        //alert( obj['STATUS']);
+                                
+                        
+                    }catch(e) {     
+                        //alert('Exception while request..' + e);
+                    }       
+                },
+                error: function(){                      
+                    //alert('Error while request..');
+                }
+            });
+            /*
+            //alert(student_id + " " + schedule_id + " " + operations);
+            
+            //document.write(number + " " + result);
+            var url = "<?=base_url();?>check/";
+            if(operations=='create') url = url + "create_transaction/";
+            else if(operations=='remove') url = url + "remove_transaction/";
+            url = url + student_id + "/" + schedule_id;
+            var pmeters = "CU_GRAD";
+            
+
+            receiveReq = new getHttpRequest();
+            receiveReq.open("POST",url,true);
+            
+            alert("xxx");
+            receiveReq.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            receiveReq.setRequestHeader("Content-length",pmeters.length);
+            receiveReq.setRequestHeader("Connection","close");
+            receiveReq.send(pmeters);
+            
+            receiveReq.onreadystatechange = function(){
+                if(receiveReq.readyState==3){
+                    //document.getElementById("resultx").innerHTML = "Loading";
+                }
+                
+                if(receiveReq.readyState==4){
+                    if(receiveReq.status==200){
+                        //document.getElementById("resultx").innerHTML = receiveReq.responseText;
+                        alert("XXX");
+                    }
+                }
+            }
+            */
+            
+        }
+    </script>
 </head>
 
 <body style="margin-top:15px;padding:0">
@@ -79,7 +143,7 @@
                     <?php
                     foreach($name_list as $student){
                     ?>
-                        <div class="panel panel-green" id="<? //=$student->student_id;?>">
+                        <div class="panel panel-<?=$student->color;?>" id="<?=$student->student_id;?>">
                             <div class="panel-heading">
                                 <div class="row">
                                     <!--h3 class="panel-title">Panel title</h3-->
@@ -93,37 +157,26 @@
                                         <img src="<?=base_url();?>GradPic/<?=$imagePath;?>" class="img-thumbnail" width="100%">
                                     </div>
                                     <div class="col-xs-6 col-sm-4 col-md-2">
-                                        <div class="row btn-group" valign="middle">
-                                            <a href="#" class="btn btn-lg btn-default">
-                                                <i class="fa fa-check-circle fa-2x"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-lg btn-default">
-                                                <i class="fa fa-times-circle fa-2x"></i>
-                                            </a>
+                                        <div class="btn-group" id = "<?=$student->student_id;?>" data-toggle="buttons">
+                                            <label class="btn btn-default <?php if($student->checked == true) echo 'active';?>">
+                                                <input type="radio" name="<?=$student->student_id;?>" id="<?=$student->student_id;?>" autocomplete="off" onchange="javascript:edit_transaction(<?=$student->student_id;?>,<?=$schedule_detail->schedule_id;?>,'create')" <?php if($student->checked == true) echo 'checked';?>> <i class="fa fa-check-circle fa-2x"></i>
+                                            </label>
+                                            <label class="btn btn-default  <?php if($student->checked == false) echo 'active';?>">
+                                                <input type="radio" name="<?=$student->student_id;?>" id="<?=$student->student_id;?>" autocomplete="off" onchange="javascript:edit_transaction(<?=$student->student_id;?>,<?=$schedule_detail->schedule_id;?>,'remove')" <?php if($student->checked == false) echo 'checked';?>> <i class="fa fa-times-circle fa-2x"></i>
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-8">
                                         <div class="col-xs-12">
+                                            <?php if($student->prerequisite){ ?>
+                                                <h3><i class="fa fa-fw fa-times"></i> มาซ้อมไม่ครบ</h3>
+                                            <?php }?>
                                             <h4># <?=$student->order;?> (<?=$student->student_id;?>)</h4>
                                             <h4><?=$student->th_prefix;?><?=$student->th_firstname;?> <?=$student->th_lastname;?></h4>
                                             <h4><?=$student->en_prefix;?><?=$student->en_firstname;?> <?=$student->en_lastname;?></h4>
                                         </div>
                                     </div>
                                 </div>
-                                <!--div class="row" align="center">
-                                    <a href="#" class="btn btn-lg btn-link">
-                                        <i class="fa fa-chevron-left fa-5x vcenter"></i>
-                                    </a>   
-                                    <a href="#" class="btn btn-lg btn-link">
-                                        <i class="fa fa-check-circle fa-5x"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-lg btn-link">
-                                        <i class="fa fa-times-circle fa-5x"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-lg btn-link">
-                                        <i class="fa fa-chevron-right fa-5x"></i>
-                                    </a>
-                                </div-->
                             </div>
                         </div>
                     <?php

@@ -125,12 +125,34 @@ class check extends CI_Controller {
 		$data['active_group'] = $active_group;
 		$data['attendance_order'] = $attendance_order;
 		$data['schedule_detail'] = $this->check->get_schedule_detail($schedule_id);
-        if($active_group > 0) $data['name_list'] = $this->check->get_name_list($active_group);
-        else $data['name_list'] = $this->check->get_extra_list($schedule_id);
+       	$prerequisite = $data['schedule_detail']->round - 1;
+        if($active_group > 0) $name_list = $this->check->get_name_list($active_group);
+        else $name_list = $this->check->get_extra_list($schedule_id);
+
+        foreach($name_list as $student){
+        	if($this->check->inserted_transaction($student->student_id, $schedule_id)) $student->checked = true;
+        	else $student->checked = false;
+
+        	$student->color = 'green';
+        	$student->prerequisite = false;
+			if($this->check->attend_prev($student->student_id, $prerequisite) || $student->checked){
+				$student->prerequisite = false;
+			}else{
+				$student->color = 'red';
+				$student->prerequisite = true;
+			}
+        }
+
+        $data['name_list'] = $name_list;
 		$data['last10transaction'] = $this->check->get_last_10_transaction();
         //$this->load->view('inc_header');
         $this->load->view('check/list_check',$data);
         //$this->load->view('inc_footer');
     }
-
+    public function create_transaction($student_id,$schedule_id){
+    	$this->check->create_transaction($student_id,$schedule_id);
+    }
+    public function remove_transaction($student_id,$schedule_id){
+    	$this->check->remove_transaction($student_id,$schedule_id);
+    }
 }

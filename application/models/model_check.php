@@ -59,13 +59,16 @@ class model_check extends CI_Model{
 		else return false;
 	}
 	public function create_transaction($student_id, $schedule_id){
-		$time = date('Y-m-d H:i:s');
-		$data = array(
-				'STUDENT_student_id' => $student_id,
-				'SCHEDULE_schedule_id' => $schedule_id,
-				'transaction_time' => $time
-			);
-		$this->db->insert('transaction',$data);
+		$result = $this->db->where('STUDENT_student_id',$student_id)->where('SCHEDULE_schedule_id',$schedule_id)->get('transaction')->row();
+		if(count($result)==0){
+			$time = date('Y-m-d H:i:s');
+			$data = array(
+					'STUDENT_student_id' => $student_id,
+					'SCHEDULE_schedule_id' => $schedule_id,
+					'transaction_time' => $time
+				);
+			$this->db->insert('transaction',$data);
+		}
 	}
 	public function attend_prev($student_id, $time_count){
 		$result = $this->db->where('STUDENT_student_id', $student_id)->get('transaction')->result();
