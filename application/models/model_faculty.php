@@ -39,5 +39,12 @@ class model_faculty extends CI_Model {
 		$this->db->like($this->en, $data['en_faculty_name']);
 		return $this->db->get($this->table)->result();
 	}
+	public function has_key_in_faculty($data){
+		$this->db->where($this->id, $data['faculty_id']);
+		if($this->db->get($this->table)->num_rows() == 0){
+			return false;
+		}
+		return true;
+	}
 }
 ?>

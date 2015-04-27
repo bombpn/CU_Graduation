@@ -72,7 +72,7 @@
                            success: function()
                            {
                                 // alert("msg " + res.message);
-                                parent.fadeOut('slow', function() {$(this).remove();});
+                                parent.fadeOut('fast', function() {$(this).remove();});
                            }
                      });                
                 }

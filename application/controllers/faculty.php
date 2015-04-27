@@ -65,4 +65,9 @@ class faculty extends CI_Controller {
 		$temp['en_faculty_name'] = $en_faculty_name;
 		return $temp;
 	}
+
+	public function has_key_in_faculty(){
+		$has_key = $this->faculty->has_key_in_faculty($_POST);
+		$this->output->set_content_type('application/json')->set_output(json_encode($has_key));
+	}
 }
