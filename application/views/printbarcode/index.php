@@ -1,14 +1,14 @@
 <?php
-  $url = base_url()."index.php/";
+  //$url = base_url()."index.php/";
 ?>
     <link href="<?=base_url();?>css/cover.css" rel="stylesheet">
         <div class="cover-container">
             <div class="inner">
-              <h1 class="page-header">พิมพ์บาร์โค้ด</h3>
+              <h1 class="page-header">พิมพ์บาร์โค้ด <small>Print Barcode</small></h3>
               <ul class="nav nav-tabs">
-                <li id="nav-faculties"><a href="javascript:showFaculties()">Faculties</a></li>
-                <li id="nav-individual"><a href="javascript:showIndividual()">Individual</a></li>
-                <li id="nav-batch"><a href="javascript:showBatch()">Batch</a></li>
+                <li id="nav-faculties"><a href="javascript:showFaculties()">คณะ</a></li>
+                <li id="nav-individual"><a href="javascript:showIndividual()">รายบุคคล</a></li>
+                <li id="nav-batch"><a href="javascript:showBatch()">พิมพ์เป็นกลุ่ม</a></li>
               </ul>
             </div>
 
