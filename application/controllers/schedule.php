@@ -154,6 +154,7 @@ class Schedule extends CI_Controller {
 		$fetch['attendList'] = $this->schedule->getAttendList($schedule_id);
 		$fetch['teachers'] = $this->schedule->getAllTeachers();
 		$fetch['conduct_teacher'] = $this->schedule->getTeacherList($schedule_id);
+		$fetch['conduct_teacher2'] = $this->schedule->getTeacherList2($schedule_id);
 		$this->load->view('inc_header');
 		$this->load->view('schedule/edit',$fetch);
 		$this->load->view('inc_footer');

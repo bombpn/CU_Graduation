@@ -146,5 +146,28 @@ class model_schedule extends CI_Model{
 		echo "DROP ".$schedule_id." SUCCESSFULLY";
 	}
 
+
+	public function getTeacherList2($schedule_id){
+
+		/*
+			SELECT `teacher`.`teacher_id` , `teacher`.`th_firstname` , `conduct`.`SCHEDULE_schedule_id` 
+			FROM `teacher` 
+			LEFT JOIN `conduct` 
+			ON `teacher`.`teacher_id` = `conduct`.`TEACHER_teacher_id` 
+			WHERE `SCHEDULE_schedule_id` = 41 
+			->where('conduct.SCHEDULE_schedule_id',$schedule_id)->or_where('SCHEDULE_schedule_id IS NULL')
+
+			->where('conduct.SCHEDULE_schedule_id',$schedule_id)->or_where('conduct.SCHEDULE_schedule_id',NULL)
+			OR `SCHEDULE_schedule_id` IS NULL
+		*/
+
+		$teacher = $this->db->select('teacher.teacher_id,teacher.th_firstname,teacher.th_lastname,conduct.SCHEDULE_schedule_id')
+		->from('teacher')->join('conduct','teacher.teacher_id = conduct.TEACHER_teacher_id','left')
+		->where('conduct.SCHEDULE_schedule_id',$schedule_id)->or_where('conduct.SCHEDULE_schedule_id IS NULL')
+		->get()->result();
+
+		return $teacher;
+	}
+
 }
 ?>

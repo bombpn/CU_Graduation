@@ -73,6 +73,7 @@
                 });
 
                 $("#submit").click(function(){
+                 if(confirm("ยืนยันการส่ง ?")){
                   var formData = { date : $("#datepicker").val(),
                                   start_time : $("#starttime").val(),
                                   end_time : $("#stoptime").val(),
@@ -95,6 +96,7 @@
                       window.location.href = res.redirect;
                     }
                   });
+                }
                 });//submit
             });
     </script>
@@ -141,6 +143,7 @@
                             ?>
                         </tbody>
                       </table>
+
 
         <!-- Form -->
         <form class="form-horizontal">
@@ -201,7 +204,13 @@
                         <?php
                         if(count($groups>0)){
                             foreach($groups as $row){
-                              echo '<option value="'.$row->group_id.'">'.$row->group_id.' : '.$row->th_group_name.'</option>';
+                              echo '<option value="'
+                              .$row->group_id.
+                              '">'.
+                              $row->group_id.
+                              ' : '.
+                              $row->th_group_name.
+                              '</option>';
                             }
                         }else{
                           echo '<option value="">No Group Available</option>';
@@ -300,7 +309,8 @@
                     <?php
                     if(count($teachers>0)){
                         foreach($teachers as $row){
-                          echo '<option value="'.$row->teacher_id.'">'.$row->teacher_id.' : '.$row->th_firstname.' '.$row->th_lastname.'</option>';
+                          echo '<option value="'.$row->teacher_id.'">'
+                          .$row->teacher_id.' : '.$row->th_firstname.' '.$row->th_lastname.'</option>';
                         }
                     }else{
                       echo '<option value="">No Teachers Available</option>';
@@ -340,7 +350,7 @@
                               foreach($conduct_teacher as $row){
                                 echo "<tr>";
                                   echo "<td>";
-                                    echo $row->teacher_id;
+                                    echo $i+1;
                                   echo "</td>";
                                   echo "<td>";
                                     echo $row->teacher_id." : ".$row->th_firstname;
