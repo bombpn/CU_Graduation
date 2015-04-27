@@ -77,11 +77,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THPrefixInput">คำนำหน้าชื่อ </label>
   <div class="col-md-2">
-    <select id="THPrefixInput" name="THPrefixInput" class="form-control" onchange="changeENPrefixValue()">
-      <option value="นาย">นาย</option>
-      <option value="นาง">นาง</option>
-      <option value="นางสาว">นางสาว</option>
-    </select>
+    <input id="THPrefixInput" name="THPrefixInput" class="form-control"></input>
   </div>
 </div>
 
@@ -106,11 +102,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THPrefixInput">Prefix</label>
   <div class="col-md-2">
-    <select id="ENPrefixInput" name="ENPrefixInput" class="form-control" onchange="changeTHPrefixValue()">
-      <option value="Mr.">Mr.</option>
-      <option value="Mrs.">Mrs.</option>
-      <option value="Miss">Miss</option>
-    </select>
+    <input id="ENPrefixInput" name="ENPrefixInput" class="form-control" value"<?=$en_prefix?>"></input>
   </div>
 </div>
 
@@ -131,6 +123,16 @@
     
   </div>
 </div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="GenderInput">เพศ</label>
+  <div class="col-md-2">
+    <select id="GenderInput" name="GenderInput" class="form-control">
+      <option value="M" >ชาย</option>
+      <option value="F" >หญิง</option>
+    </select>
+  </div>
+</div> 
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="BarcodeInput">บาร์โค้ด</label>  

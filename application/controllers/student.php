@@ -48,13 +48,13 @@ class Student extends CI_Controller {
 				$this->load->view('student/edit',$data);
 				$this->load->view('inc_footer');
 			}
-			else if($_POST) {
+			else if(isset($_POST['SaveButton']) {
+				//From Edit VIEW
 				//GET Data from View
 				$faculty = $_POST["FacultyInput"];
 				$group = $_POST["GroupInput"];
 				$honors = $_POST["HonorInput"];
-				$gender = "F" ;
-				if($_POST["THPrefixInput"] == "นาย") $gender = "M" ;
+				$gender = $_POST['gender'] ;
 				$order =  $this->model_student->get_last_group_order($group) ;
 				$data = array(
 				"student_id" => $_POST["IDInput"],
@@ -129,7 +129,7 @@ class Student extends CI_Controller {
 			$group = $POST["GroupInput"];
 			$degree = $POST["DegreeInput"];
 			$honors = $POST["HonorInput"];
-			$gender = "F" ;
+			$gender = $POST["GenderInput"] ;
 			//New student order is the last order in that group.
 			$order = $this->model_student->get_last_group_order($group);
 			if($POST["THPrefixInput"] == "นาย") $gender = "M" ;
@@ -164,12 +164,9 @@ class Student extends CI_Controller {
 				$data['en_lastname'] = $r->en_lastname ; 
 				$data['barcode'] = $r->barcode ;
 				$data['picture_path'] = $r->picture_path ;
-				$ta = array('นาย' ,'นาง' ,'นางสาว');
-				$ea = array('Mr.','Mrs.' ,'Miss');
-				$data['ta'] = $ta ; 
-				$data['ea'] = $ea ;
-				$data['select_th_prefix'] = $r->th_prefix ; 
-				$data['select_en_prefix'] = $r->en_prefix ;
+				$data['th_prefix'] = $r->th_prefix ; 
+				$data['en_prefix'] = $r->en_prefix ;
+				$data['gender'] = $r->gender ;
 				$data['select_fid'] = $select_fid;
 				$data['select_gid'] = $group != NULL ? $group->GROUP_group_id : 0;
 				$data['order'] = $group != NULL ?  $group->order : "-" ;

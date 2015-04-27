@@ -12,7 +12,6 @@
           if(tp =='นาย') $("#ENPrefixInput").val('Mr.') ;
           else if (tp =='นาง') $("#ENPrefixInput").val('Mrs.') ;
           else if (tp =='นางสาว') $("#ENPrefixInput").val('Miss') ;
-            
         }
         function changeTHPrefixValue(){
           console.log('EN change');
@@ -54,7 +53,7 @@
 <!-- Page Heading -->
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header"> แก้ข้อมูลของบัณฑิต <small>Edit Graduate</small>
+        <h1 class="page-header"> แก้ไขข้อมูลของบัณฑิต <small>Edit Graduate</small>
         </h1>
 <form class="form-horizontal" action="<?=base_url();?>student/edit" method="POST">
 <fieldset>
@@ -75,14 +74,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THPrefixInput">คำนำหน้าชื่อ </label>
   <div class="col-md-2">
-    <select id="THPrefixInput" name="THPrefixInput" class="form-control" onchange="changeENPrefixValue()">
-      <?php 
-        foreach ($ta as $th_prefix){
-          if ($select_th_prefix == $th_prefix) echo "<option value='$th_prefix' selected = 'selected' >$th_prefix</option> "; 
-          else echo "<option value='$th_prefix' >$th_prefix</option> "; 
-        }
-      ?>
-    </select>
+    <input id="THPrefixInput" name="THPrefixInput" class="form-control" value"<?=$th_prefix?>"></input>
   </div>
 </div>
 
@@ -107,14 +99,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THPrefixInput">Prefix</label>
   <div class="col-md-2">
-    <select id="ENPrefixInput" name="ENPrefixInput" class="form-control" onchange='changeTHPrefixValue()'>
-      <?php 
-        foreach ($ea as $en_prefix){
-          if ($select_en_prefix == $en_prefix) echo "<option value='$en_prefix' selected = 'selected' >$en_prefix</option> "; 
-          else echo "<option value='$en_prefix' >$en_prefix</option> "; 
-        }
-      ?>
-      </select>
+    <input id="ENPrefixInput" name="ENPrefixInput" class="form-control" value"<?=$en_prefix?>"></input>
   </div>
 </div>
 
@@ -135,6 +120,15 @@
     
   </div>
 </div>
+<div class="form-group">
+  <label class="col-md-4 control-label" for="GenderInput">เพศ</label>
+  <div class="col-md-2">
+    <select id="GenderInput" name="GenderInput" class="form-control">
+      <option value="M" <?php if($gendere == "M") echo 'selected'?>>ชาย</option>
+      <option value="F" <?php if($degree == "F") echo 'selected'?>>หญิง</option>
+    </select>
+  </div>
+</div> 
 <div class="form-group">
   <label class="col-md-4 control-label" for="BarcodeInput">บาร์โค้ด</label>  
   <div class="col-md-2">
@@ -180,7 +174,7 @@
 </div>
 
 <!-- Select Basic -->
-<!-- <div class="form-group">
+<div class="form-group">
   <label class="col-md-4 control-label" for="DegreeInput">ปริญญา</label>
   <div class="col-md-2">
     <select id="DegreeInput" name="DegreeInput" class="form-control">
@@ -189,7 +183,7 @@
       <option value="ปริญญาเอก" <?php if($degree == "ปริญญาเอก") echo 'selected'?>>เอก</option>
     </select>
   </div>
-</div> -->
+</div> 
 
 <!-- Select Basic -->
 <div class="form-group">
