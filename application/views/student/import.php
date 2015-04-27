@@ -4,6 +4,30 @@
     <title>CU Graduation</title>
     <!-- <link href="<?=base_url();?>css/calendar.css" rel="stylesheet"> -->
     <script>
+        $( "#document" ).ready(function() {
+            event.preventDefault();
+              var g = $("#GroupInput").val() ;
+              var formData = { opt : "group_change_on_import" , group_id : g  };
+              //BRING AJAX REQUEST ON!
+              $.ajax({
+                    type: "POST",
+                    url: '<?php echo base_url();?>student/update_form/>',
+                    dataType: 'json',
+                    data: formData,
+                    success: function(res){
+                      $("#OrderInput").attr("readonly", false);
+                      $('#OrderInput').val(res.order);
+                      $("#OrderInput").attr("readonly", true);
+
+                      $("#DegreeInput").attr("readonly", false);
+                      $('#DegreeInput').val(res.degree);
+                      $("#DegreeInput").attr("readonly", true); 
+                      //alert(res.message);
+                      //window.location.href = res.redirect;
+                      // $('#123 td:nth-child(2)').html('<i class="fa fa-pencil"></i>');
+                    }
+                });
+        });
         function changeENPrefixValue(){
           console.log('TH change');
           var tp = $("#THPrefixInput").val() ;
@@ -25,7 +49,6 @@
               event.preventDefault();
               var g = $("#GroupInput").val() ;
               var formData = { opt : "group_change_on_import" , group_id : g  };
-                      console.log('KKK'); 
               //BRING AJAX REQUEST ON!
               $.ajax({
                     type: "POST",
@@ -68,7 +91,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="IDInput">ID</label>  
   <div class="col-md-2">
-  <input id="IDInput" name="IDInput" type="text" class="form-control input-md" required="">
+  <input id="IDInput" name="IDInput" type="text" class="form-control input-md" required="true">
     
   </div>
 </div>
@@ -77,7 +100,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THPrefixInput">คำนำหน้าชื่อ </label>
   <div class="col-md-2">
-    <input id="THPrefixInput" name="THPrefixInput" class="form-control"></input>
+    <input id="THPrefixInput" name="THPrefixInput" type="text" class="form-control input_md" required="true"></input>
   </div>
 </div>
 
@@ -85,7 +108,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THNameInput">ชื่อ</label>  
   <div class="col-md-4">
-  <input id="THNameInput" name="THFirstnameInput" type="text" placeholder="" class="form-control input-md" required="">
+  <input id="THNameInput" name="THFirstnameInput" type="text" placeholder="" class="form-control input-md" required="true">
     
   </div>
 </div>
@@ -94,7 +117,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THLastnameInput">นามสกุล</label>  
   <div class="col-md-4">
-  <input id="THLastnameInput" name="THLastnameInput" type="text" placeholder="" class="form-control input-md" required="">
+  <input id="THLastnameInput" name="THLastnameInput" type="text" placeholder="" class="form-control input-md" required="true">
     
   </div>
 </div>
@@ -102,7 +125,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THPrefixInput">Prefix</label>
   <div class="col-md-2">
-    <input id="ENPrefixInput" name="ENPrefixInput" class="form-control" value"<?=$en_prefix?>"></input>
+    <input id="ENPrefixInput" name="ENPrefixInput" type="text" class="form-control input_md" required="true"></input>
   </div>
 </div>
 
@@ -110,7 +133,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THNameInput">Firstname</label>  
   <div class="col-md-4">
-  <input id="THNameInput" name="ENFirstnameInput" type="text" placeholder="" class="form-control input-md" required="">
+  <input id="THNameInput" name="ENFirstnameInput" type="text" placeholder="" class="form-control input-md" required="true">
     
   </div>
 </div>
@@ -119,13 +142,13 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THLastnameInput">Lastname</label>  
   <div class="col-md-4">
-  <input id="THLastnameInput" name="ENLastnameInput" type="text" placeholder="" class="form-control input-md" required="">
+  <input id="THLastnameInput" name="ENLastnameInput" type="text" placeholder="" class="form-control input-md" required="true">
     
   </div>
 </div>
 
 <div class="form-group">
-  <label class="col-md-4 control-label" for="GenderInput">เพศ</label>
+  <label class="col-md-4 control-label" for="GenderInput" required="true">เพศ</label>
   <div class="col-md-2">
     <select id="GenderInput" name="GenderInput" class="form-control">
       <option value="M" >ชาย</option>
@@ -172,11 +195,6 @@
   <label class="col-md-4 control-label" for="DegreeInput">ปริญญา</label>
   <div class="col-md-2">
     <input id="DegreeInput" name="DegreeInput" type="text" placeholder="" class="form-control input-md" readonly="true">
-    <!-- <select id="DegreeInput" name="DegreeInput" class="form-control" readonly>
-      <option value="ปริญญาตรี">ตรี</option>
-      <option value="ปริญญาโท">โท</option>
-      <option value="ปริญญาเอก">เอก</option>
-    </select> -->
   </div>
 </div>
 
@@ -202,9 +220,9 @@
   <label class="col-md-4 control-label" for="HonorInput">เกียรตินิยม</label>
   <div class="col-md-2">
     <select id="HonorInput" name="HonorInput" class="form-control" required="true">
+      <option value="0">-</option>
       <option value="1">อันดับ 1</option>
       <option value="2">อันดับ 2</option>
-      <option value="0">-</option>
     </select>
   </div>
 </div>

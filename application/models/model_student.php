@@ -144,6 +144,12 @@ class model_student extends CI_Model{
 		$result = $r->row_array() ;
 		return  $result ; 
 	}
+	public function get_degree_student($group_id){
+		$this->db->where('group_id',$group_id);
+		$r = $this->db->get('group');
+		$r = $r->row() ;
+		return $r != NULL ? $r->degree : "" ;
+	}
 }
 
 

@@ -48,7 +48,7 @@ class Student extends CI_Controller {
 				$this->load->view('student/edit',$data);
 				$this->load->view('inc_footer');
 			}
-			else if(isset($_POST['SaveButton']) {
+			else if(isset($_POST['SaveButton'])) {
 				//From Edit VIEW
 				//GET Data from View
 				$faculty = $_POST["FacultyInput"];
@@ -170,6 +170,7 @@ class Student extends CI_Controller {
 				$data['select_fid'] = $select_fid;
 				$data['select_gid'] = $group != NULL ? $group->GROUP_group_id : 0;
 				$data['order'] = $group != NULL ?  $group->order : "-" ;
+				$data['degree'] = $group != NULL ?  $this->model_student->get_degree_student($group->GROUP_group_id) : "" ;
 				$data['honors'] = $group != NULL ?  $group->honors : 0 ;
 				return $data ;
 	}

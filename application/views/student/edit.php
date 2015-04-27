@@ -74,7 +74,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THPrefixInput">คำนำหน้าชื่อ </label>
   <div class="col-md-2">
-    <input id="THPrefixInput" name="THPrefixInput" class="form-control" value"<?=$th_prefix?>"></input>
+    <input id="THPrefixInput" name="THPrefixInput" type="text" class="form-control input_md" value="<?php echo $th_prefix ; ?>"></input>
   </div>
 </div>
 
@@ -99,7 +99,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="THPrefixInput">Prefix</label>
   <div class="col-md-2">
-    <input id="ENPrefixInput" name="ENPrefixInput" class="form-control" value"<?=$en_prefix?>"></input>
+    <input id="ENPrefixInput" name="ENPrefixInput" type="text" class="form-control input_md" value="<?php echo $en_prefix ; ?>"></input>
   </div>
 </div>
 
@@ -124,8 +124,8 @@
   <label class="col-md-4 control-label" for="GenderInput">เพศ</label>
   <div class="col-md-2">
     <select id="GenderInput" name="GenderInput" class="form-control">
-      <option value="M" <?php if($gendere == "M") echo 'selected'?>>ชาย</option>
-      <option value="F" <?php if($degree == "F") echo 'selected'?>>หญิง</option>
+      <option value="M" <?php if($gender == "M") echo 'selected'?>>ชาย</option>
+      <option value="F" <?php if($gender == "F") echo 'selected'?>>หญิง</option>
     </select>
   </div>
 </div> 
@@ -177,10 +177,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="DegreeInput">ปริญญา</label>
   <div class="col-md-2">
-    <select id="DegreeInput" name="DegreeInput" class="form-control">
-      <option value="ปริญญาตรี" <?php if($degree == "ปริญญาตรี") echo 'selected'?>>ตรี</option>
-      <option value="ปริญญาโท" <?php if($degree == "ปริญญาโท") echo 'selected'?>>โท</option>
-      <option value="ปริญญาเอก" <?php if($degree == "ปริญญาเอก") echo 'selected'?>>เอก</option>
+    <input id="DegreeInput" name="DegreeInput" class="form-control" value="<?php echo $degree ; ?>" readonly="true"></input>
     </select>
   </div>
 </div> 
