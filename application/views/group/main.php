@@ -37,7 +37,7 @@
                     $th_name = $r["th_group_name"] ;
                     $en_name = $r["en_group_name"] ;
                     if ($r['international'] =='1')
-                    $international = 'International' ;
+                    $international = 'นานาชาติ' ;
                     else 
                     $international = 'ปกติ' ;
                     $degree = $r['degree'] ;
@@ -50,9 +50,21 @@
                             <td>".$international."</td>
                             <td>".$degree."</td>
                             <td>";
-                        
+                        echo anchor("group/edit/".$group_id ,"แก้ไข",array(
+                        'name'=>'EditButton', 'class'=>'btn btn-info', 
+                        )) ;
+                        echo "&nbsp" ;
                         echo anchor("group/addStudent/".$group_id ,"เพิ่มบัณฑิต",array(
                         'name'=>'ImportButton', 'class'=>'btn btn-primary', 
+                        )) ;
+                        echo "&nbsp" ;
+                        echo anchor("group/viewStudent/".$group_id."/".$th_name ,"รายชื่อบัณฑิต",array(
+                        'name'=>'ViewButton', 'class'=>'btn btn-primary', 
+                        )) ;
+                        echo "&nbsp" ;
+                        echo anchor("group/del/".$group_id , "ลบ" ,array(
+                        "onclick" => "javascript:return confirm('คุณต้องการลบหรือไม่? $group_id $th_name $en_name ');" ,
+                        'name'=>'DeleteButton', 'class'=>'btn btn-danger'
                         )) ;
                         echo "</td>    
                         </tr> 

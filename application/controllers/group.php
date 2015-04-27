@@ -187,7 +187,7 @@ class Group extends CI_Controller {
 					"id" => $id , 
 					"th_name" => $ra['th_group_name'],
 					"en_name" => $ra['en_group_name'] ,
-					"international" => $ra['international'] ,
+					"international" => $ra['international'] == 1 ? "นานาชาติ" : "ปกติ" ,
 					"degree" => $ra['degree']  ));
 				$this->load->view('inc_footer');
 	}

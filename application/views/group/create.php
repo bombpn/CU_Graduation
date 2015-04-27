@@ -28,7 +28,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="IDInput">ชื่อกลุ่ม (ภาษาไทย)</label>  
+  <label class="col-md-4 control-label" for="IDInput">ชื่อ</label>  
   <div class="col-md-2">
   <input id="THNameInput" name="THNameInput" type="text" class="form-control input-md" required="" >
     
@@ -37,7 +37,7 @@
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="IDInput">ชื่อกลุ่ม (ภาษาอังกฤษ)</label>  
+  <label class="col-md-4 control-label" for="IDInput">Name</label>  
   <div class="col-md-2">
   <input id="ENNameInput" name="ENNameInput" type="text" class="form-control input-md" required=""  >
     
@@ -49,7 +49,7 @@
   <div class="col-md-2">
     <select id="InternationalInput" name="InternationalInput" class="form-control">
      <option value="0">ปกติ</option>
-      <option value="1">International</option>
+      <option value="1">นานาชาติ</option>
       </select>
   </div>
 </div>
