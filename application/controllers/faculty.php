@@ -17,18 +17,18 @@ class faculty extends CI_Controller {
 	public function add_faculty(){
 		if($_POST){
 			$message = $this->faculty->add_faculty($_POST);
-			redirect("faculty");
+			$this->output->set_content_type('application/json')->set_output(json_encode($message)); 
 		}
 	}
 	public function delete_faculty(){
 		// console.log("[control]try to delete " + $_POST["faculty_id"]);
 		$this->faculty->delete_faculty($_POST);
 		// $this->index();
-		$result = array(
-					'redirect' => 'schedule',
-					'message' => "ADDED SUCCESFULL returning back"
-			);
-		$this->output->set_content_type('application/json')->set_output(json_encode($result));
+		// $result = array(
+		// 			'redirect' => 'schedule',
+		// 			'message' => "ADDED SUCCESFULL returning back"
+		// 	);
+		// $this->output->set_content_type('application/json')->set_output(json_encode($result));
 	}
 	public function edit_faculty(){
 		if($_POST){
