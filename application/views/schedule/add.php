@@ -62,8 +62,8 @@
                     dataType: 'json',
                     data: formData,
                     success: function(res){
-                      //alert(res.message);
-                      //window.location.href = res.redirect;
+                      alert(res.message);
+                      window.location.href = res.redirect;
                     }
                   });
                 });//submit

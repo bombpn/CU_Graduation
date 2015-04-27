@@ -20,7 +20,6 @@
               var MY_SELECT = $($('select[multiple].chosen').get(0)); // BUG
               $('#groupAdd').click(function(){
                   var selection = MY_SELECT.getSelectionOrder();
-
                   console.log(textGroup);
                   $("#returnedArrangement").find("tr").remove();
                   $('#s1-order-list').empty();
@@ -51,7 +50,8 @@
                                   type : $("#schedule_type").val(),
                                   round : $("#schedule_round").val(),
                                   PLACE_place_id : $("#schedule_place").val(),
-                                  schedule_group_populated : schedule_populated
+                                  schedule_group_populated : schedule_populated,
+                                  schedule_id : $("#schedule_id").val()
                   };
                   console.log(formData);
                   //BRING AJAX REQUEST ON!
@@ -61,8 +61,8 @@
                     dataType: 'json',
                     data: formData,
                     success: function(res){
-                      //alert(res.message);
-                      //window.location.href = res.redirect;
+                      alert(res.message);
+                      window.location.href = res.redirect;
                     }
                   });
                 });//submit
@@ -122,7 +122,8 @@
                   <input class="form-control input-md" type="text" id="datepicker" value="<?=$returnObject['date']?>"></input>
                 </div>
               </div>
-
+              <!--HIDDEN FIELD  -->
+                  <input id="schedule_id" type="hidden" value="<?=$returnObject['schedule_id']?>"></input>
               <!-- Time Picker -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="starttime">Start time : </label>
@@ -198,7 +199,26 @@
                       </tr>
                     </thead>
                     <tbody id="returnedArrangement">
+                        <!-- HERE -->
+                        <?php
+                            if(count($attendList)>0){
+                              $i =0;
+                              foreach($attendList as $row){
+                                echo "<tr>";
+                                  echo "<td>";
+                                    echo $row->attendance_order;
+                                  echo "</td>";
+                                  echo "<td>";
+                                    echo $row->GROUP_group_id." : ".$row->th_group_name;
+                                  echo "</td>";
+                                echo "</tr>";
+                                $i++;
+                              }
+                            }else{
+                              echo " NO DATA ";
+                            }
 
+                        ?>
                     </tbody>
                   </table>
                     </div>

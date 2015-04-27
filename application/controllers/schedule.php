@@ -96,7 +96,7 @@ class Schedule extends CI_Controller {
 
 	public function editResult(){
 		if($_POST){
-				$schedule_id = NULL;
+				$schedule_id = $_POST['schedule_id'];
 				$date=$_POST['date'];
 				$start_time=$_POST['start_time'];
 				$end_time=$_POST['end_time'];
@@ -106,7 +106,6 @@ class Schedule extends CI_Controller {
 				$StudentGroup = $_POST['schedule_group_populated'];
 
 				$data = array(
-					'schedule_id'		=>NULL,
 					'date'			 		=>$date,
 					'start_time'		 =>$start_time,
 					'end_time'			=>$end_time,
@@ -114,12 +113,14 @@ class Schedule extends CI_Controller {
 					'round'					=>$round,
 					'PLACE_place_id'=>$PLACE_place_id
 				);
-				//ADD TO DB
-				//DELETE SCHEDULE_ID FROM ATTEND
-				//ADD WHOLE NEW THING
+				//ADD TO DB PART
+					//DELETE SCHEDULE_ID FROM ATTEND
+					$this->schedule->editSchedule($data,$StudentGroup,$schedule_id);
+
+					//ADD WHOLE NEW THING
 
 				$result = array(
-						'redirect' => 'schedule',
+						'redirect' => '',
 						'message' => "ADDED SUCCESFULL returning back"
 				);
 
@@ -140,12 +141,14 @@ class Schedule extends CI_Controller {
 
 
 		}
+
 	public function editSchedule($schedule_id = null){
 		$fetch['groups'] = $this->schedule->getAllGroups();
 		$fetch['places'] = $this->schedule->getAllPlaces();
 		$fetch['individual'] = $this->schedule->getSchedule($schedule_id);
 		$fetch['returnObject'] = $this->schedule->getDate($schedule_id);
 		$fetch['schedule_id'] = $schedule_id;
+		$fetch['attendList'] = $this->schedule->getAttendList($schedule_id);
 		$this->load->view('inc_header');
 		$this->load->view('schedule/edit',$fetch);
 		$this->load->view('inc_footer');

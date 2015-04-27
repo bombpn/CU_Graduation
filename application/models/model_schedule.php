@@ -32,6 +32,7 @@ class model_schedule extends CI_Model{
 			return $returnObject;
 	}
 
+
 	public function getAllGroups(){
 		return $this->db->get("group")->result();
 	}
@@ -51,22 +52,58 @@ class model_schedule extends CI_Model{
 			$this->db->select_max('schedule_id');
 			$conditioned_schedule = $this->db->get('schedule');
 			$resultRow = $conditioned_schedule->row_array();
-
 			$schedule_id = $resultRow['schedule_id'];
-			//attend[0] = ENG
-			//attend[1] =
-			for(int i = 0 ; i < $attend.length ; i++){
+
+			for($i = 0 ; $i < count($attend) ; $i++){
 				$data_attend = array(
-					'schedule' =>
+					'SCHEDULE_schedule_id' => $schedule_id,
+					'GROUP_group_id'=>$attend[$i],
+					'attendance_order'=>$i+1
 				);
 				$this->db->insert('attend',$data_attend);
 			}
-			//SELECT MAX
-			//GET IT SCHEDULT ID
-			//INSERT ATTEND SCHEDULE ID AND $data[StudentGroup][i]
-			//$this
 			return $data['date'];
+	}
 
+	public function getAttendList($schedule_id){
+
+		/*
+		SELECT `attend`.`attendance_order`,`attend`.`GROUP_group_id`,`group`.`th_group_name`
+		FROM `attend`
+		INNER JOIN `group`
+		ON `attend`.`GROUP_group_id` = `group`.`group_id`
+		WHERE `attend`.`SCHEDULE_schedule_id` = @@@@@$schedule_id@@@@@@
+		ORDER BY `attend`.`attendance_order` ASC
+		*/
+
+		$attendRows = $this->db->select('attend.attendance_order, attend.GROUP_group_id,group.th_group_name')
+		->from('attend')->join('group', 'group.group_id = attend.GROUP_group_id', 'inner')
+		->where('attend.SCHEDULE_schedule_id', $schedule_id)->
+		order_by('attend.attendance_order','ASC')->get()->result();
+
+		return $attendRows;
+
+	}
+
+
+	public function editSchedule($data,$attend,$schedule_id){
+
+		$this->db->where('schedule_id', $schedule_id);
+		$this->db->update('schedule', $data);
+
+			//attend part
+			//Delete All First
+			$this->db->delete('attend', array('SCHEDULE_schedule_id' => $schedule_id));
+			//Reinsert by Forms
+			for($i = 0 ; $i < count($attend) ; $i++){
+				$data_attend = array(
+					'SCHEDULE_schedule_id' => $schedule_id,
+					'GROUP_group_id'=>$attend[$i],
+					'attendance_order'=>$i+1
+				);
+				$this->db->insert('attend',$data_attend);
+			}
+			return $data['date'];
 	}
 
 }
