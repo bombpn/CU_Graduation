@@ -1,6 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-
 class model_schedule extends CI_Model{
 	public function __construct(){
 		parent::__construct();
@@ -32,6 +31,9 @@ class model_schedule extends CI_Model{
 			return $returnObject;
 	}
 
+	public function getAllTeachers(){
+		return $this->db->get("teacher")->result();
+	}
 
 	public function getAllGroups(){
 		return $this->db->get("group")->result();
@@ -47,13 +49,13 @@ class model_schedule extends CI_Model{
 
 	//SETTERS
 
-	public function addScheduleToDB($data,$attend){
+	public function addScheduleToDB($data,$attend,$teachers){
 		  $this->db->insert('schedule',$data);
 			$this->db->select_max('schedule_id');
 			$conditioned_schedule = $this->db->get('schedule');
 			$resultRow = $conditioned_schedule->row_array();
 			$schedule_id = $resultRow['schedule_id'];
-
+			//ATTEND
 			for($i = 0 ; $i < count($attend) ; $i++){
 				$data_attend = array(
 					'SCHEDULE_schedule_id' => $schedule_id,
@@ -62,6 +64,17 @@ class model_schedule extends CI_Model{
 				);
 				$this->db->insert('attend',$data_attend);
 			}
+
+			//CONDUCT = > TEACHER 
+			//ATTEND
+			for($i = 0 ; $i < count($teachers) ; $i++){
+				$teacher_conduct = array(
+					'SCHEDULE_schedule_id' => $schedule_id,
+					'TEACHER_teacher_id'=>$teachers[$i]
+				);
+				$this->db->insert('conduct',$teacher_conduct);
+			}
+
 			return $data['date'];
 	}
 
@@ -84,8 +97,17 @@ class model_schedule extends CI_Model{
 		return $attendRows;
 	}
 
+	public function getTeacherList($schedule_id){
+		$teacherRows =$this->db->select('teacher.teacher_id,teacher.th_firstname')
+		->from('conduct')->join('teacher','conduct.TEACHER_teacher_id = teacher.teacher_id','inner')
+		->where('conduct.SCHEDULE_schedule_id',$schedule_id)->
+		order_by('teacher.teacher_id','ASC')->get()->result();
+		return $teacherRows;
 
-	public function editSchedule($data,$attend,$schedule_id){
+	}
+
+
+	public function editSchedule($data,$attend,$teachers,$schedule_id){
 
 		$this->db->where('schedule_id', $schedule_id);
 		$this->db->update('schedule', $data);
@@ -93,6 +115,7 @@ class model_schedule extends CI_Model{
 			//attend part
 			//Delete All First
 			$this->db->delete('attend', array('SCHEDULE_schedule_id' => $schedule_id));
+			$this->db->delete('conduct', array('SCHEDULE_schedule_id' => $schedule_id));
 			//Reinsert by Forms
 			for($i = 0 ; $i < count($attend) ; $i++){
 				$data_attend = array(
@@ -102,12 +125,24 @@ class model_schedule extends CI_Model{
 				);
 				$this->db->insert('attend',$data_attend);
 			}
+
+			//ATTEND
+			for($i = 0 ; $i < count($teachers) ; $i++){
+				$teacher_conduct = array(
+					'SCHEDULE_schedule_id' => $schedule_id,
+					'TEACHER_teacher_id'=>$teachers[$i]
+				);
+				$this->db->insert('conduct',$teacher_conduct);
+			}
+
 			return $data['date'];
 	}
 
 	public function dropSchedule($schedule_id){
+		$this->db->delete('conduct', array('SCHEDULE_schedule_id' => $schedule_id));
 		$this->db->delete('attend', array('SCHEDULE_schedule_id' => $schedule_id));
 		$this->db->delete('schedule' , array('schedule_id'=>$schedule_id));
+		
 		echo "DROP ".$schedule_id." SUCCESSFULLY";
 	}
 

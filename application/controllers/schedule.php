@@ -70,7 +70,7 @@ class Schedule extends CI_Controller {
 				$round=$_POST['round'];
 				$PLACE_place_id =$_POST['PLACE_place_id'];
 				$StudentGroup = $_POST['schedule_group_populated'];
-
+				$teachers = $_POST['teachers'];
 				$data = array(
 					'schedule_id'		=>NULL,
 					'date'			 		=>$date,
@@ -81,7 +81,7 @@ class Schedule extends CI_Controller {
 					'PLACE_place_id'=>$PLACE_place_id
 				);
 				//ADD TO DB
-				$this->schedule->addScheduleToDB($data,$StudentGroup);
+				$this->schedule->addScheduleToDB($data,$StudentGroup,$teachers);
 				//$this->schedule->addAttendList($)
 				$result = array(
 						'redirect' => 'schedule',
@@ -105,6 +105,7 @@ class Schedule extends CI_Controller {
 				$round=$_POST['round'];
 				$PLACE_place_id =$_POST['PLACE_place_id'];
 				$StudentGroup = $_POST['schedule_group_populated'];
+				$teachers = $_POST['teachers'];
 				//MIGRATING TO ARRAY
 				$data = array(
 					'date'			 		=>$date,
@@ -116,8 +117,9 @@ class Schedule extends CI_Controller {
 				);
 				//ADD TO DB PART
 					//DELETE SCHEDULE_ID FROM ATTEND
+					//DELETE TEACHER_ID FROM CONDUCT
 					//UPDATE EVERYTHING
-					$this->schedule->editSchedule($data,$StudentGroup,$schedule_id);
+					$this->schedule->editSchedule($data,$StudentGroup,$teachers,$schedule_id);
 				//RETURNING MESSAGE TO Ajax HANDLER
 				$result = array(
 						'redirect' => '',
@@ -135,7 +137,7 @@ class Schedule extends CI_Controller {
 
 		$fetch['groups'] = $this->schedule->getAllGroups();
 		$fetch['places'] = $this->schedule->getAllPlaces();
-
+		$fetch['teachers'] = $this->schedule->getAllTeachers();
 			$this->load->view('inc_header');
 			$this->load->view('schedule/add',$fetch);
 			$this->load->view('inc_footer');
@@ -150,6 +152,8 @@ class Schedule extends CI_Controller {
 		$fetch['returnObject'] = $this->schedule->getDate($schedule_id);
 		$fetch['schedule_id'] = $schedule_id;
 		$fetch['attendList'] = $this->schedule->getAttendList($schedule_id);
+		$fetch['teachers'] = $this->schedule->getAllTeachers();
+		$fetch['conduct_teacher'] = $this->schedule->getTeacherList($schedule_id);
 		$this->load->view('inc_header');
 		$this->load->view('schedule/edit',$fetch);
 		$this->load->view('inc_footer');
