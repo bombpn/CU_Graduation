@@ -14,7 +14,7 @@
               var schedule_populated = new Array();
               var textGroup = [];
               $('#schedule_group option').each(function(i){
-                textGroup[i] = $(this).text();
+                textGroup[$(this).val()] = $(this).text();
               });
               $('select[multiple].chosen').chosen();
               var MY_SELECT = $($('select[multiple].chosen').get(0)); // BUG
@@ -23,13 +23,14 @@
                   console.log(textGroup);
                   $("#returnedArrangement").find("tr").remove();
                   $('#s1-order-list').empty();
+                  $('#inform').find("h3").remove();
+                  $("#inform").append("<h3>"+"กรุณากดบันทึกลำดับกลุ่มหลังจากเลือกกลุ่มใหม่"+"</h3>");
                   schedule_populated=[];
                   $(selection).each(function(i){
-                      $('#returnedArrangement').append("<tr><td>"+selection[i]+"</td><td>"+textGroup[selection[i]]+"</td></tr>");
+                      $('#returnedArrangement').append("<tr><td>"+(i+1)+"</td><td>"+textGroup[selection[i]]+"</td></tr>");
                       schedule_populated.push(selection[i]);
                   });
               });
-                console.log("<?=$returnObject['date']?>");
                 $("#datepicker").datepicker({
                   dateFormat: 'yy-mm-dd',
                 });
@@ -41,7 +42,6 @@
                   showSecond: true,
                   timeFormat: 'HH:mm:ss'
                 });
-
 
                 $("#submit").click(function(){
                   var formData = { date : $("#datepicker").val(),
@@ -186,7 +186,7 @@
                     </div>
                   </div>
 
-                  List Group in This Schedule
+                  ข้อมูลลำดับกลุ่ม
                   <!-- RETURN AJAX FETCH SCHEDULE BY schedule_date -->
                   <div class="form-group">
                   <div class="col-md-4"></div>
@@ -215,14 +215,15 @@
                                 $i++;
                               }
                             }else{
-                              echo " NO DATA ";
+                              echo "<tr><td>";
+                              echo "ยังไม่มีข้อมูลลำดับกลุ่ม";
+                              echo "</td></tr>";
                             }
-
                         ?>
                     </tbody>
                   </table>
                     </div>
-                  <div class="col-md-4"></div>
+                  <div class="col-md-4" id="inform"></div>
                 </div>
 
                   <br>

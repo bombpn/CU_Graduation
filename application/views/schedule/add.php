@@ -9,13 +9,12 @@
 
     <script src="<?=base_url();?>/js/chosen.order.jquery.js"></script>
     <script src="<?=base_url();?>/js/jquery-ui-timepicker-addon.js"></script>
-
     <script type="text/javascript">
             $("document").ready(function() {
                 var schedule_populated = new Array();
                 var textGroup = [];
                 $('#schedule_group option').each(function(i){
-                  textGroup[i] = $(this).text();
+                  textGroup[$(this).val()] = $(this).text();
                 });
                 $('select[multiple].chosen').chosen();
                 var MY_SELECT = $($('select[multiple].chosen').get(0)); // BUG
@@ -27,7 +26,7 @@
                     $('#s1-order-list').empty();
                     schedule_populated=[];
                     $(selection).each(function(i){
-                        $('#returnedArrangement').append("<tr><td>"+selection[i]+"</td><td>"+textGroup[selection[i]]+"</td></tr>");
+                        $('#returnedArrangement').append("<tr><td>"+(i+1)+"</td><td>"+textGroup[selection[i]]+"</td></tr>");
                         schedule_populated.push(selection[i]);
                     });
                 });
@@ -169,7 +168,7 @@
                 </div>
               </div>
 
-              List Group in This Schedule
+              ข้อมูลลำดับกลุ่ม
               <!-- RETURN AJAX FETCH SCHEDULE BY schedule_date -->
               <div class="form-group">
               <div class="col-md-4"></div>
@@ -212,7 +211,7 @@
                           '</option>';
                         }
                     }else{
-                      echo '<option value="">No Group Available</option>';
+                      echo '<option value="">ยังไม่มีข้อมูลลำดับกลุ่ม</option>';
                     }
                     ?>
                   </select>

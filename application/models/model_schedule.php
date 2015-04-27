@@ -82,7 +82,6 @@ class model_schedule extends CI_Model{
 		order_by('attend.attendance_order','ASC')->get()->result();
 
 		return $attendRows;
-
 	}
 
 
