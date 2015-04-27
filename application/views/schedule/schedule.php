@@ -30,10 +30,10 @@
             <small>Schedule Manager</small>
         </h1>
       </div>
-        
+
         <div class="col-md-6"><center>
-            <a class="btn btn-primary" href="<?=base_url();?>schedule">Today</a>
-            <a href ="<?=base_url();?>schedule/addSchedule"  class="btn btn-primary" >Add New Group</a>
+            <a class="btn btn-info" href="<?=base_url();?>schedule">กำหนดการทั้งหมด</a>
+            <a href ="<?=base_url();?>schedule/addSchedule"  class="btn btn-primary" >เพิ่มกำหนดการใหม่</a>
             <?php
                 echo $calendars;
               ?>

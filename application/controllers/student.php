@@ -40,27 +40,22 @@ class Student extends CI_Controller {
 
 			if(gettype($rs) == "string" && $rs != "#"){
 				// Edit Student Info with ID
+				// Prepare data for edit view
 				$data = $this->getDataForEdit($rs);
+				$data['facultyList'] = $this->model_student->get_faculty_for_import() ;
+				$data['groupList'] = $this->model_student->get_group_for_import() ;
 				$this->load->view('inc_header');
 				$this->load->view('student/edit',$data);
 				$this->load->view('inc_footer');
 			}
-		    /*
-			else if ($rs == "#") {
-				$var = array ("opt" => "edit") ;
-				$this->load->view('inc_header');
-				$this->load->view('student/search',$var);
-				$this->load->view('inc_footer');
-			}*/
-			else if($_POST) {
-				// 
+			else if(isset($_POST['SaveButton'])) {
+				//From Edit VIEW
+				//GET Data from View
 				$faculty = $_POST["FacultyInput"];
 				$group = $_POST["GroupInput"];
-				$degree = $_POST["DegreeInput"];
-				$honor = $_POST["HonorInput"];
-				$gender = "F" ;
-				if($_POST["THPrefixInput"] == "นาย") $gender = "M" ;
-
+				$honors = $_POST["HonorInput"];
+				$gender = $_POST['gender'] ;
+				$order =  $this->model_student->get_last_group_order($group) ;
 				$data = array(
 				"student_id" => $_POST["IDInput"],
 				"th_prefix" => $_POST["THPrefixInput"],
@@ -70,55 +65,21 @@ class Student extends CI_Controller {
 				"en_firstname" => $_POST["ENFirstnameInput"],
 				"en_lastname" => $_POST["ENLastnameInput"],
 				"gender" => $gender ,
+				"barcode" => $_POST["BarcodeInput"] ,
 				"picture_path" => $_POST["IDInput"].'.'."jpg",
-				"barcode" => $_POST["BarcodeInput"]/*
-				"picture_path" => $_POST[("PicPathInput"),
-				"degree" => $degree ,
-				"faculty" => $faculty ,
-				"group" => $group ,
-				"honor" => $honor */
+				"faculty_id" => $faculty ,
+				"group_id" => $group ,
+				"order" => $order ,
+				"honors" => $honors
 				);
 				$id = $_POST["IDInput"] ;
-				$this->model_student->updateStudent($id,$data)	;		
-				echo "Update" ;
+				$this->model_student->updateStudent($id,$data)	;
+
 				$this->load->view('inc_header');
 				$this->load->view('student/successful',array("opt" => 'edit'));
 				$this->load->view('inc_footer');
 			}
 
-	}
-	public function update($opt = "edit"){
-		if($_POST){
-			$faculty = $_POST["FacultyInput"];
-			$group = $_POST["GroupInput"];
-			$degree = $_POST["DegreeInput"];
-			$honor = $_POST["HonorInput"];
-			$gender = "F" ;
-			if($_POST["THPrefixInput"] == "นาย") $gender = "M" ;
-
-			$data = array(
-				"student_id" => $_POST["IDInput"],
-				"th_prefix" => $_POST["THPrefixInput"],
-				"th_firstname" => $_POST["THFirstnameInput"],
-				"th_lastname" => $_POST["THLastnameInput"],
-				"en_prefix" => $_POST["ENPrefixInput"],
-				"en_firstname" => $_POST["ENFirstnameInput"],
-				"en_lastname" => $_POST["ENLastnameInput"],
-				"gender" => $gender ,
-				"picture_path" => $_POST["IDInput"].'.'."jpg"
-				/*"barcode" => $_POST[("IDInput"),
-				"picture_path" => $_POST[("PicPathInput"),
-				"degree" => $degree ,
-				"faculty" => $faculty ,
-				"group" => $group ,
-				"honor" => $honor */
-			);
-		updateStudent($data['student_id'],$data);
-		$array = array('opt' => $opt);
-		$this->load->view('inc_header');
-		$this->load->view('student/successful',$array);
-		$this->load->view('inc_footer');
-		}
 	}
 	public function import()
 	{
@@ -141,15 +102,17 @@ class Student extends CI_Controller {
 			exit();
 		}
 		else {
+			$facultyList = $this->model_student->get_faculty_for_import() ;
+			$groupList = $this->model_student->get_group_for_import() ;
 			$this->load->view('inc_header');
-			$this->load->view('student/import');
+			$this->load->view('student/import', array('facultyList' => $facultyList , 'groupList' => $groupList));
 			$this->load->view('inc_footer');
 		}
 	}
 
 	public function del($id)
 	{	
-		if ($this->model_student->removeStudent($id)){
+		if ($this->model_student->remove_student($id)){
 				$this->load->view('inc_header');
 				$this->load->view('student/successful',array("opt"=>"del" , "student_id" <= $id ));
 				$this->load->view('inc_footer');
@@ -163,34 +126,37 @@ class Student extends CI_Controller {
 
 	public function saveByForm($POST){
 			$faculty = $POST["FacultyInput"];
-			$group = $_POST["GroupInput"];
-			$degree = $_POST["DegreeInput"];
-			$honor = $_POST["HonorInput"];
-			$gender = "F" ;
-			if($_POST["THPrefixInput"] == "นาย") $gender = "M" ;
+			$group = $POST["GroupInput"];
+			$degree = $POST["DegreeInput"];
+			$honors = $POST["HonorInput"];
+			$gender = $POST["GenderInput"] ;
+			//New student order is the last order in that group.
+			$order = $this->model_student->get_last_group_order($group);
+			if($POST["THPrefixInput"] == "นาย") $gender = "M" ;
 
 			$data = array(
-				"student_id" => $_POST["IDInput"],
-				"th_prefix" => $_POST["THPrefixInput"],
-				"th_firstname" => $_POST["THFirstnameInput"],
-				"th_lastname" => $_POST["THLastnameInput"],
-				"en_prefix" => $_POST["ENPrefixInput"],
-				"en_firstname" => $_POST["ENFirstnameInput"],
-				"en_lastname" => $_POST["ENLastnameInput"],
+				"student_id" => $POST["IDInput"],
+				"th_prefix" => $POST["THPrefixInput"],
+				"th_firstname" => $POST["THFirstnameInput"],
+				"th_lastname" => $POST["THLastnameInput"],
+				"en_prefix" => $POST["ENPrefixInput"],
+				"en_firstname" => $POST["ENFirstnameInput"],
+				"en_lastname" => $POST["ENLastnameInput"],
 				"gender" => $gender ,
-				"barcode" => $_POST["BarcodeInput"] ,
-				"picture_path" => $_POST["IDInput"].'.'."jpg"
-				/*"barcode" => $_POST[("IDInput"),
-				"picture_path" => $_POST[("PicPathInput"),
+				"barcode" => $POST["BarcodeInput"] ,
+				"picture_path" => $POST["IDInput"].'.'."jpg",
 				"degree" => $degree ,
-				"faculty" => $faculty ,
-				"group" => $group ,
-				"honor" => $honor */
+				"faculty_id" => $faculty ,
+				"group_id" => $group ,
+				"order" => $order ,
+				"honors" => $honors
 			);			
 			return $this->model_student->addStudent($data);
 	}
 	public function getDataForEdit($id){
-			$r = $this->model_student->get_student_by_id($id);
+				$r = $this->model_student->get_student_by_id($id);
+				$select_fid = $this->model_student->get_faculty_id_by_student($id) ;
+				$group = $this->model_student->get_group_by_student($id) ;
 				$data['student_id'] = $r->student_id ;
 				$data['th_firstname'] = $r->th_firstname ;
 				$data['th_lastname'] = $r->th_lastname ;
@@ -198,16 +164,37 @@ class Student extends CI_Controller {
 				$data['en_lastname'] = $r->en_lastname ; 
 				$data['barcode'] = $r->barcode ;
 				$data['picture_path'] = $r->picture_path ;
-				$ta = array('นาย' ,'นาง' ,'นางสาว');
-				$ea = array('Mr.','Mrs.' ,'Miss');
-				$data['ta'] = $ta ; 
-				$data['ea'] = $ea ;
-				$data['select_th_prefix'] = $r->th_prefix ; 
-				$data['select_en_prefix'] = $r->en_prefix ;
+				$data['th_prefix'] = $r->th_prefix ; 
+				$data['en_prefix'] = $r->en_prefix ;
+				$data['gender'] = $r->gender ;
+				$data['select_fid'] = $select_fid;
+				$data['select_gid'] = $group != NULL ? $group->GROUP_group_id : 0;
+				$data['order'] = $group != NULL ?  $group->order : "-" ;
+				$data['degree'] = $group != NULL ?  $this->model_student->get_degree_student($group->GROUP_group_id) : "" ;
+				$data['honors'] = $group != NULL ?  $group->honors : 0 ;
 				return $data ;
 	}
 	
-       public function genBarcode($id){
-       	return $id ;
+       public function update_form(){
+       		if($_POST['opt']=='group_change_on_import'){
+       			$id = $_POST['group_id'] ;
+       			$r = $this->model_student->get_inter_degree_from_group($id) ;
+       			$result = array (
+       				'order' => $this->model_student->get_last_group_order($id),
+       				'international' => $r['international'] ,
+       				'degree' => $r['degree']
+       				) ;
+       			$this->output->set_content_type('application/json')->set_output(json_encode($result));
+       		}
+       		else if($_POST['opt']=='group_change_on_edit'){
+       			$id = $_POST['group_id'] ;
+       			$r = $this->model_student->get_inter_degree_from_group($id) ;
+       			$result = array (
+       				'order' => $this->model_student->get_last_group_order($id),
+       				'international' => $r['international'] ,
+       				'degree' => $r['degree']
+       				) ;
+       			$this->output->set_content_type('application/json')->set_output(json_encode($result));
+       		}
        }
 }

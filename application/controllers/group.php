@@ -9,9 +9,11 @@ class Group extends CI_Controller {
 	}
 
 	public function index()
-	{
+	{			
+
+				$data = $this->model_group->get_all_group() ;
 				$this->load->view('inc_header');
-				$this->load->view('group/main');
+				$this->load->view('group/main',array("result" => $data));
 				$this->load->view('inc_footer');
 	}
 	public function search($id=0)
@@ -136,14 +138,6 @@ class Group extends CI_Controller {
 			$this->load->view('inc_footer');
 		}
 	}
-	public function import()
-	{
-			$data = $this->model_group->get_all_group() ;
-			$this->load->view('inc_header');
-			$this->load->view('group/import',array("result" => $data));
-			$this->load->view('inc_footer');
-	}
-
 	public function del($id)
 	{	
 		if ($this->model_group->removeGroup($id)){
@@ -189,7 +183,12 @@ class Group extends CI_Controller {
 	public function addStudent($id){
 				$ra = $this->model_group->get_group_by_id($id) ;
 				$this->load->view('inc_header');
-				$this->load->view('group/upload',array("id" => $id , "name" => $ra['th_group_name'] ));
+				$this->load->view('group/upload',array(
+					"id" => $id , 
+					"th_name" => $ra['th_group_name'],
+					"en_name" => $ra['en_group_name'] ,
+					"international" => $ra['international'] == 1 ? "นานาชาติ" : "ปกติ" ,
+					"degree" => $ra['degree']  ));
 				$this->load->view('inc_footer');
 	}
 	public function uploadCSV(){
@@ -256,22 +255,12 @@ class Group extends CI_Controller {
                 $data['gender'] = 	$field['gender'] ;
 				$data['picture_path'] = $field['student_id'].'.jpg' ;
                 $data['barcode'] = 	$field['barcode'] ;
+                $data['faculty_id'] = $field['faculty_id'] ;
+                $data['group_id'] = $group_id ;
+                $data['honors'] = $field['honors'] ;
+                $data['order'] = $count ;
                 // Add new student
                 $this->model_student->addStudent($data) ;
-                // Add student to group id : $group_id
-                $join = array(
-                	'STUDENT_student_id' =>$data['student_id'] ,
-                	'GROUP_group_id' =>$group_id ,
-                	'order' => $count ,
-                	'honors' => $field['honors']
-                	);
-                $this->model_group->addJoin($join) ;
-                // Add student to faculty : $field['faculty_id']
-                $belong = array(
-                	'STUDENT_student_id' =>$data['student_id'] ,
-                	'FACULTY_faculty_id' =>$field['faculty_id']
-                	);
-                $this->model_group->addBelong($belong) ;
                 
                 $count++;
                }

@@ -14,12 +14,20 @@ class model_faculty extends CI_Model {
 		$this->db->where($this->id, $data['faculty_id']);
 		if($this->db->get($this->table)->num_rows() == 0){
 			$this->db->insert($this->table, $data);
+			return "success";
 		}
-		echo 'Row succesfully inserted!';
+		return "error";
 	}
-	public function delete_faculty($faculty_id) {
-		$this->db->where($this->id, $faculty_id);
+	public function delete_faculty($data) {
+		$this->db->where('FACULTY_faculty_id', $data['faculty_id']);
+		$this->db->delete('teacher_belong_to');
+		
+		$this->db->where('FACULTY_faculty_id', $data['faculty_id']);
+		$this->db->delete('student_belong_to');
+
+		$this->db->where($this->id, $data['faculty_id']);
 		$this->db->delete($this->table);
+		// console.log("[Model]delete success" + $data['faculty_id']);
 	}
 	public function edit_faculty($data) {
 		$this->db->where($this->id, $data['faculty_id']);
@@ -30,6 +38,13 @@ class model_faculty extends CI_Model {
 		$this->db->like($this->th, $data['th_faculty_name']);
 		$this->db->like($this->en, $data['en_faculty_name']);
 		return $this->db->get($this->table)->result();
+	}
+	public function has_key_in_faculty($data){
+		$this->db->where($this->id, $data['faculty_id']);
+		if($this->db->get($this->table)->num_rows() == 0){
+			return false;
+		}
+		return true;
 	}
 }
 ?>

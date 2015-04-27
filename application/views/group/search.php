@@ -26,12 +26,12 @@
     <input id="SearchIDInput" name="SearchIDInput" type="search" placeholder="" class="form-control input-md">
   </div></div>
   <div class="form-group">
-  <label class="col-md-4 control-label" for="SearchIDInput">ชื่อกลุ่ม (ภาษาไทย)</label>
+  <label class="col-md-4 control-label" for="SearchIDInput">ชื่อ</label>
   <div class="col-md-2">
     <input id="SearchTHNameInput" name="SearchTHNameInput" type="search" placeholder="" class="form-control input-md">
   </div></div>
     <div class="form-group">
-    <label class="col-md-4 control-label" for="SearchIDInput">ชื่อกลุ่ม (ภาษาอังกฤษ)</label>
+    <label class="col-md-4 control-label" for="SearchIDInput">Name</label>
   <div class="col-md-2">
     <input id="SearchENNameInput" name="SearchENNameInput" type="search" placeholder="" class="form-control input-md">
     </div></div>

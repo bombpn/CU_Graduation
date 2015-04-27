@@ -77,7 +77,7 @@ class teacher extends CI_Controller {
 			$data['edit_teacher_temp'] = $this->teacher->get_teacher($teacher_id);
 			$data['allfaculty'] = $this->teacher->get_other_table('faculty');
 			$this->load->view('inc_header');
-			$this->load->view('teacher/edit_teacher', $data);
+			$this->load->view('teacher/add_teacher', $data);
 			$this->load->view('inc_footer');
 	}
 	//
@@ -86,5 +86,10 @@ class teacher extends CI_Controller {
 			$this->load->view('inc_header');
 			$this->load->view('teacher/search_teacher', $data);
 			$this->load->view('inc_footer');
+	}
+	//
+	public function has_key_in_teacher(){
+		$has_key = $this->teacher->has_key_in_teacher($_POST);
+		$this->output->set_content_type('application/json')->set_output(json_encode($has_key));
 	}
 }
