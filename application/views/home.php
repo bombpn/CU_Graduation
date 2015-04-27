@@ -11,13 +11,24 @@
 <!-- Page Heading -->
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">
-            หน้าแรก
-            <small>Subheading</small>
-        </h1>
-        CONTENT
+    	<br>
+    	<div class="jumbotron">
+			  <h2>ยินดีต้อนรับเข้าสู่ระบบ</h2>
+			  <br><hr>
+			  ยินดีต้อนรับเข้าสู่ระบบจัดการบัณฑิตในพิธีพระราชทานปริญญาบัติ
+		</div>
+
+		<div class="col-md-8">
+				ส่วนของประกาศต่างๆ 
+				<br>
+
+		</div>
+		<div class="col-md-4">
+		</div>
+
+       
     </div>
-</div>
+</div><br><br>
 <!-- /.row -->
 </body>
 </html>

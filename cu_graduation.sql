@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2015 at 10:07 AM
+-- Generation Time: Apr 26, 2015 at 09:58 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -37,8 +37,11 @@ CREATE TABLE IF NOT EXISTS `attend` (
 --
 
 INSERT INTO `attend` (`GROUP_group_id`, `SCHEDULE_schedule_id`, `attendance_order`) VALUES
-(1, 1, 1),
-(2, 1, 2);
+(1, 4, 1),
+(1, 13, 1),
+(2, 1, 1),
+(2, 13, 2),
+(3, 14, 1);
 
 -- --------------------------------------------------------
 
@@ -54,14 +57,22 @@ CREATE TABLE IF NOT EXISTS `conduct` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `extra_extend`
+-- Table structure for table `extra_attend`
 --
 
-CREATE TABLE IF NOT EXISTS `extra_extend` (
+CREATE TABLE IF NOT EXISTS `extra_attend` (
   `STUDENT_student_id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `SCHEDULE_schedule_id` int(11) NOT NULL,
   `TEACHER_teacher_id` varchar(10) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `extra_attend`
+--
+
+INSERT INTO `extra_attend` (`STUDENT_student_id`, `SCHEDULE_schedule_id`, `TEACHER_teacher_id`) VALUES
+('4771863721', 2, 'AAAA'),
+('5271802221', 2, 'AAAA');
 
 -- --------------------------------------------------------
 
@@ -94,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `group` (
   `en_group_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `international` tinyint(1) DEFAULT NULL,
   `degree` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `group`
@@ -102,7 +113,8 @@ CREATE TABLE IF NOT EXISTS `group` (
 
 INSERT INTO `group` (`group_id`, `th_group_name`, `en_group_name`, `international`, `degree`) VALUES
 (1, 'วิศวกรรมศาสตร์ปริญญาตรี', 'Undergraduation Engineering', 0, 'ปริญญาตรี'),
-(2, 'วิศวกรรมศาสตร์ปริญญาโท-เอก', 'Graduate Engineering', 0, 'ปริญญาโท-เอก');
+(2, 'วิศวกรรมศาสตร์ปริญญาโท-เอก', 'Graduate Engineering', 0, 'ปริญญาโท-เอก'),
+(3, 'ทดสอบ', 'Test', 0, 'ปริญญาตรี');
 
 -- --------------------------------------------------------
 
@@ -123,6 +135,7 @@ CREATE TABLE IF NOT EXISTS `join` (
 
 INSERT INTO `join` (`STUDENT_student_id`, `GROUP_group_id`, `order`, `honors`) VALUES
 ('4771863721', 2, 16, 'วิศวกรรมศาสตร์บัณฑิต'),
+('4771863721', 3, 1, 'ทดสอบทดสอบ'),
 ('4830532321', 1, 629, 'วิศวกรรมศาสตร์บัณฑิต'),
 ('4871802521', 2, 3, 'วิศวกรรมศาสตร์บัณฑิต'),
 ('4871862121', 2, 7, 'วิศวกรรมศาสตร์บัณฑิต'),
@@ -701,9 +714,9 @@ INSERT INTO `join` (`STUDENT_student_id`, `GROUP_group_id`, `order`, `honors`) V
 ('5330823821', 1, 567, 'วิศวกรรมศาสตร์บัณฑิต'),
 ('5330824421', 1, 74, 'วิศวกรรมศาสตร์บัณฑิต'),
 ('5330825021', 1, 206, 'วิศวกรรมศาสตร์บัณฑิต'),
-('5330826721', 1, 582, 'วิศวกรรมศาสตร์บัณฑิต'),
-('5330830121', 1, 601, 'วิศวกรรมศาสตร์บัณฑิต');
+('5330826721', 1, 582, 'วิศวกรรมศาสตร์บัณฑิต');
 INSERT INTO `join` (`STUDENT_student_id`, `GROUP_group_id`, `order`, `honors`) VALUES
+('5330830121', 1, 601, 'วิศวกรรมศาสตร์บัณฑิต'),
 ('5330833021', 1, 684, 'วิศวกรรมศาสตร์บัณฑิต'),
 ('5330834721', 1, 644, 'วิศวกรรมศาสตร์บัณฑิต'),
 ('5330901021', 1, 490, 'วิศวกรรมศาสตร์บัณฑิต'),
@@ -1252,15 +1265,27 @@ CREATE TABLE IF NOT EXISTS `schedule` (
   `type` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `round` int(11) DEFAULT NULL,
   `PLACE_place_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `schedule`
 --
 
 INSERT INTO `schedule` (`schedule_id`, `date`, `start_time`, `end_time`, `type`, `round`, `PLACE_place_id`) VALUES
-(1, '2015-04-20', '08:00:00', '12:00:00', 'Practice', 1, 1),
-(2, '2015-04-21', '08:00:00', '12:00:00', 'Practice', 1, 1);
+(1, '2015-04-20', '08:00:00', '12:00:00', 'Practice', 2, 1),
+(2, '2015-04-21', '08:00:00', '12:00:00', 'Practice', 1, 1),
+(3, '2015-04-26', '16:00:00', '18:00:00', 'Practice', 1, 1),
+(4, '2015-04-26', '16:00:00', '20:00:00', 'Practice', 1, 1),
+(5, '2015-04-26', '16:00:00', '20:00:00', 'Practice', 1, 1),
+(6, '2015-04-26', '16:00:00', '20:00:00', 'Practice', 1, 1),
+(7, '2015-04-26', '16:00:00', '20:00:00', 'Practice', 1, 1),
+(8, '2015-04-26', '16:00:00', '20:00:00', 'Practice', 1, 1),
+(9, '2015-04-26', '16:00:00', '20:00:00', 'Practice', 1, 1),
+(10, '2015-04-26', '16:00:00', '20:00:00', 'Practice', 1, 1),
+(11, '2015-04-26', '16:00:00', '20:00:00', 'Practice', 1, 1),
+(12, '2015-04-26', '16:00:00', '20:00:00', 'Practice', 1, 1),
+(13, '2015-04-26', '11:00:00', '23:00:00', 'Practice', 1, 1),
+(14, '2015-04-27', '01:00:00', '23:00:00', 'Practice', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1286,8 +1311,8 @@ CREATE TABLE IF NOT EXISTS `student` (
 --
 
 INSERT INTO `student` (`student_id`, `th_prefix`, `th_firstname`, `th_lastname`, `en_prefix`, `en_firstname`, `en_lastname`, `gender`, `barcode`, `picture_path`) VALUES
-('4771863721', 'นางสาว', 'รัศมีทิพย์', 'วิตา', 'Ms.', 'Firstname', 'Lastname', 'F', '2.0021E+13', '4771863721.jpg'),
-('4830532321', 'นาย', 'สราวุธ', 'ลิขิตสิทธิกุล', 'Mr.', 'Firstname', 'Lastname', 'M', '2.0021E+13', '4830532321.jpg'),
+('4771863721', 'นางสาว', 'รัศมีทิพย์', 'วิตา', 'Ms.', 'Firstname', 'Lastname', 'F', 'ABCDEFGHIJKL', '4771863721.jpg'),
+('4830532321', 'นาย', 'สราวุธ', 'ลิขิตสิทธิกุล', 'Mr.', 'Firstname', 'Lastname', 'M', 'ABCDEFGHJIKLKKK', '4830532321.jpg'),
 ('4871802521', 'นางสาว', 'ขวัญชนก', 'จันทร์สว่าง', 'Ms.', 'Firstname', 'Lastname', 'F', '2.0021E+13', '4871802521.jpg'),
 ('4871862121', 'นาย', 'ดวงมีชัย', 'ดวนสุวรรณ', 'Mr.', 'Firstname', 'Lastname', 'M', '2.0021E+13', '4871862121.jpg'),
 ('4971871921', 'นาย', 'พงศกรณ์', 'วิจิตเวชไพศาล', 'Mr.', 'Firstname', 'Lastname', 'M', '2.0021E+13', '4971871921.jpg'),
@@ -3506,6 +3531,13 @@ CREATE TABLE IF NOT EXISTS `teacher` (
   `tel_number` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `teacher`
+--
+
+INSERT INTO `teacher` (`teacher_id`, `th_prefix`, `th_firstname`, `th_lastname`, `en_prefix`, `en_firstname`, `en_lastname`, `tel_number`) VALUES
+('AAAA', 'นาย', 'เอ', 'บี', 'Mr.', 'A', 'B', '0812345678');
+
 -- --------------------------------------------------------
 
 --
@@ -3529,6 +3561,23 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `seat` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `transaction_time` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `transaction`
+--
+
+INSERT INTO `transaction` (`STUDENT_student_id`, `SCHEDULE_schedule_id`, `seat`, `transaction_time`) VALUES
+('4771863721', 13, NULL, '2015-04-26 15:47:05'),
+('4771863721', 14, NULL, '2015-04-26 15:47:15'),
+('5330012121', 13, NULL, '2015-04-26 21:56:03'),
+('5330027621', 13, NULL, '2015-04-26 21:56:05'),
+('5330034021', 13, NULL, '2015-04-26 21:56:06'),
+('5330047121', 13, NULL, '2015-04-26 21:56:07'),
+('5330056821', 13, NULL, '2015-04-26 21:56:08'),
+('5331001421', 13, NULL, '2015-04-26 21:56:01'),
+('5331004321', 13, NULL, '2015-04-26 21:56:07'),
+('5331006621', 13, NULL, '2015-04-26 21:56:09'),
+('5331204521', 13, NULL, '2015-04-26 21:56:04');
 
 -- --------------------------------------------------------
 
@@ -3558,9 +3607,9 @@ ALTER TABLE `conduct`
  ADD PRIMARY KEY (`TEACHER_teacher_id`,`SCHEDULE_schedule_id`), ADD KEY `fk_TEACHER_has_SCHEDULE_SCHEDULE1_idx` (`SCHEDULE_schedule_id`), ADD KEY `fk_TEACHER_has_SCHEDULE_TEACHER1_idx` (`TEACHER_teacher_id`);
 
 --
--- Indexes for table `extra_extend`
+-- Indexes for table `extra_attend`
 --
-ALTER TABLE `extra_extend`
+ALTER TABLE `extra_attend`
  ADD PRIMARY KEY (`STUDENT_student_id`,`SCHEDULE_schedule_id`), ADD KEY `fk_STUDENT_has_SCHEDULE_SCHEDULE2_idx` (`SCHEDULE_schedule_id`), ADD KEY `fk_STUDENT_has_SCHEDULE_STUDENT2_idx` (`STUDENT_student_id`), ADD KEY `fk_EXTRA_EXTEND_TEACHER1_idx` (`TEACHER_teacher_id`);
 
 --
@@ -3637,7 +3686,7 @@ ALTER TABLE `vip_seats`
 -- AUTO_INCREMENT for table `group`
 --
 ALTER TABLE `group`
-MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `place`
 --
@@ -3647,7 +3696,7 @@ MODIFY `place_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- Constraints for dumped tables
 --
@@ -3667,9 +3716,9 @@ ADD CONSTRAINT `fk_TEACHER_has_SCHEDULE_SCHEDULE1` FOREIGN KEY (`SCHEDULE_schedu
 ADD CONSTRAINT `fk_TEACHER_has_SCHEDULE_TEACHER1` FOREIGN KEY (`TEACHER_teacher_id`) REFERENCES `teacher` (`teacher_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `extra_extend`
+-- Constraints for table `extra_attend`
 --
-ALTER TABLE `extra_extend`
+ALTER TABLE `extra_attend`
 ADD CONSTRAINT `fk_EXTRA_EXTEND_TEACHER1` FOREIGN KEY (`TEACHER_teacher_id`) REFERENCES `teacher` (`teacher_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
 ADD CONSTRAINT `fk_STUDENT_has_SCHEDULE_SCHEDULE2` FOREIGN KEY (`SCHEDULE_schedule_id`) REFERENCES `schedule` (`schedule_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
 ADD CONSTRAINT `fk_STUDENT_has_SCHEDULE_STUDENT2` FOREIGN KEY (`STUDENT_student_id`) REFERENCES `student` (`student_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;

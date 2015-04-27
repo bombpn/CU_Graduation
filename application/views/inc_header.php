@@ -19,6 +19,12 @@
 
     <!-- Custom Fonts -->
     <link href="<?=base_url();?>/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- jQuery -->
+    <script src="<?=base_url();?>/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?=base_url();?>/js/bootstrap.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -159,10 +165,10 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li <?php if($this->uri->segment(1)=="home" ||$this->uri->segment(1)=="" ) echo "class='active'";?>>
-                        <a href="<?=base_url(); ?>"><i class="fa fa-fw fa-home"></i> หน้าแรก</a>
+                        <a href="<?=base_url(); ?>home/"><i class="fa fa-fw fa-home"></i> หน้าแรก</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-mortar-board"></i> ตรวจสอบลำดับที่</a>
+                        <a href="<?=base_url(); ?>view_order/" target="_blank"><i class="fa fa-fw fa-mortar-board"></i> ตรวจสอบลำดับที่</a>
                     </li>
                     <li <?php if($this->uri->segment(1)=="check") echo "class='active'";?>>
                         <a href="<?=base_url(); ?>check/"><i class="fa fa-fw fa-barcode"></i> เช็คชื่อ</a>
@@ -170,9 +176,9 @@
                     <li>
                         <a href="#"><i class="fa fa-fw fa-file"></i> รายงาน</a>
                     </li>
-                    <li>
+                    <!--li>
                         <a href="#"><i class="fa fa-fw fa-history"></i>ประวัติ</a>
-                    </li>
+                    </li-->
                     <li>
                         <a href="#"><i class="fa fa-fw fa-print"></i>พิมพ์บาร์โค้ด</a>
                     </li>
@@ -192,13 +198,13 @@
                                 <a href="<?=base_url(); ?>teacher/">รายชื่ออาจารย์</a>
                             </li>
                             <li>
-                                <a href="#">สถานที่</a>
+                                <a href="<?=base_url(); ?>place/">สถานที่</a>
                             </li>
                             <li>
                                 <a href="<?=base_url(); ?>schedule/">ตารางการซ้อม</a>
                             </li>
                             <li>
-                                <a href="#">อนุญาตบัณฑิตซ้อมนอกรอบ</a>
+                                <a href="<?=base_url(); ?>extra_attend/">อนุญาตบัณฑิตซ้อมนอกรอบ</a>
                             </li>
                         </ul>
                     </li>
