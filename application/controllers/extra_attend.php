@@ -39,7 +39,8 @@ class extra_attend extends CI_Controller {
 		$data['allschedule'] = $this->extra_attend->search_schedule($_POST['student_id']);
 		$data['thisstudent'] = $this->extra_attend->search_student($_POST['student_id']);
 		$this->load->view('inc_header');
-		$this->load->view('extra_attend/search_student', $data);
+		if(count($data['thisstudent']) == 0) redirect('extra_attend');
+		else $this->load->view('extra_attend/search_student', $data);
 		$this->load->view('inc_footer');
 	}
 }

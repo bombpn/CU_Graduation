@@ -167,6 +167,12 @@ if (!empty($javascriptVariables)) {
                 if(isset($edit_teacher_temp)) echo "แก้ไขรายชื่ออาจารย์";
                 else echo "เพิ่มรายชื่ออาจารย์";
             ?>
+            <small>
+            <?php
+                if(isset($edit_teacher_temp)) echo "Edit Teacher";
+                else echo "Import Teacher";
+            ?>
+            </small>
         </h1>
         <form id="add-form" class="form-horizontal" action="<?=base_url();?>teacher/add_teacher" method="POST">
                 <fieldset>
@@ -256,11 +262,11 @@ if (!empty($javascriptVariables)) {
                     <label class="col-md-4 control-label" for="button1id"></label>
                     <div class="col-md-4">
                         <button type="button" id="submit" class="submit btn btn-info" value="Submit">
-                            Submit
+                            เก็บ
                             <!-- <i class="fa fa-search"></i> -->
                         </button>
                         <a href="<?=base_url();?>teacher/index" class="btn btn-danger">
-                            Cancel
+                            ยกเลิก
                             <!-- <i class="fa fa-search"></i> -->
                         </a>
                         

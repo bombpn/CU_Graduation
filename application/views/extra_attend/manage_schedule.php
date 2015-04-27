@@ -14,7 +14,7 @@
             <a href="<?=base_url();?>extra_attend/index" class="btn btn-link" title="Back">
                 <i class="fa fa-chevron-circle-left fa-3x"></i>
             </a>
-            | รายชื่อบัณฑิตที่ได้รับอนุญาต 
+            | รายชื่อบัณฑิตที่ได้รับอนุญาต <small>Permitted Graduate</small>
         </h1>
         <div class="col-lg-12">
             <form class="form-horizontal" action="<?=base_url();?>extra_attend/add_student" method="POST">
@@ -58,7 +58,7 @@
                     </select>   
                     </div>
                     <div class="col-md-2">
-                            <input type="submit" class="btn btn-info" value="ADD STUDENT">
+                            <input type="submit" class="btn btn-info" value="เพิ่มบัณฑิต">
                     </div> 
                 </div>
                 </fieldset>

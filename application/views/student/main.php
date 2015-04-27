@@ -13,9 +13,9 @@
            รายชื่อบัณทิต
             <small>Gruaduate</small>
         </h1>
-	<a href="<?=base_url(); ?>student/import/" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-save"></span> Add Graduate</a>
+	<a href="<?=base_url(); ?>student/import/" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-save"></span> เพิ่มบัณฑิต</a>
 	<br></br>
-    <a href="<?=base_url(); ?>student/search/" class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-search"></span> Search Graduate</a>
+    <a href="<?=base_url(); ?>student/search/" class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-search"></span> ค้นหาบัณฑิต</a>
     </div>
 </div>
 <!-- /.row -->

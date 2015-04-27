@@ -12,6 +12,7 @@
     <div class="col-lg-12">
         <h1 class="page-header">
             ข้อมูลการซ้อมนอกรอบของบัณฑิต
+            <small>Permitted Graduate Information</small>
         </h1>
         <?php
             $student = $thisstudent[0];
@@ -22,7 +23,7 @@
             <a href="<?=base_url();?>extra_attend/index" class="btn btn-link" title="Back">
                 <i class="fa fa-chevron-circle-left fa-2x" style="color: #FFF;"></i>
             </a>
-            | ผลการค้นหา
+            | ผลการค้นหา <small style="color: #FFF;">(Search Result)</small>
         </h2>
         <h3> <?=$th.' ('.$en.')';?> </h3>
         <table class="table table-striped">

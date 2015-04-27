@@ -49,13 +49,14 @@
     <div class="col-lg-12">
         <h1 class="page-header">
             รายชื่ออาจารย์
+            <small>Teacher</small>
         </h1>
         
         <a href="<?=base_url();?>teacher/load_add_teacher_page" class="btn btn-primary" title="Add">
-            ADD TEACHER <i class="fa fa-plus"></i> 
+            เพิ่มอาจารย์ <i class="fa fa-plus"></i> 
         </a>
         <a href="<?=base_url();?>teacher/load_search_teacher_page" class="btn btn-success" title="Search">
-            SEARCH TEACHER <i class="fa fa-search"></i> 
+            ค้นหาอาจารย์ <i class="fa fa-search"></i> 
         </a>
         <?php
             if ($search == '1') {
@@ -65,7 +66,7 @@
                 <a href="<?=base_url();?>teacher/index" class="btn btn-link" title="Back">
                     <i class="fa fa-chevron-circle-left fa-2x" style="color: #FFF;"></i>
                 </a>
-                | ผลการค้นหา
+                | ผลการค้นหา <small style="color: #FFF;">(Search Result)</small>
             </h2>
             
         <?php

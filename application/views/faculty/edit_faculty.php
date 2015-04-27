@@ -14,6 +14,7 @@
     <div class="col-lg-12">
         <h1 class="page-header">
             แก้ไขรายชื่อคณะ
+            <small>Edit Faculty</small>
         </h1>
         <form class="form-horizontal" action="<?=base_url();?>faculty/edit_faculty" method="POST">
                 <fieldset>
@@ -43,7 +44,7 @@
                             <!-- <i class="fa fa-search"></i> -->
                         </input>
                         <a href="<?=base_url();?>faculty/index" class="btn btn-danger">
-                            Cancel
+                            ยกเลิก
                             <!-- <i class="fa fa-search"></i> -->
                         </a>
                         

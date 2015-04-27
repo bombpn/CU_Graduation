@@ -169,13 +169,14 @@
     <div class="col-lg-12">
         <h1 class="page-header">
             รายชื่อคณะ
+            <small>Faculty</small>
         </h1>
         
         <?php
         if($faculty_id_search == "" && $th_faculty_name_search == "" && $en_faculty_name_search == ""){
         ?>
             <a href="<?=base_url();?>faculty/load_add_faculty_page" class="btn btn-primary">
-                add faculty <i class="fa fa-plus"></i>
+                เพิ่มคณะ <i class="fa fa-plus"></i>
             </a>
         <?php
             }else{
@@ -185,7 +186,7 @@
                 <a href="<?=base_url();?>faculty/index" class="btn btn-link">
                     <i class="fa fa-chevron-circle-left fa-2x" style="color: #fff;"></i>
                 </a>
-                | ผลการค้นหา
+                | ผลการค้นหา <small style="color: #FFF;">(Search Result)</small>
             </h2>
             
         <?php

@@ -12,13 +12,14 @@
     <div class="col-lg-12">
         <h1 class="page-header">
             รายชื่อสถานที่
+            <small>Place</small>
         </h1>
         
         <a href="<?=base_url();?>place/load_add_place_page" class="btn btn-primary" title="Add">
-            ADD PLACE <i class="fa fa-plus"></i> 
+            เพิ่มสถานที่ <i class="fa fa-plus"></i> 
         </a>
         <a href="<?=base_url();?>place/load_search_place_page" class="btn btn-success" title="Search">
-            SEARCH PLACE <i class="fa fa-search"></i> 
+            ค้นหาสถานที่ <i class="fa fa-search"></i> 
         </a>
         <?php
             if ($search == '1') {
@@ -28,7 +29,7 @@
                 <a href="<?=base_url();?>place/index" class="btn btn-link" title="Back">
                     <i class="fa fa-chevron-circle-left fa-2x" style="color: #FFF;"></i>
                 </a>
-                | ผลการค้นหา
+                | ผลการค้นหา <small style="color: #FFF;">(Search Result)</small>
             </h2>
             
         <?php

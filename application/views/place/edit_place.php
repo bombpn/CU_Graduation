@@ -12,6 +12,7 @@
     <div class="col-lg-12">
         <h1 class="page-header">
             แก้ไขข้อมูลสถานที่
+            <small>Edit Place</small>
         </h1>
         <form class="form-horizontal" action="<?=base_url();?>place/edit_place" method="POST" enctype="multipart/form-data">
                 <fieldset>
@@ -76,12 +77,12 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="button1id"></label>
                     <div class="col-md-4">
-                        <input type="submit" class="btn btn-info" value="Submit">
+                        <input type="submit" class="btn btn-info" value="เก็บ">
 
                             <!-- <i class="fa fa-search"></i> -->
                         </input>
                         <a href="<?=base_url();?>place/index" class="btn btn-danger">
-                            Cancel
+                            ยกเลิก
                             <!-- <i class="fa fa-search"></i> -->
                         </a>
                         

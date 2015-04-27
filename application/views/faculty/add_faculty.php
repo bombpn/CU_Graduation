@@ -115,6 +115,7 @@
     <div class="col-lg-12">
         <h1 class="page-header">
             เพิ่มรายชื่อคณะ
+            <small>Import Faculty</small>
         </h1>
         <form id="add-form" class="form-horizontal" action="<?=base_url();?>faculty/add_faculty" method="POST">
                 <!-- <fieldset> -->
@@ -153,11 +154,11 @@
                     <label class="col-md-4 control-label" for="button1id"></label>
                     <div class="col-md-4">
                         <button type="button" id="submit" class="submit btn btn-info" value="Submit">
-                            Submit
+                            เก็บ
                             <!-- <i class="fa fa-search"></i> -->
                         </button>
                         <a href="<?=base_url();?>faculty" class="btn btn-danger">
-                            Cancel
+                            ยกเลิก
                             <!-- <i class="fa fa-search"></i> -->
                         </a>
                         

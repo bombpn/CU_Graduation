@@ -45,7 +45,7 @@
   <div class="col-md-2">
     <input id="SearchENLastnameInput" name="SearchENLastnameInput" type="search" placeholder="" class="form-control input-md">
     <br></br>
-    <input type="submit" class="btn btn-primary" value="Search"> 
+    <input type="submit" class="btn btn-primary" value="ค้นหา"> 
     </div> 
     </div>
 </fieldset>

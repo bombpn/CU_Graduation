@@ -13,6 +13,7 @@
     <div class="col-lg-12">
         <h1 class="page-header">
             ค้นหารายชื่ออาจารย์
+            <small>Search Teacher</small>
         </h1>
         <form class="form-horizontal" action="<?=base_url();?>teacher/search_teacher" method="POST">
                 <fieldset>
@@ -85,12 +86,12 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="button1id"></label>
                     <div class="col-md-4">
-                        <input type="submit" class="btn btn-info" value="Submit">
+                        <input type="submit" class="btn btn-info" value="ค้นหา">
 
                             <!-- <i class="fa fa-search"></i> -->
                         </input>
                         <a href="<?=base_url();?>teacher/index" class="btn btn-danger">
-                            Cancel
+                            ยกเลิก
                             <!-- <i class="fa fa-search"></i> -->
                         </a>
                         

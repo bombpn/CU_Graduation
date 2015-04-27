@@ -12,6 +12,7 @@
     <div class="col-lg-12">
         <h1 class="page-header">
             จัดการบัณฑิตที่ซ้อมนอกรอบ
+            <small>Give Permission</small>
         </h1>
             <form class="form-horizontal" action="<?=base_url();?>extra_attend/search_student" method="POST">
                 <div class="form-group">
@@ -20,7 +21,7 @@
                         <input class="form-control input-md" name="student_id" placeholder="Student ID" required>       
                     </div>
                     <div class="col-md-2">
-                            <input type="submit" class="btn btn-success" value="SEARCH">
+                            <input type="submit" class="btn btn-success" value="ค้นหา">
                     </div> 
                 </div>
             </form>
