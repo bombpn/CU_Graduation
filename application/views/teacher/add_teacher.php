@@ -31,7 +31,7 @@
                                 $id = $faculty->faculty_id;
                                 $th = $faculty->th_faculty_name;
                                 $en = $faculty->en_faculty_name;
-                                echo "<option val=".$id.">".$id.": ".$th." (".$en.")</option>";
+                                echo "<option value=".$id.">".$id.": ".$th." (".$en.")</option>";
                             }
                             ?>
                         </select>   
