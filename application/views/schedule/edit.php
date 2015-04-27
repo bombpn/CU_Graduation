@@ -113,7 +113,7 @@
                       </table>
 
         <!-- Form -->
-
+        <form class="form-horizontal">
 
               <!-- Date Picker -->
               <div class="form-group">
@@ -255,7 +255,7 @@
                       </select>
                     </div>
                   </div>
-
+                </form>
                   <div class="form-group">
                     <div class="col-md-4"></div>
                     <div class="col-md-4"><button id="submit" name="submit" class="btn btn-primary">Submit</button></div>
