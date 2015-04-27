@@ -162,8 +162,6 @@ class model_schedule extends CI_Model{
 		$this->db->delete('conduct', array('SCHEDULE_schedule_id' => $schedule_id));
 		$this->db->delete('attend', array('SCHEDULE_schedule_id' => $schedule_id));
 		$this->db->delete('schedule' , array('schedule_id'=>$schedule_id));
-		
-		echo "DROP ".$schedule_id." SUCCESSFULLY";
 	}
 
 	public function getVipSeats ($schedule_id){

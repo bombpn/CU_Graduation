@@ -133,6 +133,7 @@ class Schedule extends CI_Controller {
 
 	public function dropSchedule($schedule_id){
 		$this->schedule->dropSchedule($schedule_id);
+		$this->load->view('schedule/result');
 	}
 
 	public function addSchedule(){
