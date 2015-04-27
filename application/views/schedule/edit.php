@@ -196,7 +196,7 @@
                     <label class="col-md-4 control-label" for="schedule_type">Type : </label>
                     <div class="col-md-4">
                       <select id="schedule_type" name="schedule_type" class="form-control">
-                        <option value="Rehearsal" <?php if($returnObject['type']=="Practice")echo "selected=selected"?>>รอบซ้อมรับ</option>
+                        <option value="Rehearsal" <?php if($returnObject['type']=="Rehearsal")echo "selected=selected"?>>รอบซ้อมรับ</option>
                         <option value="Graduation" <?php if($returnObject['type']=="Graduation")echo "selected=selected"?>>รอบพิธีการจริง</option>
                       </select>
                     </div>
@@ -385,7 +385,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="vipseat">VIP Seats (คั่นด้วยลูกน้ำ) : </label>
                     <div class="col-md-4">
-                      <input class="form-control input-md" type="text" id="vipseat" value="<?php 
+                      <input class="form-control input-md" type="text" id="vipseat" placeholder="1A,2A,3A" value="<?php 
                         $i = 0;
                         foreach($vipseats as $seat){
                           echo $seat->vip_seat;

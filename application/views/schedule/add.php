@@ -319,7 +319,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="vipseat">VIP Seats (คั่นด้วยลูกน้ำ) : </label>
                     <div class="col-md-4">
-                      <input class="form-control input-md" type="text" id="vipseat">
+                      <input class="form-control input-md" type="text" placeholder="1A,2A,3A" id="vipseat">
                     </div>
                     <div class="col-md-4"></div>
                 </div>
