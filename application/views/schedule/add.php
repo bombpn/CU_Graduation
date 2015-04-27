@@ -75,7 +75,12 @@
 
                 $("#submit").click(function(){
                   //PREPARE FORM DATA
-                  //event.preventDefault();
+                    //event.preventDefault();
+                  //RESOLVED VIP SEATS
+                   var myString = $("#vipseat").val();
+                   var myArray = myString.split(',');
+                   console.log(myArray);
+
                   var formData = { date : $("#datepicker").val(),
                                   start_time : $("#starttime").val(),
                                   end_time : $("#stoptime").val(),
@@ -83,6 +88,7 @@
                                   round : $("#schedule_round").val(),
                                   PLACE_place_id : $("#schedule_place").val(),
                                   schedule_group_populated : schedule_populated,
+                                  vipseat : myArray,
                                   teachers : teacher_populated
                   };
                   console.log(formData);
@@ -309,9 +315,22 @@
 
             <!-- END TEACER PART -->
 
+             <!-- VIP SEAT PART -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="vipseat">VIP Seats (คั่นด้วยลูกน้ำ) : </label>
+                    <div class="col-md-4">
+                      <input class="form-control input-md" type="text" id="vipseat">
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
 
             </form>
-            <input id="submit" type="submit" name="submit" value="Submit" class="btn btn-primary">
+            </form>
+                  <div class="form-group">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"><button id="submit" name="submit" class="btn btn-primary">Submit</button></div>
+                    <div class="col-md-4"></div>
+                  </div>
         <hr>
     </div>
 </div>

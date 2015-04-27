@@ -49,12 +49,13 @@ class model_schedule extends CI_Model{
 
 	//SETTERS
 
-	public function addScheduleToDB($data,$attend,$teachers){
-		  $this->db->insert('schedule',$data);
+	public function addScheduleToDB($data,$attend,$teachers,$vipseats){
+		 	$this->db->insert('schedule',$data);
 			$this->db->select_max('schedule_id');
 			$conditioned_schedule = $this->db->get('schedule');
 			$resultRow = $conditioned_schedule->row_array();
 			$schedule_id = $resultRow['schedule_id'];
+			
 			//ATTEND
 			for($i = 0 ; $i < count($attend) ; $i++){
 				$data_attend = array(
@@ -73,6 +74,15 @@ class model_schedule extends CI_Model{
 					'TEACHER_teacher_id'=>$teachers[$i]
 				);
 				$this->db->insert('conduct',$teacher_conduct);
+			}
+
+			//VIPSEATS
+			for($i = 0 ; $i < count($vipseats) ; $i++){
+				$vip_seat_single = array(
+					'SCHEDULE_schedule_id' => $schedule_id,
+					'vip_seat'=>$vipseats[$i]
+				);
+				$this->db->insert('vip_seats',$vip_seat_single);
 			}
 
 			return $data['date'];
@@ -107,7 +117,7 @@ class model_schedule extends CI_Model{
 	}
 
 
-	public function editSchedule($data,$attend,$teachers,$schedule_id){
+	public function editSchedule($data,$attend,$teachers,$vipseats,$schedule_id){
 
 		$this->db->where('schedule_id', $schedule_id);
 		$this->db->update('schedule', $data);
@@ -116,6 +126,7 @@ class model_schedule extends CI_Model{
 			//Delete All First
 			$this->db->delete('attend', array('SCHEDULE_schedule_id' => $schedule_id));
 			$this->db->delete('conduct', array('SCHEDULE_schedule_id' => $schedule_id));
+			$this->db->delete('vip_seats', array('SCHEDULE_schedule_id' => $schedule_id));
 			//Reinsert by Forms
 			for($i = 0 ; $i < count($attend) ; $i++){
 				$data_attend = array(
@@ -135,6 +146,15 @@ class model_schedule extends CI_Model{
 				$this->db->insert('conduct',$teacher_conduct);
 			}
 
+			//VIPSEATS
+			for($i = 0 ; $i < count($vipseats) ; $i++){
+				$vip_seat_single = array(
+					'SCHEDULE_schedule_id' => $schedule_id,
+					'vip_seat'=>$vipseats[$i]
+				);
+				$this->db->insert('vip_seats',$vip_seat_single);
+			}
+
 			return $data['date'];
 	}
 
@@ -146,6 +166,12 @@ class model_schedule extends CI_Model{
 		echo "DROP ".$schedule_id." SUCCESSFULLY";
 	}
 
+	public function getVipSeats ($schedule_id){
+		$results = $this->db->select('vip_seats.vip_seat')->from('vip_seats')
+		->where('vip_seats.SCHEDULE_schedule_id',$schedule_id)->get()->result();
+
+		return $results;
+	}
 
 	public function getTeacherList2($schedule_id){
 

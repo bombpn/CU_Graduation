@@ -73,6 +73,12 @@
                 });
 
                 $("#submit").click(function(){
+
+                   //RESOLVED VIP SEATS
+                   var myString = $("#vipseat").val();
+                   var myArray = myString.split(',');
+
+
                  if(confirm("ยืนยันการส่ง ?")){
                   var formData = { date : $("#datepicker").val(),
                                   start_time : $("#starttime").val(),
@@ -82,6 +88,7 @@
                                   PLACE_place_id : $("#schedule_place").val(),
                                   schedule_group_populated : schedule_populated,
                                   schedule_id : $("#schedule_id").val(),
+                                  vipseat : myArray,
                                   teachers : teacher_populated
                   };
                   console.log(formData);
@@ -345,15 +352,15 @@
                 <tbody id="returnTeacher">
                      <!-- HERE -->
                         <?php
-                            if(count($conduct_teacher)>0){
+                            if(count($conduct_teacher2)>0){
                               $i =0;
-                              foreach($conduct_teacher as $row){
+                              foreach($conduct_teacher2 as $row){
                                 echo "<tr>";
                                   echo "<td>";
                                     echo $i+1;
                                   echo "</td>";
                                   echo "<td>";
-                                    echo $row->teacher_id." : ".$row->th_firstname;
+                                    echo $row->teacher_id." : ".$row->th_firstname." ".$row->th_lastname;
                                   echo "</td>";
                                 echo "</tr>";
                                 $i++;
@@ -374,6 +381,21 @@
 
             <!-- END TEACER PART -->
 
+            <!-- VIP SEAT PART -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="vipseat">VIP Seats (คั่นด้วยลูกน้ำ) : </label>
+                    <div class="col-md-4">
+                      <input class="form-control input-md" type="text" id="vipseat" value="<?php 
+                        $i = 0;
+                        foreach($vipseats as $seat){
+                          echo $seat->vip_seat;
+                          $i++;
+                          echo (($i< count($vipseats))? ",":"");
+                        }
+                      ?>">
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
 
                 </form>
                   <div class="form-group">

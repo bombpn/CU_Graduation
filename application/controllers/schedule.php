@@ -71,6 +71,7 @@ class Schedule extends CI_Controller {
 				$PLACE_place_id =$_POST['PLACE_place_id'];
 				$StudentGroup = $_POST['schedule_group_populated'];
 				$teachers = $_POST['teachers'];
+				$vipseats = $_POST['vipseat'];
 				$data = array(
 					'schedule_id'		=>NULL,
 					'date'			 		=>$date,
@@ -81,8 +82,8 @@ class Schedule extends CI_Controller {
 					'PLACE_place_id'=>$PLACE_place_id
 				);
 				//ADD TO DB
-				$this->schedule->addScheduleToDB($data,$StudentGroup,$teachers);
-				//$this->schedule->addAttendList($)
+				$this->schedule->addScheduleToDB($data,$StudentGroup,$teachers,$vipseats);
+				
 				$result = array(
 						'redirect' => 'schedule',
 						'message' => "ADDED SUCCESFULL returning back"
@@ -106,6 +107,7 @@ class Schedule extends CI_Controller {
 				$PLACE_place_id =$_POST['PLACE_place_id'];
 				$StudentGroup = $_POST['schedule_group_populated'];
 				$teachers = $_POST['teachers'];
+				$vipseats = $_POST['vipseat'];
 				//MIGRATING TO ARRAY
 				$data = array(
 					'date'			 		=>$date,
@@ -119,7 +121,7 @@ class Schedule extends CI_Controller {
 					//DELETE SCHEDULE_ID FROM ATTEND
 					//DELETE TEACHER_ID FROM CONDUCT
 					//UPDATE EVERYTHING
-					$this->schedule->editSchedule($data,$StudentGroup,$teachers,$schedule_id);
+					$this->schedule->editSchedule($data,$StudentGroup,$teachers,$vipseats,$schedule_id);
 				//RETURNING MESSAGE TO Ajax HANDLER
 				$result = array(
 						'redirect' => '',
@@ -155,6 +157,7 @@ class Schedule extends CI_Controller {
 		$fetch['teachers'] = $this->schedule->getAllTeachers();
 		$fetch['conduct_teacher'] = $this->schedule->getTeacherList($schedule_id);
 		$fetch['conduct_teacher2'] = $this->schedule->getTeacherList2($schedule_id);
+		$fetch['vipseats'] = $this->schedule->getVipSeats($schedule_id);
 		$this->load->view('inc_header');
 		$this->load->view('schedule/edit',$fetch);
 		$this->load->view('inc_footer');

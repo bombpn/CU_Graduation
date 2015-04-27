@@ -204,7 +204,7 @@
                                 <a href="<?=base_url(); ?>schedule/">ตารางการซ้อม</a>
                             </li>
                             <li>
-                                <a href="#">อนุญาตบัณฑิตซ้อมนอกรอบ</a>
+                                <a href="<?=base_url(); ?>extra_attend/">อนุญาตบัณฑิตซ้อมนอกรอบ</a>
                             </li>
                         </ul>
                     </li>
