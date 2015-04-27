@@ -1,4 +1,4 @@
 RewriteEngine on
-RewriteBase /CU_Graduation/
+RewriteBase /cu_graduation/
 RewriteCond $1 !^(index\.php|css|font-awesome|fonts|js|GradPic)
 RewriteRule ^(.*)$ index.php [L]
