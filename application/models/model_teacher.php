@@ -84,5 +84,12 @@ class model_teacher extends CI_Model {
 		$this->db->delete($table_name);
 		$this->db->insert($table_name, $data);
 	}
+	public function has_key_in_teacher($data){
+		$this->db->where($this->id, $data['teacher_id']);
+		if($this->db->get($this->table)->num_rows() == 0){
+			return false;
+		}
+		return true;
+	}
 }
 ?>

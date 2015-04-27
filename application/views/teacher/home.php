@@ -4,6 +4,43 @@
 <head>
 
     <title>CU Graduation</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
+    <script src="http://malsup.github.com/jquery.form.js"></script> 
+    <script type="text/javascript">
+    //     $("document").ready(function() {
+    //         $('table#table tbody td div button.delete').click(function()
+    //         {
+    //             if (confirm("คุณต้องการลบใช่หรือไม่?"))
+    //             {
+    //                 var parent = $(this).parent().parent().parent();
+    //                 var formData = { teacher_id : $(this).parent().parent().siblings('.teacher_id').children().text(),
+    //                         faculty_id : $(this).parent().parent().siblings('.faculty_id').children().text(),
+    //                         th_prefix : $(this).parent().parent().siblings('.th_prefix').children().text(),
+    //                         th_firstname : $(this).parent().parent().siblings('.th_firstname').children().text(),
+    //                         th_lastname : $(this).parent().parent().siblings('.th_lastname').children().text(),
+    //                         en_prefix : $(this).parent().parent().siblings('.en_prefix').children().text(),
+    //                         en_firstname : $(this).parent().parent().siblings('.en_firstname').children().text(),
+    //                         en_lastname : $(this).parent().parent().siblings('.en_lastname').children().text(),
+    //                         tel_number : $(this).parent().parent().siblings('.tel_number').children().text()
+    //                 };
+    //                 console.log(formData);
+    //                 $.ajax(
+    //                 {
+    //                        type: "POST",
+    //                        url: '<?php echo base_url();?>teacher/delete_teacher/>',
+    //                        data: formData,
+    //                        cache: false,
+                        
+    //                        success: function()
+    //                        {
+    //                             // alert("msg " + res.message);
+    //                             parent.fadeOut('fast', function() {$(this).remove();});
+    //                        }
+    //                  });                
+    //             }
+    //         });
+    //     });
+    </script>
 </head>
 
 <body>
@@ -99,12 +136,17 @@
                         <!-- <button type="submit" class="btn btn-primary">
                             <i class="fa fa-pencil"></i>
                         </button> -->
-                        <a href="<?=base_url();?>teacher/load_edit_teacher_page/<?=$teacher->teacher_id;?>" class="btn btn-primary" title="Edit">
-                            <i class="fa fa-pencil"></i>
-                        </a>
-                        <a href="<?=base_url();?>teacher/delete_teacher/<?=$teacher->teacher_id;?>" class="btn btn-danger" title="Delete">
-                            <i class="fa fa-trash"></i>
-                        </a>
+                        <div class="manage btn-group">
+                            <a href="<?=base_url();?>teacher/load_edit_teacher_page/<?=$teacher->teacher_id;?>" class="btn btn-primary" title="Edit">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <a href="<?=base_url();?>teacher/delete_teacher/<?=$teacher->teacher_id;?>" class="btn btn-danger" title="Delete">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                            <!-- <button type="button" id="delete" class="delete btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </button> -->
+                        </div>
                     </td>
                 </tr>
 	            <?php
