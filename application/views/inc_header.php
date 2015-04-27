@@ -174,13 +174,13 @@
                         <a href="<?=base_url(); ?>check/"><i class="fa fa-fw fa-barcode"></i> เช็คชื่อ</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-file"></i> รายงาน</a>
+                        <a href="<?=base_url(); ?>report/"><i class="fa fa-fw fa-file"></i> รายงาน</a>
                     </li>
                     <!--li>
                         <a href="#"><i class="fa fa-fw fa-history"></i>ประวัติ</a>
                     </li-->
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-print"></i>พิมพ์บาร์โค้ด</a>
+                        <a href="<?=base_url(); ?>printbarcode"><i class="fa fa-fw fa-print"></i>พิมพ์บาร์โค้ด</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-database"></i> จัดการข้อมูล <i class="fa fa-fw fa-caret-down"></i></a>
