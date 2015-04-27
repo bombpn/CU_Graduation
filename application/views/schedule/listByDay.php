@@ -15,7 +15,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header-list">
-            Schedule <?php echo $formattedDate; ?>
+            กำหนดการในวัน <?php echo $formattedDate; ?>
         </h1>
         <br>
         <table class="table">

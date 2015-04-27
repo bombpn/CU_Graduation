@@ -114,8 +114,8 @@
 <div class="col-md-12">
 <div class="row clearfix">
     <div class="col-lg-12">
-        <h1 class="page-header">แก้ไขข้อมูล
-            <small>Edit</small>
+        <h1 class="page-header">แก้ไขข้อมูลกำหนดการ
+            <small>Edit Schedule</small>
         </h1>
 ท่านกำลังแก้ไข <br>
                       <table class="table">

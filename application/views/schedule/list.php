@@ -15,7 +15,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header-list">
-            All Schedule
+            กำหนดการซ้อมทั้งหมด
         </h1>
         <table class="table">
           <thead>
