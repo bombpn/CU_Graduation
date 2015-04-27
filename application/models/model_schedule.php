@@ -103,7 +103,6 @@ class model_schedule extends CI_Model{
 		->from('attend')->join('group', 'group.group_id = attend.GROUP_group_id', 'inner')
 		->where('attend.SCHEDULE_schedule_id', $schedule_id)->
 		order_by('attend.attendance_order','ASC')->get()->result();
-
 		return $attendRows;
 	}
 
