@@ -14,9 +14,9 @@ class Schedule extends CI_Controller {
 
 				'template'    => '{table_open}<div>{/table_open}
            {heading_row_start}<center>{/heading_row_start}
-           {heading_previous_cell}<caption><a href="{previous_url}" class="btn btn-primary" title="Previous Month">&lt;&lt;Prev</a>{/heading_previous_cell}
+           {heading_previous_cell}<caption><a href="{previous_url}" class="btn btn-primary" title="Previous Month">&lt;&lt;เดือนก่อนหน้า</a>{/heading_previous_cell}
            {heading_title_cell} <a class="btn btn-primary">{heading}</a>{/heading_title_cell}
-           {heading_next_cell}<a href="{next_url}" class="btn btn-primary" title="Next Month">Next&gt;&gt;</a></caption>{/heading_next_cell}
+           {heading_next_cell}<a href="{next_url}" class="btn btn-primary" title="Next Month">เดือนถัดไป&gt;&gt;</a></caption>{/heading_next_cell}
            {heading_row_end}</center><col class="weekday" span="5"><col class="weekend_sat"><col class="weekend_sun">{/heading_row_end}
 
 					 {week_row_start}<div class="cal-row-fluid cal-row-head">{/week_row_start}
@@ -70,7 +70,8 @@ class Schedule extends CI_Controller {
 				$round=$_POST['round'];
 				$PLACE_place_id =$_POST['PLACE_place_id'];
 				$StudentGroup = $_POST['schedule_group_populated'];
-
+				$teachers = $_POST['teachers'];
+				$vipseats = $_POST['vipseat'];
 				$data = array(
 					'schedule_id'		=>NULL,
 					'date'			 		=>$date,
@@ -81,8 +82,8 @@ class Schedule extends CI_Controller {
 					'PLACE_place_id'=>$PLACE_place_id
 				);
 				//ADD TO DB
-				$this->schedule->addScheduleToDB($data);
-				//$this->schedule->addAttendList($)
+				$this->schedule->addScheduleToDB($data,$StudentGroup,$teachers,$vipseats);
+				
 				$result = array(
 						'redirect' => 'schedule',
 						'message' => "ADDED SUCCESFULL returning back"
@@ -96,7 +97,8 @@ class Schedule extends CI_Controller {
 
 	public function editResult(){
 		if($_POST){
-				$schedule_id = NULL;
+				//INPUT DATA
+				$schedule_id = $_POST['schedule_id'];
 				$date=$_POST['date'];
 				$start_time=$_POST['start_time'];
 				$end_time=$_POST['end_time'];
@@ -104,9 +106,10 @@ class Schedule extends CI_Controller {
 				$round=$_POST['round'];
 				$PLACE_place_id =$_POST['PLACE_place_id'];
 				$StudentGroup = $_POST['schedule_group_populated'];
-
+				$teachers = $_POST['teachers'];
+				$vipseats = $_POST['vipseat'];
+				//MIGRATING TO ARRAY
 				$data = array(
-					'schedule_id'		=>NULL,
 					'date'			 		=>$date,
 					'start_time'		 =>$start_time,
 					'end_time'			=>$end_time,
@@ -114,38 +117,48 @@ class Schedule extends CI_Controller {
 					'round'					=>$round,
 					'PLACE_place_id'=>$PLACE_place_id
 				);
-				//ADD TO DB
-				//DELETE SCHEDULE_ID FROM ATTEND
-				//ADD WHOLE NEW THING
-
+				//ADD TO DB PART
+					//DELETE SCHEDULE_ID FROM ATTEND
+					//DELETE TEACHER_ID FROM CONDUCT
+					//UPDATE EVERYTHING
+					$this->schedule->editSchedule($data,$StudentGroup,$teachers,$vipseats,$schedule_id);
+				//RETURNING MESSAGE TO Ajax HANDLER
 				$result = array(
-						'redirect' => 'schedule',
+						'redirect' => '',
 						'message' => "ADDED SUCCESFULL returning back"
 				);
-
 				$this->output->set_content_type('application/json')->set_output(json_encode($result));
 			}
+	}
 
-
+	public function dropSchedule($schedule_id){
+		$this->schedule->dropSchedule($schedule_id);
+		$this->load->view('schedule/result');
 	}
 
 	public function addSchedule(){
 
 		$fetch['groups'] = $this->schedule->getAllGroups();
 		$fetch['places'] = $this->schedule->getAllPlaces();
-
+		$fetch['teachers'] = $this->schedule->getAllTeachers();
 			$this->load->view('inc_header');
 			$this->load->view('schedule/add',$fetch);
 			$this->load->view('inc_footer');
 
 
 		}
+
 	public function editSchedule($schedule_id = null){
 		$fetch['groups'] = $this->schedule->getAllGroups();
 		$fetch['places'] = $this->schedule->getAllPlaces();
 		$fetch['individual'] = $this->schedule->getSchedule($schedule_id);
 		$fetch['returnObject'] = $this->schedule->getDate($schedule_id);
 		$fetch['schedule_id'] = $schedule_id;
+		$fetch['attendList'] = $this->schedule->getAttendList($schedule_id);
+		$fetch['teachers'] = $this->schedule->getAllTeachers();
+		$fetch['conduct_teacher'] = $this->schedule->getTeacherList($schedule_id);
+		$fetch['conduct_teacher2'] = $this->schedule->getTeacherList2($schedule_id);
+		$fetch['vipseats'] = $this->schedule->getVipSeats($schedule_id);
 		$this->load->view('inc_header');
 		$this->load->view('schedule/edit',$fetch);
 		$this->load->view('inc_footer');

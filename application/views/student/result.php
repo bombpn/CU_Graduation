@@ -18,11 +18,12 @@
         	<thead>
         		<tr>
         			<th>รหัสนิสิต</th>
-        			<th>คำนำหน้ชื่อ</th>
-        			<th>ชือภาษาไทย</th>
-        			<th>นามสกุลอภาษาไทย</th>
-                    <th>ชื่อภาษาอังกฤษ</th>
-                    <th>นามสกุลอภาษาอังกฤษ</th>
+        			<th>คำนำหน้าชื่อ</th>
+        			<th>ชือ</th>
+        			<th>นามสกุล</th>
+                    <th>Prefix</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
         			<th>แก้ไข</th>
         		<tr>
         	</thead>
@@ -49,13 +50,13 @@
                             <td>".$en_firstname."</td>
                             <td>".$en_lastname."</td>
                             <td>";
-                        echo anchor("student/edit/".$student_id ,"แก้ไข",array(
-                        'name'=>'SaveButton', 'class'=>'btn btn-info', 
-                        )) ;
-                        echo anchor("student/del/".$student_id , "ลบ" ,array(
-                        "onclick" => "javascript:return confirm('คุณต้องการลบหรือไม่? $student_id $th_prefix $th_firstname $th_lastname');" ,
-                        'name'=>'DeleteButton', 'class'=>'btn btn-danger'
-                        )) ;
+                        $bu = base_url();
+                        echo "<a href='".$bu."student/edit/".$student_id."'  name='SaveButton' class='btn btn-info'><span class='glyphicon glyphicon-edit'></span></a> &nbsp" ;
+                        
+                        echo "<a href='".$bu."student/del/".$student_id."' name='DeleteButton' class='btn btn-danger'" ;
+                        echo "onclick ='"."javascript:return confirm('คุณต้องการลบหรือไม่? $student_id $th_prefix $th_firstname $th_lastname');'" ;
+                        echo " ><span class='glyphicon glyphicon-trash'></span></a>" ;
+
 	            		echo "</td>    
                         </tr> 
                     <form>";
