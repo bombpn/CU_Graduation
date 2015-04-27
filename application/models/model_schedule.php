@@ -106,5 +106,11 @@ class model_schedule extends CI_Model{
 			return $data['date'];
 	}
 
+	public function dropSchedule($schedule_id){
+		$this->db->delete('attend', array('SCHEDULE_schedule_id' => $schedule_id));
+		$this->db->delete('schedule' , array('schedule_id'=>$schedule_id));
+		echo "DROP ".$schedule_id." SUCCESSFULLY";
+	}
+
 }
 ?>

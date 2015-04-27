@@ -14,9 +14,9 @@ class Schedule extends CI_Controller {
 
 				'template'    => '{table_open}<div>{/table_open}
            {heading_row_start}<center>{/heading_row_start}
-           {heading_previous_cell}<caption><a href="{previous_url}" class="btn btn-primary" title="Previous Month">&lt;&lt;Prev</a>{/heading_previous_cell}
+           {heading_previous_cell}<caption><a href="{previous_url}" class="btn btn-primary" title="Previous Month">&lt;&lt;เดือนก่อนหน้า</a>{/heading_previous_cell}
            {heading_title_cell} <a class="btn btn-primary">{heading}</a>{/heading_title_cell}
-           {heading_next_cell}<a href="{next_url}" class="btn btn-primary" title="Next Month">Next&gt;&gt;</a></caption>{/heading_next_cell}
+           {heading_next_cell}<a href="{next_url}" class="btn btn-primary" title="Next Month">เดือนถัดไป&gt;&gt;</a></caption>{/heading_next_cell}
            {heading_row_end}</center><col class="weekday" span="5"><col class="weekend_sat"><col class="weekend_sun">{/heading_row_end}
 
 					 {week_row_start}<div class="cal-row-fluid cal-row-head">{/week_row_start}
@@ -96,6 +96,7 @@ class Schedule extends CI_Controller {
 
 	public function editResult(){
 		if($_POST){
+				//INPUT DATA
 				$schedule_id = $_POST['schedule_id'];
 				$date=$_POST['date'];
 				$start_time=$_POST['start_time'];
@@ -104,7 +105,7 @@ class Schedule extends CI_Controller {
 				$round=$_POST['round'];
 				$PLACE_place_id =$_POST['PLACE_place_id'];
 				$StudentGroup = $_POST['schedule_group_populated'];
-
+				//MIGRATING TO ARRAY
 				$data = array(
 					'date'			 		=>$date,
 					'start_time'		 =>$start_time,
@@ -115,19 +116,19 @@ class Schedule extends CI_Controller {
 				);
 				//ADD TO DB PART
 					//DELETE SCHEDULE_ID FROM ATTEND
+					//UPDATE EVERYTHING
 					$this->schedule->editSchedule($data,$StudentGroup,$schedule_id);
-
-					//ADD WHOLE NEW THING
-
+				//RETURNING MESSAGE TO Ajax HANDLER
 				$result = array(
 						'redirect' => '',
 						'message' => "ADDED SUCCESFULL returning back"
 				);
-
 				$this->output->set_content_type('application/json')->set_output(json_encode($result));
 			}
+	}
 
-
+	public function dropSchedule($schedule_id){
+		$this->schedule->dropSchedule($schedule_id);
 	}
 
 	public function addSchedule(){

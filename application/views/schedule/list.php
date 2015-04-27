@@ -24,6 +24,7 @@
               <th>วันที่</th>
               <th>เวลาเริ่ม</th>
               <th>เวลาสิ้นสุด</th>
+              <th>แก้ไข</th>
             <tr>
           </thead>
           <tbody>
@@ -37,6 +38,10 @@
                     <td><?=$schedule->date;?></td>
                     <td><?=$schedule->start_time;?></td>
                     <td><?=$schedule->end_time;?></td>
+                    <td>
+                      <a href="<?=base_url();?>schedule/editSchedule/<?=$schedule->schedule_id?>" class="btn btn-primary">แก้ไข</a>
+                      <a href="<?=base_url();?>schedule/dropSchedule/<?=$schedule->schedule_id?>" class="btn btn-danger">ลบ</a>
+                    </td>
                   </tr>
               <?php
                 }
