@@ -165,7 +165,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li <?php if($this->uri->segment(1)=="home" ||$this->uri->segment(1)=="" ) echo "class='active'";?>>
-                        <a href="<?=base_url(); ?>"><i class="fa fa-fw fa-home"></i> หน้าแรก</a>
+                        <a href="<?=base_url(); ?>home/"><i class="fa fa-fw fa-home"></i> หน้าแรก</a>
                     </li>
                     <li>
                         <a href="<?=base_url(); ?>view_order/" target="_blank"><i class="fa fa-fw fa-mortar-board"></i> ตรวจสอบลำดับที่</a>
