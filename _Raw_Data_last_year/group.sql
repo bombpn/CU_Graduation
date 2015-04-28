@@ -3,10 +3,11 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2015 at 02:54 PM
+-- Generation Time: Apr 28, 2015 at 03:14 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -26,6 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `group`
 --
 
+DROP TABLE IF EXISTS `group`;
 CREATE TABLE IF NOT EXISTS `group` (
   `group_id` int(11) NOT NULL,
   `th_group_name` varchar(50) DEFAULT NULL,
@@ -88,6 +90,7 @@ INSERT INTO `group` (`group_id`, `th_group_name`, `en_group_name`, `internationa
 (46, 'บริหารธุรกิจบัณฑิต', 'ฺBachelor of Business Administration', 1, 'ปริญญาตรี'),
 (47, 'คณะวิศวกรรมศาสตร์ นานาชาติ ปริญญาตรี', 'International School of Engineering Undergraduate', 1, 'ปริญญาตรี'),
 (48, 'อักษรศาสตร์ นานาชาติ ปริญญาตรี', 'Bachelor of Arts in Language and Culture Undergrad', 1, 'ปริญญาตรี');
+SET FOREIGN_KEY_CHECKS=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
