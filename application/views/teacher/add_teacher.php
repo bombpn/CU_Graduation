@@ -11,8 +11,14 @@ $javascriptVariables = array(
 <head>
 
     <title>CU Graduation</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
-    <script src="http://malsup.github.com/jquery.form.js"></script> 
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>-->
+    <!-- <script src="http://malsup.github.com/jquery.form.js"></script>  -->
+
+    <!-- Ajax -->
+    <script src="<?=base_url();?>/js/jquery_ajax.js"></script>
+    <!-- Form -->
+    <script src="<?=base_url();?>/js/jquery.form.js"></script>
+
     <script type="text/javascript">
 
         $("document").ready(function() {

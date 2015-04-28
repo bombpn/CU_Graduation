@@ -4,7 +4,10 @@
 <head>
 
     <title>CU Graduation</title>
-    
+        <!-- Ajax -->
+    <script src="<?=base_url();?>/js/jquery_ajax.js"></script>
+    <!-- Form -->
+    <script src="<?=base_url();?>/js/jquery.form.js"></script>
     
 </head>
 
