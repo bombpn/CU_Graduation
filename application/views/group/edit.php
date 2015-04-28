@@ -50,7 +50,7 @@
     <select id="InternationalInput" name="InternationalInput" class="form-control">
      <?php 
         foreach ($ia as $international){
-          $value = $international=='International' ? 1:0 ;
+          $value = $international=='นานาชาติ' ? 1:0 ;
           if ($select_international == $value) echo "<option value='$value' selected = 'selected'>$international</option> "; 
           else echo "<option value='$value'>$international</option> "; 
         }
@@ -67,7 +67,7 @@
       <?php 
         foreach ($da as $degree){
           $degree_text = str_replace("ปริญญา", "", $degree) ;
-          if ($select_degree == $degree_text) echo "<option value='$degree' selected = 'selected'>$degree_text</option> "; 
+          if ($select_degree == $degree) echo "<option value='$degree' selected = 'selected'>$degree_text</option> "; 
           else echo "<option value='$degree'>$degree_text</option> "; 
         }
       ?>

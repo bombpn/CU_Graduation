@@ -15,12 +15,7 @@
 			$opt = "search" ;
         }
     	else if($opt=="import") {
-    		echo "<h1 class=".'page-header'.">นำเข้าข้อมูลสำเร็จ<small>Successfully Import</small></h1> " ; 
-    	}
-    	else if($opt=="importcsv") {
-    		echo "<h1 class=".'page-header'.">นำเข้าข้อมูลสำเร็จ<small>Successfully Import</small></h1> " ; 
-    		echo "<h1 class=".'page-header'."><small>"."$num_records"."</small></h1> " ;
-    		$opt = "import" ;
+    		echo "<h1 class=".'page-header'.">เพิ่มบัณฑิตสำเร็จ<small>Successfully Add</small></h1> " ; 
     	}
     	else if($opt=="del") {
     		echo "<h1 class=".'page-header'.">ลบข้อมูลสำเร็จ<small>Successfully Delete</small></h1> " ; 

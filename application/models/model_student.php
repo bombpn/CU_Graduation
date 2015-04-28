@@ -16,26 +16,34 @@ class model_student extends CI_Model{
 		$this->db->delete('join');
 		$this->db->where('STUDENT_student_id',$data['student_id']);
 		$this->db->delete('student_belong_to');
-		//Relation Set Up
-		$join = array('STUDENT_student_id' => $data['student_id'] ,
-			'GROUP_group_id' => $data['group_id'] ,
-			'order' => $data['order'] ,
-			 'honors' => $data['honors']
-			 );
-		$this->db->insert('join',$join) ;
+		//Entity Set Up
+		$degree = $data['degree'];
+		$order = $data['order'];
+		$honors = $data['honors'];
+		$group_id = $data['group_id'];
+		$faculty_id = $data['faculty_id'];
 
-		$belong = array('STUDENT_student_id' => $data['student_id'] ,
-			'FACULTY_faculty_id' => $data['faculty_id'] 
-			 );
-		$this->db->insert('student_belong_to',$belong) ;
-
-		// Can insert new entry
 		unset($data['degree']);
 		unset($data['order']);
 		unset($data['honors']);
 		unset($data['group_id']);
 		unset($data['faculty_id']);
 		$this->db->insert('student',$data) ;
+		//Relation Set Up
+		$join = array('STUDENT_student_id' => $data['student_id'] ,
+			'GROUP_group_id' => $group_id ,
+			'order' => $order ,
+			 'honors' => $honors
+			 );
+		$this->db->insert('join',$join) ;
+
+		$belong = array('STUDENT_student_id' => $data['student_id'] ,
+			'FACULTY_faculty_id' => $faculty_id 
+			 );
+		$this->db->insert('student_belong_to',$belong) ;
+
+		// Can insert new entry
+		
 		return true ;
 	}
 		else{

@@ -62,6 +62,7 @@
     <select id="DegreeInput" name="DegreeInput" class="form-control">
       <option value="ปริญญาตรี">ตรี</option>
       <option value="ปริญญาโท">โท</option>
+      <option value="ปริญญาโท-เอก">โท-เอก</option>
       <option value="ปริญญาเอก">เอก</option>
     </select>
   </div>

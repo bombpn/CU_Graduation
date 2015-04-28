@@ -172,8 +172,8 @@ class Group extends CI_Controller {
 				$data['group_id'] = $r['group_id'] ;
 				$data['th_name'] = $r['th_group_name'] ;
 				$data['en_name'] = $r['en_group_name'] ;
-				$ia = array('International','ปกติ');
-				$da = array('ตรี','โท' ,'เอก');
+				$ia = array('นานาชาติ','ปกติ');
+				$da = array('ปริญญาตรี','ปริญญาโท','ปริญญาโท-เอก' ,'ปริญญาเอก');
 				$data['select_international'] = $r['international'] ; 
 				$data['select_degree'] = $r['degree'] ; 
 				$data['ia'] = $ia ;
@@ -265,33 +265,6 @@ class Group extends CI_Controller {
                 $count++;
                }
            return $count-1 ;
-               /*
-          	$line = 1 ;
-            $file = fopen($filePath,"r");
-
-			while(! feof($file))
-  			{
-
-  				$field = fgetcsv($file) ;
-  				//Skip First Line!
-  					if( $line > 1) {
-                	echo "$field[0]<br>" ;
-                	$data['student_id'] = $field[0] ;
-                	$data['th_prefix'] = $field[1] ;
-					$data['th_firstname'] = $field[2] ;
-					$data['th_lastname'] =  $field[3] ;
-                	$data['en_prefix'] = $field[4] ;
-					$data['en_firstname'] = $field[5] ;
-					$data['en_lastname'] =  $field[6] ;
-                	$data['gender'] = 	$field[7] ;
-					$data['picture_path'] = $data['student_id'].'.jpg' ;
-                	$data['barcode'] = 	$data['student_id'] ;
-                	if ($this->model_group->addStudent($data)) 
-                		{$count++;}
-                }
-                $line++;
-  			}
-			fclose($file);*/
        }
        public function viewStudent($id,$name){
        		$data = $this->model_group->get_student_from_group_id($id);
