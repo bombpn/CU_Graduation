@@ -66,7 +66,7 @@
 	<div class="container">
 		<div class="content">
 		<h1>CU GRADUATION SYSTEM</h1>
-		<br><center><small>ระบบจัดการบัณฑิตในพิธีพระราชทานปริญญาบัติ</small></center>
+		<br><center><small>ระบบจัดการบัณฑิตในพิธีพระราชทานปริญญาบัตร</small></center>
 		</div>
 			<br>
 		<div class="content">

@@ -21,9 +21,10 @@ class model_report extends CI_Model {
 	public function get_present_student($group_id, $round){
 		$this->db->from('student');
 		$this->db->join('join', 'join.STUDENT_student_id=student.student_id', 'inner');
-		$this->db->where('GROUP_group_id', $group_id);
+		$this->db->where('join.GROUP_group_id', $group_id);
+		$this->db->join('attend', 'attend.GROUP_group_id=join.GROUP_group_id', 'left');
+		$this->db->join('schedule', 'schedule.schedule_id=attend.SCHEDULE_schedule_id', 'left');
 		$this->db->join('transaction', 'transaction.STUDENT_student_id=student.student_id', 'inner');
-		$this->db->join('schedule', 'schedule.schedule_id=transaction.SCHEDULE_schedule_id', 'left');
 		$this->db->order_by('order','ASC');
 		if($round == 3){
 			$this->db->where('schedule.type', 'Graduation');
@@ -63,6 +64,7 @@ class model_report extends CI_Model {
 		$this->db->where('join.GROUP_group_id', $group_id);
 		$this->db->join('attend', 'attend.GROUP_group_id=join.GROUP_group_id', 'left');
 		$this->db->join('schedule', 'schedule.schedule_id=attend.SCHEDULE_schedule_id', 'left');
+		$this->db->join('transaction', 'transaction.STUDENT_student_id=student.student_id', 'left');
 		$this->db->order_by('order','ASC');
 		if($round == 3){
 			$this->db->where('schedule.type', 'Graduation');
@@ -73,6 +75,7 @@ class model_report extends CI_Model {
 			$this->db->where('schedule.round', $round);
 		}
 		else return NULL;
+		$this->db->where('transaction.STUDENT_student_id IS NULL');
 		return $this->db->get()->result_array();
 	}
 
