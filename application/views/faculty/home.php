@@ -79,7 +79,7 @@
             {
                 if (confirm("คุณต้องการบันทึกค่าที่แก้ไขใช่หรือไม่?"))
                 {
-                    var formData = { faculty_id : $(this).parent().parent().siblings('.faculty_id').children('.form-control').text(),
+                    var formData = { faculty_id : $(this).parent().parent().siblings('.faculty_id').children().text(),
                                   th_faculty_name : $(this).parent().parent().siblings('.th_faculty_name').children('.form-control').attr("value"),
                                   en_faculty_name : $(this).parent().parent().siblings('.en_faculty_name').children('.form-control').attr("value")
                         };
