@@ -1,5 +1,5 @@
 <?php
-  //$url = base_url()."index.php/";
+  $url = base_url();//."index.php/";
 ?>
     <link href="<?=base_url();?>css/cover.css" rel="stylesheet">
         <div class="cover-container">

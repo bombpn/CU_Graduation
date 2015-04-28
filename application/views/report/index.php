@@ -1,5 +1,5 @@
 <?php
-  //$url = base_url()."index.php/";
+  $url = base_url();//."index.php/";
 ?>
 <form class="form-horizontal" action="<?=$url?>report/printt" method="POST" target="_blank">
 <fieldset>
