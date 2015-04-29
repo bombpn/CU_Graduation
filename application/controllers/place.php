@@ -5,6 +5,7 @@ class place extends CI_Controller {
 		parent::__construct();
 		$this->load->model("model_place", "place");
 		$this->load->helper('download');
+		date_default_timezone_set('Asia/Bangkok');
 	}
 	public function index() {
 		$data['allplace'] = $this->place->get_all_place();

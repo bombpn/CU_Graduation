@@ -5,6 +5,7 @@ class Student extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('form');
 		$this->load->model("model_student","model_student");
+		date_default_timezone_set('Asia/Bangkok');
 	}
 
 	public function index()

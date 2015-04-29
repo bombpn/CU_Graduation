@@ -6,6 +6,7 @@ class Group extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->model("model_group","model_group");
 		$this->load->model("model_student","model_student");
+		date_default_timezone_set('Asia/Bangkok');
 	}
 
 	public function index()

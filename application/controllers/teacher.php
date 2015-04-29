@@ -4,6 +4,7 @@ class teacher extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model("model_teacher", "teacher");
+		date_default_timezone_set('Asia/Bangkok');
 	}
 	public function index() {
 		$data['allteacher'] = $this->teacher->get_all_teacher();

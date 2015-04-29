@@ -5,6 +5,7 @@ class view_order extends CI_Controller {
 		parent::__construct();
 		$this->load->model("model_view_order","order");
 		$this->load->helper('download');
+		date_default_timezone_set('Asia/Bangkok');
 	}
 	public function index(){
 		$data['color'] = 'green';

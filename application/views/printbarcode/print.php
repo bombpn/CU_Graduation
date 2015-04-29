@@ -53,6 +53,7 @@ $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
 // set font
 $pdf->SetFont('thsarabun', '', 16);
+$pdf->SetTextColor(0,0,0);
 
 // add a page
 $pdf->AddPage();
@@ -98,11 +99,12 @@ if ($type == 1 || $type == 2) {
       $barcode_params = $pdf->serializeTCPDFtagParameters(array($d["barcode"], 'C128', '', '', 300, 30, 0.6, $style, 'L'));
     }
     $print_sid = substr($d["student_id"], 0, 3) . " " . substr($d["student_id"], 3, 5) . " " . substr($d["student_id"], 8, 2);
+    $pdf->SetTextColor(0,0,0);
     $html .= '<tr width="100%" height="100%">
 <td width="50%">
 <b style="font-size:150pt;">' . $d["order"] . '</b><br><span style="font-size: 14pt;"><br>
-' . $d["th_prefix"] . $d["th_firstname"] . " " . $d["th_lastname"] . " [" . $d["th_group_name"] . '] <br> 
-' . $d["en_prefix"] . $d["en_firstname"] . " " . $d["en_lastname"] . " [" . $d["en_group_name"] . ']
+' . $d["th_prefix"] . $d["th_firstname"] . " " . $d["th_lastname"] . " <br>[" . $d["th_group_name"] . '] <br> 
+' . $d["en_prefix"] . $d["en_firstname"] . " " . $d["en_lastname"] . " <br>[" . $d["en_group_name"] . ']
 </span>
 </td>
 <td width="50%">
@@ -140,6 +142,7 @@ if ($type == 1 || $type == 2) {
         $barcode_params = $pdf->serializeTCPDFtagParameters(array($d["barcode"], 'C128', '', '', 300, 30, 0.6, $style, 'L'));
       }
       $print_sid = substr($d["student_id"], 0, 3) . " " . substr($d["student_id"], 3, 5) . " " . substr($d["student_id"], 8, 2);
+      $pdf->SetTextColor(0,0,0);
       $html .= '<tr width="100%" height="100%">
 <td width="50%">
 <b style="font-size:150pt;">' . $d["order"] . '</b><br><span style="font-size: 14pt;"><br>
