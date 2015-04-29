@@ -110,8 +110,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <!--script src="<?=base_url();?>js/jquery-1.11.1.min.js"></script>
-    <script src="<?=base_url();?>js/bootstrap.min.js"></script-->
+    <script src="<?=base_url();?>js/jquery-1.11.1.min.js"></script>
+    <script src="<?=base_url();?>js/bootstrap.min.js"></script>
     <script type="text/javascript">
       var printable = false;
       var currentPage = 0;
