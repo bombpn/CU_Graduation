@@ -3,11 +3,10 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2015 at 03:15 PM
+-- Generation Time: Apr 28, 2015 at 02:54 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -27,7 +26,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `faculty`
 --
 
-DROP TABLE IF EXISTS `faculty`;
 CREATE TABLE IF NOT EXISTS `faculty` (
   `faculty_id` int(11) NOT NULL,
   `th_faculty_name` varchar(50) DEFAULT NULL,
@@ -67,7 +65,6 @@ INSERT INTO `faculty` (`faculty_id`, `th_faculty_name`, `en_faculty_name`) VALUE
 (37, 'คณะสหเวชศาสตร์', 'Allied Health Science'),
 (38, 'คณะจิตวิทยา', 'Psychology '),
 (39, 'คณะวิทยาศาสตร์และการกีฬา', 'Sport Science');
-SET FOREIGN_KEY_CHECKS=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
