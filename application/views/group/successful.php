@@ -18,7 +18,7 @@
     	else if($opt=="create") {
     		echo "<h1 class=".'page-header'.">สร้างกลุ่มสำเร็จ <small>Successfully Create</small></h1> " ; 
     	    echo "<h1 class=".'page-header'."><small>ชื่อกลุ่ม : ".$Gname." </small></h1> " ;
-            $opt = "" 
+            $opt = "" ;
         }
     	else if($opt=="importcsv") {
     		echo "<h1 class=".'page-header'.">นำเข้าข้อมูลสำเร็จ <small>Successfully Import</small></h1> " ; 
