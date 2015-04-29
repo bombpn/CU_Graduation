@@ -18,6 +18,14 @@ class model_report extends CI_Model {
 		return $this->db->get()->row()->th_group_name;
 	}
 
+	public function get_en_group_name($group_id){
+		$this->db->select('group_id');
+		$this->db->select('en_group_name');
+		$this->db->from('group');
+		$this->db->where('group_id', $group_id);
+		return $this->db->get()->row()->en_group_name;
+	}
+
 	public function get_present_student($group_id, $round){
 		$this->db->from('student');
 		$this->db->join('join', 'join.STUDENT_student_id=student.student_id', 'inner');

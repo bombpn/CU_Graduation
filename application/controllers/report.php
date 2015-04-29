@@ -23,27 +23,27 @@ class report extends CI_Controller {
 		else{
 			redirect('report');
 		}
-		$data['group_name'] = $this->model_report->get_group_name($group_id);
+		$data['group_name'] = $this->model_report->get_en_group_name($group_id);
 		$data['round'] = $round;
-		if($round==1) $roundname = "[ซ้อม1]";
-		else if($round==2) $roundname = "[ซ้อม2]";
-		else $roundname = "[วันจริง]";
+		if($round==1) $roundname = "[Rehearsal1]";
+		else if($round==2) $roundname = "[rehearsal2]";
+		else $roundname = "[Graduation_Day]";
 		if($printtype==1){
 			$data['data'] = $this->model_report->get_present_student($group_id,$round);
-			$data['title'] = $roundname."[รายชื่อคนมา]".$data['group_name'];
-			$data['filename'] = $roundname."[รายชื่อคนมา]".$data['group_name']."(".date('Y-m-d H:i:s').").xlsx";
+			$data['title'] = $roundname."[Present_List]".$data['group_name'];
+			$data['filename'] = $roundname."[Present_List]".$data['group_name']."(".date('Y-m-d H:i:s').").xlsx";
 			$this->load->view('report/print',$data);
 		}
 		else if($printtype==2){
 			$data['data'] = $this->model_report->get_absent_student($group_id,$round);
-			$data['title'] = $roundname."[รายชื่อคนขาด]".$data['group_name'];
-			$data['filename'] = $roundname."[รายชื่อคนขาด]".$data['group_name']."(".date('Y-m-d H:i:s').").xlsx";
+			$data['title'] = $roundname."[Absent_List]".$data['group_name'];
+			$data['filename'] = $roundname."[Absent_List]".$data['group_name']."(".date('Y-m-d H:i:s').").xlsx";
 			$this->load->view('report/print',$data);
 		}
 		else if($printtype==3){
 			$data['data'] = $this->model_report->get_all_student($group_id);
-			$data['title'] = $roundname."[รายชื่อทั้งหมด]".$data['group_name'];
-			$data['filename'] = $roundname."[รายชื่อทั้งหมด]".$data['group_name']."(".date('Y-m-d H:i:s').").xlsx";
+			$data['title'] = $roundname."[All]".$data['group_name'];
+			$data['filename'] = $roundname."[All]".$data['group_name']."(".date('Y-m-d H:i:s').").xlsx";
 			$this->load->view('report/printall',$data);
 		}
 		else {
