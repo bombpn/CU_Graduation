@@ -48,10 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'ap-cdbr-azure-southeast-a.cloudapp.net';
-$db['default']['username'] = 'b5c2d13b11866e';
-$db['default']['password'] = 'd1908223';
-$db['default']['database'] = 'cugrad';
+$db['default']['hostname'] = 'localhost';
+$db['default']['username'] = 'root';
+$db['default']['password'] = '';
+$db['default']['database'] = 'cu_graduation';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
