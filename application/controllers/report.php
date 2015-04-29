@@ -31,20 +31,20 @@ class report extends CI_Controller {
 		else $roundname = "[Graduation_Day]";
 		if($printtype==1){
 			$data['data'] = $this->model_report->get_present_student($group_id,$round);
-			$data['title'] = $roundname."[Present_List]".$data['group_name'];
+			$data['title'] = $roundname."[Present_List] ".$data['group_name'];
 			$data['filename'] = $roundname."[Present_List]".$data['group_name']."(".date('Y-m-d H:i:s').").xlsx";
 			$this->load->view('report/print',$data);
 		}
 		else if($printtype==2){
 			$data['data'] = $this->model_report->get_absent_student($group_id,$round);
-			$data['title'] = $roundname."[Absent_List]".$data['group_name'];
+			$data['title'] = $roundname."[Absent_List] ".$data['group_name'];
 			$data['filename'] = $roundname."[Absent_List]".$data['group_name']."(".date('Y-m-d H:i:s').").xlsx";
 			$this->load->view('report/print',$data);
 		}
 		else if($printtype==3){
 			$data['data'] = $this->model_report->get_all_student($group_id);
-			$data['title'] = $roundname."[All]".$data['group_name'];
-			$data['filename'] = $roundname."[All]".$data['group_name']."(".date('Y-m-d H:i:s').").xlsx";
+			$data['title'] = "[All] ".$data['group_name'];
+			$data['filename'] = "[All]".$data['group_name']."(".date('Y-m-d H:i:s').").xlsx";
 			$this->load->view('report/printall',$data);
 		}
 		else {

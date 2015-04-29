@@ -66,7 +66,8 @@
       รายชื่อบัณฑิตที่ไม่มา
     </label>
   </div>
-  <div class="radio" style="display: none;">
+  <!-- <div class="radio" style="display: none;"> -->
+  <div class="radio">
     <label for="printtype-3">
       <input name="printtype" id="printtype-3" value="3" type="radio">
       รายชื่อบัณฑิตทั้งหมด

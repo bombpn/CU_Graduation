@@ -15,16 +15,22 @@
           <div class="inner cover">
             <div id="faculties">
               <h2>พิมพ์บัตรบาร์โค้ด <small>ตามคณะ</small></h2>
-              <?php
-                $n = 0;
-                //var_dump($data);
-                foreach ($data as $key => $value) {
-                  echo "<a href=\"" . $url . "printbarcode/printt?type=1&id="
-                   . $value["group_id"] . "\" target=\"_blank\" class=\"btn btn-default\"" 
-                   . ">[" . $value["group_id"] . "] " 
-                   . $value["th_group_name"] . "</a> ";
-                }
-              ?>
+                <?php
+                  $n = 0;
+                  //var_dump($data);
+                  foreach ($data as $key => $value) {
+                    if ($n%3==0) echo '<div class="row">';
+                    echo '<div class="col-md-4">';
+                    echo "<a href=\"" . $url . "printbarcode/printt?type=1&id="
+                     . $value["group_id"] 
+                     . "\" target=\"_blank\" class=\"btn btn-default  btn-block\" style=\"text-align:left\"" 
+                     . ">[" . $value["group_id"] . "] " 
+                     . $value["th_group_name"] . "</a> ";
+                     echo '</div>';
+                    $n++;
+                    if ($n%3==0) echo '</div>';
+                  }
+                ?>
               </p>
               </br>              
             </div>
@@ -85,19 +91,24 @@
             <h4 class="modal-title" id="myModalLabel">เลือกคณะ <small>คลิกเลือกคณะที่ต้องการ คลิกอีกครั้งเพื่อยกเลิก</small></h4>
           </div>
           <div class="modal-body">
-            <div class="btn-group" data-toggle="buttons">
+            <!-- <div class="btn-group" data-toggle="buttons"> -->
 
               <?php
+                $n=0;
                 foreach ($data as $key => $value) {
-                  echo "<label class=\"btn btn-default btn-sm\"><input id=\"batch-check-" 
+                  if ($n%3==0) echo '<div class="btn-group" data-toggle="buttons" style="display: block; width: 100%;">';
+                  echo '<label class="btn btn-default btn-sm" style="text-align:left; display: block; width: 33%;">';
+                  echo "<input id=\"batch-check-" 
                   . $value["group_id"] . "\" type=\"checkbox\">[" 
                   . $value["group_id"] . "] " . $value["th_group_name"] . "</label>";
+                  $n++;
+                  if ($n%3==0) echo '</div>';
                 }
               ?>
               <!-- label class="btn btn-primary active">
                 <input type="checkbox" checked> Option 1
               </label -->
-            </div>
+            <!-- </div> -->
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">เรียบร้อย</button>
